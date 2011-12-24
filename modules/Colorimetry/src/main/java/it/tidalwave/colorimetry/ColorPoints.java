@@ -20,7 +20,7 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.argyll;
+package it.tidalwave.colorimetry;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;

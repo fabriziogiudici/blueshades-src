@@ -20,9 +20,10 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.argyll;
+package it.tidalwave.colorimetry;
 
 import javax.annotation.Nonnegative;
+import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -36,10 +37,16 @@ import lombok.ToString;
  *
  **********************************************************************************************************************/
 @Immutable @RequiredArgsConstructor @Getter @EqualsAndHashCode @ToString
-public class MeasureWithPrecision<Measure>
+public class ColorTemperature
   {
-    private final Measure measure;
+    public enum Scale // FIXME: better name
+      {
+        K
+      } 
     
     @Nonnegative
-    private final double deltaE;
+    private final int t;
+    
+    @Nonnull
+    private final Scale scale;
   }

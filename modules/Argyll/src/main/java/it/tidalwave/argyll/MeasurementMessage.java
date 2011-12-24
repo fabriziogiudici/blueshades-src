@@ -22,9 +22,12 @@
  **********************************************************************************************************************/
 package it.tidalwave.argyll;
 
+import javax.annotation.Nonnull;
 import it.tidalwave.actor.MessageSupport;
 import it.tidalwave.actor.annotation.Message;
-import javax.annotation.Nonnull;
+import it.tidalwave.colorimetry.ColorPoints;
+import it.tidalwave.colorimetry.ColorTemperature;
+import it.tidalwave.colorimetry.MeasureWithPrecision;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import static lombok.AccessLevel.PUBLIC;

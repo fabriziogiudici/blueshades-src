@@ -37,53 +37,13 @@
     </parent>
 
     <groupId>it.tidalwave.blueargyle</groupId>
-    <artifactId>it-tidalwave-argyll</artifactId>
+    <artifactId>it-tidalwave-colorimetry</artifactId>
     <packaging>nbm</packaging>
     <version>1.0.0-SNAPSHOT</version>
-    <name>blueArgyle - Argyll</name>
-    <description>blueArgyle - Argyll</description>
+    <name>blueArgyle - Colorimetry</name>
+    <description>blueArgyle - Colorimetry</description>
     
     <dependencies>
-        <dependency>
-            <groupId>it.tidalwave.solidblue</groupId>
-            <artifactId>it-tidalwave-actor</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-colorimetry</artifactId>
-        </dependency>
-            
-        <dependency>
-            <groupId>it.tidalwave.netbeans</groupId>
-            <artifactId>it-tidalwave-netbeans-util</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>it.tidalwave.thesefoolishthings</groupId>
-            <artifactId>it-tidalwave-messagebus</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.netbeans.api</groupId>
-            <artifactId>org-openide-filesystems</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.netbeans.api</groupId>
-            <artifactId>org-openide-modules</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.kenai.nbpwr</groupId>
-            <artifactId>org-slf4j-jdk14</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.kenai.nbpwr</groupId>
-            <artifactId>joda-time</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.kenai.nbpwr</groupId>
-            <artifactId>com-eaio-uuid</artifactId>
-        </dependency>
     </dependencies>
 
     <build>
@@ -93,7 +53,7 @@
                 <artifactId>nbm-maven-plugin</artifactId>
                 <configuration>
                     <publicPackages>
-                        <publicPackage>it.tidalwave.argyll</publicPackage>
+                        <publicPackage>it.tidalwave.colorimetry</publicPackage>
                     </publicPackages>
                 </configuration>
             </plugin>
