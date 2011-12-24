@@ -31,12 +31,10 @@
             <artifactId>it-tidalwave-argyll</artifactId>
         </dependency>
 
-<!-- Uncomment if you want to enable the License Panel feature
         <dependency>
             <groupId>it.tidalwave.netbeans</groupId>
             <artifactId>it-tidalwave-netbeans-licensepanel</artifactId>
         </dependency> 
--->
 
 <!-- Uncomment if you want to expose AutoUpdate services
 
