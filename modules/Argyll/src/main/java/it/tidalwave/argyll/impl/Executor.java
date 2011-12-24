@@ -91,7 +91,7 @@ public class Executor
                   }
                 catch (IOException e)
                   {
-                    e.printStackTrace(); // FIXME  
+                    log.warn("while reading from process console", e); 
                   }
               }
           };
@@ -222,7 +222,7 @@ public class Executor
      *
      ******************************************************************************************************************/
     @Nonnull
-    public Executor execute()
+    public Executor start()
       throws IOException
       {
         log.info(">>>> executing {} ...", arguments);
@@ -250,7 +250,7 @@ public class Executor
      *
      ******************************************************************************************************************/
     @Nonnull
-    public Executor waitFor()
+    public Executor waitForCompletion()
       throws IOException, InterruptedException
       {
         process.waitFor();

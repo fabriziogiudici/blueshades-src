@@ -57,6 +57,6 @@ public class DispwinActor
 
         final Executor executor = Executor.forExecutable("dispwin")
                                           .withArgument("--");
-        DisplayDiscoveryMessage.with(executor.execute().waitFor().getStderr().filteredBy("^ *[1-9] = '([^,]*),.*$")).send();
+        DisplayDiscoveryMessage.with(executor.start().waitForCompletion().getStderr().filteredBy("^ *[1-9] = '([^,]*),.*$")).send();
       }
   }
