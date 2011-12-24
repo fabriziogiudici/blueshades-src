@@ -61,11 +61,6 @@
         <dependencies>
             <dependency>
                 <groupId>it.tidalwave.blueargyle</groupId>
-                <artifactId>it-tidalwave-blueargyle-module1</artifactId>
-                <version>1.0-ALPHA-2-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>it.tidalwave.blueargyle</groupId>
                 <artifactId>it-tidalwave-blueargyle-application-customization</artifactId>
                 <version>1.0-ALPHA-2-SNAPSHOT</version>
             </dependency>
