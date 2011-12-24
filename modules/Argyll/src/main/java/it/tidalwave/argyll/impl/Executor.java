@@ -22,21 +22,18 @@
  **********************************************************************************************************************/
 package it.tidalwave.argyll.impl;
 
+import java.io.*;
+import java.util.Map.Entry;
+import java.util.*;
+import java.util.concurrent.Executors;
 import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import javax.annotation.concurrent.ThreadSafe;
 import lombok.AccessLevel;
 import lombok.Cleanup;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -46,70 +43,149 @@ import lombok.extern.slf4j.Slf4j;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @RequiredArgsConstructor(access=AccessLevel.PRIVATE) @Slf4j
+@ThreadSafe @NoArgsConstructor(access=AccessLevel.PRIVATE) @Slf4j
 public class Executor 
   {
+    @RequiredArgsConstructor(access=AccessLevel.PACKAGE)
+    public class ConsoleOutput
+      {
+        @Nonnull
+        private final InputStream input;
+        
+        @Getter
+        private final List<String> content = new ArrayList<String>();
+        
+        @Nonnull
+        public ConsoleOutput start()
+          {
+            Executors.newSingleThreadExecutor().submit(runnable); 
+            return this;
+          }
+        
+        private final Runnable runnable = new Runnable() 
+          {
+            @Override
+            public void run() 
+              {
+                try
+                  {
+                    read();  
+                  }
+                catch (IOException e)
+                  {
+                    e.printStackTrace(); // FIXME  
+                  }
+              }
+          };
+        
+        @Nonnull
+        public List<String> filteredBy (final @Nonnull String filter)
+          {
+            final Pattern p = Pattern.compile(filter);
+            final List<String> result = new ArrayList<String>();
+
+            for (final String s : content)
+              {
+                final Matcher m = p.matcher(s);
+                
+                if (m.matches())
+                  {
+                    result.add(m.group(1));  
+                  }
+              }
+            
+            return result;
+          }
+    
+        private void read()
+          throws IOException
+          {
+            final @Cleanup BufferedReader br = new BufferedReader(new InputStreamReader(input));
+
+            for (;;)
+              {
+                final String s = br.readLine();
+
+                if (s == null)
+                  { 
+                    break;   
+                  }  
+
+                log.info(">>>>>>>> {}", s);
+                content.add(s);  
+              }
+
+            br.close();
+          }
+      }
+    
     private final static String argyllPath = "/Users/fritz/Applications/Argyll_V1.3.5/bin";
     
-    private final List<String> arguments;
+    private final List<String> arguments = new ArrayList<String>();
 
-    private final String filter;
+    private Process process;
     
     @Getter
-    private final List<String> filteredOutput;
+    private ConsoleOutput stdout;
     
+    @Getter
+    private ConsoleOutput stderr;
+    
+    private PrintWriter stdin;
+                
     @Nonnull
     public static Executor forExecutable (final @Nonnull String executable)
       {
-        return new Executor(Arrays.asList(argyllPath + File.separator + executable), "", Collections.<String>emptyList());
+        final Executor executor = new Executor();
+        executor.arguments.add(argyllPath + File.separator + executable);
+        return executor;
       }
     
     @Nonnull
     public Executor withArgument (final @Nonnull String argument)
       {
-        final List<String> tmp = new ArrayList<String>(arguments);
-        tmp.add(argument);
-        return new Executor(tmp, filter, Collections.<String>emptyList());
-      }
-    
-    @Nonnull
-    public Executor withFilter (final @Nonnull String filter)
-      {
-        return new Executor(arguments, filter, Collections.<String>emptyList());
+        arguments.add(argument);
+        return this;
       }
     
     @Nonnull
     public Executor execute()
+      throws IOException
+      {
+        log.info(">>>> executing {} ...", arguments);
+        
+        final List<String> environment = new ArrayList<String>();
+        
+//        for (final Entry<String, String> e : System.getenv().entrySet())
+//          {
+//            environment.add(String.format("%s=%s", e.getKey(), e.getValue()));  
+//          }
+        
+        environment.add("ARGYLL_NOT_INTERACTIVE=true");
+        log.info(">>>> environment: {}", environment);
+        process = Runtime.getRuntime().exec(arguments.toArray(new String[0]),
+                                            environment.toArray(new String[0]));
+        stdout = new ConsoleOutput(process.getInputStream()).start();
+        stderr = new ConsoleOutput(process.getErrorStream()).start();
+        stdin  = new PrintWriter(process.getOutputStream(), true);
+        
+        return this;
+      }
+
+    @Nonnull
+    public Executor waitFor()
       throws IOException, InterruptedException
       {
-        log.debug(">>>> executing {} ...", arguments);
-        final Process process = Runtime.getRuntime().exec(arguments.toArray(new String[0]));
         process.waitFor();
+        return this;
+      }
 
-        final Pattern p = Pattern.compile(filter);
-        final List<String> output = new ArrayList<String>();
-        final @Cleanup BufferedReader br = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-        
-        for (;;)
-          {
-            final String s = br.readLine();
-            
-            if (s == null)
-              { 
-                break;   
-              }  
-            
-            log.debug(">>>>>>>> {}", s);
-            
-            final Matcher m = p.matcher(s);
-            
-            if (m.matches())
-              {
-                output.add(m.group(1));  
-              }
-          }
-        
-        br.close();
-        return new Executor(arguments, filter, output);
+    @Nonnull
+    public Executor send (final @Nonnull String string) 
+      throws IOException 
+      {
+        stdin.print(string);
+        return this;
       }
   }
+

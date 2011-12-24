@@ -56,8 +56,7 @@ public class DispwinActor
         log.trace("discoverDisplays({})", message);
 
         final Executor executor = Executor.forExecutable("dispwin")
-                                          .withArgument("--")
-                                          .withFilter("^ *[1-9] = '([^,]*),.*$");
-        DisplayDiscoveryMessage.with(executor.execute().getFilteredOutput()).send();
+                                          .withArgument("--");
+        DisplayDiscoveryMessage.with(executor.execute().waitFor().getStderr().filteredBy("^ *[1-9] = '([^,]*),.*$")).send();
       }
   }
