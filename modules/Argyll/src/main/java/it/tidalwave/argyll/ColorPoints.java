@@ -20,10 +20,16 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.argyll.impl;
+package it.tidalwave.argyll;
 
-import it.tidalwave.actor.spi.ActorActivator;
-import it.tidalwave.actor.spi.ActorGroupActivator;
+import javax.annotation.Nonnull;
+import javax.annotation.concurrent.Immutable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 
 /***********************************************************************************************************************
  * 
@@ -31,11 +37,13 @@ import it.tidalwave.actor.spi.ActorGroupActivator;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class ArgyllActivator extends ActorGroupActivator
+@Immutable @Getter @EqualsAndHashCode @ToString
+public class ColorPoints
   {
-    public ArgyllActivator() 
+    private final List<ColorPoint> colorPoints = new ArrayList<ColorPoint>();
+    
+    public ColorPoints (final @Nonnull ColorPoint ... colorPoints)
       {
-        add(new ActorActivator(DispwinActor.class, 1));
-        add(new ActorActivator(SpotReadActor.class, 1));
+        this.colorPoints.addAll(Arrays.asList(colorPoints));
       }
   }

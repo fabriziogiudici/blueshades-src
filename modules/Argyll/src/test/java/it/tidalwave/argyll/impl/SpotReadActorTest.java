@@ -22,8 +22,13 @@
  **********************************************************************************************************************/
 package it.tidalwave.argyll.impl;
 
-import it.tidalwave.actor.spi.ActorActivator;
+import it.tidalwave.actor.Collaboration;
 import it.tidalwave.actor.spi.ActorGroupActivator;
+import it.tidalwave.argyll.MeasurementRequest;
+import it.tidalwave.argyll.MeasurementMessage;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /***********************************************************************************************************************
  * 
@@ -31,11 +36,42 @@ import it.tidalwave.actor.spi.ActorGroupActivator;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class ArgyllActivator extends ActorGroupActivator
+public class SpotReadActorTest 
   {
-    public ArgyllActivator() 
+    private MessageVerifier messages;
+    
+    private ActorGroupActivator activator;
+    
+    @BeforeMethod
+    public void setupFixture()
       {
-        add(new ActorActivator(DispwinActor.class, 1));
-        add(new ActorActivator(SpotReadActor.class, 1));
+        activator = new ArgyllActivator();
+        activator.activate();   
+        messages = new MessageVerifier();
+        messages.initialize();
+      }
+    
+    @AfterMethod
+    public void disposeFixture()
+      {
+        activator.deactivate();
+        activator = null;
+        messages.dispose();
+        messages = null;
+      }
+    
+    @Test
+    public void must_measure() 
+      throws InterruptedException
+      {
+        final Collaboration collaboration = new MeasurementRequest().send();
+        collaboration.waitForCompletion();
+        Thread.sleep(1000); // FIXME: to receive CollaborationCompleted
+        
+        messages.verifyCollaborationStarted();
+        messages.verify(MeasurementRequest.class);
+        messages.verify(MeasurementMessage.class);
+//        messages.verify(DisplayDiscoveryMessage.class).with("displayNames", new Equals(Arrays.asList("SwitchResX4 - Color LCD")));
+        messages.verifyCollaborationCompleted();
       }
   }

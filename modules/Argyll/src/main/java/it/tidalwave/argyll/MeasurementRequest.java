@@ -20,22 +20,25 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.argyll.impl;
+package it.tidalwave.argyll;
 
-import it.tidalwave.actor.spi.ActorActivator;
-import it.tidalwave.actor.spi.ActorGroupActivator;
+import it.tidalwave.actor.MessageSupport;
+import it.tidalwave.actor.annotation.Message;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
+import static lombok.AccessLevel.PUBLIC;
 
 /***********************************************************************************************************************
+ * 
+ * A message asking for a measurement.
+ * 
+ * @stereotype Message
  * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class ArgyllActivator extends ActorGroupActivator
+@Message @RequiredArgsConstructor(access=PUBLIC) @ToString
+public class MeasurementRequest extends MessageSupport
   {
-    public ArgyllActivator() 
-      {
-        add(new ActorActivator(DispwinActor.class, 1));
-        add(new ActorActivator(SpotReadActor.class, 1));
-      }
   }

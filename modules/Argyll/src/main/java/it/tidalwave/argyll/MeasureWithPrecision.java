@@ -20,10 +20,14 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.argyll.impl;
+package it.tidalwave.argyll;
 
-import it.tidalwave.actor.spi.ActorActivator;
-import it.tidalwave.actor.spi.ActorGroupActivator;
+import javax.annotation.Nonnegative;
+import javax.annotation.concurrent.Immutable;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 /***********************************************************************************************************************
  * 
@@ -31,11 +35,11 @@ import it.tidalwave.actor.spi.ActorGroupActivator;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class ArgyllActivator extends ActorGroupActivator
+@Immutable @RequiredArgsConstructor @Getter @EqualsAndHashCode @ToString
+public class MeasureWithPrecision<Measure>
   {
-    public ArgyllActivator() 
-      {
-        add(new ActorActivator(DispwinActor.class, 1));
-        add(new ActorActivator(SpotReadActor.class, 1));
-      }
+    private final Measure measure;
+    
+    @Nonnegative
+    private final double deltaE;
   }

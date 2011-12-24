@@ -27,6 +27,7 @@ import javax.annotation.concurrent.ThreadSafe;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -95,6 +96,17 @@ public class Executor
                   }
               }
           };
+        
+        /***************************************************************************************************************
+         * 
+         *
+         ***************************************************************************************************************/
+        @Nonnull
+        public Scanner filteredAndSplitBy (final @Nonnull String filterRegexp, final @Nonnull String delimiterRegexp)
+          {
+            final String string = filteredBy(filterRegexp).get(0);
+            return new Scanner(string).useDelimiter(Pattern.compile(delimiterRegexp));
+          }
         
         /***************************************************************************************************************
          * 
