@@ -1,0 +1,122 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>it.tidalwave.blueargyle</groupId>
+        <artifactId>it-tidalwave-blueargyle</artifactId>
+        <version>1.0-ALPHA-1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <groupId>it.tidalwave.blueargyle</groupId>
+    <artifactId>it-tidalwave-blueargyle-modules</artifactId>
+    <version>1.0-ALPHA-1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>blueArgyle (modules)</name>
+    <description>blueArgyle (modules)</description>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>it.tidalwave.netbeans</groupId>
+                <artifactId>openbluesky</artifactId>
+                <version>${openbluesky.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.superpom</groupId>
+                <artifactId>platform13</artifactId>
+                <version>${netbeans.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.thesefoolishthings</groupId>
+                <artifactId>thesefoolishthings</artifactId>
+                <version>${thesefoolishthings.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.superpom</groupId>
+                <artifactId>libraries</artifactId>
+                <version>${libraries.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            
+            <dependency>
+                <groupId>com.kenai.nbpwr</groupId>
+                <artifactId>org-slf4j-jdk14</artifactId>
+                <version>1.6.1-201106101300</version>
+            </dependency>
+            
+
+            <dependency>
+                <groupId>com.google.code.findbugs</groupId>
+                <artifactId>jsr305</artifactId>
+                <version>1.3.7</version>
+                <!-- WARNING: don't use 1.3.8, it has got a broken pom which brings is tons of useless stuff! -->
+            </dependency>
+            <dependency>
+                <groupId>javax.inject</groupId>
+                <artifactId>javax.inject</artifactId>
+                <version>1</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${tft.lombok.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.kenai.nbpwr</groupId>
+            <artifactId>javax-annotation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.kenai.nbpwr</groupId>
+            <artifactId>javax-inject</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        
+        <!-- TEST DEPENDENCIES -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <modules>
+        <module>ApplicationCustomization</module>
+        <module>Module1</module>
+    </modules>
+
+</project>
