@@ -22,14 +22,20 @@
  **********************************************************************************************************************/
 package it.tidalwave.argyll.impl;
 
-import java.io.*;
-import java.util.Map.Entry;
-import java.util.*;
-import java.util.concurrent.Executors;
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.ThreadSafe;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.annotation.concurrent.ThreadSafe;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import lombok.AccessLevel;
 import lombok.Cleanup;
 import lombok.Getter;
@@ -53,7 +59,7 @@ public class Executor
         private final InputStream input;
         
         @Getter
-        private final List<String> content = new ArrayList<String>();
+        private final List<String> content = Collections.synchronizedList(new ArrayList<String>());
         
         @Nonnull
         public ConsoleOutput start()
@@ -84,7 +90,7 @@ public class Executor
             final Pattern p = Pattern.compile(filter);
             final List<String> result = new ArrayList<String>();
 
-            for (final String s : content)
+            for (final String s : new ArrayList<String>(content))
               {
                 final Matcher m = p.matcher(s);
                 
@@ -95,6 +101,28 @@ public class Executor
               }
             
             return result;
+          }
+        
+        @Nonnull
+        public ConsoleOutput waitFor (final @Nonnull String regexp)
+          throws InterruptedException
+          {
+            log.info("waitFor({})", regexp);
+            
+            while (filteredBy(regexp).isEmpty())
+              {
+                synchronized (this)
+                  {
+                    wait(500); // FIXME: polls because it doesn't get notified
+                  }
+              }
+            
+            return this;
+          } 
+        
+        public void clear()
+          {
+            content.clear();  
           }
     
         private void read()
@@ -113,6 +141,11 @@ public class Executor
 
                 log.info(">>>>>>>> {}", s);
                 content.add(s);  
+                
+                synchronized (this)
+                  {
+                    notifyAll();  
+                  }
               }
 
             br.close();
@@ -182,9 +215,10 @@ public class Executor
 
     @Nonnull
     public Executor send (final @Nonnull String string) 
-      throws IOException 
+      throws IOException
       {
-        stdin.print(string);
+        log.info(">>>> sending {}...", string);
+        stdin.println(string);
         return this;
       }
   }
