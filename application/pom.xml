@@ -28,7 +28,7 @@
         </dependency>
         <dependency>
             <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-blueargyle-module1</artifactId>
+            <artifactId>it-tidalwave-argyll</artifactId>
         </dependency>
 
 <!-- Uncomment if you want to enable the License Panel feature

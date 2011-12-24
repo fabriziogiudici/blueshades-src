@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--********************************************************************************************************************
  *
- * SolidBlue - open source safe data
+ * blueArgyle - a Java UI for Argyll
  * Copyright (C) 2011-2011 by Tidalwave s.a.s. (http://www.tidalwave.it)
  *
  ***********************************************************************************************************************
@@ -17,8 +17,8 @@
  *
  ***********************************************************************************************************************
  *
- * WWW: http://solidblue.java.net
- * SCM: https://bitbucket.org/tidalwave/solidblue-src
+ * WWW: http://blueargyle.java.net
+ * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  ********************************************************************************************************************-->
 <!DOCTYPE module PUBLIC

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--********************************************************************************************************************
  *
  * blueArgyle - a Java UI for Argyll
@@ -21,15 +21,24 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  ********************************************************************************************************************-->
-<additionalHeaders>
-    <script_style>
-        <firstLine><![CDATA[#***********************************************************************************************************************]]></firstLine>
-        <beforeEachLine>#*</beforeEachLine>
-        <endLine><![CDATA[#***********************************************************************************************************************]]></endLine>
-        <skipLine><![CDATA[^#!.*$]]></skipLine>
-        <firstLineDetectionPattern><![CDATA[#.*$]]></firstLineDetectionPattern>
-        <lastLineDetectionPattern><![CDATA[#\**.*$]]></lastLineDetectionPattern>
-        <allowBlankLines>false</allowBlankLines>
-        <isMultiline>false</isMultiline>
-    </script_style>
-</additionalHeaders>
+<configuration debug="true"> 
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>target/test.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%-20thread] %-5level %-50logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender"> 
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%-20thread] %-5level %-50logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="debug"> 
+        <appender-ref ref="STDERR" />
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>

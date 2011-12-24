@@ -1,4 +1,4 @@
-<!--********************************************************************************************************************
+/***********************************************************************************************************************
  *
  * blueArgyle - a Java UI for Argyll
  * Copyright (C) 2011-2011 by Tidalwave s.a.s. (http://www.tidalwave.it)
@@ -19,14 +19,24 @@
  * WWW: http://blueargyle.java.net
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
- ********************************************************************************************************************-->
-<nbm>
-    <moduleType>normal</moduleType>
-    <codeNameBase>it.tidalwave.solidblue.application/1</codeNameBase>
-    <cluster>solidblue</cluster>
-    <manifest>src/main/nbm/manifest.mf</manifest>
-    <homepageUrl>http://solidblue.java.net</homepageUrl>
-    <author>Fabrizio Giudici</author>
-    <licenseName>Apache License, Version 2.0</licenseName>
-    <licenseFile>../../LICENSE.txt</licenseFile>
-</nbm>
+ **********************************************************************************************************************/
+package it.tidalwave.argyll;
+
+import it.tidalwave.actor.MessageSupport;
+import it.tidalwave.actor.annotation.Message;
+import lombok.ToString;
+
+/***********************************************************************************************************************
+ * 
+ * A message for starting the discovery of displays.
+ * 
+ * @stereotype Message
+ * 
+ * @author  Fabrizio Giudici
+ * @version $Id$
+ *
+ **********************************************************************************************************************/
+@Message @ToString
+public class DisplayDiscoveryQueryMessage extends MessageSupport
+  {
+  }

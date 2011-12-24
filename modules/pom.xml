@@ -47,7 +47,18 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            
+          
+            <dependency>
+                <groupId>it.tidalwave.solidblue</groupId>
+                <artifactId>it-tidalwave-actor</artifactId>
+                <version>1.0.1-SNAPSHOT</version>
+            </dependency>
+ 
+            <dependency>
+                <groupId>com.kenai.nbpwr</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>1.6.2-201110292322</version>
+            </dependency> 
             <dependency>
                 <groupId>com.kenai.nbpwr</groupId>
                 <artifactId>org-slf4j-jdk14</artifactId>
@@ -116,7 +127,7 @@
 
     <modules>
         <module>ApplicationCustomization</module>
-        <module>Module1</module>
+        <module>Argyll</module>
     </modules>
 
 </project>

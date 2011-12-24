@@ -1,6 +1,6 @@
 /***********************************************************************************************************************
  *
- * TODO
+ * blueArgyle - a Java UI for Argyll
  * Copyright (C) 2011-2011 by Tidalwave s.a.s. (http://www.tidalwave.it)
  *
  ***********************************************************************************************************************
@@ -16,18 +16,49 @@
  *
  ***********************************************************************************************************************
  *
- * WWW: TODO
- * SCM: TODO
+ * WWW: http://blueargyle.java.net
+ * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.blueargyle.module1;
+package it.tidalwave.argyll;
+
+import javax.annotation.Nonnull;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+import it.tidalwave.actor.MessageSupport;
+import it.tidalwave.actor.annotation.Message;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
+import static lombok.AccessLevel.PRIVATE;
 
 /***********************************************************************************************************************
+ * 
+ * A message notifying the discovery of some displays.
+ * 
+ * @stereotype Message
  * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class Dummy
+@Message @RequiredArgsConstructor(access=PRIVATE) @ToString
+public class DisplayDiscoveryMessage extends MessageSupport
   {
-  } 
+    @Getter
+    private final List<String> displayNames;  
+    
+    @Nonnull
+    public static DisplayDiscoveryMessage with (final @Nonnull Collection<String> displayNames)
+      {
+        return new DisplayDiscoveryMessage(new CopyOnWriteArrayList<String>(displayNames));
+      }
+    
+    @Nonnull
+    public static DisplayDiscoveryMessage with (final @Nonnull String ... displayNames)
+      {
+        return with(Arrays.asList(displayNames));
+      }
+  }

@@ -14,18 +14,17 @@
     <version>1.0-ALPHA-2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>blueArgyle (master)</name>
-    <description>blueArgyle (master)</description>
+    <description>blueArgyle - a Java UI for Argyll</description>
 
-    <url>http://it-tidalwave-blueargyle.java.net</url>
+    <url>http://blueargyle.java.net</url>
     <inceptionYear>2011</inceptionYear>
 
     <properties>
         <scm.repo.url>ssh://hg@bitbucket.org/tidalwave/blueargyle-src</scm.repo.url>
         <scm.repo.readonly.url>https://bitbucket.org/tidalwave/blueargyle-src</scm.repo.readonly.url>
         <scm.repo.browse.url>https://bitbucket.org/tidalwave/blueargyle-src/src</scm.repo.browse.url>
-        
-        <tidalwave.ci.view>VIEW</tidalwave.ci.view>
-        <tidalwave.issues>ISSUES</tidalwave.issues>
+        <tidalwave.ci.view>blueArgyle</tidalwave.ci.view>
+        <tidalwave.issues>BAY</tidalwave.issues>
         
         <tft.lombok.version>0.10.2</tft.lombok.version>
 
@@ -33,9 +32,10 @@
         <netbeans.cluster>blueargyle</netbeans.cluster>
 
         <openbluesky.version>0.13</openbluesky.version>
-        <thesefoolishthings.version>1.18</thesefoolishthings.version>
+        <thesefoolishthings.version>1.19-SNAPSHOT</thesefoolishthings.version>
         <libraries.version>1.1.5</libraries.version>
         <netbeans.version>RELEASE70</netbeans.version>
+        <logback.version>0.9.30</logback.version>
     </properties>
 
     <repositories>
@@ -79,7 +79,11 @@
                 <artifactId>it-tidalwave-blueargyle-application</artifactId>
                 <version>1.0-ALPHA-2-SNAPSHOT</version>
             </dependency>
-            <!-- TODO: ADD OTHER DEPENDENCY SECTIONS FOR EXPOSED MODULES OF YOUR PROJECT HERE-->  
+            <dependency>
+                <groupId>it.tidalwave.blueargyle</groupId>
+                <artifactId>it-tidalwave-argyll</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     

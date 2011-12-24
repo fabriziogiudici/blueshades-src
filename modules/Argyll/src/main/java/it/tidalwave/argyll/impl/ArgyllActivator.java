@@ -1,4 +1,4 @@
-<!--********************************************************************************************************************
+/***********************************************************************************************************************
  *
  * blueArgyle - a Java UI for Argyll
  * Copyright (C) 2011-2011 by Tidalwave s.a.s. (http://www.tidalwave.it)
@@ -19,14 +19,22 @@
  * WWW: http://blueargyle.java.net
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
- ********************************************************************************************************************-->
-<nbm>
-    <moduleType>normal</moduleType>
-    <codeNameBase>it.tidalwave.solidblue.application/1</codeNameBase>
-    <cluster>solidblue</cluster>
-    <manifest>src/main/nbm/manifest.mf</manifest>
-    <homepageUrl>http://solidblue.java.net</homepageUrl>
-    <author>Fabrizio Giudici</author>
-    <licenseName>Apache License, Version 2.0</licenseName>
-    <licenseFile>../../LICENSE.txt</licenseFile>
-</nbm>
+ **********************************************************************************************************************/
+package it.tidalwave.argyll.impl;
+
+import it.tidalwave.actor.spi.ActorActivator;
+import it.tidalwave.actor.spi.ActorGroupActivator;
+
+/***********************************************************************************************************************
+ * 
+ * @author  Fabrizio Giudici
+ * @version $Id$
+ *
+ **********************************************************************************************************************/
+public class ArgyllActivator extends ActorGroupActivator
+  {
+    public ArgyllActivator() 
+      {
+        add(new ActorActivator(DispwinActor.class, 1));
+      }
+  }
