@@ -28,7 +28,6 @@ import javax.inject.Provider;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -46,6 +45,8 @@ import it.tidalwave.uniformity.ui.UniformityCheckPresentation;
 import it.tidalwave.uniformity.ui.UniformityCheckPresentation.Position;
 import it.tidalwave.uniformity.ui.spi.UniformityCheckPresentationBuilder;
 import lombok.extern.slf4j.Slf4j;
+import static java.util.concurrent.TimeUnit.*;
+import static it.tidalwave.actor.Collaboration.*;
 import static it.tidalwave.uniformity.ui.UniformityCheckPresentation.Position.pos;
 
 /***********************************************************************************************************************
@@ -76,7 +77,7 @@ public class UniformityCheckControllerActor
     
     private Position currentPosition;
     
-    private Collaboration collaborationPendingUserIntervention = Collaboration.NULL_COLLABORATION;
+    private Collaboration collaborationPendingUserIntervention = NULL_COLLABORATION;
     
     private Object suspensionToken;
     
@@ -96,8 +97,8 @@ public class UniformityCheckControllerActor
                 public void run() 
                   {
                     presentation.renderWhiteCellAt(currentPosition);
-                    new MeasurementRequest().sendLater(500, TimeUnit.MILLISECONDS);
-                    collaborationPendingUserIntervention = Collaboration.NULL_COLLABORATION;
+                    new MeasurementRequest().sendLater(500, MILLISECONDS);
+                    collaborationPendingUserIntervention = NULL_COLLABORATION;
                   }
               });
           }
@@ -119,7 +120,7 @@ public class UniformityCheckControllerActor
                 public void run() 
                   {
                     presentation.dismiss();
-                    collaborationPendingUserIntervention = Collaboration.NULL_COLLABORATION;
+                    collaborationPendingUserIntervention = NULL_COLLABORATION;
                   }
               });
           }
