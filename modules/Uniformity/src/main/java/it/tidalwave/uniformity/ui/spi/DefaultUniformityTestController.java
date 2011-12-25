@@ -48,36 +48,27 @@ public class DefaultUniformityTestController implements UniformityTestController
     
     @Nonnull
     /* package FIXME */ UniformityTestPresentation presentation;
-    
+
+    private final int columns = 3;
+    private final int rows = 3;
+
+    private final List<Position> positions = new ArrayList<Position>();
+
+    private Iterator<Position> cursor;
+        
     /*******************************************************************************************************************
      * 
      *
      ******************************************************************************************************************/
     public void run()
       {
-        final int columns = 3;
-        final int rows = 3;
+        computePositions();
         presentation.setGridSize(columns, rows);
-        
-        final List<Position> pp = new ArrayList<Position>();
-        
-        for (int row = 0; row < rows; row++)
-          {
-            for (int column = 0; column < columns; column++)
-              {
-                pp.add(pos(column, row));
-              }
-          }
-        
-        pp.add(0, pp.remove(4));
-
         presentation.renderControlPanel(DEFAULT_CONTROL_PANEL_POSITION);
-        
-        final Iterator<Position> ii = pp.iterator();
         
         for (int i = 0; i < 9; i++)
           {
-            final Position p = ii.next();   
+            final Position p = cursor.next();   
             
             if (p.equals(DEFAULT_CONTROL_PANEL_POSITION))
               {
@@ -97,7 +88,27 @@ public class DefaultUniformityTestController implements UniformityTestController
               }
           }
       }
-    
+ 
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    private void computePositions()
+      {
+        positions.clear();
+        
+        for (int row = 0; row < rows; row++)
+          {
+            for (int column = 0; column < columns; column++)
+              {
+                positions.add(pos(column, row));
+              }
+          }
+        
+        positions.add(0, positions.remove(4));
+        cursor = positions.iterator();
+      }
+     
     private void measure()
       {
         try
