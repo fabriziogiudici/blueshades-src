@@ -41,29 +41,29 @@ import lombok.extern.slf4j.Slf4j;
  *
  **********************************************************************************************************************/
 @ServiceProvider(service=UniformityCheckPresentationBuilder.class) @Slf4j
-public class SwingUniformityCheckPresentationBuilder implements UniformityCheckPresentationBuilder
+public class UniformityCheckPresentationPanelBuilder implements UniformityCheckPresentationBuilder
   {
-    private WeakReference<SwingUniformityCheckPresentation> presentationRef = new WeakReference<SwingUniformityCheckPresentation>(null);
+    private WeakReference<UniformityCheckPresentationPanel> presentationRef = new WeakReference<UniformityCheckPresentationPanel>(null);
     
     @Override @Nonnull
     public UniformityCheckPresentation buildUI()
       {
         log.info("buildUI()");
-        SwingUniformityCheckPresentation presentation = presentationRef.get();
+        UniformityCheckPresentationPanel presentation = presentationRef.get();
         
         if (presentation == null)
           {
             presentation = buildUI2();
-            presentationRef = new WeakReference<SwingUniformityCheckPresentation>(presentation);
+            presentationRef = new WeakReference<UniformityCheckPresentationPanel>(presentation);
           }
         
         return presentation;
       }
               
     @Nonnull
-    private SwingUniformityCheckPresentation buildUI2()
+    private UniformityCheckPresentationPanel buildUI2()
       {
-        final AtomicReference<SwingUniformityCheckPresentation> reference = new AtomicReference<SwingUniformityCheckPresentation>();
+        final AtomicReference<UniformityCheckPresentationPanel> reference = new AtomicReference<UniformityCheckPresentationPanel>();
         
         try  
           {
@@ -72,7 +72,7 @@ public class SwingUniformityCheckPresentationBuilder implements UniformityCheckP
                 @Override
                 public void run() 
                   {
-                    reference.set(new SwingUniformityCheckPresentation());
+                    reference.set(new UniformityCheckPresentationPanel());
                   }
               });
           } 

@@ -46,7 +46,7 @@ import lombok.extern.slf4j.Slf4j;
  *
  **********************************************************************************************************************/
 @Slf4j
-public class SwingUniformityCheckPresentation extends JPanel implements UniformityCheckPresentation
+public class UniformityCheckPresentationPanel extends JPanel implements UniformityCheckPresentation
   {
     private JPanel[][] cell;
     
