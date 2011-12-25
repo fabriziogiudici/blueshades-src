@@ -35,6 +35,7 @@ import it.tidalwave.actor.annotation.Actor;
 import it.tidalwave.actor.annotation.MessageListener;
 import it.tidalwave.argyll.MeasurementMessage;
 import it.tidalwave.argyll.MeasurementRequest;
+import it.tidalwave.uniformity.UniformityTestRequest;
 import it.tidalwave.uniformity.ui.UniformityTestController;
 import it.tidalwave.uniformity.ui.UniformityTestPresentation;
 import it.tidalwave.uniformity.ui.UniformityTestPresentation.Position;
@@ -86,6 +87,18 @@ public class DefaultUniformityTestController implements UniformityTestController
      *
      ******************************************************************************************************************/
     @MessageListener
+    public void start (final @Nonnull UniformityTestRequest message)
+      {
+        log.info("start({})", message);
+        initialize();
+        prepareNextMeasurement();  
+      }
+        
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    @MessageListener
     public void processMeasure (final @Nonnull MeasurementMessage message)
       {
         log.info("processMeasure({})", message);
@@ -98,7 +111,7 @@ public class DefaultUniformityTestController implements UniformityTestController
      * 
      *
      ******************************************************************************************************************/
-    public void initialize()
+    private void initialize()
       {
         log.info("initialize()");
         computePositions();
@@ -112,7 +125,7 @@ public class DefaultUniformityTestController implements UniformityTestController
      * Prepares the next measurement inviting the user to properly position the sensor.
      *
      ******************************************************************************************************************/
-    public void prepareNextMeasurement()
+    private void prepareNextMeasurement()
       {
         log.info("prepareNextMeasurement()");
         

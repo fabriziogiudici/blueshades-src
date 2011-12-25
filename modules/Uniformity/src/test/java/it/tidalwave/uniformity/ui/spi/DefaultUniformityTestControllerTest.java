@@ -27,6 +27,7 @@ import javax.swing.JFrame;
 import it.tidalwave.actor.spi.ActorActivator;
 import it.tidalwave.actor.spi.ActorGroupActivator;
 import it.tidalwave.argyll.impl.MockSpotReadActor;
+import it.tidalwave.uniformity.UniformityTestRequest;
 import it.tidalwave.uniformity.ui.UniformityTestPresentation;
 import it.tidalwave.uniformity.ui.impl.SwingUniformityTestPresentation;
 import it.tidalwave.uniformity.ui.UniformityTestPresentation.Position;
@@ -124,8 +125,7 @@ public class DefaultUniformityTestControllerTest
     public void must_follow_the_proper_sequence_3x3() 
       throws InterruptedException
       {
-        fixture.initialize();  
-        fixture.prepareNextMeasurement();  
+        new UniformityTestRequest().send();
         
         Thread.sleep(20000); // FIXME: wait for completion
         
@@ -205,8 +205,7 @@ public class DefaultUniformityTestControllerTest
         jframe.setSize(800, 600);
         jframe.setVisible(true);
         fixture.presentation = presentation;
-        fixture.initialize();
-        fixture.prepareNextMeasurement();
+        new UniformityTestRequest().send();
 
         do
           {
