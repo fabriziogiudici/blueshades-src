@@ -101,11 +101,11 @@ public class DefaultUniformityTestController implements UniformityTestController
         presentation.renderWhite(row, column);
         measure();
         presentation.renderMeasurement(row, column, "Luminance: 1 cd/m2", "White point: 2420 K");
-        presentation.renderInvitation(row + 1, 0);
+        row++;
+        column = 0;
+        presentation.renderInvitation(row, column);
         
         waitForNextPressed();
-        row = 1;
-        column = 0;
         presentation.renderWhite(row, column);
         measure();
         presentation.renderMeasurement(row, column, "Luminance: 1 cd/m2", "White point: 2420 K");
@@ -119,11 +119,11 @@ public class DefaultUniformityTestController implements UniformityTestController
         presentation.renderWhite(row, column);
         measure();
         presentation.renderMeasurement(row, column, "Luminance: 1 cd/m2", "White point: 2420 K");
-        presentation.renderInvitation(row + 1, 0);
+        row++;
+        column = 0;
+        presentation.renderInvitation(row, column);
         
         waitForNextPressed();
-        row = 2;
-        column = 0;
         presentation.renderWhite(row, column);
         measure();
         presentation.renderMeasurement(row, column, "Luminance: 1 cd/m2", "White point: 2420 K");
