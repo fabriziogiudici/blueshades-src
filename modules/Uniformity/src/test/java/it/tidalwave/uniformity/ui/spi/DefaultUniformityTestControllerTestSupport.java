@@ -25,6 +25,7 @@ package it.tidalwave.uniformity.ui.spi;
 import it.tidalwave.actor.spi.ActorActivator;
 import it.tidalwave.actor.spi.ActorGroupActivator;
 import it.tidalwave.argyll.impl.MockSpotReadActor;
+import it.tidalwave.uniformity.ui.UniformityTestPresentation;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
@@ -36,6 +37,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public abstract class DefaultUniformityTestControllerTestSupport 
   {
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
     static class TestActivator extends ActorGroupActivator
       {
         public TestActivator() 
@@ -44,4 +49,14 @@ public abstract class DefaultUniformityTestControllerTestSupport
             add(new ActorActivator(DefaultUniformityTestController.class, 1));
           }
       }
+    
+    protected UniformityTestPresentationBuilder presentationBuilder;
+    
+    protected UniformityTestPresentation presentation;
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    protected abstract void createPresentation();
   }

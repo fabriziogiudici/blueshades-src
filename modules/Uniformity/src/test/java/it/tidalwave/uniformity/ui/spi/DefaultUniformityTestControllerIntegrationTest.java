@@ -44,8 +44,6 @@ import java.awt.Component;
 @Slf4j
 public class DefaultUniformityTestControllerIntegrationTest extends DefaultUniformityTestControllerTestSupport
   {
-//    private UniformityTestPresentation presentation;
-//    
     private TestActivator testActivator;
     
     private InOrder inOrder;
@@ -62,12 +60,24 @@ public class DefaultUniformityTestControllerIntegrationTest extends DefaultUnifo
         messageVerifier = new MessageVerifier();
         messageVerifier.initialize();
         
-        MockLookup.setInstances(new SwingUniformityTestPresentationBuilder());
+        createPresentation();
+        MockLookup.setInstances(presentationBuilder);
         
 //        inOrder = inOrder(presentation);
         
         testActivator = new TestActivator();
         testActivator.activate();
+      }
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    @Override
+    protected void createPresentation()
+      {
+        presentationBuilder = new SwingUniformityTestPresentationBuilder();
+        presentation = presentationBuilder.buildUI();
       }
     
     /*******************************************************************************************************************
@@ -92,7 +102,7 @@ public class DefaultUniformityTestControllerIntegrationTest extends DefaultUnifo
     public void must_follow_the_proper_sequence_3x3b() throws InterruptedException
       {
         JFrame jframe = new JFrame();
-        jframe.add((Component)Locator.find(UniformityTestPresentationBuilder.class).buildUI());
+        jframe.add((Component)presentation);
         jframe.setSize(1024, 768);
         jframe.setVisible(true);
         new UniformityTestRequest().send();

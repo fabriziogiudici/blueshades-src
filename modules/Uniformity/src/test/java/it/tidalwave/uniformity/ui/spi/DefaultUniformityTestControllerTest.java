@@ -51,8 +51,6 @@ import static org.mockito.Mockito.*;
 @Slf4j
 public class DefaultUniformityTestControllerTest extends DefaultUniformityTestControllerTestSupport
   {
-    private UniformityTestPresentation presentation;
-    
     private TestActivator testActivator;
     
     private InOrder inOrder;
@@ -100,17 +98,27 @@ public class DefaultUniformityTestControllerTest extends DefaultUniformityTestCo
         messageVerifier = new MessageVerifier();
         messageVerifier.initialize();
         
-        presentation = mock(UniformityTestPresentation.class);
-        doAnswer(storeActionReferences).when(presentation).bind(any(Action.class));
-        doAnswer(clickContinue).when(presentation).renderInvitation(any(Position.class));
-        final UniformityTestPresentationBuilder presentationBuilder = mock(UniformityTestPresentationBuilder.class);
-        doReturn(presentation).when(presentationBuilder).buildUI();
+        createPresentation();
         MockLookup.setInstances(presentationBuilder);
         
         inOrder = inOrder(presentation);
         
         testActivator = new TestActivator();
         testActivator.activate();
+      }
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    @Override
+    protected void createPresentation()
+      {
+        presentation = mock(UniformityTestPresentation.class);
+        doAnswer(storeActionReferences).when(presentation).bind(any(Action.class));
+        doAnswer(clickContinue).when(presentation).renderInvitation(any(Position.class));
+        presentationBuilder = mock(UniformityTestPresentationBuilder.class);
+        doReturn(presentation).when(presentationBuilder).buildUI();
       }
     
     /*******************************************************************************************************************
