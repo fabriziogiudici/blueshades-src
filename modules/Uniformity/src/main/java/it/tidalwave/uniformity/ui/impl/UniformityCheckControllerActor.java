@@ -89,6 +89,7 @@ public class UniformityCheckControllerActor
         @Override
         public void actionPerformed (final @Nonnull ActionEvent event) 
           {
+            setEnabled(false);
             collaborationPendingUserIntervention.resume(suspensionToken, new Runnable()
               {
                 @Override
@@ -111,6 +112,7 @@ public class UniformityCheckControllerActor
         @Override
         public void actionPerformed (final @Nonnull ActionEvent event) 
           {
+            setEnabled(false);
             collaborationPendingUserIntervention.resume(suspensionToken, new Runnable()
               {
                 @Override
@@ -161,6 +163,8 @@ public class UniformityCheckControllerActor
     private void initialize()
       {
         log.info("initialize()");
+        continueAction.setEnabled(false);
+        cancelAction.setEnabled(false);
         presentation = presentationBuilder.get().buildUI();
         computePositions();
         presentation.bind(continueAction, cancelAction);
@@ -189,6 +193,8 @@ public class UniformityCheckControllerActor
             suspensionToken = collaborationPendingUserIntervention.suspend();
             presentation.renderSensorPlacementInvitationCellAt(currentPosition);
             eventuallyMoveOutControlPanel();
+            continueAction.setEnabled(true);
+            cancelAction.setEnabled(true);
           }
       }
  
