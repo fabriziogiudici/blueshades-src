@@ -129,7 +129,11 @@ public class DefaultUniformityTestController implements UniformityTestController
       {
         log.info("prepareNextMeasurement()");
         
-        if (positionIterator.hasNext())
+        if (!positionIterator.hasNext())
+          {
+            presentation.dispose();  
+          }
+        else
           {
             currentPosition = positionIterator.next();   
             eventuallyMoveOutControlPanel();

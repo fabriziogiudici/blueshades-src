@@ -96,4 +96,10 @@ public interface UniformityTestPresentation
     public void renderMeasurement (@Nonnull Position position,
                                    @Nonnull String luminance, 
                                    @Nonnull String whitePoint);
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    public void dispose();
   }

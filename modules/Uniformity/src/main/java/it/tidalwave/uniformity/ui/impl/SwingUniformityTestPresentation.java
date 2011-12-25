@@ -51,7 +51,7 @@ public class SwingUniformityTestPresentation extends JPanel implements Uniformit
     private JPanel[][] cell;
     
     private Action continueAction;
-    
+
     /*******************************************************************************************************************
      * 
      *
@@ -215,6 +215,15 @@ public class SwingUniformityTestPresentation extends JPanel implements Uniformit
                 setCell(position, new MeasurementPanel(luminance, whitePoint));
               }
           });
+      }
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    @Override
+    public void dispose() 
+      {
       }
     
     /*******************************************************************************************************************
