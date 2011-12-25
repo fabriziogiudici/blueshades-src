@@ -71,6 +71,10 @@ public class DefaultUniformityTestControllerTest
     
     private InOrder inOrder;
     
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
     private final Answer<Void> clickContinue = new Answer<Void>()
       {
         @Override
@@ -82,6 +86,10 @@ public class DefaultUniformityTestControllerTest
           }
       };
 
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
     @BeforeMethod
     public void setupFixture()
       {
@@ -95,6 +103,10 @@ public class DefaultUniformityTestControllerTest
         fixture.presentation = presentation;
       }
     
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
     @AfterMethod
     public void cleanup()
       {
@@ -104,6 +116,10 @@ public class DefaultUniformityTestControllerTest
         testActivator = null;
       }
     
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
     @Test
     public void must_follow_the_proper_sequence_3x3() 
       throws InterruptedException
@@ -176,6 +192,10 @@ public class DefaultUniformityTestControllerTest
         inOrder.verify(presentation).renderMeasurement( eq(pos(2, 2)), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
       }
     
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
     @Test
     public void must_follow_the_proper_sequence_3x3b() throws InterruptedException
       {
