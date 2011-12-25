@@ -25,6 +25,7 @@ package it.tidalwave.uniformity.ui;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import lombok.EqualsAndHashCode;
+import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 /***********************************************************************************************************************
@@ -37,22 +38,11 @@ import lombok.ToString;
  **********************************************************************************************************************/
 public interface UniformityTestPresentation 
   {
-    @EqualsAndHashCode @ToString
+    @RequiredArgsConstructor @EqualsAndHashCode @ToString
     public static class Position
       {
-        public int column;
-        public int row;
-
-        public boolean next() 
-          {
-            if (++column == 3) // FIXME
-              {
-                column = 0;
-                row++;
-              }
-            
-            return row < 3; // FIXME
-          }
+        public final int column;
+        public final int row;
       }
     
     /*******************************************************************************************************************

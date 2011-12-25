@@ -84,14 +84,12 @@ public class DefaultUniformityTestController implements UniformityTestController
         
         final List<UniformityTestPresentation.Position> pp = new ArrayList<UniformityTestPresentation.Position>();
         
-        final UniformityTestPresentation.Position pc = new UniformityTestPresentation.Position();
-        for (int i = 0; i < 9; i++)
+        for (int row = 0; row < rows; row++)
           {
-            final UniformityTestPresentation.Position pc2 = new UniformityTestPresentation.Position();
-            pc2.column = pc.column;
-            pc2.row = pc.row;
-            pp.add(pc2);
-            pc.next();
+            for (int column = 0; column < columns; column++)
+              {
+                pp.add(new UniformityTestPresentation.Position(column, row));
+              }
           }
         
         final Iterator<UniformityTestPresentation.Position> ii = pp.iterator();
