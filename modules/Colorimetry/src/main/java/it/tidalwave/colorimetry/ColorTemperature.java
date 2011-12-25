@@ -28,7 +28,6 @@ import javax.annotation.concurrent.Immutable;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 
 /***********************************************************************************************************************
  * 
@@ -36,7 +35,7 @@ import lombok.ToString;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @RequiredArgsConstructor @Getter @EqualsAndHashCode @ToString
+@Immutable @RequiredArgsConstructor @Getter @EqualsAndHashCode
 public class ColorTemperature
   {
     public enum Scale // FIXME: better name
@@ -49,4 +48,10 @@ public class ColorTemperature
     
     @Nonnull
     private final Scale scale;
+    
+    @Override @Nonnull
+    public String toString()
+      {
+        return String.format("%d %s", t, scale);  
+      }
   }

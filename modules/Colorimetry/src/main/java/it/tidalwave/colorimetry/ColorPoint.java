@@ -27,7 +27,6 @@ import javax.annotation.concurrent.Immutable;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 
 /***********************************************************************************************************************
  * 
@@ -35,13 +34,30 @@ import lombok.ToString;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @RequiredArgsConstructor @Getter @EqualsAndHashCode @ToString
+@Immutable @RequiredArgsConstructor @Getter @EqualsAndHashCode
 public class ColorPoint
   {
     public static enum ColorSpace
       {
-        XYZ,
+        XYZ
+          {
+            @Override @Nonnull 
+            public String toString (final @Nonnull ColorPoint colorPoint)
+              {
+                return String.format("(x=%f, y=%f, z=%f)", colorPoint.c1, colorPoint.c2, colorPoint.c3);  
+              }
+          },
+        
         Lab
+          {
+            @Override @Nonnull 
+            public String toString (final @Nonnull ColorPoint colorPoint)
+              {
+                return String.format("(L=%f, a*=%f, b*=%f)", colorPoint.c1, colorPoint.c2, colorPoint.c3);  
+              }
+          };
+        
+        public abstract String toString (@Nonnull ColorPoint colorPoint);
       }
     
     private final double c1;
@@ -52,4 +68,10 @@ public class ColorPoint
     
     @Nonnull
     private final ColorSpace colorSpace;
+    
+    @Override @Nonnull
+    public String toString()
+      {
+        return colorSpace.toString(this);  
+      }
   }

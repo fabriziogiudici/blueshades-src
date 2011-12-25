@@ -23,11 +23,11 @@
 package it.tidalwave.colorimetry;
 
 import javax.annotation.Nonnegative;
+import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 
 /***********************************************************************************************************************
  * 
@@ -35,11 +35,17 @@ import lombok.ToString;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @RequiredArgsConstructor @Getter @EqualsAndHashCode @ToString
+@Immutable @RequiredArgsConstructor @Getter @EqualsAndHashCode
 public class MeasureWithPrecision<Measure>
   {
     private final Measure measure;
     
     @Nonnegative
     private final double deltaE;
+    
+    @Override @Nonnull
+    public String toString()
+      {
+        return String.format("(%s, de=%f)", measure, deltaE);  
+      }
   }
