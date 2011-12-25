@@ -84,6 +84,11 @@
                 <artifactId>it-tidalwave-colorimetry</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>
+            <dependency>
+                <groupId>it.tidalwave.blueargyle</groupId>
+                <artifactId>it-tidalwave-uniformity</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     
