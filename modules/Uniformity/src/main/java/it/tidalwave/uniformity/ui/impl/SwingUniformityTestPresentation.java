@@ -30,10 +30,10 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import it.tidalwave.uniformity.ui.UniformityTestPresentation;
-import javax.annotation.CheckForNull;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
@@ -46,6 +46,19 @@ import lombok.extern.slf4j.Slf4j;
 public class SwingUniformityTestPresentation extends JPanel implements UniformityTestPresentation
   {
     private JPanel[][] cell;
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    private static class Empty extends JPanel
+      {
+        public Empty()
+          {
+            setOpaque(true);
+            setBackground(Color.GRAY);
+          }
+      }
     
     /*******************************************************************************************************************
      * 
@@ -118,7 +131,8 @@ public class SwingUniformityTestPresentation extends JPanel implements Uniformit
                     for (int column = 0; column < columns; column++)
                       {
                         add(cell[row][column] = new JPanel(new BorderLayout()));
-//                        cell[row][column].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                        cell[row][column].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                        cell[row][column].add(new Empty(), BorderLayout.CENTER);
                       }
                   }
               }
@@ -137,7 +151,7 @@ public class SwingUniformityTestPresentation extends JPanel implements Uniformit
             @Override
             public void run() 
               {
-                setCell(row, column, null);
+                setCell(row, column, new Empty());
               }
           });
       }
@@ -217,15 +231,10 @@ public class SwingUniformityTestPresentation extends JPanel implements Uniformit
      * 
      *
      ******************************************************************************************************************/
-    private void setCell (final @Nonnegative int row, final @Nonnegative int column, final @CheckForNull Component component)
+    private void setCell (final @Nonnegative int row, final @Nonnegative int column, final @Nonnull Component component)
       {
         cell[row][column].removeAll();
-        
-        if (component != null)
-          {
-            cell[row][column].add(component, BorderLayout.CENTER);
-          }
-            
+        cell[row][column].add(component, BorderLayout.CENTER);
         validate();
       }
     

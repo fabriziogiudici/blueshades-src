@@ -69,7 +69,7 @@ public class DefaultUniformityTestControllerTest
         inOrder.verify(presentation).renderWhite(       eq(1), eq(1));
 
         // measure
-        inOrder.verify(presentation).renderMeasurement( eq(1), eq(1), eq("Luminance: 1 cd/m2"), eq("White point: 2720 K"));
+        inOrder.verify(presentation).renderMeasurement( eq(1), eq(1), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
         inOrder.verify(presentation).renderInvitation(  eq(0), eq(0));
         inOrder.verify(presentation).renderControlPanel(eq(1), eq(0));
         
