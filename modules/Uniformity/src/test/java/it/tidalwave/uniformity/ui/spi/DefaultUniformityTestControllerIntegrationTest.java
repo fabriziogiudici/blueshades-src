@@ -22,6 +22,10 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.ui.spi;
 
+import javax.annotation.Nonnull;
+import java.awt.Component;
+import java.awt.EventQueue;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import it.tidalwave.argyll.impl.MessageVerifier;
 import it.tidalwave.netbeans.util.test.MockLookup;
@@ -31,15 +35,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import java.awt.Component;
-import java.awt.EventQueue;
-import javax.annotation.Nonnull;
-import javax.swing.JButton;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.fest.swing.core.BasicComponentFinder;
 import org.fest.swing.core.ComponentFinder;
 import static org.mockito.Mockito.*;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 /***********************************************************************************************************************
  * 
@@ -123,13 +123,20 @@ public class DefaultUniformityTestControllerIntegrationTest extends DefaultUnifo
      ******************************************************************************************************************/
     @AfterMethod
     public void cleanup()
+      throws InterruptedException
       {
         messageVerifier.dispose();
         testActivator.deactivate();
         messageVerifier = null;
         testActivator = null;
         presentation = null;
-        frame.dispose();
+        
+        if (frame != null)
+          {
+            Thread.sleep(2000);
+            frame.dispose();
+          }
+        
         frame = null;
         MockLookup.reset();
       }
@@ -143,7 +150,5 @@ public class DefaultUniformityTestControllerIntegrationTest extends DefaultUnifo
       throws InterruptedException
       {
         xxx();
-        
-        Thread.sleep(2000);
       }
   }
