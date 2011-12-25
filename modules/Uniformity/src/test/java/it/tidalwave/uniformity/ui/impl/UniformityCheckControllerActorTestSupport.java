@@ -89,6 +89,7 @@ public abstract class UniformityCheckControllerActorTestSupport
         
         inOrder.verify(presentation).bind(any(Action.class), any(Action.class));
         inOrder.verify(presentation).setGridSize(eq(3), eq(3));
+        inOrder.verify(presentation).showUp();
         inOrder.verify(presentation).renderControlPanelAt(eq(pos(0, 0)));
         
         inOrder.verify(presentation).renderSensorPlacementInvitationCellAt(eq(pos(1, 1)));

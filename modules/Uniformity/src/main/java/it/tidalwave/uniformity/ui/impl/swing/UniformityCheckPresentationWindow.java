@@ -39,14 +39,14 @@ import static it.tidalwave.uniformity.ui.impl.swing.SafeRunner.*;
 public class UniformityCheckPresentationWindow extends UniformityCheckPresentationWindowSupport
   {    
     @Override
-    public void bind (final @Nonnull Action continueAction, final @Nonnull Action cancelAction)
+    public void showUp()
       {
         runSafely(new Runnable() 
           {
             @Override
             public void run() 
               {
-                panel.bind(continueAction, cancelAction);
+                panel.showUp();
                 final GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
                 final GraphicsDevice graphicsDevice = graphicsEnvironment.getScreenDevices()[0];
                 graphicsDevice.setFullScreenWindow(frame);

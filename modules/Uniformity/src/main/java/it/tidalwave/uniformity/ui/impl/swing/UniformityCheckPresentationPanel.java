@@ -124,6 +124,15 @@ public class UniformityCheckPresentationPanel extends JPanel implements Uniformi
      *
      ******************************************************************************************************************/
     @Override
+    public void showUp()
+      {
+      }
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    @Override
     public void renderEmptyCellAt (final @Nonnull Position position) 
       {
         runSafely(new Runnable() 
@@ -213,7 +222,6 @@ public class UniformityCheckPresentationPanel extends JPanel implements Uniformi
     @Override
     public void dismiss() 
       {
-        log.info("dispose()");
       }
     
     /*******************************************************************************************************************

@@ -165,6 +165,7 @@ public class UniformityCheckControllerActor
         computePositions();
         presentation.bind(continueAction, cancelAction);
         presentation.setGridSize(columns, rows);
+        presentation.showUp();
         presentation.renderControlPanelAt(DEFAULT_CONTROL_PANEL_POSITION);
       }
     
