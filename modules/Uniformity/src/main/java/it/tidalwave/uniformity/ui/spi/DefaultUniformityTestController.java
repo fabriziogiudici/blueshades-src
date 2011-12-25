@@ -24,6 +24,9 @@ package it.tidalwave.uniformity.ui.spi;
 
 import it.tidalwave.uniformity.ui.UniformityTestController;
 import it.tidalwave.uniformity.ui.UniformityTestPresentation;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import javax.annotation.Nonnull;
 import lombok.extern.slf4j.Slf4j;
 
@@ -70,7 +73,7 @@ public class DefaultUniformityTestController implements UniformityTestController
               }
           }
         
-        final UniformityTestPresentation.Position p = new UniformityTestPresentation.Position();
+//        final UniformityTestPresentation.Position p = new UniformityTestPresentation.Position();
         
         waitForNextPressed();
         presentation.renderWhite(1, 1);
@@ -78,6 +81,21 @@ public class DefaultUniformityTestController implements UniformityTestController
         presentation.renderMeasurement(1, 1, "Luminance: 1 cd/m2", "White point: 2720 K");
         presentation.renderInvitation(0, 0);
         presentation.renderControlPanel(1, 0);
+        
+        final List<UniformityTestPresentation.Position> pp = new ArrayList<UniformityTestPresentation.Position>();
+        
+        final UniformityTestPresentation.Position pc = new UniformityTestPresentation.Position();
+        for (int i = 0; i < 9; i++)
+          {
+            final UniformityTestPresentation.Position pc2 = new UniformityTestPresentation.Position();
+            pc2.column = pc.column;
+            pc2.row = pc.row;
+            pp.add(pc2);
+            pc.next();
+          }
+        
+        final Iterator<UniformityTestPresentation.Position> ii = pp.iterator();
+        UniformityTestPresentation.Position p = ii.next();
         
         for (int i = 0; i < 8; i++)
           {
@@ -94,11 +112,12 @@ public class DefaultUniformityTestController implements UniformityTestController
 
             if (p.column == 0 && p.row == 1)
               {
-                p.next();
+                ii.next();
               }
             
-            if (p.next())
+            if (ii.hasNext())
               {
+                p = ii.next();
                 presentation.renderInvitation(p.row, p.column);
               }
           }
