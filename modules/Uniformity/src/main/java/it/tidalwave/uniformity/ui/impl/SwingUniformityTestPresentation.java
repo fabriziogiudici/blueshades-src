@@ -38,6 +38,8 @@ import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
  * 
+ * @stereotype Presentation
+ * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
@@ -82,30 +84,6 @@ public class SwingUniformityTestPresentation extends JPanel implements Uniformit
         public Invitation()
           {
             add(new JLabel("Put the sensor here"));
-          }
-      }
-    
-    /*******************************************************************************************************************
-     * 
-     *
-     ******************************************************************************************************************/
-    private static class ControlPanel extends JPanel
-      {
-        public ControlPanel()
-          {
-            add(new JLabel("Control panel"));
-          }
-      }
-    
-    /*******************************************************************************************************************
-     * 
-     *
-     ******************************************************************************************************************/
-    private static class Measurement extends JPanel
-      {
-        public Measurement()
-          {
-            add(new JLabel("Measurement"));
           }
       }
     
@@ -221,7 +199,7 @@ public class SwingUniformityTestPresentation extends JPanel implements Uniformit
             @Override
             public void run() 
               {
-                setCell(position, new Measurement());
+                setCell(position, new MeasurementPanel(luminance, whitePoint));
               }
           });
       }
