@@ -24,9 +24,11 @@ package it.tidalwave.uniformity.ui.spi;
 
 import javax.annotation.Nonnull;
 import java.awt.Component;
-import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.Timer;
 import it.tidalwave.argyll.impl.MessageVerifier;
 import it.tidalwave.netbeans.util.test.MockLookup;
 import it.tidalwave.uniformity.ui.UniformityTestPresentation;
@@ -37,9 +39,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.fest.swing.core.BasicComponentFinder;
-import org.fest.swing.core.ComponentFinder;
 import static org.mockito.Mockito.*;
+import static org.fest.swing.core.BasicComponentFinder.*;
 
 /***********************************************************************************************************************
  * 
@@ -62,19 +63,20 @@ public class DefaultUniformityTestControllerIntegrationTest extends DefaultUnifo
         public Void answer (final @Nonnull InvocationOnMock invocation) 
           throws Throwable 
           {
-            final ComponentFinder componentFinder = BasicComponentFinder.finderWithCurrentAwtHierarchy();
-            final JButton button = componentFinder.findByName("btContinue", JButton.class);
             invocation.callRealMethod();
-            
-            EventQueue.invokeLater(new Runnable()
+
+            final Timer timer = new Timer(1000, new ActionListener() 
               {
                 @Override
-                public void run() 
+                public void actionPerformed (final @Nonnull ActionEvent event) 
                   {
                     log.info("Clicking on 'Continue'...");
-                    button.doClick();
+                    finderWithCurrentAwtHierarchy().findByName("btContinue", JButton.class).doClick();
                   }
               });
+
+            timer.setRepeats(false);
+            timer.start();
             
             return null;
           }
