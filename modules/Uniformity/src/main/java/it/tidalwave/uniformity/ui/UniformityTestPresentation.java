@@ -43,13 +43,15 @@ public interface UniformityTestPresentation
         public int column;
         public int row;
 
-        public void next() 
+        public boolean next() 
           {
             if (++column == 3) // FIXME
               {
                 column = 0;
                 row++;
               }
+            
+            return row < 3; // FIXME
           }
       }
     
