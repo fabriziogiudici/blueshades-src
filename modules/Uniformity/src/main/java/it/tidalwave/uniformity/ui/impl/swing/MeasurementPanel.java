@@ -22,6 +22,7 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.ui.impl.swing;
 
+import java.awt.Color;
 import javax.annotation.Nonnull;
 import javax.swing.JPanel;
 
@@ -38,11 +39,13 @@ public class MeasurementPanel extends JPanel
     public MeasurementPanel() 
       {
         initComponents();
+        setOpaque(true);
+        setBackground(UniformityCheckPresentationPanel.DEFAULT_BACKGROUND);
       }
 
     public MeasurementPanel (final @Nonnull String luminance, final @Nonnull String whitePoint)
       {
-        initComponents();
+        this();
         lbLuminance.setText(luminance);
         lbWhitePoint.setText(whitePoint);
       }

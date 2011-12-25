@@ -46,6 +46,9 @@ import static it.tidalwave.uniformity.ui.impl.swing.SafeRunner.*;
 @Slf4j
 public class UniformityCheckPresentationPanel extends JPanel implements UniformityCheckPresentation
   {
+    /* package */ final static Color DEFAULT_BACKGROUND = new Color(200, 200, 200);
+    /* package */ final static Color BORDER_COLOR = new Color(160, 160, 160);
+    
     private JPanel[][] cell;
     
     private Action continueAction;
@@ -61,7 +64,7 @@ public class UniformityCheckPresentationPanel extends JPanel implements Uniformi
         public Empty()
           {
             setOpaque(true);
-            setBackground(Color.GRAY);
+            setBackground(DEFAULT_BACKGROUND);
           }
       }
     
@@ -78,6 +81,16 @@ public class UniformityCheckPresentationPanel extends JPanel implements Uniformi
           }
       }
     
+//    /*******************************************************************************************************************
+//     * 
+//     *
+//     ******************************************************************************************************************/
+//    public UniformityCheckPresentationPanel()
+//      {
+//        setOpaque(true);
+//        setBackground(new Color(235, 235, 235));
+//      }
+//    
     /*******************************************************************************************************************
      * 
      *
@@ -111,7 +124,7 @@ public class UniformityCheckPresentationPanel extends JPanel implements Uniformi
                     for (int column = 0; column < columns; column++)
                       {
                         add(cell[row][column] = new JPanel(new BorderLayout()));
-                        cell[row][column].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                        cell[row][column].setBorder(BorderFactory.createLineBorder(BORDER_COLOR));
                         cell[row][column].add(new Empty(), BorderLayout.CENTER);
                       }
                   }

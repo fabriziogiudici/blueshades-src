@@ -27,8 +27,8 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import javax.swing.JComponent;
+import static java.awt.RenderingHints.*;
 
 /***********************************************************************************************************************
  * 
@@ -40,8 +40,7 @@ public class SensorPlacementInvitationComponent extends JComponent
   {
     public SensorPlacementInvitationComponent()
       {
-        setBackground(Color.WHITE);
-        setForeground(Color.ORANGE);   
+        setBackground(UniformityCheckPresentationPanel.DEFAULT_BACKGROUND);
         setOpaque(true);
       }
     
@@ -53,16 +52,27 @@ public class SensorPlacementInvitationComponent extends JComponent
         final Graphics2D g2 = (Graphics2D)graphics;
         g2.setColor(getBackground());
         g2.fillRect(0, 0, w, h);
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON);
+        final int cx = w / 2;
+        final int cy = h / 2;
         final int r = Math.min(w, h);
         final int er = (int)(r * 0.8) / 2;
         final int cr = (int)(r * 0.6) / 2;
-        g2.setStroke(new BasicStroke(16));
-        g2.setColor(getForeground());
-        final int cx = w / 2;
-        final int cy = h / 2;
+        
+        g2.setColor(Color.WHITE);
+        g2.fillOval(cx - cr, cy - cr, cr * 2, cr * 2);
+        g2.setStroke(new BasicStroke(32));
         g2.drawOval(cx - cr, cy - cr, cr * 2, cr * 2);
         g2.drawLine(cx, cy - er, cx, cy + er);
         g2.drawLine(cx - er, cy, cx + er, cy);
+        
+        g2.setStroke(new BasicStroke(16));
+        g2.setColor(Color.ORANGE);
+        g2.drawOval(cx - cr, cy - cr, cr * 2, cr * 2);
+        g2.drawLine(cx, cy - er, cx, cy - cr);
+        g2.drawLine(cx, cy + er, cx, cy + cr);
+        g2.drawLine(cx - er, cy, cx - cr, cy);
+        g2.drawLine(cx + er, cy, cx + cr, cy);
+
       }
   }
