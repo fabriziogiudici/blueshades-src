@@ -22,6 +22,7 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.ui.spi;
 
+import it.tidalwave.actor.Collaboration;
 import javax.annotation.Nonnull;
 import javax.swing.JFrame;
 import it.tidalwave.actor.spi.ActorActivator;
@@ -125,9 +126,9 @@ public class DefaultUniformityTestControllerTest
     public void must_follow_the_proper_sequence_3x3() 
       throws InterruptedException
       {
-        new UniformityTestRequest().send();
-        
-        Thread.sleep(20000); // FIXME: wait for completion
+        final Collaboration collaboration = new UniformityTestRequest().send();
+        collaboration.waitForCompletion();
+//        Thread.sleep(20000); // FIXME: wait for completion
         
         inOrder.verify(presentation).setGridSize(eq(3), eq(3));
         
@@ -196,7 +197,7 @@ public class DefaultUniformityTestControllerTest
      * 
      *
      ******************************************************************************************************************/
-    @Test
+    @Test(enabled=false)
     public void must_follow_the_proper_sequence_3x3b() throws InterruptedException
       {
         JFrame jframe = new JFrame();
