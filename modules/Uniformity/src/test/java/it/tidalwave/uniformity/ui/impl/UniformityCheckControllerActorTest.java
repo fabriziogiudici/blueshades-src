@@ -115,7 +115,7 @@ public class UniformityCheckControllerActorTest extends UniformityCheckControlle
       {
         presentation = mock(UniformityCheckPresentation.class);
         doAnswer(storeActionReferences).when(presentation).bind(any(Action.class), any(Action.class));
-        doAnswer(clickContinue).when(presentation).renderInvitation(any(Position.class));
+        doAnswer(clickContinue).when(presentation).renderSensorPlacementInvitationCellAt(any(Position.class));
         presentationBuilder = mock(UniformityCheckPresentationBuilder.class);
         doReturn(presentation).when(presentationBuilder).buildUI();
       }

@@ -69,33 +69,33 @@ public interface UniformityCheckPresentation
      * 
      *
      ******************************************************************************************************************/
-    public void renderEmpty (@Nonnull Position position);
+    public void renderEmptyCellAt (@Nonnull Position position);
 
     /*******************************************************************************************************************
      * 
      *
      ******************************************************************************************************************/
-    public void renderInvitation (@Nonnull Position position);
+    public void renderSensorPlacementInvitationCellAt (@Nonnull Position position);
 
     /*******************************************************************************************************************
      * 
      *
      ******************************************************************************************************************/
-    public void renderControlPanel (@Nonnull Position position);
+    public void renderControlPanelAt (@Nonnull Position position);
 
     /*******************************************************************************************************************
      * 
      *
      ******************************************************************************************************************/
-    public void renderWhite (@Nonnull Position position);
+    public void renderWhiteCellAt (@Nonnull Position position);
 
     /*******************************************************************************************************************
      * 
      *
      ******************************************************************************************************************/
-    public void renderMeasurement (@Nonnull Position position,
-                                   @Nonnull String luminance, 
-                                   @Nonnull String whitePoint);
+    public void renderMeasurementCellAt (@Nonnull Position position,
+                                         @Nonnull String luminance, 
+                                         @Nonnull String whitePoint);
     
     /*******************************************************************************************************************
      * 

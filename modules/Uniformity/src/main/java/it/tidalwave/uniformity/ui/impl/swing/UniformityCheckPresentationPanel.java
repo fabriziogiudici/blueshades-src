@@ -124,7 +124,7 @@ public class UniformityCheckPresentationPanel extends JPanel implements Uniformi
      *
      ******************************************************************************************************************/
     @Override
-    public void renderEmpty (final @Nonnull Position position) 
+    public void renderEmptyCellAt (final @Nonnull Position position) 
       {
         runSafely(new Runnable() 
           {
@@ -141,7 +141,7 @@ public class UniformityCheckPresentationPanel extends JPanel implements Uniformi
      *
      ******************************************************************************************************************/
     @Override
-    public void renderInvitation (final @Nonnull Position position) 
+    public void renderSensorPlacementInvitationCellAt (final @Nonnull Position position) 
       {
         runSafely(new Runnable() 
           {
@@ -158,7 +158,7 @@ public class UniformityCheckPresentationPanel extends JPanel implements Uniformi
      *
      ******************************************************************************************************************/
     @Override
-    public void renderControlPanel (final @Nonnull Position position) 
+    public void renderControlPanelAt (final @Nonnull Position position) 
       {
         runSafely(new Runnable() 
           {
@@ -175,7 +175,7 @@ public class UniformityCheckPresentationPanel extends JPanel implements Uniformi
      *
      ******************************************************************************************************************/
     @Override
-    public void renderWhite (final @Nonnull Position position) 
+    public void renderWhiteCellAt (final @Nonnull Position position) 
       {
         runSafely(new Runnable() 
           {
@@ -192,7 +192,7 @@ public class UniformityCheckPresentationPanel extends JPanel implements Uniformi
      *
      ******************************************************************************************************************/
     @Override
-    public void renderMeasurement (final @Nonnull Position position, 
+    public void renderMeasurementCellAt (final @Nonnull Position position, 
                                    final @Nonnull String luminance, 
                                    final @Nonnull String whitePoint) 
       {

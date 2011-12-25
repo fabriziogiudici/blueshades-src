@@ -109,7 +109,7 @@ public class UniformityCheckControllerActorIntegrationTest extends UniformityChe
     protected void createPresentation()
       {
         presentation = spy(new UniformityCheckPresentationWindow());
-        doAnswer(clickContinue).when(presentation).renderInvitation(any(UniformityCheckPresentation.Position.class));
+        doAnswer(clickContinue).when(presentation).renderSensorPlacementInvitationCellAt(any(UniformityCheckPresentation.Position.class));
         presentationBuilder = mock(UniformityCheckPresentationBuilder.class);
         doReturn(presentation).when(presentationBuilder).buildUI();
       }

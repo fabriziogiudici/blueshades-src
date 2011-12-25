@@ -94,7 +94,7 @@ public class UniformityCheckControllerActor
                 @Override
                 public void run() 
                   {
-                    presentation.renderWhite(currentPosition);
+                    presentation.renderWhiteCellAt(currentPosition);
                     new MeasurementRequest().sendLater(500, TimeUnit.MILLISECONDS);
                     collaborationPendingUserIntervention = Collaboration.NULL_COLLABORATION;
                   }
@@ -144,11 +144,12 @@ public class UniformityCheckControllerActor
       throws NotFoundException
       {
         log.info("processMeasure({})", message);
+        // FIXME: do the right math here
         final double c1 = message.getColorPoints().find(ColorPoint.ColorSpace.Lab).getC1();
         final int temp = message.getCcTemperature().getMeasure().getT();
-        presentation.renderMeasurement(currentPosition,
-                                       String.format("Luminance: %.0f cd/m2", c1), 
-                                       String.format("White point: %d K", temp));
+        presentation.renderMeasurementCellAt(currentPosition,
+                                             String.format("Luminance: %.0f cd/m2", c1), 
+                                             String.format("White point: %d K", temp));
         eventuallyMoveInControlPanel();
         prepareNextMeasurement(message);  
       }
@@ -164,7 +165,7 @@ public class UniformityCheckControllerActor
         computePositions();
         presentation.bind(continueAction, cancelAction);
         presentation.setGridSize(columns, rows);
-        presentation.renderControlPanel(DEFAULT_CONTROL_PANEL_POSITION);
+        presentation.renderControlPanelAt(DEFAULT_CONTROL_PANEL_POSITION);
       }
     
     /*******************************************************************************************************************
@@ -185,7 +186,7 @@ public class UniformityCheckControllerActor
             currentPosition = positionIterator.next(); 
             collaborationPendingUserIntervention = message.getCollaboration();
             suspensionToken = collaborationPendingUserIntervention.suspend();
-            presentation.renderInvitation(currentPosition);
+            presentation.renderSensorPlacementInvitationCellAt(currentPosition);
             eventuallyMoveOutControlPanel();
           }
       }
@@ -199,7 +200,7 @@ public class UniformityCheckControllerActor
       {
         if (currentPosition.equals(DEFAULT_CONTROL_PANEL_POSITION))
           {
-            presentation.renderControlPanel(ALTERNATE_CONTROL_PANEL_POSITION);
+            presentation.renderControlPanelAt(ALTERNATE_CONTROL_PANEL_POSITION);
           }
       }
     
@@ -212,8 +213,8 @@ public class UniformityCheckControllerActor
       {
         if (currentPosition.equals(DEFAULT_CONTROL_PANEL_POSITION))
           {
-            presentation.renderControlPanel(currentPosition);
-            presentation.renderEmpty(ALTERNATE_CONTROL_PANEL_POSITION);
+            presentation.renderControlPanelAt(currentPosition);
+            presentation.renderEmptyCellAt(ALTERNATE_CONTROL_PANEL_POSITION);
           }
       }
     
