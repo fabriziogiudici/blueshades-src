@@ -22,9 +22,10 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.ui.spi;
 
-import it.tidalwave.actor.Collaboration;
 import javax.annotation.Nonnull;
+import javax.swing.Action;
 import javax.swing.JFrame;
+import it.tidalwave.actor.Collaboration;
 import it.tidalwave.actor.spi.ActorActivator;
 import it.tidalwave.actor.spi.ActorGroupActivator;
 import it.tidalwave.argyll.MeasurementMessage;
@@ -33,18 +34,17 @@ import it.tidalwave.argyll.impl.MessageVerifier;
 import it.tidalwave.argyll.impl.MockSpotReadActor;
 import it.tidalwave.uniformity.UniformityTestRequest;
 import it.tidalwave.uniformity.ui.UniformityTestPresentation;
-import it.tidalwave.uniformity.ui.impl.SwingUniformityTestPresentation;
 import it.tidalwave.uniformity.ui.UniformityTestPresentation.Position;
+import it.tidalwave.uniformity.ui.impl.SwingUniformityTestPresentation;
 import lombok.extern.slf4j.Slf4j;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.mockito.InOrder;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import static it.tidalwave.uniformity.ui.UniformityTestPresentation.Position.pos;
-import javax.swing.Action;
 import static org.mockito.Mockito.*;
-import org.testng.annotations.AfterMethod;
 
 /***********************************************************************************************************************
  * 
