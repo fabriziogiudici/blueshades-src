@@ -101,5 +101,5 @@ public interface UniformityCheckPresentation
      * 
      *
      ******************************************************************************************************************/
-    public void dispose();
+    public void dismiss();
   }

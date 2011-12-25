@@ -24,17 +24,16 @@ package it.tidalwave.uniformity.ui.impl.swing;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
-import java.lang.reflect.InvocationTargetException;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.EventQueue;
 import java.awt.GridLayout;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import it.tidalwave.uniformity.ui.UniformityCheckPresentation;
 import lombok.extern.slf4j.Slf4j;
+import static it.tidalwave.uniformity.ui.impl.swing.SafeRunner.*;
 
 /***********************************************************************************************************************
  * 
@@ -212,7 +211,7 @@ public class UniformityCheckPresentationPanel extends JPanel implements Uniformi
      *
      ******************************************************************************************************************/
     @Override
-    public void dispose() 
+    public void dismiss() 
       {
         log.info("dispose()");
       }
@@ -227,49 +226,5 @@ public class UniformityCheckPresentationPanel extends JPanel implements Uniformi
         cell[position.row][position.column].removeAll();
         cell[position.row][position.column].add(component, BorderLayout.CENTER);
         validate();
-      }
-    
-    /*******************************************************************************************************************
-     * 
-     *
-     ******************************************************************************************************************/
-    private static void runSafely (final @Nonnull Runnable runnable)
-      {
-        final Runnable guardedRunnable = new Runnable() 
-          {
-            @Override
-            public void run() 
-              {
-                try
-                  {
-                    runnable.run();
-                  }
-                catch (Throwable t)
-                  {
-                        t.printStackTrace();
-                    log.warn("", t);
-                  }
-              }
-          };
-
-        if (EventQueue.isDispatchThread())
-          {
-            guardedRunnable.run();
-          }
-        else
-          {
-            try 
-              {
-                EventQueue.invokeAndWait(guardedRunnable);
-              } 
-            catch (InterruptedException e) 
-              {
-                log.warn("", e);
-              } 
-            catch (InvocationTargetException e) 
-              {
-                log.warn("", e);
-              }
-          }
       }
   }

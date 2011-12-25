@@ -34,6 +34,9 @@ import it.tidalwave.netbeans.util.test.MockLookup;
 import it.tidalwave.uniformity.ui.UniformityCheckPresentation;
 import it.tidalwave.uniformity.ui.spi.UniformityCheckPresentationBuilder;
 import it.tidalwave.uniformity.ui.impl.swing.UniformityCheckPresentationPanel;
+import it.tidalwave.uniformity.ui.impl.swing.UniformityCheckPresentationWindow;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -110,13 +113,18 @@ public class UniformityCheckControllerActorIntegrationTest extends UniformityChe
     protected void createPresentation()
       {
         presentation = spy(new UniformityCheckPresentationPanel());
+//        presentation = spy(new UniformityCheckPresentationWindow());
         doAnswer(clickContinue).when(presentation).renderInvitation(any(UniformityCheckPresentation.Position.class));
         presentationBuilder = mock(UniformityCheckPresentationBuilder.class);
         doReturn(presentation).when(presentationBuilder).buildUI();
         
         frame = new JFrame();
         frame.add((Component)presentation);
-        frame.setSize(1024, 768);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setUndecorated(true); 
+        final GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        final GraphicsDevice graphicsDevice = graphicsEnvironment.getScreenDevices()[0];
+        graphicsDevice.setFullScreenWindow(frame);
         frame.setVisible(true);
       }
     
@@ -128,19 +136,18 @@ public class UniformityCheckControllerActorIntegrationTest extends UniformityChe
     public void cleanup()
       throws InterruptedException
       {
+        if (presentation != null)
+          {
+            Thread.sleep(2000);
+//            presentation.dispose();
+          }
+        
         messageVerifier.dispose();
         testActivator.deactivate();
         messageVerifier = null;
         testActivator = null;
         presentation = null;
         
-        if (frame != null)
-          {
-            Thread.sleep(2000);
-            frame.dispose();
-          }
-        
-        frame = null;
         MockLookup.reset();
       }
     

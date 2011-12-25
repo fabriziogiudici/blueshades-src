@@ -130,7 +130,7 @@ public abstract class UniformityCheckControllerActorTestSupport
         inOrder.verify(presentation).renderWhite(       eq(pos(2, 2)));
         inOrder.verify(presentation).renderMeasurement( eq(pos(2, 2)), eq("Luminance: 109 cd/m2"), eq("White point: 6009 K"));
         
-        inOrder.verify(presentation).dispose();
+        inOrder.verify(presentation).dismiss();
         
         if (!(presentation instanceof Component)) // Swing makes its own interactions
           {

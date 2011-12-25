@@ -116,7 +116,7 @@ public class UniformityCheckControllerActor
                 @Override
                 public void run() 
                   {
-                    presentation.dispose();
+                    presentation.dismiss();
                     collaborationPendingUserIntervention = Collaboration.NULL_COLLABORATION;
                   }
               });
@@ -178,7 +178,7 @@ public class UniformityCheckControllerActor
         
         if (!positionIterator.hasNext())
           {
-            presentation.dispose();  
+            presentation.dismiss();  
           }
         else
           {
