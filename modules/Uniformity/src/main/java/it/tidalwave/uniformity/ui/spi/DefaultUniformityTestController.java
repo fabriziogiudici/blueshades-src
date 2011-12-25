@@ -26,11 +26,15 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import it.tidalwave.actor.annotation.MessageListener;
+import it.tidalwave.argyll.MeasurementMessage;
+import it.tidalwave.argyll.MeasurementRequest;
 import it.tidalwave.uniformity.ui.UniformityTestController;
 import it.tidalwave.uniformity.ui.UniformityTestPresentation;
 import it.tidalwave.uniformity.ui.UniformityTestPresentation.Position;
 import lombok.extern.slf4j.Slf4j;
 import static it.tidalwave.uniformity.ui.UniformityTestPresentation.Position.pos;
+import java.util.concurrent.TimeUnit;
 
 /***********************************************************************************************************************
  *
@@ -55,37 +59,59 @@ public class DefaultUniformityTestController implements UniformityTestController
     private final List<Position> positions = new ArrayList<Position>();
 
     private Iterator<Position> cursor;
+    
+    private Position currentPosition;
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    @MessageListener
+    public void receiveMeasure (final @Nonnull MeasurementMessage message)
+      {
+        presentation.renderMeasurement(currentPosition, "Luminance: 1 cd/m2", "White point: 2420 K");
+
+        if (currentPosition.equals(DEFAULT_CONTROL_PANEL_POSITION))
+          {
+            presentation.renderControlPanel(currentPosition);
+            presentation.renderEmpty(AUX_CONTROL_PANEL_POSITION);
+          }
+        
+        prepareNextMeasurement();  
+      }
         
     /*******************************************************************************************************************
      * 
      *
      ******************************************************************************************************************/
-    public void run()
+    public void initialize()
       {
         computePositions();
         presentation.setGridSize(columns, rows);
         presentation.renderControlPanel(DEFAULT_CONTROL_PANEL_POSITION);
-        
-        for (int i = 0; i < 9; i++)
+      }
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    public void prepareNextMeasurement()
+      {
+        if (cursor.hasNext())
           {
-            final Position p = cursor.next();   
-            
-            if (p.equals(DEFAULT_CONTROL_PANEL_POSITION))
+            currentPosition = cursor.next();   
+
+            if (currentPosition.equals(DEFAULT_CONTROL_PANEL_POSITION))
               {
                 presentation.renderControlPanel(AUX_CONTROL_PANEL_POSITION);
               }
 
-            presentation.renderInvitation(p);
+            presentation.renderInvitation(currentPosition);
             waitForNextPressed();
-            presentation.renderWhite(p);
-            measure();
-            presentation.renderMeasurement(p, "Luminance: 1 cd/m2", "White point: 2420 K");
-
-            if (p.equals(DEFAULT_CONTROL_PANEL_POSITION))
-              {
-                presentation.renderControlPanel(p);
-                presentation.renderEmpty(AUX_CONTROL_PANEL_POSITION);
-              }
+            presentation.renderWhite(currentPosition);
+            new MeasurementRequest().sendLater(500, TimeUnit.MILLISECONDS);
+            delay(); // FIXME: drop this when you connect to the messagebus
+            receiveMeasure(null);
           }
       }
  
@@ -109,7 +135,7 @@ public class DefaultUniformityTestController implements UniformityTestController
         cursor = positions.iterator();
       }
      
-    private void measure()
+    private void delay()
       {
         try
           {
@@ -119,6 +145,7 @@ public class DefaultUniformityTestController implements UniformityTestController
           {
           }
       }
+    
     private void waitForNextPressed()
       {
         try

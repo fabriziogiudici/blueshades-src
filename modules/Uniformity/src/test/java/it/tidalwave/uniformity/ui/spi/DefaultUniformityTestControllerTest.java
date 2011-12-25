@@ -60,7 +60,8 @@ public class DefaultUniformityTestControllerTest
     @Test
     public void must_follow_the_proper_sequence_3x3()
       {
-        fixture.run();  
+        fixture.initialize();  
+        fixture.prepareNextMeasurement();  
         
         inOrder.verify(presentation).setGridSize(eq(3), eq(3));
         
@@ -134,9 +135,8 @@ public class DefaultUniformityTestControllerTest
         jframe.setSize(800, 600);
         jframe.setVisible(true);
         fixture.presentation = presentation;
-        fixture.run();  
-//        
-//        Thread.sleep(99999);
+        fixture.initialize();
+        fixture.prepareNextMeasurement();
       }
     
     private void waitForNextPressed()
