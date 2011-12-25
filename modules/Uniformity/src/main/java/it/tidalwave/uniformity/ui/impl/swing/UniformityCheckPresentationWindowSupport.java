@@ -30,20 +30,20 @@ import lombok.Delegate;
  * 
  * FIXME: a separate base class which implements @Delegate methods. If you put everything together with 
  * UniformityCheckPresentationWindow, strange compilation errors occur (also elsewhere) probably because of a Lombok
- * bug.
+ * bug. This class must be public, with public constructor, or mocking will fail.
  * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-abstract class UniformityCheckPresentationWindowSupport implements UniformityCheckPresentation
+public abstract class UniformityCheckPresentationWindowSupport implements UniformityCheckPresentation
   {
     protected final JFrame frame = new JFrame();
     
     @Delegate(types=UniformityCheckPresentation.class)
     protected final UniformityCheckPresentationPanel panel = new UniformityCheckPresentationPanel();
     
-    protected UniformityCheckPresentationWindowSupport()
+    public UniformityCheckPresentationWindowSupport()
       {
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setUndecorated(true); 
