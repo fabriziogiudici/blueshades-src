@@ -20,7 +20,7 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.ui.impl;
+package it.tidalwave.uniformity.ui.impl.swing;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
@@ -30,11 +30,11 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
+import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import it.tidalwave.uniformity.ui.UniformityCheckPresentation;
-import javax.swing.Action;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************

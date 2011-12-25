@@ -20,7 +20,7 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.ui.impl;
+package it.tidalwave.uniformity.ui.impl.swing;
 
 import javax.annotation.Nonnull;
 import java.lang.ref.WeakReference;
