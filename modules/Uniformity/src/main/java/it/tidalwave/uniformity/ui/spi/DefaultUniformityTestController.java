@@ -51,7 +51,7 @@ import javax.swing.Action;
 public class DefaultUniformityTestController implements UniformityTestController
   {
     private static final Position DEFAULT_CONTROL_PANEL_POSITION = pos(0, 0);
-    private static final Position AUX_CONTROL_PANEL_POSITION = pos(0, 1);
+    private static final Position ALTERNATE_CONTROL_PANEL_POSITION = pos(0, 1);
     
     @Nonnull
     /* package FIXME */ UniformityTestPresentation presentation;
@@ -61,7 +61,7 @@ public class DefaultUniformityTestController implements UniformityTestController
 
     private final List<Position> positions = new ArrayList<Position>();
 
-    private Iterator<Position> cursor;
+    private Iterator<Position> positionIterator;
     
     private Position currentPosition;
     
@@ -89,13 +89,7 @@ public class DefaultUniformityTestController implements UniformityTestController
     public void receiveMeasure (final @Nonnull MeasurementMessage message)
       {
         presentation.renderMeasurement(currentPosition, "Luminance: 1 cd/m2", "White point: 2420 K");
-
-        if (currentPosition.equals(DEFAULT_CONTROL_PANEL_POSITION))
-          {
-            presentation.renderControlPanel(currentPosition);
-            presentation.renderEmpty(AUX_CONTROL_PANEL_POSITION);
-          }
-        
+        eventuallyMoveInControlPanel();
         prepareNextMeasurement();  
       }
         
@@ -113,26 +107,50 @@ public class DefaultUniformityTestController implements UniformityTestController
     
     /*******************************************************************************************************************
      * 
+     * Prepares the next measurement inviting the user to properly position the sensor.
      *
      ******************************************************************************************************************/
     public void prepareNextMeasurement()
       {
-        if (cursor.hasNext())
+        if (positionIterator.hasNext())
           {
-            currentPosition = cursor.next();   
-
-            if (currentPosition.equals(DEFAULT_CONTROL_PANEL_POSITION))
-              {
-                presentation.renderControlPanel(AUX_CONTROL_PANEL_POSITION);
-              }
-
+            currentPosition = positionIterator.next();   
+            eventuallyMoveOutControlPanel();
             presentation.renderInvitation(currentPosition);
-//            waitForNextPressed(); // FIXME
           }
       }
  
     /*******************************************************************************************************************
+     *
+     * If the current position is the one where the ControlPanel is rendered, move it to the alternate position.
+     *
+     ******************************************************************************************************************/
+    private void eventuallyMoveOutControlPanel()
+      {
+        if (currentPosition.equals(DEFAULT_CONTROL_PANEL_POSITION))
+          {
+            presentation.renderControlPanel(ALTERNATE_CONTROL_PANEL_POSITION);
+          }
+      }
+    
+    /*******************************************************************************************************************
+     *
+     * If the ControlPanel was moved to the alternate position, restore it.
+     *
+     ******************************************************************************************************************/
+    private void eventuallyMoveInControlPanel()
+      {
+        if (currentPosition.equals(DEFAULT_CONTROL_PANEL_POSITION))
+          {
+            presentation.renderControlPanel(currentPosition);
+            presentation.renderEmpty(ALTERNATE_CONTROL_PANEL_POSITION);
+          }
+      }
+    
+    /*******************************************************************************************************************
      * 
+     * Compute the sequence of positions to make measurements. It starts from the central cell then it proceeds from the
+     * upper left control, rightbound and downwards.
      *
      ******************************************************************************************************************/
     private void computePositions()
@@ -148,7 +166,7 @@ public class DefaultUniformityTestController implements UniformityTestController
           }
         
         positions.add(0, positions.remove((rows * columns) / 2));
-        cursor = positions.iterator();
+        positionIterator = positions.iterator();
       }
      
     private void delay()
