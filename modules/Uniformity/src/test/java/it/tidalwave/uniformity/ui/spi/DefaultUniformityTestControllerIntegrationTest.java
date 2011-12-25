@@ -24,7 +24,6 @@ package it.tidalwave.uniformity.ui.spi;
 
 import javax.swing.JFrame;
 import it.tidalwave.argyll.impl.MessageVerifier;
-import it.tidalwave.netbeans.util.Locator;
 import it.tidalwave.netbeans.util.test.MockLookup;
 import it.tidalwave.uniformity.UniformityTestRequest;
 import lombok.extern.slf4j.Slf4j;
