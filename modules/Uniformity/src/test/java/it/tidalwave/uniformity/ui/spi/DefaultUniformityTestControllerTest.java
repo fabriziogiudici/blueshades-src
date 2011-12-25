@@ -56,15 +56,10 @@ public class DefaultUniformityTestControllerTest
   {
     static class TestActivator extends ActorGroupActivator
       {
-        public final DefaultUniformityTestController fixture;
-        
         public TestActivator() 
           {
-            final ActorActivator fixtureActivator = new ActorActivator(DefaultUniformityTestController.class, 1);
             add(new ActorActivator(MockSpotReadActor.class, 1));
-            add(fixtureActivator);
-            
-            fixture = (DefaultUniformityTestController)fixtureActivator.getActorObject();
+            add(new ActorActivator(DefaultUniformityTestController.class, 1));
           }
       }
 
@@ -76,6 +71,8 @@ public class DefaultUniformityTestControllerTest
     
     private MessageVerifier messageVerifier;
     
+    private Action continueAction;
+    
     /*******************************************************************************************************************
      * 
      *
@@ -86,7 +83,21 @@ public class DefaultUniformityTestControllerTest
         public Void answer (final @Nonnull InvocationOnMock invocation) 
           {
             log.info("Clicking on 'Continue'...");
-            testActivator.fixture.continueAction.actionPerformed(null);
+            continueAction.actionPerformed(null);
+            return null;
+          }
+      };
+
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    private final Answer<Void> storeActionReferences = new Answer<Void>()
+      {
+        @Override
+        public Void answer (final @Nonnull InvocationOnMock invocation) 
+          {
+            continueAction = (Action)invocation.getArguments()[0];
             return null;
           }
       };
@@ -102,6 +113,7 @@ public class DefaultUniformityTestControllerTest
         messageVerifier.initialize();
         
         presentation = mock(UniformityTestPresentation.class);
+        doAnswer(storeActionReferences).when(presentation).bind(any(Action.class));
         doAnswer(clickContinue).when(presentation).renderInvitation(any(Position.class));
         final UniformityTestPresentationBuilder presentationBuilder = mock(UniformityTestPresentationBuilder.class);
         doReturn(presentation).when(presentationBuilder).buildUI();
@@ -125,6 +137,7 @@ public class DefaultUniformityTestControllerTest
         messageVerifier = null;
         presentation = null;
         testActivator = null;
+        continueAction = null;
         MockLookup.reset();
       }
     
@@ -220,12 +233,5 @@ public class DefaultUniformityTestControllerTest
         
     private void waitForNextPressed()
       {
-//        try
-//          {
-//            log.info("WAITING");
-//          } 
-//        catch (InterruptedException e) 
-//          {
-//          }
       }
   }
