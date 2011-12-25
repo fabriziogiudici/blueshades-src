@@ -39,6 +39,7 @@ import org.mockito.InOrder;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import static it.tidalwave.uniformity.ui.UniformityTestPresentation.Position.pos;
+import javax.swing.Action;
 import static org.mockito.Mockito.*;
 import org.testng.annotations.AfterMethod;
 
@@ -130,6 +131,7 @@ public class DefaultUniformityTestControllerTest
         collaboration.waitForCompletion();
 //        Thread.sleep(20000); // FIXME: wait for completion
         
+        inOrder.verify(presentation).bind(any(Action.class));
         inOrder.verify(presentation).setGridSize(eq(3), eq(3));
         
         inOrder.verify(presentation).renderControlPanel(eq(pos(0, 0)));
@@ -191,6 +193,9 @@ public class DefaultUniformityTestControllerTest
         inOrder.verify(presentation).renderWhite(       eq(pos(2, 2)));
         // measure
         inOrder.verify(presentation).renderMeasurement( eq(pos(2, 2)), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
+        
+//        inOrder.verify(presentation).dispose();
+        verifyNoMoreInteractions(presentation);
       }
     
     /*******************************************************************************************************************
