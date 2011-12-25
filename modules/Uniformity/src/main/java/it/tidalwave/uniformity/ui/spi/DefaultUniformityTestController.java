@@ -147,7 +147,7 @@ public class DefaultUniformityTestController implements UniformityTestController
               }
           }
         
-        positions.add(0, positions.remove(4));
+        positions.add(0, positions.remove((rows * columns) / 2));
         cursor = positions.iterator();
       }
      
