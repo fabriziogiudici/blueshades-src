@@ -22,19 +22,23 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.ui.spi;
 
+import javax.annotation.Nonnull;
 import javax.swing.JFrame;
+import it.tidalwave.actor.spi.ActorActivator;
+import it.tidalwave.actor.spi.ActorGroupActivator;
+import it.tidalwave.argyll.impl.MockSpotReadActor;
 import it.tidalwave.uniformity.ui.UniformityTestPresentation;
 import it.tidalwave.uniformity.ui.impl.SwingUniformityTestPresentation;
 import it.tidalwave.uniformity.ui.UniformityTestPresentation.Position;
 import lombok.extern.slf4j.Slf4j;
-import org.mockito.InOrder;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import static it.tidalwave.uniformity.ui.UniformityTestPresentation.Position.pos;
-import javax.annotation.Nonnull;
-import static org.mockito.Mockito.*;
+import org.mockito.InOrder;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import static it.tidalwave.uniformity.ui.UniformityTestPresentation.Position.pos;
+import static org.mockito.Mockito.*;
+import org.testng.annotations.AfterMethod;
 
 /***********************************************************************************************************************
  * 
@@ -45,36 +49,69 @@ import org.mockito.stubbing.Answer;
 @Slf4j
 public class DefaultUniformityTestControllerTest 
   {
+    static class TestActivator extends ActorGroupActivator
+      {
+        public final DefaultUniformityTestController fixture;
+        
+        public TestActivator() 
+          {
+            final ActorActivator fixtureActivator = new ActorActivator(DefaultUniformityTestController.class, 1);
+            add(new ActorActivator(MockSpotReadActor.class, 1));
+            add(fixtureActivator);
+            
+            fixture = (DefaultUniformityTestController)fixtureActivator.getActorObject();
+          }
+      }
+
     private DefaultUniformityTestController fixture;
     
     private UniformityTestPresentation presentation;
     
+    private TestActivator testActivator;
+    
     private InOrder inOrder;
     
+    private final Answer<Void> clickContinue = new Answer<Void>()
+      {
+        @Override
+        public Void answer (final @Nonnull InvocationOnMock invocation) 
+          {
+            log.info("Clicking on 'Continue'...");
+            fixture.continueAction.actionPerformed(null);
+            return null;
+          }
+      };
+
     @BeforeMethod
     public void setupFixture()
       {
-        fixture = new DefaultUniformityTestController();   
         presentation = mock(UniformityTestPresentation.class);
-        doAnswer(new Answer<Void>()
-          {
-            @Override
-            public Void answer (final @Nonnull InvocationOnMock invocation) 
-              {
-                fixture.continueAction.actionPerformed(null);
-                return null;
-              }
-          }).when(presentation).renderInvitation(any(Position.class));
+        doAnswer(clickContinue).when(presentation).renderInvitation(any(Position.class));
         
         inOrder = inOrder(presentation);
+        testActivator = new TestActivator();
+        testActivator.activate();
+        fixture = testActivator.fixture;
         fixture.presentation = presentation;
       }
     
+    @AfterMethod
+    public void cleanup()
+      {
+        testActivator.deactivate();
+        fixture = null;
+        presentation = null;
+        testActivator = null;
+      }
+    
     @Test
-    public void must_follow_the_proper_sequence_3x3()
+    public void must_follow_the_proper_sequence_3x3() 
+      throws InterruptedException
       {
         fixture.initialize();  
         fixture.prepareNextMeasurement();  
+        
+        Thread.sleep(20000); // FIXME: wait for completion
         
         inOrder.verify(presentation).setGridSize(eq(3), eq(3));
         

@@ -223,6 +223,7 @@ public class SwingUniformityTestPresentation extends JPanel implements Uniformit
      ******************************************************************************************************************/
     private void setCell (final @Nonnull Position position, final @Nonnull Component component)
       {
+        log.info("setCell({}, {})", position, component);
         cell[position.row][position.column].removeAll();
         cell[position.row][position.column].add(component, BorderLayout.CENTER);
         validate();

@@ -23,6 +23,7 @@
 package it.tidalwave.uniformity.ui.spi;
 
 import javax.annotation.Nonnull;
+import javax.annotation.concurrent.NotThreadSafe;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -30,6 +31,7 @@ import java.util.concurrent.TimeUnit;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import it.tidalwave.actor.annotation.Actor;
 import it.tidalwave.actor.annotation.MessageListener;
 import it.tidalwave.argyll.MeasurementMessage;
 import it.tidalwave.argyll.MeasurementRequest;
@@ -47,7 +49,7 @@ import static it.tidalwave.uniformity.ui.UniformityTestPresentation.Position.pos
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Slf4j
+@Actor(threadSafe=false) @NotThreadSafe @Slf4j
 public class DefaultUniformityTestController implements UniformityTestController
   {
     private static final Position DEFAULT_CONTROL_PANEL_POSITION = pos(0, 0);
@@ -76,8 +78,6 @@ public class DefaultUniformityTestController implements UniformityTestController
           {
             presentation.renderWhite(currentPosition);
             new MeasurementRequest().sendLater(500, TimeUnit.MILLISECONDS);
-            delay(); // FIXME: drop this when you connect to the messagebus
-            receiveMeasure(null);
           }
       };
     
@@ -86,8 +86,9 @@ public class DefaultUniformityTestController implements UniformityTestController
      *
      ******************************************************************************************************************/
     @MessageListener
-    public void receiveMeasure (final @Nonnull MeasurementMessage message)
+    public void processMeasure (final @Nonnull MeasurementMessage message)
       {
+        log.info("processMeasure({})", message);
         presentation.renderMeasurement(currentPosition, "Luminance: 1 cd/m2", "White point: 2420 K");
         eventuallyMoveInControlPanel();
         prepareNextMeasurement();  
@@ -99,6 +100,7 @@ public class DefaultUniformityTestController implements UniformityTestController
      ******************************************************************************************************************/
     public void initialize()
       {
+        log.info("initialize()");
         computePositions();
         presentation.bind(continueAction);
         presentation.setGridSize(columns, rows);
@@ -112,6 +114,8 @@ public class DefaultUniformityTestController implements UniformityTestController
      ******************************************************************************************************************/
     public void prepareNextMeasurement()
       {
+        log.info("prepareNextMeasurement()");
+        
         if (positionIterator.hasNext())
           {
             currentPosition = positionIterator.next();   
@@ -168,27 +172,4 @@ public class DefaultUniformityTestController implements UniformityTestController
         positions.add(0, positions.remove((rows * columns) / 2));
         positionIterator = positions.iterator();
       }
-     
-    private void delay()
-      {
-        try
-          {
-            Thread.sleep(300);
-          } 
-        catch (InterruptedException e) 
-          {
-          }
-      }
-    
-//    private void waitForNextPressed()
-//      {
-//        try
-//          {
-//            Thread.sleep(300);
-//            continueAction.actionPerformed(null);
-//          } 
-//        catch (InterruptedException e) 
-//          {
-//          }
-//      }
   }
