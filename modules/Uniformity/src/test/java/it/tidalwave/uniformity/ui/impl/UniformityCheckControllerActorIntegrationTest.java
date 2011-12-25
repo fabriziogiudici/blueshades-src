@@ -23,7 +23,6 @@
 package it.tidalwave.uniformity.ui.impl;
 
 import javax.annotation.Nonnull;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -33,10 +32,7 @@ import it.tidalwave.argyll.impl.MessageVerifier;
 import it.tidalwave.netbeans.util.test.MockLookup;
 import it.tidalwave.uniformity.ui.UniformityCheckPresentation;
 import it.tidalwave.uniformity.ui.spi.UniformityCheckPresentationBuilder;
-import it.tidalwave.uniformity.ui.impl.swing.UniformityCheckPresentationPanel;
 import it.tidalwave.uniformity.ui.impl.swing.UniformityCheckPresentationWindow;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -112,20 +108,10 @@ public class UniformityCheckControllerActorIntegrationTest extends UniformityChe
     @Override
     protected void createPresentation()
       {
-        presentation = spy(new UniformityCheckPresentationPanel());
-//        presentation = spy(new UniformityCheckPresentationWindow());
+        presentation = spy(new UniformityCheckPresentationWindow());
         doAnswer(clickContinue).when(presentation).renderInvitation(any(UniformityCheckPresentation.Position.class));
         presentationBuilder = mock(UniformityCheckPresentationBuilder.class);
         doReturn(presentation).when(presentationBuilder).buildUI();
-        
-        frame = new JFrame();
-        frame.add((Component)presentation);
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        frame.setUndecorated(true); 
-        final GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        final GraphicsDevice graphicsDevice = graphicsEnvironment.getScreenDevices()[0];
-        graphicsDevice.setFullScreenWindow(frame);
-        frame.setVisible(true);
       }
     
     /*******************************************************************************************************************
@@ -139,7 +125,7 @@ public class UniformityCheckControllerActorIntegrationTest extends UniformityChe
         if (presentation != null)
           {
             Thread.sleep(2000);
-//            presentation.dispose();
+            presentation.dismiss();
           }
         
         messageVerifier.dispose();
