@@ -36,6 +36,7 @@ import it.tidalwave.uniformity.ui.spi.UniformityCheckPresentationBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.mockito.InOrder;
 import static it.tidalwave.uniformity.ui.UniformityCheckPresentation.Position.pos;
+import java.awt.Component;
 import static org.mockito.Mockito.*;
 
 /***********************************************************************************************************************
@@ -131,7 +132,7 @@ public abstract class UniformityCheckControllerActorTestSupport
         
         inOrder.verify(presentation).dispose();
         
-        if (!presentation.getClass().getName().contains("Swing")) // Swing makes its own interactions
+        if (!(presentation instanceof Component)) // Swing makes its own interactions
           {
             verifyNoMoreInteractions(presentation);
           }
