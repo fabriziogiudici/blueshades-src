@@ -25,12 +25,9 @@ package it.tidalwave.uniformity.ui.spi;
 import javax.annotation.Nonnull;
 import javax.swing.Action;
 import it.tidalwave.actor.Collaboration;
-import it.tidalwave.actor.spi.ActorActivator;
-import it.tidalwave.actor.spi.ActorGroupActivator;
 import it.tidalwave.argyll.MeasurementMessage;
 import it.tidalwave.argyll.MeasurementRequest;
 import it.tidalwave.argyll.impl.MessageVerifier;
-import it.tidalwave.argyll.impl.MockSpotReadActor;
 import it.tidalwave.netbeans.util.test.MockLookup;
 import it.tidalwave.uniformity.UniformityTestRequest;
 import it.tidalwave.uniformity.ui.UniformityTestPresentation;
@@ -52,17 +49,8 @@ import static org.mockito.Mockito.*;
  *
  **********************************************************************************************************************/
 @Slf4j
-public class DefaultUniformityTestControllerTest 
+public class DefaultUniformityTestControllerTest extends DefaultUniformityTestControllerTestSupport
   {
-    static class TestActivator extends ActorGroupActivator
-      {
-        public TestActivator() 
-          {
-            add(new ActorActivator(MockSpotReadActor.class, 1));
-            add(new ActorActivator(DefaultUniformityTestController.class, 1));
-          }
-      }
-
     private UniformityTestPresentation presentation;
     
     private TestActivator testActivator;

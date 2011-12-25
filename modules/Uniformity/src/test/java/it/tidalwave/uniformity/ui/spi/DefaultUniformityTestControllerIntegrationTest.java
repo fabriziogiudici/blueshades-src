@@ -23,10 +23,7 @@
 package it.tidalwave.uniformity.ui.spi;
 
 import javax.swing.JFrame;
-import it.tidalwave.actor.spi.ActorActivator;
-import it.tidalwave.actor.spi.ActorGroupActivator;
 import it.tidalwave.argyll.impl.MessageVerifier;
-import it.tidalwave.argyll.impl.MockSpotReadActor;
 import it.tidalwave.netbeans.util.Locator;
 import it.tidalwave.netbeans.util.test.MockLookup;
 import it.tidalwave.uniformity.UniformityTestRequest;
@@ -45,22 +42,8 @@ import java.awt.Component;
  *
  **********************************************************************************************************************/
 @Slf4j
-public class DefaultUniformityTestControllerIntegrationTest 
+public class DefaultUniformityTestControllerIntegrationTest extends DefaultUniformityTestControllerTestSupport
   {
-    static class TestActivator extends ActorGroupActivator
-      {
-        public final DefaultUniformityTestController fixture;
-        
-        public TestActivator() 
-          {
-            final ActorActivator fixtureActivator = new ActorActivator(DefaultUniformityTestController.class, 1);
-            add(new ActorActivator(MockSpotReadActor.class, 1));
-            add(fixtureActivator);
-            
-            fixture = (DefaultUniformityTestController)fixtureActivator.getActorObject();
-          }
-      }
-
 //    private UniformityTestPresentation presentation;
 //    
     private TestActivator testActivator;
