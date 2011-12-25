@@ -27,6 +27,9 @@ import javax.annotation.Nonnull;
 import javax.swing.JFrame;
 import it.tidalwave.actor.spi.ActorActivator;
 import it.tidalwave.actor.spi.ActorGroupActivator;
+import it.tidalwave.argyll.MeasurementMessage;
+import it.tidalwave.argyll.MeasurementRequest;
+import it.tidalwave.argyll.impl.MessageVerifier;
 import it.tidalwave.argyll.impl.MockSpotReadActor;
 import it.tidalwave.uniformity.UniformityTestRequest;
 import it.tidalwave.uniformity.ui.UniformityTestPresentation;
@@ -74,6 +77,8 @@ public class DefaultUniformityTestControllerTest
     
     private InOrder inOrder;
     
+    private MessageVerifier messageVerifier;
+    
     /*******************************************************************************************************************
      * 
      *
@@ -96,6 +101,8 @@ public class DefaultUniformityTestControllerTest
     @BeforeMethod
     public void setupFixture()
       {
+        messageVerifier = new MessageVerifier();
+        messageVerifier.initialize();
         presentation = mock(UniformityTestPresentation.class);
         doAnswer(clickContinue).when(presentation).renderInvitation(any(Position.class));
         
@@ -113,7 +120,9 @@ public class DefaultUniformityTestControllerTest
     @AfterMethod
     public void cleanup()
       {
+        messageVerifier.dispose();
         testActivator.deactivate();
+        messageVerifier = null;
         fixture = null;
         presentation = null;
         testActivator = null;
@@ -196,6 +205,17 @@ public class DefaultUniformityTestControllerTest
         
         inOrder.verify(presentation).dispose();
         verifyNoMoreInteractions(presentation);
+        
+        messageVerifier.verifyCollaborationStarted();
+        messageVerifier.verify(UniformityTestRequest.class);
+        
+        for (int i = 0; i < 9; i++)
+          { 
+            messageVerifier.verify(MeasurementRequest.class);  
+            messageVerifier.verify(MeasurementMessage.class);  
+          }
+        
+        messageVerifier.verifyCollaborationCompleted();
       }
     
     /*******************************************************************************************************************
