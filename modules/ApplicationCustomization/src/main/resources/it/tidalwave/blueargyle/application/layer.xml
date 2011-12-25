@@ -36,12 +36,12 @@
             <file name="org-openide-actions-SaveAsAction.shadow_hidden"/>
         </folder>
         <file name="GoTo_hidden"/>
-        <file name="Tools_hidden"/>
+<!--        <file name="Tools_hidden"/>-->
         <file name="View_hidden"/>
         <file name="Window_hidden"/>
     </folder>
     <folder name="Toolbars">
-        <!-- file name="File_hidden"/ -->
+        <file name="File_hidden"/>
         <file name="Clipboard_hidden"/>
         <file name="Memory_hidden"/>
         <file name="UndoRedo_hidden"/>
