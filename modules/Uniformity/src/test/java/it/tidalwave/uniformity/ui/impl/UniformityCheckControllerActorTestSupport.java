@@ -87,7 +87,7 @@ public abstract class UniformityCheckControllerActorTestSupport
         final Collaboration collaboration = new UniformityCheckRequest().send();
         collaboration.waitForCompletion();
         
-        inOrder.verify(presentation).bind(any(Action.class));
+        inOrder.verify(presentation).bind(any(Action.class), any(Action.class));
         inOrder.verify(presentation).setGridSize(eq(3), eq(3));
         inOrder.verify(presentation).renderControlPanel(eq(pos(0, 0)));
         

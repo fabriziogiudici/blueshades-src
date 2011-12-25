@@ -106,6 +106,27 @@ public class UniformityCheckControllerActor
      * 
      *
      ******************************************************************************************************************/
+    /* package */ final Action cancelAction = new AbstractAction("Cancel") 
+      {
+        @Override
+        public void actionPerformed (final @Nonnull ActionEvent event) 
+          {
+            collaborationPendingUserIntervention.resume(suspensionToken, new Runnable()
+              {
+                @Override
+                public void run() 
+                  {
+                    presentation.dispose();
+                    collaborationPendingUserIntervention = Collaboration.NULL_COLLABORATION;
+                  }
+              });
+          }
+      };
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
     @MessageListener
     public void start (final @Nonnull UniformityCheckRequest message)
       {
@@ -141,7 +162,7 @@ public class UniformityCheckControllerActor
         log.info("initialize()");
         presentation = presentationBuilder.get().buildUI();
         computePositions();
-        presentation.bind(continueAction);
+        presentation.bind(continueAction, cancelAction);
         presentation.setGridSize(columns, rows);
         presentation.renderControlPanel(DEFAULT_CONTROL_PANEL_POSITION);
       }

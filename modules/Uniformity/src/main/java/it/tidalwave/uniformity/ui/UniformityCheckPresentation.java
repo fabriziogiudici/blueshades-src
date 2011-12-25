@@ -57,7 +57,7 @@ public interface UniformityCheckPresentation
      * 
      *
      ******************************************************************************************************************/
-    public void bind (@Nonnull Action continueAction);
+    public void bind (@Nonnull Action continueAction, @Nonnull Action cancelAction);
     
     /*******************************************************************************************************************
      * 

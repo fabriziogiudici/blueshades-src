@@ -51,6 +51,8 @@ public class UniformityCheckPresentationPanel extends JPanel implements Uniformi
     private JPanel[][] cell;
     
     private Action continueAction;
+    
+    private Action cancelAction;
 
     /*******************************************************************************************************************
      * 
@@ -95,9 +97,10 @@ public class UniformityCheckPresentationPanel extends JPanel implements Uniformi
      *
      ******************************************************************************************************************/
     @Override
-    public void bind (final @Nonnull Action continueAction)
+    public void bind (final @Nonnull Action continueAction, final @Nonnull Action cancelAction)
       {
         this.continueAction = continueAction;
+        this.cancelAction = cancelAction;
       }
     
     /*******************************************************************************************************************
@@ -176,7 +179,7 @@ public class UniformityCheckPresentationPanel extends JPanel implements Uniformi
             @Override
             public void run() 
               {
-                setCell(position, new ControlPanel(continueAction));
+                setCell(position, new ControlPanel(continueAction, cancelAction));
               }
           });
       }

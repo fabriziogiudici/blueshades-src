@@ -41,16 +41,18 @@ public class ControlPanel extends JPanel
         initComponents();
       }
 
-    public ControlPanel (final @Nonnull Action continueAction)
+    public ControlPanel (final @Nonnull Action continueAction, final @Nonnull Action cancelAction)
       {
         initComponents();
         btContinue.setAction(continueAction);
+        btCancel.setAction(cancelAction);
       }
 
     @Override
     public void removeNotify()
       {
         btContinue.setAction(null);
+        btCancel.setAction(null);
         super.removeNotify();
       }
     
@@ -64,44 +66,58 @@ public class ControlPanel extends JPanel
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btContinue = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        btContinue = new javax.swing.JButton();
+        btCancel = new javax.swing.JButton();
 
         setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.name")); // NOI18N
 
-        btContinue.setText(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.btContinue.text")); // NOI18N
-        btContinue.setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.btContinue.name")); // NOI18N
-
         jLabel1.setText(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.jLabel1.text")); // NOI18N
         jLabel1.setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.jLabel1.name")); // NOI18N
+
+        jPanel1.setMaximumSize(new java.awt.Dimension(32767, 48));
+        jPanel1.setMinimumSize(new java.awt.Dimension(0, 48));
+        jPanel1.setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.jPanel1.name")); // NOI18N
+        jPanel1.setPreferredSize(new java.awt.Dimension(0, 48));
+        jPanel1.setSize(new java.awt.Dimension(0, 48));
+
+        btContinue.setText(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.btContinue.text")); // NOI18N
+        btContinue.setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.btContinue.name")); // NOI18N
+        btContinue.setPreferredSize(new java.awt.Dimension(102, 32));
+        btContinue.setSize(new java.awt.Dimension(102, 32));
+        jPanel1.add(btContinue);
+
+        btCancel.setText(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.btCancel.text")); // NOI18N
+        btCancel.setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.btCancel.name")); // NOI18N
+        btCancel.setPreferredSize(new java.awt.Dimension(102, 32));
+        btCancel.setSize(new java.awt.Dimension(102, 32));
+        jPanel1.add(btCancel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btContinue)
-                        .addGap(134, 134, 134))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btContinue)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btCancel;
     private javax.swing.JButton btContinue;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
   }
