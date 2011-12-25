@@ -49,16 +49,20 @@
             <artifactId>it-tidalwave-argyll</artifactId>
         </dependency>
         <dependency>
-            <artifactId>it-tidalwave-actor</artifactId>
             <groupId>it.tidalwave.solidblue</groupId>
+            <artifactId>it-tidalwave-actor</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.netbeans</groupId>
+            <artifactId>it-tidalwave-netbeans-util</artifactId>
         </dependency>
         <dependency>
             <groupId>com.kenai.nbpwr</groupId>
             <artifactId>org-slf4j-jdk14</artifactId>
         </dependency>
         <dependency>
-            <artifactId>org-openide-util</artifactId>
             <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-util</artifactId>
         </dependency>
         
         <!-- TEST DEPENDENCIES -->
@@ -66,6 +70,11 @@
             <groupId>it.tidalwave.blueargyle</groupId>
             <artifactId>it-tidalwave-argyll</artifactId>
             <classifier>tests</classifier>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.netbeans</groupId>
+            <artifactId>it-tidalwave-netbeans-util-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

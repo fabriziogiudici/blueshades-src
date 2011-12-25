@@ -24,7 +24,6 @@ package it.tidalwave.uniformity.ui.spi;
 
 import javax.annotation.Nonnull;
 import javax.swing.Action;
-import javax.swing.JFrame;
 import it.tidalwave.actor.Collaboration;
 import it.tidalwave.actor.spi.ActorActivator;
 import it.tidalwave.actor.spi.ActorGroupActivator;
@@ -32,10 +31,10 @@ import it.tidalwave.argyll.MeasurementMessage;
 import it.tidalwave.argyll.MeasurementRequest;
 import it.tidalwave.argyll.impl.MessageVerifier;
 import it.tidalwave.argyll.impl.MockSpotReadActor;
+import it.tidalwave.netbeans.util.test.MockLookup;
 import it.tidalwave.uniformity.UniformityTestRequest;
 import it.tidalwave.uniformity.ui.UniformityTestPresentation;
 import it.tidalwave.uniformity.ui.UniformityTestPresentation.Position;
-import it.tidalwave.uniformity.ui.impl.SwingUniformityTestPresentation;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -69,8 +68,6 @@ public class DefaultUniformityTestControllerTest
           }
       }
 
-    private DefaultUniformityTestController fixture;
-    
     private UniformityTestPresentation presentation;
     
     private TestActivator testActivator;
@@ -89,7 +86,7 @@ public class DefaultUniformityTestControllerTest
         public Void answer (final @Nonnull InvocationOnMock invocation) 
           {
             log.info("Clicking on 'Continue'...");
-            fixture.continueAction.actionPerformed(null);
+            testActivator.fixture.continueAction.actionPerformed(null);
             return null;
           }
       };
@@ -103,14 +100,17 @@ public class DefaultUniformityTestControllerTest
       {
         messageVerifier = new MessageVerifier();
         messageVerifier.initialize();
+        
         presentation = mock(UniformityTestPresentation.class);
         doAnswer(clickContinue).when(presentation).renderInvitation(any(Position.class));
+        final UniformityTestPresentationBuilder presentationBuilder = mock(UniformityTestPresentationBuilder.class);
+        doReturn(presentation).when(presentationBuilder).buildUI();
+        MockLookup.setInstances(presentationBuilder);
         
         inOrder = inOrder(presentation);
+        
         testActivator = new TestActivator();
         testActivator.activate();
-        fixture = testActivator.fixture;
-        fixture.presentation = presentation;
       }
     
     /*******************************************************************************************************************
@@ -123,9 +123,9 @@ public class DefaultUniformityTestControllerTest
         messageVerifier.dispose();
         testActivator.deactivate();
         messageVerifier = null;
-        fixture = null;
         presentation = null;
         testActivator = null;
+        MockLookup.reset();
       }
     
     /*******************************************************************************************************************
@@ -217,29 +217,7 @@ public class DefaultUniformityTestControllerTest
         
         messageVerifier.verifyCollaborationCompleted();
       }
-    
-    /*******************************************************************************************************************
-     * 
-     *
-     ******************************************************************************************************************/
-    @Test(enabled=false)
-    public void must_follow_the_proper_sequence_3x3b() throws InterruptedException
-      {
-        JFrame jframe = new JFrame();
-        final SwingUniformityTestPresentation presentation = new SwingUniformityTestPresentation();
-        jframe.add(presentation);
-        jframe.setSize(800, 600);
-        jframe.setVisible(true);
-        fixture.presentation = presentation;
-        new UniformityTestRequest().send();
-
-        do
-          {
-            Thread.sleep(2000);
-          }
-        while (jframe.isVisible());
-      }
-    
+        
     private void waitForNextPressed()
       {
 //        try

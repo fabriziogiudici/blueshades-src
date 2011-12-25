@@ -224,6 +224,7 @@ public class SwingUniformityTestPresentation extends JPanel implements Uniformit
     @Override
     public void dispose() 
       {
+        log.info("dispose()");
       }
     
     /*******************************************************************************************************************
