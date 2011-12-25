@@ -80,29 +80,26 @@ public class DefaultUniformityTestController implements UniformityTestController
         presentation.renderControlPanel(1, 0);
         
         waitForNextPressed();
-        p.row = 0;
-        p.column = 0;
         presentation.renderWhite(p.row, p.column);
         measure();
         presentation.renderMeasurement(p.row, p.column, "Luminance: 1 cd/m2", "White point: 2420 K");
         presentation.renderControlPanel(p.row, p.column);
         presentation.renderEmpty(p.row + 1, p.column);
-        p.column++;
+        p.next();
         presentation.renderInvitation(p.row, p.column);
         
         waitForNextPressed();
         presentation.renderWhite(p.row, p.column);
         measure();
         presentation.renderMeasurement(p.row, p.column, "Luminance: 1 cd/m2", "White point: 2420 K");
-        p.column++;
+        p.next();
         presentation.renderInvitation(p.row, p.column);
         
         waitForNextPressed();
         presentation.renderWhite(p.row, p.column);
         measure();
         presentation.renderMeasurement(p.row, p.column, "Luminance: 1 cd/m2", "White point: 2420 K");
-        p.row++;
-        p.column = 0;
+        p.next();
         presentation.renderInvitation(p.row, p.column);
         
         waitForNextPressed();
@@ -110,9 +107,9 @@ public class DefaultUniformityTestController implements UniformityTestController
         measure();
         presentation.renderMeasurement(p.row, p.column, "Luminance: 1 cd/m2", "White point: 2420 K");
         
-        p.column++;
+        p.next();
 
-        p.column++;
+        p.next();
         
         presentation.renderInvitation(p.row, p.column);
         
@@ -120,22 +117,21 @@ public class DefaultUniformityTestController implements UniformityTestController
         presentation.renderWhite(p.row, p.column);
         measure();
         presentation.renderMeasurement(p.row, p.column, "Luminance: 1 cd/m2", "White point: 2420 K");
-        p.row++;
-        p.column = 0;
+        p.next();
         presentation.renderInvitation(p.row, p.column);
         
         waitForNextPressed();
         presentation.renderWhite(p.row, p.column);
         measure();
         presentation.renderMeasurement(p.row, p.column, "Luminance: 1 cd/m2", "White point: 2420 K");
-        p.column++;
+        p.next();
         presentation.renderInvitation(p.row, p.column);
         
         waitForNextPressed();
         presentation.renderWhite(p.row, p.column);
         measure();
         presentation.renderMeasurement(p.row, p.column, "Luminance: 1 cd/m2", "White point: 2420 K");
-        p.column++;
+        p.next();
         presentation.renderInvitation(p.row, p.column);
         
         waitForNextPressed();

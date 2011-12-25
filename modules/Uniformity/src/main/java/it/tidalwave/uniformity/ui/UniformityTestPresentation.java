@@ -42,6 +42,15 @@ public interface UniformityTestPresentation
       {
         public int column;
         public int row;
+
+        public void next() 
+          {
+            if (++column == 3) // FIXME
+              {
+                column = 0;
+                row++;
+              }
+          }
       }
     
     /*******************************************************************************************************************
