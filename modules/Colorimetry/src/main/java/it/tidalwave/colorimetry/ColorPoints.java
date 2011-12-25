@@ -29,7 +29,6 @@ import java.util.Arrays;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.ToString;
 
 /***********************************************************************************************************************
  * 
@@ -37,7 +36,7 @@ import lombok.ToString;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @Getter @EqualsAndHashCode @ToString
+@Immutable @Getter @EqualsAndHashCode
 public class ColorPoints
   {
     private final List<ColorPoint> colorPoints = new ArrayList<ColorPoint>();
@@ -45,5 +44,11 @@ public class ColorPoints
     public ColorPoints (final @Nonnull ColorPoint ... colorPoints)
       {
         this.colorPoints.addAll(Arrays.asList(colorPoints));
+      }
+    
+    @Override @Nonnull
+    public String toString()
+      {
+        return colorPoints.toString();  
       }
   }
