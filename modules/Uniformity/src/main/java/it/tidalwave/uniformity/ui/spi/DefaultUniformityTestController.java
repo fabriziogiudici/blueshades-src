@@ -66,10 +66,10 @@ public class DefaultUniformityTestController implements UniformityTestController
                   {
                     presentation.renderInvitation(row, column);
                   }
-                else
-                  {
-                    presentation.renderEmpty(row, column);
-                  }
+//                else
+//                  {
+//                    presentation.renderEmpty(row, column);
+//                  }
               }
           }
         

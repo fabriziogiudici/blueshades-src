@@ -33,6 +33,7 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import it.tidalwave.uniformity.ui.UniformityTestPresentation;
+import javax.annotation.CheckForNull;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
@@ -45,19 +46,6 @@ import lombok.extern.slf4j.Slf4j;
 public class SwingUniformityTestPresentation extends JPanel implements UniformityTestPresentation
   {
     private JPanel[][] cell;
-    
-    /*******************************************************************************************************************
-     * 
-     *
-     ******************************************************************************************************************/
-    private static class Empty extends JPanel
-      {
-        public Empty()
-          {
-            setOpaque(true);
-            setBackground(Color.GRAY);
-          }
-      }
     
     /*******************************************************************************************************************
      * 
@@ -149,7 +137,7 @@ public class SwingUniformityTestPresentation extends JPanel implements Uniformit
             @Override
             public void run() 
               {
-                setCell(row, column, new Empty());
+                setCell(row, column, null);
               }
           });
       }
@@ -229,10 +217,15 @@ public class SwingUniformityTestPresentation extends JPanel implements Uniformit
      * 
      *
      ******************************************************************************************************************/
-    private void setCell (final @Nonnegative int row, final @Nonnegative int column, final @Nonnull Component component)
+    private void setCell (final @Nonnegative int row, final @Nonnegative int column, final @CheckForNull Component component)
       {
         cell[row][column].removeAll();
-        cell[row][column].add(component, BorderLayout.CENTER);
+        
+        if (component != null)
+          {
+            cell[row][column].add(component, BorderLayout.CENTER);
+          }
+            
         validate();
       }
     

@@ -63,14 +63,7 @@ public class DefaultUniformityTestControllerTest
         inOrder.verify(presentation).setGridSize(eq(3), eq(3));
         
         inOrder.verify(presentation).renderControlPanel(eq(0), eq(0));
-        inOrder.verify(presentation).renderEmpty(       eq(0), eq(1));
-        inOrder.verify(presentation).renderEmpty(       eq(0), eq(2));
-        inOrder.verify(presentation).renderEmpty(       eq(1), eq(0));
         inOrder.verify(presentation).renderInvitation(  eq(1), eq(1));
-        inOrder.verify(presentation).renderEmpty(       eq(1), eq(2));
-        inOrder.verify(presentation).renderEmpty(       eq(2), eq(0));
-        inOrder.verify(presentation).renderEmpty(       eq(2), eq(1));
-        inOrder.verify(presentation).renderEmpty(       eq(2), eq(2));
         
         waitForNextPressed();
         inOrder.verify(presentation).renderWhite(       eq(1), eq(1));
