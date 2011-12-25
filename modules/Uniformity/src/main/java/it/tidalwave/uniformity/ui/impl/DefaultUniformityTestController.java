@@ -20,10 +20,11 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.ui.spi;
+package it.tidalwave.uniformity.ui.impl;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
+import javax.inject.Provider;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -42,9 +43,9 @@ import it.tidalwave.uniformity.UniformityTestRequest;
 import it.tidalwave.uniformity.ui.UniformityTestController;
 import it.tidalwave.uniformity.ui.UniformityTestPresentation;
 import it.tidalwave.uniformity.ui.UniformityTestPresentation.Position;
+import it.tidalwave.uniformity.ui.spi.UniformityTestPresentationBuilder;
 import lombok.extern.slf4j.Slf4j;
 import static it.tidalwave.uniformity.ui.UniformityTestPresentation.Position.pos;
-import javax.inject.Provider;
 
 /***********************************************************************************************************************
  *

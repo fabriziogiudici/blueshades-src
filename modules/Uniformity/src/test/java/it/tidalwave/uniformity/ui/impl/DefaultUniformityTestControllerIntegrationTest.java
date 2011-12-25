@@ -20,7 +20,7 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.ui.spi;
+package it.tidalwave.uniformity.ui.impl;
 
 import javax.annotation.Nonnull;
 import java.awt.Component;
@@ -32,7 +32,7 @@ import javax.swing.Timer;
 import it.tidalwave.argyll.impl.MessageVerifier;
 import it.tidalwave.netbeans.util.test.MockLookup;
 import it.tidalwave.uniformity.ui.UniformityTestPresentation;
-import it.tidalwave.uniformity.ui.impl.SwingUniformityTestPresentation;
+import it.tidalwave.uniformity.ui.spi.UniformityTestPresentationBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;

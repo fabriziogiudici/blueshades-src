@@ -20,27 +20,23 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.ui.spi;
+package it.tidalwave.uniformity.ui.impl;
 
 import javax.annotation.Nonnull;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.Action;
-import it.tidalwave.actor.Collaboration;
-import it.tidalwave.argyll.MeasurementMessage;
-import it.tidalwave.argyll.MeasurementRequest;
 import it.tidalwave.argyll.impl.MessageVerifier;
 import it.tidalwave.netbeans.util.test.MockLookup;
-import it.tidalwave.uniformity.UniformityTestRequest;
 import it.tidalwave.uniformity.ui.UniformityTestPresentation;
 import it.tidalwave.uniformity.ui.UniformityTestPresentation.Position;
+import it.tidalwave.uniformity.ui.spi.UniformityTestPresentationBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import static it.tidalwave.uniformity.ui.UniformityTestPresentation.Position.pos;
 import static org.mockito.Mockito.*;
 
 /***********************************************************************************************************************
