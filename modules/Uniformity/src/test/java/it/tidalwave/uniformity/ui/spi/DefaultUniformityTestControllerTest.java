@@ -40,6 +40,8 @@ import org.mockito.InOrder;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import static it.tidalwave.uniformity.ui.UniformityTestPresentation.Position.pos;
+import java.util.Timer;
+import java.util.TimerTask;
 import static org.mockito.Mockito.*;
 
 /***********************************************************************************************************************
@@ -68,8 +70,16 @@ public class DefaultUniformityTestControllerTest extends DefaultUniformityTestCo
         @Override
         public Void answer (final @Nonnull InvocationOnMock invocation) 
           {
-            log.info("Clicking on 'Continue'...");
-            continueAction.actionPerformed(null);
+            new Timer().schedule(new TimerTask() 
+              {
+                @Override
+                public void run() 
+                  {
+                    log.info("Clicking on 'Continue'...");
+                    continueAction.actionPerformed(null);
+                  }
+              }, 1000);
+
             return null;
           }
       };
@@ -147,7 +157,6 @@ public class DefaultUniformityTestControllerTest extends DefaultUniformityTestCo
       {
         final Collaboration collaboration = new UniformityTestRequest().send();
         collaboration.waitForCompletion();
-//        Thread.sleep(20000); // FIXME: wait for completion
         
         inOrder.verify(presentation).bind(any(Action.class));
         inOrder.verify(presentation).setGridSize(eq(3), eq(3));
@@ -160,8 +169,8 @@ public class DefaultUniformityTestControllerTest extends DefaultUniformityTestCo
 
         // measure
         inOrder.verify(presentation).renderMeasurement( eq(pos(1, 1)), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
-        inOrder.verify(presentation).renderControlPanel(eq(pos(0, 1)));
         inOrder.verify(presentation).renderInvitation(  eq(pos(0, 0)));
+        inOrder.verify(presentation).renderControlPanel(eq(pos(0, 1)));
         
         waitForNextPressed();
         inOrder.verify(presentation).renderWhite(       eq(pos(0, 0)));

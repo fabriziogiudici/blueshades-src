@@ -22,10 +22,13 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.ui.spi;
 
+import it.tidalwave.actor.Collaboration;
 import javax.swing.JFrame;
 import it.tidalwave.argyll.impl.MessageVerifier;
 import it.tidalwave.netbeans.util.test.MockLookup;
 import it.tidalwave.uniformity.UniformityTestRequest;
+import it.tidalwave.uniformity.ui.UniformityTestPresentation;
+import it.tidalwave.uniformity.ui.impl.SwingUniformityTestPresentation;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -33,6 +36,15 @@ import org.testng.annotations.Test;
 import org.mockito.InOrder;
 import it.tidalwave.uniformity.ui.impl.SwingUniformityTestPresentationBuilder;
 import java.awt.Component;
+import javax.annotation.Nonnull;
+import javax.swing.Action;
+import javax.swing.JButton;
+import org.fest.swing.core.BasicComponentFinder;
+import org.fest.swing.core.ComponentFinder;
+import org.fest.swing.hierarchy.ExistingHierarchy;
+import static org.mockito.Mockito.*;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 /***********************************************************************************************************************
  * 
@@ -49,6 +61,22 @@ public class DefaultUniformityTestControllerIntegrationTest extends DefaultUnifo
     
     private MessageVerifier messageVerifier;
     
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    private final Answer<Void> clickContinue = new Answer<Void>()
+      {
+        @Override
+        public Void answer (final @Nonnull InvocationOnMock invocation) 
+          {
+            log.info("Clicking on 'Continue'...");
+            final ComponentFinder componentFinder = BasicComponentFinder.finderWithCurrentAwtHierarchy();
+            componentFinder.findByName("btContinue", JButton.class).doClick();
+            return null;
+          }
+      };
+
     /*******************************************************************************************************************
      * 
      *
@@ -75,8 +103,10 @@ public class DefaultUniformityTestControllerIntegrationTest extends DefaultUnifo
     @Override
     protected void createPresentation()
       {
-        presentationBuilder = new SwingUniformityTestPresentationBuilder();
-        presentation = presentationBuilder.buildUI();
+        presentation = spy(new SwingUniformityTestPresentation());
+        doAnswer(clickContinue).when(presentation).renderInvitation(any(UniformityTestPresentation.Position.class));
+        presentationBuilder = mock(UniformityTestPresentationBuilder.class);
+        doReturn(presentation).when(presentationBuilder).buildUI();
       }
     
     /*******************************************************************************************************************
@@ -90,6 +120,7 @@ public class DefaultUniformityTestControllerIntegrationTest extends DefaultUnifo
         testActivator.deactivate();
         messageVerifier = null;
         testActivator = null;
+        presentation = null;
         MockLookup.reset();
       }
     
@@ -104,12 +135,10 @@ public class DefaultUniformityTestControllerIntegrationTest extends DefaultUnifo
         jframe.add((Component)presentation);
         jframe.setSize(1024, 768);
         jframe.setVisible(true);
-        new UniformityTestRequest().send();
+        final Collaboration collaboration = new UniformityTestRequest().send();
+        collaboration.waitForCompletion();
 
-        do
-          {
-            Thread.sleep(2000);
-          }
-        while (jframe.isVisible());
+        Thread.sleep(2000);
+        jframe.dispose();
       }
   }

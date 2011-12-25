@@ -31,6 +31,8 @@ import java.util.concurrent.TimeUnit;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import it.tidalwave.actor.Collaboration;
+import it.tidalwave.actor.MessageSupport;
 import it.tidalwave.actor.annotation.Actor;
 import it.tidalwave.actor.annotation.MessageListener;
 import it.tidalwave.argyll.MeasurementMessage;
@@ -72,6 +74,10 @@ public class DefaultUniformityTestController implements UniformityTestController
     
     private Position currentPosition;
     
+    private Collaboration collaborationPendingUserIntervention = Collaboration.NULL_COLLABORATION;
+    
+    private Object suspensionToken;
+    
     /*******************************************************************************************************************
      * 
      *
@@ -81,8 +87,16 @@ public class DefaultUniformityTestController implements UniformityTestController
         @Override
         public void actionPerformed (final @Nonnull ActionEvent event) 
           {
-            presentation.renderWhite(currentPosition);
-            new MeasurementRequest().sendLater(500, TimeUnit.MILLISECONDS);
+            collaborationPendingUserIntervention.resume(suspensionToken, new Runnable()
+              {
+                @Override
+                public void run() 
+                  {
+                    presentation.renderWhite(currentPosition);
+                    new MeasurementRequest().sendLater(500, TimeUnit.MILLISECONDS);
+                    collaborationPendingUserIntervention = Collaboration.NULL_COLLABORATION;
+                  }
+              });
           }
       };
     
@@ -95,7 +109,7 @@ public class DefaultUniformityTestController implements UniformityTestController
       {
         log.info("start({})", message);
         initialize();
-        prepareNextMeasurement();  
+        prepareNextMeasurement(message);  
       }
         
     /*******************************************************************************************************************
@@ -108,7 +122,7 @@ public class DefaultUniformityTestController implements UniformityTestController
         log.info("processMeasure({})", message);
         presentation.renderMeasurement(currentPosition, "Luminance: 1 cd/m2", "White point: 2420 K");
         eventuallyMoveInControlPanel();
-        prepareNextMeasurement();  
+        prepareNextMeasurement(message);  
       }
         
     /*******************************************************************************************************************
@@ -130,7 +144,7 @@ public class DefaultUniformityTestController implements UniformityTestController
      * Prepares the next measurement inviting the user to properly position the sensor.
      *
      ******************************************************************************************************************/
-    private void prepareNextMeasurement()
+    private void prepareNextMeasurement (final @Nonnull MessageSupport message)
       {
         log.info("prepareNextMeasurement()");
         
@@ -140,9 +154,11 @@ public class DefaultUniformityTestController implements UniformityTestController
           }
         else
           {
-            currentPosition = positionIterator.next();   
-            eventuallyMoveOutControlPanel();
+            currentPosition = positionIterator.next(); 
+            collaborationPendingUserIntervention = message.getCollaboration();
+            suspensionToken = collaborationPendingUserIntervention.suspend();
             presentation.renderInvitation(currentPosition);
+            eventuallyMoveOutControlPanel();
           }
       }
  
