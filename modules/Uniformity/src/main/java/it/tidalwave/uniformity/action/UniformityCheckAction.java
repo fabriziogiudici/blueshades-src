@@ -47,7 +47,6 @@ import it.tidalwave.uniformity.UniformityCheckRequest;
   })
 public final class UniformityCheckAction extends AbstractAction
   {
-
     @Override
     public void actionPerformed (final @Nonnull ActionEvent event)
       {
