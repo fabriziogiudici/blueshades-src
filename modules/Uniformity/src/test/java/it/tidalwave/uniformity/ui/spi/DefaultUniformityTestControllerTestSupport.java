@@ -22,11 +22,22 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.ui.spi;
 
+import javax.swing.Action;
+import it.tidalwave.actor.Collaboration;
 import it.tidalwave.actor.spi.ActorActivator;
 import it.tidalwave.actor.spi.ActorGroupActivator;
+import it.tidalwave.argyll.MeasurementMessage;
+import it.tidalwave.argyll.MeasurementRequest;
+import it.tidalwave.argyll.impl.MessageVerifier;
 import it.tidalwave.argyll.impl.MockSpotReadActor;
+import it.tidalwave.uniformity.UniformityTestRequest;
 import it.tidalwave.uniformity.ui.UniformityTestPresentation;
 import lombok.extern.slf4j.Slf4j;
+import org.mockito.InOrder;
+import org.testng.annotations.Test;
+import static it.tidalwave.uniformity.ui.UniformityTestPresentation.Position.pos;
+import java.awt.Component;
+import static org.mockito.Mockito.*;
 
 /***********************************************************************************************************************
  * 
@@ -41,7 +52,7 @@ public abstract class DefaultUniformityTestControllerTestSupport
      * 
      *
      ******************************************************************************************************************/
-    static class TestActivator extends ActorGroupActivator
+    protected static class TestActivator extends ActorGroupActivator
       {
         public TestActivator() 
           {
@@ -49,6 +60,12 @@ public abstract class DefaultUniformityTestControllerTestSupport
             add(new ActorActivator(DefaultUniformityTestController.class, 1));
           }
       }
+    
+    protected TestActivator testActivator;
+    
+    protected InOrder inOrder;
+    
+    protected MessageVerifier messageVerifier;
     
     protected UniformityTestPresentationBuilder presentationBuilder;
     
@@ -59,4 +76,100 @@ public abstract class DefaultUniformityTestControllerTestSupport
      *
      ******************************************************************************************************************/
     protected abstract void createPresentation();
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    public void xxx() 
+      throws InterruptedException
+      {
+        final Collaboration collaboration = new UniformityTestRequest().send();
+        collaboration.waitForCompletion();
+        
+        inOrder.verify(presentation).bind(any(Action.class));
+        inOrder.verify(presentation).setGridSize(eq(3), eq(3));
+        
+        inOrder.verify(presentation).renderControlPanel(eq(pos(0, 0)));
+        inOrder.verify(presentation).renderInvitation(  eq(pos(1, 1)));
+        
+        waitForNextPressed();
+        inOrder.verify(presentation).renderWhite(       eq(pos(1, 1)));
+
+        // measure
+        inOrder.verify(presentation).renderMeasurement( eq(pos(1, 1)), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
+        inOrder.verify(presentation).renderInvitation(  eq(pos(0, 0)));
+        inOrder.verify(presentation).renderControlPanel(eq(pos(0, 1)));
+        
+        waitForNextPressed();
+        inOrder.verify(presentation).renderWhite(       eq(pos(0, 0)));
+        // measure
+        inOrder.verify(presentation).renderMeasurement( eq(pos(0, 0)), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
+        inOrder.verify(presentation).renderControlPanel(eq(pos(0, 0)));
+        inOrder.verify(presentation).renderEmpty       (eq(pos(0, 1)));
+        inOrder.verify(presentation).renderInvitation(  eq(pos(1, 0)));
+        
+        waitForNextPressed();
+        inOrder.verify(presentation).renderWhite(       eq(pos(1, 0)));
+        // measure
+        inOrder.verify(presentation).renderMeasurement( eq(pos(1, 0)), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
+        inOrder.verify(presentation).renderInvitation(  eq(pos(2, 0)));
+        
+        waitForNextPressed();
+        inOrder.verify(presentation).renderWhite(       eq(pos(2, 0)));
+        // measure
+        inOrder.verify(presentation).renderMeasurement( eq(pos(2, 0)), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
+        inOrder.verify(presentation).renderInvitation(  eq(pos(0, 1)));
+        
+        waitForNextPressed();
+        inOrder.verify(presentation).renderWhite(       eq(pos(0, 1)));
+        // measure
+        inOrder.verify(presentation).renderMeasurement( eq(pos(0, 1)), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
+        inOrder.verify(presentation).renderInvitation(  eq(pos(2, 1)));
+        
+        waitForNextPressed();
+        inOrder.verify(presentation).renderWhite(       eq(pos(2, 1)));
+        // measure
+        inOrder.verify(presentation).renderMeasurement( eq(pos(2, 1)), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
+        inOrder.verify(presentation).renderInvitation(  eq(pos(0, 2)));
+        
+        waitForNextPressed();
+        inOrder.verify(presentation).renderWhite(       eq(pos(0, 2)));
+        // measure
+        inOrder.verify(presentation).renderMeasurement( eq(pos(0, 2)), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
+        inOrder.verify(presentation).renderInvitation(  eq(pos(1, 2)));
+        
+        waitForNextPressed();
+        inOrder.verify(presentation).renderWhite(       eq(pos(1, 2)));
+        // measure
+        inOrder.verify(presentation).renderMeasurement( eq(pos(1, 2)), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
+        inOrder.verify(presentation).renderInvitation(  eq(pos(2, 2)));
+        
+        waitForNextPressed();
+        inOrder.verify(presentation).renderWhite(       eq(pos(2, 2)));
+        // measure
+        inOrder.verify(presentation).renderMeasurement( eq(pos(2, 2)), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
+        
+        inOrder.verify(presentation).dispose();
+        
+        if (!presentation.getClass().getName().contains("Swing")) // Swing makes its own interactions
+          {
+            verifyNoMoreInteractions(presentation);
+          }
+        
+        messageVerifier.verifyCollaborationStarted();
+        messageVerifier.verify(UniformityTestRequest.class);
+        
+        for (int i = 0; i < 9; i++)
+          { 
+            messageVerifier.verify(MeasurementRequest.class);  
+            messageVerifier.verify(MeasurementMessage.class);  
+          }
+        
+        messageVerifier.verifyCollaborationCompleted();
+      }
+        
+    private void waitForNextPressed()
+      {
+      }
   }

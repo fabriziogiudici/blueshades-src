@@ -22,26 +22,21 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.ui.spi;
 
-import it.tidalwave.actor.Collaboration;
 import javax.swing.JFrame;
 import it.tidalwave.argyll.impl.MessageVerifier;
 import it.tidalwave.netbeans.util.test.MockLookup;
-import it.tidalwave.uniformity.UniformityTestRequest;
 import it.tidalwave.uniformity.ui.UniformityTestPresentation;
 import it.tidalwave.uniformity.ui.impl.SwingUniformityTestPresentation;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.mockito.InOrder;
-import it.tidalwave.uniformity.ui.impl.SwingUniformityTestPresentationBuilder;
 import java.awt.Component;
+import java.awt.EventQueue;
 import javax.annotation.Nonnull;
-import javax.swing.Action;
 import javax.swing.JButton;
 import org.fest.swing.core.BasicComponentFinder;
 import org.fest.swing.core.ComponentFinder;
-import org.fest.swing.hierarchy.ExistingHierarchy;
 import static org.mockito.Mockito.*;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -55,11 +50,7 @@ import org.mockito.stubbing.Answer;
 @Slf4j
 public class DefaultUniformityTestControllerIntegrationTest extends DefaultUniformityTestControllerTestSupport
   {
-    private TestActivator testActivator;
-    
-    private InOrder inOrder;
-    
-    private MessageVerifier messageVerifier;
+    private JFrame frame;
     
     /*******************************************************************************************************************
      * 
@@ -69,10 +60,22 @@ public class DefaultUniformityTestControllerIntegrationTest extends DefaultUnifo
       {
         @Override
         public Void answer (final @Nonnull InvocationOnMock invocation) 
+          throws Throwable 
           {
-            log.info("Clicking on 'Continue'...");
             final ComponentFinder componentFinder = BasicComponentFinder.finderWithCurrentAwtHierarchy();
-            componentFinder.findByName("btContinue", JButton.class).doClick();
+            final JButton button = componentFinder.findByName("btContinue", JButton.class);
+            invocation.callRealMethod();
+            
+            EventQueue.invokeLater(new Runnable()
+              {
+                @Override
+                public void run() 
+                  {
+                    log.info("Clicking on 'Continue'...");
+                    button.doClick();
+                  }
+              });
+            
             return null;
           }
       };
@@ -90,7 +93,7 @@ public class DefaultUniformityTestControllerIntegrationTest extends DefaultUnifo
         createPresentation();
         MockLookup.setInstances(presentationBuilder);
         
-//        inOrder = inOrder(presentation);
+        inOrder = inOrder(presentation);
         
         testActivator = new TestActivator();
         testActivator.activate();
@@ -107,6 +110,11 @@ public class DefaultUniformityTestControllerIntegrationTest extends DefaultUnifo
         doAnswer(clickContinue).when(presentation).renderInvitation(any(UniformityTestPresentation.Position.class));
         presentationBuilder = mock(UniformityTestPresentationBuilder.class);
         doReturn(presentation).when(presentationBuilder).buildUI();
+        
+        frame = new JFrame();
+        frame.add((Component)presentation);
+        frame.setSize(1024, 768);
+        frame.setVisible(true);
       }
     
     /*******************************************************************************************************************
@@ -121,6 +129,8 @@ public class DefaultUniformityTestControllerIntegrationTest extends DefaultUnifo
         messageVerifier = null;
         testActivator = null;
         presentation = null;
+        frame.dispose();
+        frame = null;
         MockLookup.reset();
       }
     
@@ -129,16 +139,11 @@ public class DefaultUniformityTestControllerIntegrationTest extends DefaultUnifo
      *
      ******************************************************************************************************************/
     @Test
-    public void must_follow_the_proper_sequence_3x3b() throws InterruptedException
+    public void must_follow_the_proper_sequence_3x3() 
+      throws InterruptedException
       {
-        JFrame jframe = new JFrame();
-        jframe.add((Component)presentation);
-        jframe.setSize(1024, 768);
-        jframe.setVisible(true);
-        final Collaboration collaboration = new UniformityTestRequest().send();
-        collaboration.waitForCompletion();
-
+        xxx();
+        
         Thread.sleep(2000);
-        jframe.dispose();
       }
   }
