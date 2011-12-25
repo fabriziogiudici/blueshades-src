@@ -27,6 +27,7 @@
         <tidalwave.issues>BAY</tidalwave.issues>
         
         <tft.lombok.version>0.10.2</tft.lombok.version>
+        <tft.test.listeners>it.tidalwave.util.test.TestLogger</tft.test.listeners>
 
         <netbeans.brandingToken>blueargyle</netbeans.brandingToken>
         <netbeans.cluster>blueargyle</netbeans.cluster>
@@ -120,6 +121,18 @@
 
     <build>
         <plugins>
+           <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <properties>
+                        <property>
+                            <name>listener</name>
+                            <value>${tft.test.listeners}</value>
+                        </property>
+                    </properties>
+                </configuration>
+            </plugin>
             <!-- Needed for setting that inherited = false -->
             <plugin>
                 <groupId>com.mycila.maven-license-plugin</groupId>
