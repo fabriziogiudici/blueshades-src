@@ -35,7 +35,7 @@ import lombok.RequiredArgsConstructor;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @RequiredArgsConstructor @Getter @EqualsAndHashCode
+@Immutable @RequiredArgsConstructor(staticName="measureWithPrecision") @Getter @EqualsAndHashCode
 public class MeasureWithPrecision<Measure>
   {
     private final Measure measure;

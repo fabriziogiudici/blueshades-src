@@ -36,6 +36,9 @@ import it.tidalwave.argyll.MeasurementMessage;
 import it.tidalwave.argyll.MeasurementRequest;
 import it.tidalwave.argyll.impl.Executor.ConsoleOutput;
 import lombok.extern.slf4j.Slf4j;
+import static it.tidalwave.colorimetry.ColorPoint.*;
+import static it.tidalwave.colorimetry.ColorTemperature.*;
+import static it.tidalwave.colorimetry.MeasureWithPrecision.*;
 
 /***********************************************************************************************************************
  * 
@@ -76,11 +79,11 @@ public class SpotReadActor
         final Scanner measure = stdout.filteredAndSplitBy("^ *Result is (XYZ:.*$)", "[ ,]"); // FIXME: try ^[0123456789.]+
         
         measure.next(); // XYZ:
-        final ColorPoint xyz = new ColorPoint(measure.nextDouble(), measure.nextDouble(), measure.nextDouble(), ColorPoint.ColorSpace.XYZ);
+        final ColorPoint xyz = colorXYZ(measure.nextDouble(), measure.nextDouble(), measure.nextDouble());
         measure.next(); // blank
         measure.next(); // D50
         measure.next(); // Lab:
-        final ColorPoint lab = new ColorPoint(measure.nextDouble(), measure.nextDouble(), measure.nextDouble(), ColorPoint.ColorSpace.Lab);
+        final ColorPoint lab = colorLab(measure.nextDouble(), measure.nextDouble(), measure.nextDouble());
         
         final ColorPoints colorPoints = new ColorPoints(lab, xyz);
         
@@ -115,6 +118,6 @@ public class SpotReadActor
         scanner.next(); // Delta
         scanner.next(); // E
         final double de = scanner.nextDouble();
-        return new MeasureWithPrecision<ColorTemperature>(new ColorTemperature(t, ColorTemperature.Scale.K), de);
+        return measureWithPrecision(kelvin(t), de);
       }
   }

@@ -27,6 +27,7 @@ import javax.annotation.concurrent.Immutable;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import static lombok.AccessLevel.*;
 
 /***********************************************************************************************************************
  * 
@@ -34,7 +35,7 @@ import lombok.RequiredArgsConstructor;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @RequiredArgsConstructor @Getter @EqualsAndHashCode
+@Immutable @RequiredArgsConstructor(access=PRIVATE) @Getter @EqualsAndHashCode
 public class ColorPoint
   {
     public static enum ColorSpace
@@ -68,6 +69,18 @@ public class ColorPoint
     
     @Nonnull
     private final ColorSpace colorSpace;
+    
+    @Nonnull
+    public static ColorPoint colorXYZ (final double x, final double y, final double z)
+      {
+        return new ColorPoint(x, y, z, ColorSpace.XYZ);
+      }
+    
+    @Nonnull
+    public static ColorPoint colorLab (final double l, final double a, final double b)
+      {
+        return new ColorPoint(l, a, b, ColorSpace.Lab);
+      }
     
     @Override @Nonnull
     public String toString()

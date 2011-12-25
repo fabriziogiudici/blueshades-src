@@ -24,7 +24,6 @@ package it.tidalwave.argyll.impl;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
-import java.io.IOException;
 import it.tidalwave.actor.annotation.Actor;
 import it.tidalwave.actor.annotation.MessageListener;
 import it.tidalwave.colorimetry.ColorPoint;
@@ -34,6 +33,9 @@ import it.tidalwave.colorimetry.MeasureWithPrecision;
 import it.tidalwave.argyll.MeasurementMessage;
 import it.tidalwave.argyll.MeasurementRequest;
 import lombok.extern.slf4j.Slf4j;
+import static it.tidalwave.colorimetry.ColorPoint.*;
+import static it.tidalwave.colorimetry.ColorTemperature.*;
+import static it.tidalwave.colorimetry.MeasureWithPrecision.*;
 
 /***********************************************************************************************************************
  * 
@@ -59,14 +61,11 @@ public class MockSpotReadActor
 
         Thread.sleep(500);
         
-        final ColorPoint xyz = new ColorPoint(0.1f, 0.2f, 0.3f, ColorPoint.ColorSpace.XYZ);
-        final ColorPoint lab = new ColorPoint(100f, 101f, 102f, ColorPoint.ColorSpace.Lab);
+        final ColorPoints colorPoints = new ColorPoints(colorLab(100f, 101f, 102f), colorXYZ(0.1f, 0.2f, 0.3f));
         
-        final ColorPoints colorPoints = new ColorPoints(lab, xyz);
-        
-        final MeasureWithPrecision<ColorTemperature> ccTemp        = new MeasureWithPrecision<ColorTemperature>(new ColorTemperature(2390, ColorTemperature.Scale.K), 0.202257);
-        final MeasureWithPrecision<ColorTemperature> planckianTemp = new MeasureWithPrecision<ColorTemperature>(new ColorTemperature(2389, ColorTemperature.Scale.K), 0.110858);
-        final MeasureWithPrecision<ColorTemperature> daylightTemp  = new MeasureWithPrecision<ColorTemperature>(new ColorTemperature(2244, ColorTemperature.Scale.K), 13.893159);
+        final MeasureWithPrecision<ColorTemperature> ccTemp        = measureWithPrecision(kelvin(2390), 0.202257);
+        final MeasureWithPrecision<ColorTemperature> planckianTemp = measureWithPrecision(kelvin(2389), 0.110858);
+        final MeasureWithPrecision<ColorTemperature> daylightTemp  = measureWithPrecision(kelvin(2244), 13.893159);
         
         new MeasurementMessage(colorPoints, ccTemp, planckianTemp, daylightTemp).send();
       }
