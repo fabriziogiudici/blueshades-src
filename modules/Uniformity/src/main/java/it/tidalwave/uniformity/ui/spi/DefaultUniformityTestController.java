@@ -92,6 +92,8 @@ public class DefaultUniformityTestController implements UniformityTestController
               }
           }
         
+        pp.remove(4);
+        
         final Iterator<UniformityTestPresentation.Position> ii = pp.iterator();
         UniformityTestPresentation.Position p = ii.next();
         
@@ -106,11 +108,6 @@ public class DefaultUniformityTestController implements UniformityTestController
               {
                 presentation.renderControlPanel(p.row, p.column);
                 presentation.renderEmpty(p.row + 1, p.column);
-              }
-
-            if (p.column == 0 && p.row == 1)
-              {
-                ii.next();
               }
             
             if (ii.hasNext())
