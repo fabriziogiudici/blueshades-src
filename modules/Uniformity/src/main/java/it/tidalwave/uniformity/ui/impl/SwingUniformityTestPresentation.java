@@ -144,14 +144,14 @@ public class SwingUniformityTestPresentation extends JPanel implements Uniformit
      *
      ******************************************************************************************************************/
     @Override
-    public void renderEmpty (final @Nonnegative int row, final @Nonnegative int column) 
+    public void renderEmpty (final @Nonnull Position position) 
       {
         runSafely(new Runnable() 
           {
             @Override
             public void run() 
               {
-                setCell(row, column, new Empty());
+                setCell(position, new Empty());
               }
           });
       }
@@ -161,14 +161,14 @@ public class SwingUniformityTestPresentation extends JPanel implements Uniformit
      *
      ******************************************************************************************************************/
     @Override
-    public void renderInvitation (final @Nonnegative int row, final @Nonnegative int column) 
+    public void renderInvitation (final @Nonnull Position position) 
       {
         runSafely(new Runnable() 
           {
             @Override
             public void run() 
               {
-                setCell(row, column, new Invitation());
+                setCell(position, new Invitation());
               }
           });
       }
@@ -178,14 +178,14 @@ public class SwingUniformityTestPresentation extends JPanel implements Uniformit
      *
      ******************************************************************************************************************/
     @Override
-    public void renderControlPanel (final @Nonnegative int row, final @Nonnegative int column) 
+    public void renderControlPanel (final @Nonnull Position position) 
       {
         runSafely(new Runnable() 
           {
             @Override
             public void run() 
               {
-                setCell(row, column, new ControlPanel());
+                setCell(position, new ControlPanel());
               }
           });
       }
@@ -195,14 +195,14 @@ public class SwingUniformityTestPresentation extends JPanel implements Uniformit
      *
      ******************************************************************************************************************/
     @Override
-    public void renderWhite (final @Nonnegative int row, final @Nonnegative int column) 
+    public void renderWhite (final @Nonnull Position position) 
       {
         runSafely(new Runnable() 
           {
             @Override
             public void run() 
               {
-                setCell(row, column, new White());
+                setCell(position, new White());
               }
           });
       }
@@ -212,8 +212,7 @@ public class SwingUniformityTestPresentation extends JPanel implements Uniformit
      *
      ******************************************************************************************************************/
     @Override
-    public void renderMeasurement (final @Nonnegative int row,  
-                                   final @Nonnegative int column, 
+    public void renderMeasurement (final @Nonnull Position position, 
                                    final @Nonnull String luminance, 
                                    final @Nonnull String whitePoint) 
       {
@@ -222,7 +221,7 @@ public class SwingUniformityTestPresentation extends JPanel implements Uniformit
             @Override
             public void run() 
               {
-                setCell(row, column, new Measurement());
+                setCell(position, new Measurement());
               }
           });
       }
@@ -231,10 +230,10 @@ public class SwingUniformityTestPresentation extends JPanel implements Uniformit
      * 
      *
      ******************************************************************************************************************/
-    private void setCell (final @Nonnegative int row, final @Nonnegative int column, final @Nonnull Component component)
+    private void setCell (final @Nonnull Position position, final @Nonnull Component component)
       {
-        cell[row][column].removeAll();
-        cell[row][column].add(component, BorderLayout.CENTER);
+        cell[position.row][position.column].removeAll();
+        cell[position.row][position.column].add(component, BorderLayout.CENTER);
         validate();
       }
     

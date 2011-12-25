@@ -41,7 +41,10 @@ public interface UniformityTestPresentation
     @RequiredArgsConstructor(staticName="pos") @EqualsAndHashCode @ToString
     public static class Position
       {
+        @Nonnegative
         public final int column;
+        
+        @Nonnegative
         public final int row;
       }
     
@@ -55,32 +58,31 @@ public interface UniformityTestPresentation
      * 
      *
      ******************************************************************************************************************/
-    public void renderEmpty (@Nonnegative int row, @Nonnegative int column);
+    public void renderEmpty (@Nonnull Position position);
 
     /*******************************************************************************************************************
      * 
      *
      ******************************************************************************************************************/
-    public void renderInvitation (@Nonnegative int row, @Nonnegative int column);
+    public void renderInvitation (@Nonnull Position position);
 
     /*******************************************************************************************************************
      * 
      *
      ******************************************************************************************************************/
-    public void renderControlPanel (@Nonnegative int row, @Nonnegative int column);
+    public void renderControlPanel (@Nonnull Position position);
 
     /*******************************************************************************************************************
      * 
      *
      ******************************************************************************************************************/
-    public void renderWhite (@Nonnegative int row, @Nonnegative int column);
+    public void renderWhite (@Nonnull Position position);
 
     /*******************************************************************************************************************
      * 
      *
      ******************************************************************************************************************/
-    public void renderMeasurement (@Nonnegative int row, 
-                                   @Nonnegative int column, 
+    public void renderMeasurement (@Nonnull Position position,
                                    @Nonnull String luminance, 
                                    @Nonnull String whitePoint);
   }

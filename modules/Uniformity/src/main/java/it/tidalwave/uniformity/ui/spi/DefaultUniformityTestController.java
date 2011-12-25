@@ -59,7 +59,7 @@ public class DefaultUniformityTestController implements UniformityTestController
         final int rows = 3;
         presentation.setGridSize(columns, rows);
         
-        final List<UniformityTestPresentation.Position> pp = new ArrayList<UniformityTestPresentation.Position>();
+        final List<Position> pp = new ArrayList<Position>();
         
         for (int row = 0; row < rows; row++)
           {
@@ -71,29 +71,29 @@ public class DefaultUniformityTestController implements UniformityTestController
         
         pp.add(0, pp.remove(4));
 
-        presentation.renderControlPanel(DEFAULT_CONTROL_PANEL_POSITION.row, DEFAULT_CONTROL_PANEL_POSITION.column);
+        presentation.renderControlPanel(DEFAULT_CONTROL_PANEL_POSITION);
         
-        final Iterator<UniformityTestPresentation.Position> ii = pp.iterator();
+        final Iterator<Position> ii = pp.iterator();
         
         for (int i = 0; i < 9; i++)
           {
-            UniformityTestPresentation.Position p = ii.next();   
+            final Position p = ii.next();   
             
             if (p.equals(DEFAULT_CONTROL_PANEL_POSITION))
               {
-                presentation.renderControlPanel(AUX_CONTROL_PANEL_POSITION.row, AUX_CONTROL_PANEL_POSITION.column);
+                presentation.renderControlPanel(AUX_CONTROL_PANEL_POSITION);
               }
 
-            presentation.renderInvitation(p.row, p.column);
+            presentation.renderInvitation(p);
             waitForNextPressed();
-            presentation.renderWhite(p.row, p.column);
+            presentation.renderWhite(p);
             measure();
-            presentation.renderMeasurement(p.row, p.column, "Luminance: 1 cd/m2", "White point: 2420 K");
+            presentation.renderMeasurement(p, "Luminance: 1 cd/m2", "White point: 2420 K");
 
             if (p.equals(DEFAULT_CONTROL_PANEL_POSITION))
               {
-                presentation.renderControlPanel(p.row, p.column);
-                presentation.renderEmpty(AUX_CONTROL_PANEL_POSITION.row, AUX_CONTROL_PANEL_POSITION.column);
+                presentation.renderControlPanel(p);
+                presentation.renderEmpty(AUX_CONTROL_PANEL_POSITION);
               }
           }
       }

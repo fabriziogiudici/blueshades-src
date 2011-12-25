@@ -25,10 +25,12 @@ package it.tidalwave.uniformity.ui.spi;
 import javax.swing.JFrame;
 import it.tidalwave.uniformity.ui.UniformityTestPresentation;
 import it.tidalwave.uniformity.ui.impl.SwingUniformityTestPresentation;
+import it.tidalwave.uniformity.ui.UniformityTestPresentation.Position;
 import lombok.extern.slf4j.Slf4j;
 import org.mockito.InOrder;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import static it.tidalwave.uniformity.ui.UniformityTestPresentation.Position.pos;
 import static org.mockito.Mockito.*;
 
 /***********************************************************************************************************************
@@ -62,65 +64,65 @@ public class DefaultUniformityTestControllerTest
         
         inOrder.verify(presentation).setGridSize(eq(3), eq(3));
         
-        inOrder.verify(presentation).renderControlPanel(eq(0), eq(0));
-        inOrder.verify(presentation).renderInvitation(  eq(1), eq(1));
+        inOrder.verify(presentation).renderControlPanel(eq(pos(0, 0)));
+        inOrder.verify(presentation).renderInvitation(  eq(pos(1, 1)));
         
         waitForNextPressed();
-        inOrder.verify(presentation).renderWhite(       eq(1), eq(1));
+        inOrder.verify(presentation).renderWhite(       eq(pos(1, 1)));
 
         // measure
-        inOrder.verify(presentation).renderMeasurement( eq(1), eq(1), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
-        inOrder.verify(presentation).renderInvitation(  eq(0), eq(0));
-        inOrder.verify(presentation).renderControlPanel(eq(1), eq(0));
+        inOrder.verify(presentation).renderMeasurement( eq(pos(1, 1)), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
+        inOrder.verify(presentation).renderControlPanel(eq(pos(0, 1)));
+        inOrder.verify(presentation).renderInvitation(  eq(pos(0, 0)));
         
         waitForNextPressed();
-        inOrder.verify(presentation).renderWhite(       eq(0), eq(0));
+        inOrder.verify(presentation).renderWhite(       eq(pos(0, 0)));
         // measure
-        inOrder.verify(presentation).renderMeasurement( eq(0), eq(0), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
-        inOrder.verify(presentation).renderControlPanel(eq(0), eq(0));
-        inOrder.verify(presentation).renderEmpty       (eq(1), eq(0));
-        inOrder.verify(presentation).renderInvitation(  eq(0), eq(1));
+        inOrder.verify(presentation).renderMeasurement( eq(pos(0, 0)), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
+        inOrder.verify(presentation).renderControlPanel(eq(pos(0, 0)));
+        inOrder.verify(presentation).renderEmpty       (eq(pos(0, 1)));
+        inOrder.verify(presentation).renderInvitation(  eq(pos(1, 0)));
         
         waitForNextPressed();
-        inOrder.verify(presentation).renderWhite(       eq(0), eq(1));
+        inOrder.verify(presentation).renderWhite(       eq(pos(1, 0)));
         // measure
-        inOrder.verify(presentation).renderMeasurement( eq(0), eq(1), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
-        inOrder.verify(presentation).renderInvitation(  eq(0), eq(2));
+        inOrder.verify(presentation).renderMeasurement( eq(pos(1, 0)), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
+        inOrder.verify(presentation).renderInvitation(  eq(pos(2, 0)));
         
         waitForNextPressed();
-        inOrder.verify(presentation).renderWhite(       eq(0), eq(2));
+        inOrder.verify(presentation).renderWhite(       eq(pos(2, 0)));
         // measure
-        inOrder.verify(presentation).renderMeasurement( eq(0), eq(2), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
-        inOrder.verify(presentation).renderInvitation(  eq(1), eq(0));
+        inOrder.verify(presentation).renderMeasurement( eq(pos(2, 0)), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
+        inOrder.verify(presentation).renderInvitation(  eq(pos(0, 1)));
         
         waitForNextPressed();
-        inOrder.verify(presentation).renderWhite(       eq(1), eq(0));
+        inOrder.verify(presentation).renderWhite(       eq(pos(0, 1)));
         // measure
-        inOrder.verify(presentation).renderMeasurement( eq(1), eq(0), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
-        inOrder.verify(presentation).renderInvitation(  eq(1), eq(2));
+        inOrder.verify(presentation).renderMeasurement( eq(pos(0, 1)), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
+        inOrder.verify(presentation).renderInvitation(  eq(pos(2, 1)));
         
         waitForNextPressed();
-        inOrder.verify(presentation).renderWhite(       eq(1), eq(2));
+        inOrder.verify(presentation).renderWhite(       eq(pos(2, 1)));
         // measure
-        inOrder.verify(presentation).renderMeasurement( eq(1), eq(2), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
-        inOrder.verify(presentation).renderInvitation(  eq(2), eq(0));
+        inOrder.verify(presentation).renderMeasurement( eq(pos(2, 1)), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
+        inOrder.verify(presentation).renderInvitation(  eq(pos(0, 2)));
         
         waitForNextPressed();
-        inOrder.verify(presentation).renderWhite(       eq(2), eq(0));
+        inOrder.verify(presentation).renderWhite(       eq(pos(0, 2)));
         // measure
-        inOrder.verify(presentation).renderMeasurement( eq(2), eq(0), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
-        inOrder.verify(presentation).renderInvitation(  eq(2), eq(1));
+        inOrder.verify(presentation).renderMeasurement( eq(pos(0, 2)), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
+        inOrder.verify(presentation).renderInvitation(  eq(pos(1, 2)));
         
         waitForNextPressed();;
-        inOrder.verify(presentation).renderWhite(       eq(2), eq(1));
+        inOrder.verify(presentation).renderWhite(       eq(pos(1, 2)));
         // measure
-        inOrder.verify(presentation).renderMeasurement( eq(2), eq(1), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
-        inOrder.verify(presentation).renderInvitation(  eq(2), eq(2));
+        inOrder.verify(presentation).renderMeasurement( eq(pos(1, 2)), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
+        inOrder.verify(presentation).renderInvitation(  eq(pos(2, 2)));
         
         waitForNextPressed();;
-        inOrder.verify(presentation).renderWhite(       eq(2), eq(2));
+        inOrder.verify(presentation).renderWhite(       eq(pos(2, 2)));
         // measure
-        inOrder.verify(presentation).renderMeasurement( eq(2), eq(2), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
+        inOrder.verify(presentation).renderMeasurement( eq(pos(2, 2)), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
       }
     
     @Test
