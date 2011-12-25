@@ -32,7 +32,6 @@ import java.awt.EventQueue;
 import java.awt.GridLayout;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import it.tidalwave.uniformity.ui.UniformityCheckPresentation;
 import lombok.extern.slf4j.Slf4j;
@@ -77,18 +76,6 @@ public class UniformityCheckPresentationPanel extends JPanel implements Uniformi
           {
             setOpaque(true);
             setBackground(Color.WHITE);
-          }
-      }
-    
-    /*******************************************************************************************************************
-     * 
-     *
-     ******************************************************************************************************************/
-    private static class Invitation extends JPanel
-      {
-        public Invitation()
-          {
-            add(new JLabel("Put the sensor here"));
           }
       }
     
@@ -162,7 +149,7 @@ public class UniformityCheckPresentationPanel extends JPanel implements Uniformi
             @Override
             public void run() 
               {
-                setCell(position, new Invitation());
+                setCell(position, new SensorPlacementInvitationComponent());
               }
           });
       }
