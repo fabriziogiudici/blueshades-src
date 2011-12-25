@@ -69,12 +69,17 @@ public class DefaultUniformityTestController implements UniformityTestController
         presentation.renderControlPanel(0, 0);
         
         final Iterator<UniformityTestPresentation.Position> ii = pp.iterator();
-        UniformityTestPresentation.Position p = ii.next();
-        
-        presentation.renderInvitation(p.row, p.column);
         
         for (int i = 0; i < 9; i++)
           {
+            UniformityTestPresentation.Position p = ii.next();   
+            
+            if (p.row == 0 && p.column == 0)
+              {
+                presentation.renderControlPanel(p.row + 1, p.column);
+              }
+
+            presentation.renderInvitation(p.row, p.column);
             waitForNextPressed();
             presentation.renderWhite(p.row, p.column);
             measure();
@@ -84,18 +89,6 @@ public class DefaultUniformityTestController implements UniformityTestController
               {
                 presentation.renderControlPanel(p.row, p.column);
                 presentation.renderEmpty(p.row + 1, p.column);
-              }
-            
-            if (ii.hasNext())
-              {
-                p = ii.next();
-                
-                if (p.row == 0 && p.column == 0)
-                  {
-                    presentation.renderControlPanel(p.row + 1, p.column);
-                  }
-
-                presentation.renderInvitation(p.row, p.column);
               }
           }
       }
