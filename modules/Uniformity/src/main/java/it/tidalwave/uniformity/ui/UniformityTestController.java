@@ -32,5 +32,4 @@ package it.tidalwave.uniformity.ui;
  **********************************************************************************************************************/
 public interface UniformityTestController 
   {
-    
   }
