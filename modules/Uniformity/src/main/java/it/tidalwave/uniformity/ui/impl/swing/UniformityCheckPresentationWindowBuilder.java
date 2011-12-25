@@ -41,29 +41,29 @@ import lombok.extern.slf4j.Slf4j;
  *
  **********************************************************************************************************************/
 @ServiceProvider(service=UniformityCheckPresentationBuilder.class) @Slf4j
-public class UniformityCheckPresentationPanelBuilder implements UniformityCheckPresentationBuilder
+public class UniformityCheckPresentationWindowBuilder implements UniformityCheckPresentationBuilder
   {
-    private WeakReference<UniformityCheckPresentationPanel> presentationRef = new WeakReference<UniformityCheckPresentationPanel>(null);
+    private WeakReference<UniformityCheckPresentationWindow> presentationRef = new WeakReference<UniformityCheckPresentationWindow>(null);
     
     @Override @Nonnull
     public UniformityCheckPresentation buildUI()
       {
         log.info("buildUI()");
-        UniformityCheckPresentationPanel presentation = presentationRef.get();
+        UniformityCheckPresentationWindow presentation = presentationRef.get();
         
         if (presentation == null)
           {
             presentation = buildUI2();
-            presentationRef = new WeakReference<UniformityCheckPresentationPanel>(presentation);
+            presentationRef = new WeakReference<UniformityCheckPresentationWindow>(presentation);
           }
         
         return presentation;
       }
               
     @Nonnull
-    private UniformityCheckPresentationPanel buildUI2()
+    private UniformityCheckPresentationWindow buildUI2()
       {
-        final AtomicReference<UniformityCheckPresentationPanel> reference = new AtomicReference<UniformityCheckPresentationPanel>();
+        final AtomicReference<UniformityCheckPresentationWindow> reference = new AtomicReference<UniformityCheckPresentationWindow>();
         
         try  
           {
@@ -72,7 +72,7 @@ public class UniformityCheckPresentationPanelBuilder implements UniformityCheckP
                 @Override
                 public void run() 
                   {
-                    reference.set(new UniformityCheckPresentationPanel());
+                    reference.set(new UniformityCheckPresentationWindow());
                   }
               });
           } 
