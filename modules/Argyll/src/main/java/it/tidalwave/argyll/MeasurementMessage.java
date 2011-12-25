@@ -29,6 +29,7 @@ import it.tidalwave.colorimetry.ColorPoints;
 import it.tidalwave.colorimetry.ColorTemperature;
 import it.tidalwave.colorimetry.MeasureWithPrecision;
 import lombok.RequiredArgsConstructor;
+import lombok.Getter;
 import lombok.ToString;
 import static lombok.AccessLevel.PUBLIC;
 
@@ -42,7 +43,7 @@ import static lombok.AccessLevel.PUBLIC;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Message @RequiredArgsConstructor(access=PUBLIC) @ToString
+@Message @Getter @RequiredArgsConstructor(access=PUBLIC) @ToString
 public class MeasurementMessage extends MessageSupport
   {
     @Nonnull
