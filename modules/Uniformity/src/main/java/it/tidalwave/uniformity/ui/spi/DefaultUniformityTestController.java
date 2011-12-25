@@ -83,18 +83,20 @@ public class DefaultUniformityTestController implements UniformityTestController
               }
           }
         
-        pp.remove(4);
+        pp.add(0, pp.remove(4));
 
-        waitForNextPressed();
-        presentation.renderWhite(1, 1);
-        measure();
-        presentation.renderMeasurement(1, 1, "Luminance: 1 cd/m2", "White point: 2720 K");
-        presentation.renderInvitation(0, 0);
-        presentation.renderControlPanel(1, 0);
-                
         final Iterator<UniformityTestPresentation.Position> ii = pp.iterator();
         UniformityTestPresentation.Position p = ii.next();
         
+        waitForNextPressed();
+        presentation.renderWhite(p.row, p.column);
+        measure();
+        presentation.renderMeasurement(p.row, p.column, "Luminance: 1 cd/m2", "White point: 2720 K");
+        presentation.renderControlPanel(1, 0);
+        
+        p = ii.next();
+        presentation.renderInvitation(p.row, p.column);
+                
         for (int i = 0; i < 8; i++)
           {
             waitForNextPressed();
