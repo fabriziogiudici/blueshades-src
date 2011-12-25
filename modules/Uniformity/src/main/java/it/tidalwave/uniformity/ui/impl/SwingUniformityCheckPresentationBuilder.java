@@ -28,8 +28,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.atomic.AtomicReference;
 import java.awt.EventQueue;
 import org.openide.util.lookup.ServiceProvider;
-import it.tidalwave.uniformity.ui.UniformityTestPresentation;
-import it.tidalwave.uniformity.ui.spi.UniformityTestPresentationBuilder;
+import it.tidalwave.uniformity.ui.UniformityCheckPresentation;
+import it.tidalwave.uniformity.ui.spi.UniformityCheckPresentationBuilder;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
@@ -40,30 +40,30 @@ import lombok.extern.slf4j.Slf4j;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@ServiceProvider(service=UniformityTestPresentationBuilder.class) @Slf4j
-public class SwingUniformityTestPresentationBuilder implements UniformityTestPresentationBuilder
+@ServiceProvider(service=UniformityCheckPresentationBuilder.class) @Slf4j
+public class SwingUniformityCheckPresentationBuilder implements UniformityCheckPresentationBuilder
   {
-    private WeakReference<SwingUniformityTestPresentation> presentationRef = new WeakReference<SwingUniformityTestPresentation>(null);
+    private WeakReference<SwingUniformityCheckPresentation> presentationRef = new WeakReference<SwingUniformityCheckPresentation>(null);
     
     @Override @Nonnull
-    public UniformityTestPresentation buildUI()
+    public UniformityCheckPresentation buildUI()
       {
         log.info("buildUI()");
-        SwingUniformityTestPresentation presentation = presentationRef.get();
+        SwingUniformityCheckPresentation presentation = presentationRef.get();
         
         if (presentation == null)
           {
             presentation = buildUI2();
-            presentationRef = new WeakReference<SwingUniformityTestPresentation>(presentation);
+            presentationRef = new WeakReference<SwingUniformityCheckPresentation>(presentation);
           }
         
         return presentation;
       }
               
     @Nonnull
-    private SwingUniformityTestPresentation buildUI2()
+    private SwingUniformityCheckPresentation buildUI2()
       {
-        final AtomicReference<SwingUniformityTestPresentation> reference = new AtomicReference<SwingUniformityTestPresentation>();
+        final AtomicReference<SwingUniformityCheckPresentation> reference = new AtomicReference<SwingUniformityCheckPresentation>();
         
         try  
           {
@@ -72,7 +72,7 @@ public class SwingUniformityTestPresentationBuilder implements UniformityTestPre
                 @Override
                 public void run() 
                   {
-                    reference.set(new SwingUniformityTestPresentation());
+                    reference.set(new SwingUniformityCheckPresentation());
                   }
               });
           } 

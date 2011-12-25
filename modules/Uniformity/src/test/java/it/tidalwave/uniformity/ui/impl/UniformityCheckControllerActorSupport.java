@@ -30,12 +30,12 @@ import it.tidalwave.argyll.MeasurementMessage;
 import it.tidalwave.argyll.MeasurementRequest;
 import it.tidalwave.argyll.impl.MessageVerifier;
 import it.tidalwave.argyll.impl.MockSpotReadActor;
-import it.tidalwave.uniformity.UniformityTestRequest;
-import it.tidalwave.uniformity.ui.UniformityTestPresentation;
-import it.tidalwave.uniformity.ui.spi.UniformityTestPresentationBuilder;
+import it.tidalwave.uniformity.UniformityCheckRequest;
+import it.tidalwave.uniformity.ui.UniformityCheckPresentation;
+import it.tidalwave.uniformity.ui.spi.UniformityCheckPresentationBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.mockito.InOrder;
-import static it.tidalwave.uniformity.ui.UniformityTestPresentation.Position.pos;
+import static it.tidalwave.uniformity.ui.UniformityCheckPresentation.Position.pos;
 import static org.mockito.Mockito.*;
 
 /***********************************************************************************************************************
@@ -45,7 +45,7 @@ import static org.mockito.Mockito.*;
  *
  **********************************************************************************************************************/
 @Slf4j
-public abstract class DefaultUniformityTestControllerTestSupport 
+public abstract class UniformityCheckControllerActorSupport 
   {
     /*******************************************************************************************************************
      * 
@@ -56,7 +56,7 @@ public abstract class DefaultUniformityTestControllerTestSupport
         public TestActivator() 
           {
             add(new ActorActivator(MockSpotReadActor.class, 1));
-            add(new ActorActivator(DefaultUniformityTestController.class, 1));
+            add(new ActorActivator(UniformityCheckControllerActor.class, 1));
           }
       }
     
@@ -66,9 +66,9 @@ public abstract class DefaultUniformityTestControllerTestSupport
     
     protected MessageVerifier messageVerifier;
     
-    protected UniformityTestPresentationBuilder presentationBuilder;
+    protected UniformityCheckPresentationBuilder presentationBuilder;
     
-    protected UniformityTestPresentation presentation;
+    protected UniformityCheckPresentation presentation;
     
     /*******************************************************************************************************************
      * 
@@ -83,7 +83,7 @@ public abstract class DefaultUniformityTestControllerTestSupport
     public void xxx() 
       throws InterruptedException
       {
-        final Collaboration collaboration = new UniformityTestRequest().send();
+        final Collaboration collaboration = new UniformityCheckRequest().send();
         collaboration.waitForCompletion();
         
         inOrder.verify(presentation).bind(any(Action.class));
@@ -137,7 +137,7 @@ public abstract class DefaultUniformityTestControllerTestSupport
           }
         
         messageVerifier.verifyCollaborationStarted();
-        messageVerifier.verify(UniformityTestRequest.class);
+        messageVerifier.verify(UniformityCheckRequest.class);
         
         for (int i = 0; i < 9; i++)
           { 

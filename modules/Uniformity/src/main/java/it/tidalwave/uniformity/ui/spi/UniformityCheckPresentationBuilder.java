@@ -23,7 +23,7 @@
 package it.tidalwave.uniformity.ui.spi;
 
 import javax.annotation.Nonnull;
-import it.tidalwave.uniformity.ui.UniformityTestPresentation;
+import it.tidalwave.uniformity.ui.UniformityCheckPresentation;
 
 /***********************************************************************************************************************
  * 
@@ -33,8 +33,8 @@ import it.tidalwave.uniformity.ui.UniformityTestPresentation;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public interface UniformityTestPresentationBuilder 
+public interface UniformityCheckPresentationBuilder 
   {
     @Nonnull
-    public UniformityTestPresentation buildUI();
+    public UniformityCheckPresentation buildUI();
   }

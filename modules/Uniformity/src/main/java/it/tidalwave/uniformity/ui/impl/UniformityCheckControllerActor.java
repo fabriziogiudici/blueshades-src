@@ -39,13 +39,12 @@ import it.tidalwave.actor.annotation.MessageListener;
 import it.tidalwave.argyll.MeasurementMessage;
 import it.tidalwave.argyll.MeasurementRequest;
 import it.tidalwave.netbeans.util.Locator;
-import it.tidalwave.uniformity.UniformityTestRequest;
-import it.tidalwave.uniformity.ui.UniformityTestController;
-import it.tidalwave.uniformity.ui.UniformityTestPresentation;
-import it.tidalwave.uniformity.ui.UniformityTestPresentation.Position;
-import it.tidalwave.uniformity.ui.spi.UniformityTestPresentationBuilder;
+import it.tidalwave.uniformity.UniformityCheckRequest;
+import it.tidalwave.uniformity.ui.UniformityCheckPresentation;
+import it.tidalwave.uniformity.ui.UniformityCheckPresentation.Position;
+import it.tidalwave.uniformity.ui.spi.UniformityCheckPresentationBuilder;
 import lombok.extern.slf4j.Slf4j;
-import static it.tidalwave.uniformity.ui.UniformityTestPresentation.Position.pos;
+import static it.tidalwave.uniformity.ui.UniformityCheckPresentation.Position.pos;
 
 /***********************************************************************************************************************
  *
@@ -56,14 +55,14 @@ import static it.tidalwave.uniformity.ui.UniformityTestPresentation.Position.pos
  *
  **********************************************************************************************************************/
 @Actor(threadSafe=false) @NotThreadSafe @Slf4j
-public class DefaultUniformityTestController implements UniformityTestController
+public class UniformityCheckControllerActor
   {
     private static final Position DEFAULT_CONTROL_PANEL_POSITION = pos(0, 0);
     private static final Position ALTERNATE_CONTROL_PANEL_POSITION = pos(0, 1);
     
-    private final Provider<UniformityTestPresentationBuilder> presentationBuilder = Locator.createProviderFor(UniformityTestPresentationBuilder.class);
+    private final Provider<UniformityCheckPresentationBuilder> presentationBuilder = Locator.createProviderFor(UniformityCheckPresentationBuilder.class);
     
-    private UniformityTestPresentation presentation;
+    private UniformityCheckPresentation presentation;
 
     private final int columns = 3;
     
@@ -106,7 +105,7 @@ public class DefaultUniformityTestController implements UniformityTestController
      *
      ******************************************************************************************************************/
     @MessageListener
-    public void start (final @Nonnull UniformityTestRequest message)
+    public void start (final @Nonnull UniformityCheckRequest message)
       {
         log.info("start({})", message);
         initialize();

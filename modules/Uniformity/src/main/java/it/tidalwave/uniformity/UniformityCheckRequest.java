@@ -28,7 +28,7 @@ import lombok.ToString;
 
 /***********************************************************************************************************************
  * 
- * A request for starting the Uniformity Test.
+ * A request for starting the Uniformity Check.
  * 
  * @stereotype Message
  * 
@@ -37,6 +37,6 @@ import lombok.ToString;
  *
  **********************************************************************************************************************/
 @Message @ToString
-public class UniformityTestRequest extends MessageSupport
+public class UniformityCheckRequest extends MessageSupport
   {
   }

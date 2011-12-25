@@ -33,7 +33,7 @@ import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import it.tidalwave.uniformity.ui.UniformityTestPresentation;
+import it.tidalwave.uniformity.ui.UniformityCheckPresentation;
 import javax.swing.Action;
 import lombok.extern.slf4j.Slf4j;
 
@@ -46,7 +46,7 @@ import lombok.extern.slf4j.Slf4j;
  *
  **********************************************************************************************************************/
 @Slf4j
-public class SwingUniformityTestPresentation extends JPanel implements UniformityTestPresentation
+public class SwingUniformityCheckPresentation extends JPanel implements UniformityCheckPresentation
   {
     private JPanel[][] cell;
     
