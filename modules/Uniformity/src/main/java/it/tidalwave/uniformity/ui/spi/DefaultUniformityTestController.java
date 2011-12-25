@@ -34,7 +34,10 @@ import it.tidalwave.uniformity.ui.UniformityTestPresentation;
 import it.tidalwave.uniformity.ui.UniformityTestPresentation.Position;
 import lombok.extern.slf4j.Slf4j;
 import static it.tidalwave.uniformity.ui.UniformityTestPresentation.Position.pos;
+import java.awt.event.ActionEvent;
 import java.util.concurrent.TimeUnit;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 
 /***********************************************************************************************************************
  *
@@ -66,6 +69,22 @@ public class DefaultUniformityTestController implements UniformityTestController
      * 
      *
      ******************************************************************************************************************/
+    /* package */ final Action continueAction = new AbstractAction("Continue") 
+      {
+        @Override
+        public void actionPerformed (final @Nonnull ActionEvent event) 
+          {
+            presentation.renderWhite(currentPosition);
+            new MeasurementRequest().sendLater(500, TimeUnit.MILLISECONDS);
+            delay(); // FIXME: drop this when you connect to the messagebus
+            receiveMeasure(null);
+          }
+      };
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
     @MessageListener
     public void receiveMeasure (final @Nonnull MeasurementMessage message)
       {
@@ -87,6 +106,7 @@ public class DefaultUniformityTestController implements UniformityTestController
     public void initialize()
       {
         computePositions();
+        presentation.bind(continueAction);
         presentation.setGridSize(columns, rows);
         presentation.renderControlPanel(DEFAULT_CONTROL_PANEL_POSITION);
       }
@@ -107,11 +127,7 @@ public class DefaultUniformityTestController implements UniformityTestController
               }
 
             presentation.renderInvitation(currentPosition);
-            waitForNextPressed();
-            presentation.renderWhite(currentPosition);
-            new MeasurementRequest().sendLater(500, TimeUnit.MILLISECONDS);
-            delay(); // FIXME: drop this when you connect to the messagebus
-            receiveMeasure(null);
+//            waitForNextPressed(); // FIXME
           }
       }
  
@@ -146,14 +162,15 @@ public class DefaultUniformityTestController implements UniformityTestController
           }
       }
     
-    private void waitForNextPressed()
-      {
-        try
-          {
-            Thread.sleep(300);
-          } 
-        catch (InterruptedException e) 
-          {
-          }
-      }
+//    private void waitForNextPressed()
+//      {
+//        try
+//          {
+//            Thread.sleep(300);
+//            continueAction.actionPerformed(null);
+//          } 
+//        catch (InterruptedException e) 
+//          {
+//          }
+//      }
   }

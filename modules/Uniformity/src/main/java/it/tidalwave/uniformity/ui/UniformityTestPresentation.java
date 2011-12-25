@@ -24,6 +24,7 @@ package it.tidalwave.uniformity.ui;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
+import javax.swing.Action;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
@@ -38,6 +39,10 @@ import lombok.ToString;
  **********************************************************************************************************************/
 public interface UniformityTestPresentation 
   {
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
     @RequiredArgsConstructor(staticName="pos") @EqualsAndHashCode @ToString
     public static class Position
       {
@@ -47,6 +52,12 @@ public interface UniformityTestPresentation
         @Nonnegative
         public final int row;
       }
+
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    public void bind (@Nonnull Action continueAction);
     
     /*******************************************************************************************************************
      * 

@@ -34,6 +34,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import it.tidalwave.uniformity.ui.UniformityTestPresentation;
+import javax.swing.Action;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
@@ -48,6 +49,8 @@ import lombok.extern.slf4j.Slf4j;
 public class SwingUniformityTestPresentation extends JPanel implements UniformityTestPresentation
   {
     private JPanel[][] cell;
+    
+    private Action continueAction;
     
     /*******************************************************************************************************************
      * 
@@ -85,6 +88,16 @@ public class SwingUniformityTestPresentation extends JPanel implements Uniformit
           {
             add(new JLabel("Put the sensor here"));
           }
+      }
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    @Override
+    public void bind (final @Nonnull Action continueAction)
+      {
+        this.continueAction = continueAction;
       }
     
     /*******************************************************************************************************************
@@ -163,7 +176,7 @@ public class SwingUniformityTestPresentation extends JPanel implements Uniformit
             @Override
             public void run() 
               {
-                setCell(position, new ControlPanel());
+                setCell(position, new ControlPanel(continueAction));
               }
           });
       }
@@ -221,32 +234,41 @@ public class SwingUniformityTestPresentation extends JPanel implements Uniformit
      ******************************************************************************************************************/
     private static void runSafely (final @Nonnull Runnable runnable)
       {
-        try 
+        final Runnable guardedRunnable = new Runnable() 
           {
-            EventQueue.invokeAndWait(new Runnable() 
+            @Override
+            public void run() 
               {
-                @Override
-                public void run() 
+                try
                   {
-                    try
-                      {
-                        runnable.run();
-                      }
-                    catch (Throwable t)
-                      {
-                          t.printStackTrace();
-                        log.warn("", t);
-                      }
+                    runnable.run();
                   }
-              });
-          } 
-        catch (InterruptedException e) 
+                catch (Throwable t)
+                  {
+                        t.printStackTrace();
+                    log.warn("", t);
+                  }
+              }
+          };
+
+        if (EventQueue.isDispatchThread())
           {
-            log.warn("", e);
-          } 
-        catch (InvocationTargetException e) 
+            guardedRunnable.run();
+          }
+        else
           {
-            log.warn("", e);
+            try 
+              {
+                EventQueue.invokeAndWait(guardedRunnable);
+              } 
+            catch (InterruptedException e) 
+              {
+                log.warn("", e);
+              } 
+            catch (InvocationTargetException e) 
+              {
+                log.warn("", e);
+              }
           }
       }
   }

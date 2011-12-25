@@ -31,7 +31,10 @@ import org.mockito.InOrder;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import static it.tidalwave.uniformity.ui.UniformityTestPresentation.Position.pos;
+import javax.annotation.Nonnull;
 import static org.mockito.Mockito.*;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 /***********************************************************************************************************************
  * 
@@ -53,6 +56,16 @@ public class DefaultUniformityTestControllerTest
       {
         fixture = new DefaultUniformityTestController();   
         presentation = mock(UniformityTestPresentation.class);
+        doAnswer(new Answer<Void>()
+          {
+            @Override
+            public Void answer (final @Nonnull InvocationOnMock invocation) 
+              {
+                fixture.continueAction.actionPerformed(null);
+                return null;
+              }
+          }).when(presentation).renderInvitation(any(Position.class));
+        
         inOrder = inOrder(presentation);
         fixture.presentation = presentation;
       }
@@ -114,13 +127,13 @@ public class DefaultUniformityTestControllerTest
         inOrder.verify(presentation).renderMeasurement( eq(pos(0, 2)), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
         inOrder.verify(presentation).renderInvitation(  eq(pos(1, 2)));
         
-        waitForNextPressed();;
+        waitForNextPressed();
         inOrder.verify(presentation).renderWhite(       eq(pos(1, 2)));
         // measure
         inOrder.verify(presentation).renderMeasurement( eq(pos(1, 2)), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
         inOrder.verify(presentation).renderInvitation(  eq(pos(2, 2)));
         
-        waitForNextPressed();;
+        waitForNextPressed();
         inOrder.verify(presentation).renderWhite(       eq(pos(2, 2)));
         // measure
         inOrder.verify(presentation).renderMeasurement( eq(pos(2, 2)), eq("Luminance: 1 cd/m2"), eq("White point: 2420 K"));
@@ -137,6 +150,12 @@ public class DefaultUniformityTestControllerTest
         fixture.presentation = presentation;
         fixture.initialize();
         fixture.prepareNextMeasurement();
+
+        do
+          {
+            Thread.sleep(2000);
+          }
+        while (jframe.isVisible());
       }
     
     private void waitForNextPressed()
@@ -144,7 +163,6 @@ public class DefaultUniformityTestControllerTest
 //        try
 //          {
 //            log.info("WAITING");
-//            Thread.sleep(2000);
 //          } 
 //        catch (InterruptedException e) 
 //          {

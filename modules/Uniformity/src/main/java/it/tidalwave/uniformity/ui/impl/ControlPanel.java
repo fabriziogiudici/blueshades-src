@@ -22,6 +22,8 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.ui.impl;
 
+import javax.annotation.Nonnull;
+import javax.swing.Action;
 import javax.swing.JPanel;
 
 /***********************************************************************************************************************
@@ -39,6 +41,19 @@ public class ControlPanel extends JPanel
         initComponents();
       }
 
+    public ControlPanel (final @Nonnull Action continueAction)
+      {
+        initComponents();
+        btContinue.setAction(continueAction);
+      }
+
+    @Override
+    public void removeNotify()
+      {
+        btContinue.setAction(null);
+        super.removeNotify();
+      }
+    
     /*******************************************************************************************************************
      * 
      * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The
