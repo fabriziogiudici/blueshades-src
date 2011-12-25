@@ -60,17 +60,21 @@ public class MeasurementPanel extends JPanel
         lbLuminance = new javax.swing.JLabel();
         lbWhitePoint = new javax.swing.JLabel();
 
+        setName(org.openide.util.NbBundle.getMessage(MeasurementPanel.class, "MeasurementPanel.name")); // NOI18N
+
         lbLuminance.setFont(lbLuminance.getFont().deriveFont(lbLuminance.getFont().getStyle() | java.awt.Font.BOLD, lbLuminance.getFont().getSize()+2));
         lbLuminance.setForeground(new java.awt.Color(255, 255, 255));
         lbLuminance.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbLuminance.setText(org.openide.util.NbBundle.getMessage(MeasurementPanel.class, "MeasurementPanel.lbLuminance.text")); // NOI18N
         lbLuminance.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        lbLuminance.setName(org.openide.util.NbBundle.getMessage(MeasurementPanel.class, "MeasurementPanel.lbLuminance.name")); // NOI18N
 
         lbWhitePoint.setFont(lbWhitePoint.getFont().deriveFont(lbWhitePoint.getFont().getStyle() | java.awt.Font.BOLD, lbWhitePoint.getFont().getSize()+3));
         lbWhitePoint.setForeground(new java.awt.Color(255, 255, 255));
         lbWhitePoint.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbWhitePoint.setText(org.openide.util.NbBundle.getMessage(MeasurementPanel.class, "MeasurementPanel.lbWhitePoint.text")); // NOI18N
         lbWhitePoint.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        lbWhitePoint.setName(org.openide.util.NbBundle.getMessage(MeasurementPanel.class, "MeasurementPanel.lbWhitePoint.name")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

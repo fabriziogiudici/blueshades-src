@@ -67,9 +67,13 @@ public class ControlPanel extends JPanel
         btContinue = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
+        setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.name")); // NOI18N
+
         btContinue.setText(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.btContinue.text")); // NOI18N
+        btContinue.setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.btContinue.name")); // NOI18N
 
         jLabel1.setText(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.jLabel1.text")); // NOI18N
+        jLabel1.setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.jLabel1.name")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
