@@ -27,6 +27,7 @@ import javax.annotation.concurrent.Immutable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import it.tidalwave.util.NotFoundException;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
@@ -44,6 +45,21 @@ public class ColorPoints
     public ColorPoints (final @Nonnull ColorPoint ... colorPoints)
       {
         this.colorPoints.addAll(Arrays.asList(colorPoints));
+      }
+    
+    @Nonnull
+    public ColorPoint find (final @Nonnull ColorPoint.ColorSpace colorSpace)
+      throws NotFoundException
+      {
+        for (final ColorPoint colorPoint : colorPoints)
+          {
+            if (colorPoint.getColorSpace() == colorSpace)
+              {
+                return colorPoint;  
+              }
+          }
+        
+        throw new NotFoundException("No Color with space: " + colorSpace);
       }
     
     @Override @Nonnull

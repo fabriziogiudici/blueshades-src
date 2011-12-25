@@ -26,7 +26,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 import it.tidalwave.actor.annotation.Actor;
 import it.tidalwave.actor.annotation.MessageListener;
-import it.tidalwave.colorimetry.ColorPoint;
 import it.tidalwave.colorimetry.ColorPoints;
 import it.tidalwave.colorimetry.ColorTemperature;
 import it.tidalwave.colorimetry.MeasureWithPrecision;
@@ -48,6 +47,8 @@ import static it.tidalwave.colorimetry.MeasureWithPrecision.*;
 @Actor(threadSafe=false) @NotThreadSafe @Slf4j
 public class MockSpotReadActor 
   {
+    private int n = 0;
+    
     /*******************************************************************************************************************
      * 
      * Answers to the request for a measurement.
@@ -60,12 +61,14 @@ public class MockSpotReadActor
         log.info("spotRead({})", message);
 
         Thread.sleep(500);
+        n++;
         
-        final ColorPoints colorPoints = new ColorPoints(colorLab(100f, 101f, 102f), colorXYZ(0.1f, 0.2f, 0.3f));
+        final ColorPoints colorPoints = new ColorPoints(colorLab(100.123456 + n, 200.234567 + n, 300.345678 + n), 
+                                                        colorXYZ(400.123456 + n, 500.234567 + n, 600.345678 + n));
         
-        final MeasureWithPrecision<ColorTemperature> ccTemp        = measureWithPrecision(kelvin(2390), 0.202257);
-        final MeasureWithPrecision<ColorTemperature> planckianTemp = measureWithPrecision(kelvin(2389), 0.110858);
-        final MeasureWithPrecision<ColorTemperature> daylightTemp  = measureWithPrecision(kelvin(2244), 13.893159);
+        final MeasureWithPrecision<ColorTemperature> ccTemp        = measureWithPrecision(kelvin(6000 + n), 0. + n / 100.0);
+        final MeasureWithPrecision<ColorTemperature> planckianTemp = measureWithPrecision(kelvin(6100 + n), 1. + n / 100.0);
+        final MeasureWithPrecision<ColorTemperature> daylightTemp  = measureWithPrecision(kelvin(6200 + n), 2. + n / 100.0);
         
         new MeasurementMessage(colorPoints, ccTemp, planckianTemp, daylightTemp).send();
       }

@@ -44,6 +44,15 @@
     <description>blueArgyle - Colorimetry</description>
     
     <dependencies>
+        <dependency>
+            <groupId>it.tidalwave.thesefoolishthings</groupId>
+            <artifactId>it-tidalwave-util</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-util</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>

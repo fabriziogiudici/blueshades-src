@@ -49,12 +49,20 @@
             <artifactId>it-tidalwave-argyll</artifactId>
         </dependency>
         <dependency>
+            <artifactId>it-tidalwave-colorimetry</artifactId>
+            <groupId>it.tidalwave.blueargyle</groupId>
+        </dependency>
+        <dependency>
             <groupId>it.tidalwave.solidblue</groupId>
             <artifactId>it-tidalwave-actor</artifactId>
         </dependency>
         <dependency>
             <groupId>it.tidalwave.netbeans</groupId>
             <artifactId>it-tidalwave-netbeans-util</artifactId>
+        </dependency>
+        <dependency>
+            <artifactId>it-tidalwave-util</artifactId>
+            <groupId>it.tidalwave.thesefoolishthings</groupId>
         </dependency>
         <dependency>
             <groupId>com.kenai.nbpwr</groupId>

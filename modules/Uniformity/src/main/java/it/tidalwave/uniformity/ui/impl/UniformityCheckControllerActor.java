@@ -32,12 +32,14 @@ import java.util.concurrent.TimeUnit;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import it.tidalwave.util.NotFoundException;
 import it.tidalwave.actor.Collaboration;
 import it.tidalwave.actor.MessageSupport;
 import it.tidalwave.actor.annotation.Actor;
 import it.tidalwave.actor.annotation.MessageListener;
 import it.tidalwave.argyll.MeasurementMessage;
 import it.tidalwave.argyll.MeasurementRequest;
+import it.tidalwave.colorimetry.ColorPoint;
 import it.tidalwave.netbeans.util.Locator;
 import it.tidalwave.uniformity.UniformityCheckRequest;
 import it.tidalwave.uniformity.ui.UniformityCheckPresentation;
@@ -117,10 +119,15 @@ public class UniformityCheckControllerActor
      *
      ******************************************************************************************************************/
     @MessageListener
-    public void processMeasure (final @Nonnull MeasurementMessage message)
+    public void processMeasure (final @Nonnull MeasurementMessage message) 
+      throws NotFoundException
       {
         log.info("processMeasure({})", message);
-        presentation.renderMeasurement(currentPosition, "Luminance: 1 cd/m2", "White point: 2420 K");
+        final double c1 = message.getColorPoints().find(ColorPoint.ColorSpace.Lab).getC1();
+        final int temp = message.getCcTemperature().getMeasure().getT();
+        presentation.renderMeasurement(currentPosition,
+                                       String.format("Luminance: %.0f cd/m2", c1), 
+                                       String.format("White point: %d K", temp));
         eventuallyMoveInControlPanel();
         prepareNextMeasurement(message);  
       }
@@ -211,3 +218,4 @@ public class UniformityCheckControllerActor
         positionIterator = positions.iterator();
       }
   }
+
