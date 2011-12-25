@@ -38,7 +38,7 @@ import lombok.ToString;
  **********************************************************************************************************************/
 public interface UniformityTestPresentation 
   {
-    @RequiredArgsConstructor @EqualsAndHashCode @ToString
+    @RequiredArgsConstructor(staticName="pos") @EqualsAndHashCode @ToString
     public static class Position
       {
         public final int column;

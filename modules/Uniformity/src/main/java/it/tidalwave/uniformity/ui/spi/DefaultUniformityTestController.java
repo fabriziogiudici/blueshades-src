@@ -22,13 +22,15 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.ui.spi;
 
-import it.tidalwave.uniformity.ui.UniformityTestController;
-import it.tidalwave.uniformity.ui.UniformityTestPresentation;
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import javax.annotation.Nonnull;
+import it.tidalwave.uniformity.ui.UniformityTestController;
+import it.tidalwave.uniformity.ui.UniformityTestPresentation;
+import it.tidalwave.uniformity.ui.UniformityTestPresentation.Position;
 import lombok.extern.slf4j.Slf4j;
+import static it.tidalwave.uniformity.ui.UniformityTestPresentation.Position.pos;
 
 /***********************************************************************************************************************
  *
@@ -41,6 +43,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class DefaultUniformityTestController implements UniformityTestController
   {
+    private static final Position DEFAULT_CONTROL_PANEL_POSITION = pos(0, 0);
+    private static final Position AUX_CONTROL_PANEL_POSITION = pos(0, 1);
+    
     @Nonnull
     /* package FIXME */ UniformityTestPresentation presentation;
     
@@ -60,13 +65,13 @@ public class DefaultUniformityTestController implements UniformityTestController
           {
             for (int column = 0; column < columns; column++)
               {
-                pp.add(new UniformityTestPresentation.Position(column, row));
+                pp.add(pos(column, row));
               }
           }
         
         pp.add(0, pp.remove(4));
 
-        presentation.renderControlPanel(0, 0);
+        presentation.renderControlPanel(DEFAULT_CONTROL_PANEL_POSITION.row, DEFAULT_CONTROL_PANEL_POSITION.column);
         
         final Iterator<UniformityTestPresentation.Position> ii = pp.iterator();
         
@@ -74,9 +79,9 @@ public class DefaultUniformityTestController implements UniformityTestController
           {
             UniformityTestPresentation.Position p = ii.next();   
             
-            if (p.row == 0 && p.column == 0)
+            if (p.equals(DEFAULT_CONTROL_PANEL_POSITION))
               {
-                presentation.renderControlPanel(p.row + 1, p.column);
+                presentation.renderControlPanel(AUX_CONTROL_PANEL_POSITION.row, AUX_CONTROL_PANEL_POSITION.column);
               }
 
             presentation.renderInvitation(p.row, p.column);
@@ -85,10 +90,10 @@ public class DefaultUniformityTestController implements UniformityTestController
             measure();
             presentation.renderMeasurement(p.row, p.column, "Luminance: 1 cd/m2", "White point: 2420 K");
 
-            if (p.row == 0 && p.column == 0)
+            if (p.equals(DEFAULT_CONTROL_PANEL_POSITION))
               {
                 presentation.renderControlPanel(p.row, p.column);
-                presentation.renderEmpty(p.row + 1, p.column);
+                presentation.renderEmpty(AUX_CONTROL_PANEL_POSITION.row, AUX_CONTROL_PANEL_POSITION.column);
               }
           }
       }
