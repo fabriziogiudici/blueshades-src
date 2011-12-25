@@ -26,6 +26,10 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.awt.event.ActionEvent;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import it.tidalwave.actor.annotation.MessageListener;
 import it.tidalwave.argyll.MeasurementMessage;
 import it.tidalwave.argyll.MeasurementRequest;
@@ -34,10 +38,6 @@ import it.tidalwave.uniformity.ui.UniformityTestPresentation;
 import it.tidalwave.uniformity.ui.UniformityTestPresentation.Position;
 import lombok.extern.slf4j.Slf4j;
 import static it.tidalwave.uniformity.ui.UniformityTestPresentation.Position.pos;
-import java.awt.event.ActionEvent;
-import java.util.concurrent.TimeUnit;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 
 /***********************************************************************************************************************
  *
