@@ -50,7 +50,7 @@ import static org.fest.swing.core.BasicComponentFinder.*;
  *
  **********************************************************************************************************************/
 @Slf4j
-public class UniformityCheckControllerActorIntegrationTest extends UniformityCheckControllerActorSupport
+public class UniformityCheckControllerActorIntegrationTest extends UniformityCheckControllerActorTestSupport
   {
     private JFrame frame;
     

@@ -45,7 +45,7 @@ import static org.mockito.Mockito.*;
  *
  **********************************************************************************************************************/
 @Slf4j
-public abstract class UniformityCheckControllerActorSupport 
+public abstract class UniformityCheckControllerActorTestSupport 
   {
     /*******************************************************************************************************************
      * 

@@ -46,7 +46,7 @@ import static org.mockito.Mockito.*;
  *
  **********************************************************************************************************************/
 @Slf4j
-public class UniformityCheckControllerActorTest extends UniformityCheckControllerActorSupport
+public class UniformityCheckControllerActorTest extends UniformityCheckControllerActorTestSupport
   {
     private Action continueAction;
     
