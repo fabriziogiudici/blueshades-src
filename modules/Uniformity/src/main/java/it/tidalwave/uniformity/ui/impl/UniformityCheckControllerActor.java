@@ -98,9 +98,11 @@ public class UniformityCheckControllerActor
                   {
                     presentation.renderWhiteCellAt(currentPosition);
                     new MeasurementRequest().sendLater(500, MILLISECONDS);
-                    collaborationPendingUserIntervention = NULL_COLLABORATION;
                   }
               });
+            
+            suspensionToken = null;
+            collaborationPendingUserIntervention = NULL_COLLABORATION;
           }
       };
     
@@ -114,15 +116,22 @@ public class UniformityCheckControllerActor
         public void actionPerformed (final @Nonnull ActionEvent event) 
           {
             setEnabled(false);
-            collaborationPendingUserIntervention.resume(suspensionToken, new Runnable()
+            
+            if (suspensionToken != null)
               {
-                @Override
-                public void run() 
+                collaborationPendingUserIntervention.resume(suspensionToken, new Runnable()
                   {
-                    presentation.dismiss();
-                    collaborationPendingUserIntervention = NULL_COLLABORATION;
-                  }
-              });
+                    @Override
+                    public void run() 
+                      {
+                        // do nothing, but it will resume the Collaboration
+                      }
+                  });
+              }
+            
+            presentation.dismiss();
+            suspensionToken = null;
+            collaborationPendingUserIntervention = NULL_COLLABORATION;
           }
       };
     
