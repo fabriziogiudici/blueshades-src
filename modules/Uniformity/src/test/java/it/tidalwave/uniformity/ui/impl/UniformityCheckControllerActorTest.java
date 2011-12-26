@@ -30,7 +30,7 @@ import it.tidalwave.argyll.impl.MessageVerifier;
 import it.tidalwave.netbeans.util.test.MockLookup;
 import it.tidalwave.uniformity.ui.UniformityCheckPresentation;
 import it.tidalwave.uniformity.ui.UniformityCheckPresentation.Position;
-import it.tidalwave.uniformity.ui.spi.UniformityCheckPresentationBuilder;
+import it.tidalwave.uniformity.ui.UniformityCheckPresentationProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -116,8 +116,8 @@ public class UniformityCheckControllerActorTest extends UniformityCheckControlle
         presentation = mock(UniformityCheckPresentation.class);
         doAnswer(storeActionReferences).when(presentation).bind(any(Action.class), any(Action.class));
         doAnswer(clickContinue).when(presentation).renderSensorPlacementInvitationCellAt(any(Position.class));
-        presentationBuilder = mock(UniformityCheckPresentationBuilder.class);
-        doReturn(presentation).when(presentationBuilder).buildUI();
+        presentationBuilder = mock(UniformityCheckPresentationProvider.class);
+        doReturn(presentation).when(presentationBuilder).getPresentation();
       }
     
     /*******************************************************************************************************************

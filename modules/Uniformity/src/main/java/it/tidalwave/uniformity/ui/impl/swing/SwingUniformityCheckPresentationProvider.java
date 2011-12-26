@@ -23,50 +23,28 @@
 package it.tidalwave.uniformity.ui.impl.swing;
 
 import javax.annotation.Nonnull;
-import javax.swing.Action;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import static it.tidalwave.blueargyle.util.SafeRunner.*;
+import org.openide.util.lookup.ServiceProvider;
+import it.tidalwave.blueargyle.util.SafeSwingComponentBuilder;
+import it.tidalwave.uniformity.ui.UniformityCheckPresentationProvider;
+import lombok.extern.slf4j.Slf4j;
+import static it.tidalwave.blueargyle.util.SafeSwingComponentBuilder.*;
 
 /***********************************************************************************************************************
  * 
- * @stereotype Presentation
+ * @stereotype Factory
  * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class UniformityCheckPresentationWindow extends UniformityCheckPresentationWindowSupport
-  {    
-    @Override
-    public void showUp()
-      {
-        runSafely(new Runnable() 
-          {
-            @Override
-            public void run() 
-              {
-                panel.showUp();
-                final GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
-                final GraphicsDevice graphicsDevice = graphicsEnvironment.getScreenDevices()[0];
-                graphicsDevice.setFullScreenWindow(frame);
-                frame.setVisible(true);
-              }
-          });
-      }
+@ServiceProvider(service=SwingUniformityCheckPresentationProvider.class) @Slf4j
+public class SwingUniformityCheckPresentationProvider implements UniformityCheckPresentationProvider
+  {
+    private final SafeSwingComponentBuilder<SwingUniformityCheckPresentation> builder = builderFor(SwingUniformityCheckPresentation.class);
     
-    @Override
-    public void dismiss()
+    @Override @Nonnull
+    public SwingUniformityCheckPresentation getPresentation()
       {
-        runSafely(new Runnable() 
-          {
-            @Override
-            public void run() 
-              {
-                frame.setVisible(false);
-                frame.dispose();
-                panel.dismiss();
-              }
-          });
+        return builder.getInstance();
       }
   }

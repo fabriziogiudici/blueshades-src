@@ -33,7 +33,7 @@ import it.tidalwave.argyll.impl.MessageVerifier;
 import it.tidalwave.argyll.impl.MockSpotReadActor;
 import it.tidalwave.uniformity.UniformityCheckRequest;
 import it.tidalwave.uniformity.ui.UniformityCheckPresentation;
-import it.tidalwave.uniformity.ui.spi.UniformityCheckPresentationBuilder;
+import it.tidalwave.uniformity.ui.UniformityCheckPresentationProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.mockito.InOrder;
 import static it.tidalwave.uniformity.ui.UniformityCheckPresentation.Position.pos;
@@ -68,7 +68,7 @@ public abstract class UniformityCheckControllerActorTestSupport
     
     protected MessageVerifier messageVerifier;
     
-    protected UniformityCheckPresentationBuilder presentationBuilder;
+    protected UniformityCheckPresentationProvider presentationBuilder;
     
     protected UniformityCheckPresentation presentation;
     

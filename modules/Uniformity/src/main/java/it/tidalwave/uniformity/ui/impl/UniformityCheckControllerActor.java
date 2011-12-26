@@ -43,7 +43,7 @@ import it.tidalwave.netbeans.util.Locator;
 import it.tidalwave.uniformity.UniformityCheckRequest;
 import it.tidalwave.uniformity.ui.UniformityCheckPresentation;
 import it.tidalwave.uniformity.ui.UniformityCheckPresentation.Position;
-import it.tidalwave.uniformity.ui.spi.UniformityCheckPresentationBuilder;
+import it.tidalwave.uniformity.ui.UniformityCheckPresentationProvider;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.concurrent.TimeUnit.*;
 import static it.tidalwave.actor.Collaboration.*;
@@ -64,7 +64,7 @@ public class UniformityCheckControllerActor
     private static final Position DEFAULT_CONTROL_PANEL_POSITION = pos(0, 0);
     private static final Position ALTERNATE_CONTROL_PANEL_POSITION = pos(0, 1);
     
-    private final Provider<UniformityCheckPresentationBuilder> presentationBuilder = Locator.createProviderFor(UniformityCheckPresentationBuilder.class);
+    private final Provider<UniformityCheckPresentationProvider> presentationBuilder = Locator.createProviderFor(UniformityCheckPresentationProvider.class);
     
     private UniformityCheckPresentation presentation;
 
@@ -173,7 +173,7 @@ public class UniformityCheckControllerActor
         log.info("initialize()");
         continueAction.setEnabled(false);
         cancelAction.setEnabled(false);
-        presentation = presentationBuilder.get().buildUI();
+        presentation = presentationBuilder.get().getPresentation();
         computePositions();
         presentation.bind(continueAction, cancelAction);
         presentation.setGridSize(columns, rows);

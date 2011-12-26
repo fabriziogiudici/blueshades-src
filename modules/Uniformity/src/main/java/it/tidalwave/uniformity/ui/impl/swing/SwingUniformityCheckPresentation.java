@@ -22,31 +22,51 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.ui.impl.swing;
 
-import javax.swing.JFrame;
-import it.tidalwave.uniformity.ui.UniformityCheckPresentation;
-import lombok.Delegate;
+import javax.annotation.Nonnull;
+import javax.swing.Action;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import static it.tidalwave.blueargyle.util.SafeRunner.*;
 
 /***********************************************************************************************************************
  * 
- * FIXME: a separate base class which implements @Delegate methods. If you put everything together with 
- * UniformityCheckPresentationWindow, strange compilation errors occur (also elsewhere) probably because of a Lombok
- * bug. This class must be public, with public constructor, or mocking will fail.
+ * @stereotype Presentation
  * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public abstract class UniformityCheckPresentationWindowSupport implements UniformityCheckPresentation
-  {
-    protected final JFrame frame = new JFrame();
-    
-    @Delegate(types=UniformityCheckPresentation.class)
-    protected final UniformityCheckPresentationPanel panel = new UniformityCheckPresentationPanel();
-    
-    public UniformityCheckPresentationWindowSupport()
+public class SwingUniformityCheckPresentation extends SwingUniformityCheckPresentationSupport
+  {    
+    @Override
+    public void showUp()
       {
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        frame.setUndecorated(true); 
-        frame.add(panel);
+        runSafely(new Runnable() 
+          {
+            @Override
+            public void run() 
+              {
+                panel.showUp();
+                final GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+                final GraphicsDevice graphicsDevice = graphicsEnvironment.getScreenDevices()[0];
+                graphicsDevice.setFullScreenWindow(frame);
+                frame.setVisible(true);
+              }
+          });
+      }
+    
+    @Override
+    public void dismiss()
+      {
+        runSafely(new Runnable() 
+          {
+            @Override
+            public void run() 
+              {
+                frame.setVisible(false);
+                frame.dispose();
+                panel.dismiss();
+              }
+          });
       }
   }
