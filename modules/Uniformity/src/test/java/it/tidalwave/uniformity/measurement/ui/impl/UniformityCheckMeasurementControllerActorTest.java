@@ -26,14 +26,11 @@ import javax.annotation.Nonnull;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.Action;
-import it.tidalwave.argyll.impl.MessageVerifier;
-import it.tidalwave.netbeans.util.test.MockLookup;
 import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation;
 import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation.Position;
 import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentationProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import static org.mockito.Mockito.*;
@@ -90,19 +87,10 @@ public class UniformityCheckMeasurementControllerActorTest extends UniformityChe
      * 
      *
      ******************************************************************************************************************/
-    @BeforeMethod
-    public void setupFixture()
+    @AfterMethod
+    public void cleanupAction()
       {
-        messageVerifier = new MessageVerifier();
-        messageVerifier.initialize();
-        
-        createPresentation();
-        MockLookup.setInstances(presentationBuilder);
-        
-        inOrder = inOrder(presentation);
-        
-        testActivator = new TestActivator();
-        testActivator.activate();
+        continueAction = null;
       }
     
     /*******************************************************************************************************************
@@ -117,21 +105,5 @@ public class UniformityCheckMeasurementControllerActorTest extends UniformityChe
         doAnswer(clickContinue).when(presentation).renderSensorPlacementInvitationCellAt(any(Position.class));
         presentationBuilder = mock(UniformityCheckMeasurementPresentationProvider.class);
         doReturn(presentation).when(presentationBuilder).getPresentation();
-      }
-    
-    /*******************************************************************************************************************
-     * 
-     *
-     ******************************************************************************************************************/
-    @AfterMethod
-    public void cleanup()
-      {
-        messageVerifier.dispose();
-        testActivator.deactivate();
-        messageVerifier = null;
-        presentation = null;
-        testActivator = null;
-        continueAction = null;
-        MockLookup.reset();
       }
   }

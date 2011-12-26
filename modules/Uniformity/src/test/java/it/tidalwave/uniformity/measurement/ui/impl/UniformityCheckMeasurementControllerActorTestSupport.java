@@ -31,10 +31,13 @@ import it.tidalwave.argyll.MeasurementMessage;
 import it.tidalwave.argyll.MeasurementRequest;
 import it.tidalwave.argyll.impl.MessageVerifier;
 import it.tidalwave.argyll.impl.MockSpotReadActor;
+import it.tidalwave.netbeans.util.test.MockLookup;
 import it.tidalwave.uniformity.UniformityCheckRequest;
 import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation;
 import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentationProvider;
 import lombok.extern.slf4j.Slf4j;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.mockito.InOrder;
 import static it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation.Position.pos;
@@ -78,6 +81,40 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
      *
      ******************************************************************************************************************/
     protected abstract void createPresentation();
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    @BeforeMethod
+    public void setupFixture()
+      {
+        messageVerifier = new MessageVerifier();
+        messageVerifier.initialize();
+        
+        createPresentation();
+        MockLookup.setInstances(presentationBuilder);
+        
+        inOrder = inOrder(presentation);
+        
+        testActivator = new TestActivator();
+        testActivator.activate();
+      }
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    @AfterMethod
+    public void cleanup()
+      {
+        messageVerifier.dispose();
+        testActivator.deactivate();
+        messageVerifier = null;
+        presentation = null;
+        testActivator = null;
+        MockLookup.reset();
+      }
     
     /*******************************************************************************************************************
      * 

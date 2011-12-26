@@ -27,14 +27,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.Timer;
-import it.tidalwave.argyll.impl.MessageVerifier;
-import it.tidalwave.netbeans.util.test.MockLookup;
 import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation;
 import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentationProvider;
 import it.tidalwave.uniformity.measurement.ui.impl.netbeans.NetBeansUniformityCheckMeasurementPresentation;
 import lombok.extern.slf4j.Slf4j;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import static org.mockito.Mockito.*;
@@ -77,25 +73,6 @@ public class UniformityCheckMeasurementControllerActorIntegrationTest extends Un
             return null;
           }
       };
-
-    /*******************************************************************************************************************
-     * 
-     *
-     ******************************************************************************************************************/
-    @BeforeMethod
-    public void setupFixture()
-      {
-        messageVerifier = new MessageVerifier();
-        messageVerifier.initialize();
-        
-        createPresentation();
-        MockLookup.setInstances(presentationBuilder);
-        
-        inOrder = inOrder(presentation);
-        
-        testActivator = new TestActivator();
-        testActivator.activate();
-      }
     
     /*******************************************************************************************************************
      * 
@@ -108,28 +85,5 @@ public class UniformityCheckMeasurementControllerActorIntegrationTest extends Un
         doAnswer(clickContinue).when(presentation).renderSensorPlacementInvitationCellAt(any(UniformityCheckMeasurementPresentation.Position.class));
         presentationBuilder = mock(UniformityCheckMeasurementPresentationProvider.class);
         doReturn(presentation).when(presentationBuilder).getPresentation();
-      }
-    
-    /*******************************************************************************************************************
-     * 
-     *
-     ******************************************************************************************************************/
-    @AfterMethod
-    public void cleanup()
-      throws InterruptedException
-      {
-        if (presentation != null)
-          {
-            Thread.sleep(2000);
-            presentation.dismiss();
-          }
-        
-        messageVerifier.dispose();
-        testActivator.deactivate();
-        messageVerifier = null;
-        testActivator = null;
-        presentation = null;
-        
-        MockLookup.reset();
       }
   }
