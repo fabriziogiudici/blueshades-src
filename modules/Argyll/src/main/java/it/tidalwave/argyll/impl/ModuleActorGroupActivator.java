@@ -22,22 +22,37 @@
  **********************************************************************************************************************/
 package it.tidalwave.argyll.impl;
 
-import org.openide.util.lookup.ServiceProvider;
-import it.tidalwave.actor.spi.ActorActivator;
+import javax.annotation.Nonnull;
 import it.tidalwave.actor.spi.ActorGroupActivator;
+import it.tidalwave.netbeans.util.Locator;
+import org.openide.modules.ModuleInstall;
+import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
- * 
+ *
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-@ServiceProvider(service=ArgyllActivator.class)
-public class ArgyllActivator extends ActorGroupActivator
+@Slf4j
+public class ModuleActorGroupActivator extends ModuleInstall // FIXME: move to Actors
   {
-    public ArgyllActivator() 
+    private final ActorGroupActivator actorActivator;
+
+    protected ModuleActorGroupActivator (final @Nonnull Class<? extends ActorGroupActivator> activatorClass)
       {
-        add(new ActorActivator(DispwinActor.class, 1));
-        add(new ActorActivator(SpotReadActor.class, 1));
+        actorActivator = Locator.find(activatorClass);
+      }
+    
+    @Override
+    public void restored()
+      {
+        actorActivator.activate();
+      }
+
+    @Override
+    public void close()
+      {
+        actorActivator.deactivate();
       }
   }

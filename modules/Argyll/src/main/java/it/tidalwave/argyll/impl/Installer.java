@@ -22,22 +22,16 @@
  **********************************************************************************************************************/
 package it.tidalwave.argyll.impl;
 
-import org.openide.util.lookup.ServiceProvider;
-import it.tidalwave.actor.spi.ActorActivator;
-import it.tidalwave.actor.spi.ActorGroupActivator;
-
 /***********************************************************************************************************************
- * 
+ *
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-@ServiceProvider(service=ArgyllActivator.class)
-public class ArgyllActivator extends ActorGroupActivator
+public class Installer extends ModuleActorGroupActivator
   {
-    public ArgyllActivator() 
+    public Installer()
       {
-        add(new ActorActivator(DispwinActor.class, 1));
-        add(new ActorActivator(SpotReadActor.class, 1));
+        super(ArgyllActivator.class);
       }
   }
