@@ -37,7 +37,7 @@ import static it.tidalwave.blueargyle.util.SafeSwingComponentBuilder.*;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@ServiceProvider(service=NetBeansUniformityCheckMeasurementPresentationProvider.class) @Slf4j
+@ServiceProvider(service=UniformityCheckMeasurementPresentationProvider.class) @Slf4j
 public class NetBeansUniformityCheckMeasurementPresentationProvider implements UniformityCheckMeasurementPresentationProvider
   {
     private final SafeSwingComponentBuilder<NetBeansUniformityCheckMeasurementPresentation> builder = builderFor(NetBeansUniformityCheckMeasurementPresentation.class);
