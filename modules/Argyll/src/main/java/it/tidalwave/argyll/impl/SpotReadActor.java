@@ -74,9 +74,18 @@ public class SpotReadActor
         executor.start().getStdout().waitFor("(^.*to do a calibration.*$)").clear();
         executor.send(COMMAND_DO_MEASUREMENT).getStdout().waitFor("(^.*to do a calibration.*$)");
         executor.send(COMMAND_QUIT).waitForCompletion();
-       
-        final ConsoleOutput stdout = executor.getStdout();
-
+        
+        parseMessage(executor.getStdout()).send();
+      }
+    
+    /*******************************************************************************************************************
+     * 
+     * 
+     * 
+     ******************************************************************************************************************/
+    @Nonnull
+    private static MeasurementMessage parseMessage (final @Nonnull ConsoleOutput stdout)
+      {
         // Result is XYZ: 6.678702 5.688142 1.342970, D50 Lab: 28.611635 13.050721 26.227069
         final Scanner measure = stdout.filteredAndSplitBy("^ *Result is (XYZ:.*$)", "[ ,]"); // FIXME: try ^[0123456789.]+
         
@@ -101,7 +110,7 @@ public class SpotReadActor
         log.info("Planck T:   {}", planckianTemp);
         log.info("DayLight T: {}", daylightTemp);
 
-        new MeasurementMessage(colorPoints, ccTemp, planckianTemp, daylightTemp).send();
+        return new MeasurementMessage(colorPoints, ccTemp, planckianTemp, daylightTemp);
       }
     
     /*******************************************************************************************************************
