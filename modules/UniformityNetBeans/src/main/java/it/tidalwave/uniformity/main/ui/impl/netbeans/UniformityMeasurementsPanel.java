@@ -20,10 +20,14 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.main.ui;
+package it.tidalwave.uniformity.main.ui.impl.netbeans;
 
 import javax.annotation.Nonnull;
-import javax.swing.Action;
+import java.awt.Color;
+import java.awt.GridLayout;
+import javax.swing.SwingConstants;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /***********************************************************************************************************************
  * 
@@ -33,13 +37,33 @@ import javax.swing.Action;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public interface UniformityCheckMainPresentation
+public class UniformityMeasurementsPanel extends JPanel
   {
-    public void showUp();
+    private final GridLayout gridLayout = new GridLayout();
     
-    public void dismiss();
-
-    public void bind (@Nonnull Action startAction);
+    public UniformityMeasurementsPanel()
+      {
+        setLayout(gridLayout);
+      }
     
-    public void renderMeasurements (@Nonnull String[][] measurements);
+    public void renderMeasurements (final @Nonnull String[][] measurements)
+      {
+        removeAll();
+        gridLayout.setColumns(measurements[0].length);
+        gridLayout.setRows(measurements.length);
+        gridLayout.setHgap(8);
+        gridLayout.setVgap(8);
+        
+        for (int row = 0; row < gridLayout.getRows(); row++)
+          {
+            for (int column = 0; column < gridLayout.getColumns(); column++)
+              {
+                final JLabel label = new JLabel("<html>" + measurements[row][column].replaceAll("\n", "<br>") + "</html>");
+                label.setHorizontalAlignment(SwingConstants.CENTER);
+                label.setOpaque(true);
+                label.setBackground(Color.WHITE);
+                add(label);
+              }
+          }
+      }
   }

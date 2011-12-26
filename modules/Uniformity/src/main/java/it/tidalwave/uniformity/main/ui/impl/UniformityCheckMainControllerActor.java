@@ -24,14 +24,21 @@ package it.tidalwave.uniformity.main.ui.impl;
 
 import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
+import javax.annotation.concurrent.NotThreadSafe;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import it.tidalwave.actor.annotation.Actor;
+import it.tidalwave.actor.annotation.MessageListener;
 import it.tidalwave.netbeans.util.Locator;
 import it.tidalwave.uniformity.UniformityCheckRequest;
+import it.tidalwave.uniformity.UniformityMeasurement;
+import it.tidalwave.uniformity.UniformityMeasurementMessage;
+import it.tidalwave.uniformity.UniformityMeasurements;
 import it.tidalwave.uniformity.main.ui.UniformityCheckMainPresentation;
 import it.tidalwave.uniformity.main.ui.UniformityCheckMainPresentationProvider;
+import lombok.extern.slf4j.Slf4j;
+import static it.tidalwave.uniformity.Position.*;
 
 /***********************************************************************************************************************
  * 
@@ -42,7 +49,7 @@ import it.tidalwave.uniformity.main.ui.UniformityCheckMainPresentationProvider;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Actor(threadSafe=false)
+@Actor(threadSafe=false) @NotThreadSafe @Slf4j
 public class UniformityCheckMainControllerActor
   {
     private final UniformityCheckMainPresentationProvider presentationBuilder = Locator.find(UniformityCheckMainPresentationProvider.class);
@@ -73,4 +80,33 @@ public class UniformityCheckMainControllerActor
         presentation = presentationBuilder.getPresentation();
         presentation.bind(startAction);  
       }
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    @MessageListener
+    public void renderMeasurements (final @Nonnull UniformityMeasurementMessage message)
+      {
+        log.info("renderMeasurements({})", message);
+        final UniformityMeasurements measurements = message.getMeasurements();
+        final int columns = measurements.getColumns();
+        final int rows = measurements.getRows();
+        final UniformityMeasurement centerMeasurement = measurements.getAt(pos(columns / 2, rows / 2));
+        final int centerValue = centerMeasurement.getTemperature().getT();  
+        
+        final String[][] s = new String[rows][columns];
+        
+        for (int row = 0; row < rows; row++)
+          {
+            for (int column = 0; column < columns; column++)
+              {
+                final int value = measurements.getAt(pos(column, row)).getTemperature().getT();
+                final int delta = value - centerValue;
+                s[row][column] = String.format("%d K\n\u0394 = %d K", value, delta);
+              }
+          }
+        
+        presentation.renderMeasurements(s);
+      }  
   }
