@@ -20,7 +20,7 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.ui.impl.swing;
+package it.tidalwave.blueargyle.util;
 
 import java.awt.EventQueue;
 import java.lang.reflect.InvocationTargetException;

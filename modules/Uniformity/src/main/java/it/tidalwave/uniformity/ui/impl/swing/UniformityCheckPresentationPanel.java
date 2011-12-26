@@ -33,7 +33,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import it.tidalwave.uniformity.ui.UniformityCheckPresentation;
 import lombok.extern.slf4j.Slf4j;
-import static it.tidalwave.uniformity.ui.impl.swing.SafeRunner.*;
+import static it.tidalwave.blueargyle.util.SafeRunner.*;
 
 /***********************************************************************************************************************
  * 

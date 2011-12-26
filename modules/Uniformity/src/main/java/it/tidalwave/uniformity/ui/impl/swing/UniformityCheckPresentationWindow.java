@@ -26,7 +26,7 @@ import javax.annotation.Nonnull;
 import javax.swing.Action;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
-import static it.tidalwave.uniformity.ui.impl.swing.SafeRunner.*;
+import static it.tidalwave.blueargyle.util.SafeRunner.*;
 
 /***********************************************************************************************************************
  * 
