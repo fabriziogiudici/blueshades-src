@@ -40,7 +40,7 @@ public class MeasurementPanel extends JPanel
       {
         initComponents();
         setOpaque(true);
-        setBackground(UniformityCheckPresentationPanel.DEFAULT_BACKGROUND);
+        setBackground(UniformityCheckMeasurementPresentationPanel.DEFAULT_BACKGROUND);
       }
 
     public MeasurementPanel (final @Nonnull String luminance, final @Nonnull String whitePoint)

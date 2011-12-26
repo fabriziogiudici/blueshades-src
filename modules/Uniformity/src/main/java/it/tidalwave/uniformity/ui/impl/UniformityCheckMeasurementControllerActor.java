@@ -41,14 +41,14 @@ import it.tidalwave.argyll.MeasurementRequest;
 import it.tidalwave.colorimetry.ColorPoint;
 import it.tidalwave.netbeans.util.Locator;
 import it.tidalwave.uniformity.UniformityCheckRequest;
-import it.tidalwave.uniformity.ui.UniformityCheckPresentation;
-import it.tidalwave.uniformity.ui.UniformityCheckPresentation.Position;
-import it.tidalwave.uniformity.ui.UniformityCheckPresentationProvider;
+import it.tidalwave.uniformity.ui.UniformityCheckMeasurementPresentation;
+import it.tidalwave.uniformity.ui.UniformityCheckMeasurementPresentation.Position;
+import it.tidalwave.uniformity.ui.UniformityCheckMeasurementPresentationProvider;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.concurrent.TimeUnit.*;
 import static it.tidalwave.actor.Collaboration.*;
 import it.tidalwave.argyll.ArgyllFailureMessage;
-import static it.tidalwave.uniformity.ui.UniformityCheckPresentation.Position.pos;
+import static it.tidalwave.uniformity.ui.UniformityCheckMeasurementPresentation.Position.pos;
 
 /***********************************************************************************************************************
  *
@@ -59,14 +59,14 @@ import static it.tidalwave.uniformity.ui.UniformityCheckPresentation.Position.po
  *
  **********************************************************************************************************************/
 @Actor(threadSafe=false) @NotThreadSafe @Slf4j
-public class UniformityCheckControllerActor
+public class UniformityCheckMeasurementControllerActor
   {
     private static final Position DEFAULT_CONTROL_PANEL_POSITION = pos(0, 0);
     private static final Position ALTERNATE_CONTROL_PANEL_POSITION = pos(0, 1);
     
-    private final Provider<UniformityCheckPresentationProvider> presentationBuilder = Locator.createProviderFor(UniformityCheckPresentationProvider.class);
+    private final Provider<UniformityCheckMeasurementPresentationProvider> presentationBuilder = Locator.createProviderFor(UniformityCheckMeasurementPresentationProvider.class);
     
-    private UniformityCheckPresentation presentation;
+    private UniformityCheckMeasurementPresentation presentation;
 
     private final int columns = 3;
     

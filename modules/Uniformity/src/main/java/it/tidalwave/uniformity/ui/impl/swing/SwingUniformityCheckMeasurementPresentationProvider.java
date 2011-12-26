@@ -25,7 +25,7 @@ package it.tidalwave.uniformity.ui.impl.swing;
 import javax.annotation.Nonnull;
 import org.openide.util.lookup.ServiceProvider;
 import it.tidalwave.blueargyle.util.SafeSwingComponentBuilder;
-import it.tidalwave.uniformity.ui.UniformityCheckPresentationProvider;
+import it.tidalwave.uniformity.ui.UniformityCheckMeasurementPresentationProvider;
 import lombok.extern.slf4j.Slf4j;
 import static it.tidalwave.blueargyle.util.SafeSwingComponentBuilder.*;
 
@@ -37,13 +37,13 @@ import static it.tidalwave.blueargyle.util.SafeSwingComponentBuilder.*;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@ServiceProvider(service=SwingUniformityCheckPresentationProvider.class) @Slf4j
-public class SwingUniformityCheckPresentationProvider implements UniformityCheckPresentationProvider
+@ServiceProvider(service=SwingUniformityCheckMeasurementPresentationProvider.class) @Slf4j
+public class SwingUniformityCheckMeasurementPresentationProvider implements UniformityCheckMeasurementPresentationProvider
   {
-    private final SafeSwingComponentBuilder<SwingUniformityCheckPresentation> builder = builderFor(SwingUniformityCheckPresentation.class);
+    private final SafeSwingComponentBuilder<SwingUniformityCheckMeasurementPresentation> builder = builderFor(SwingUniformityCheckMeasurementPresentation.class);
     
     @Override @Nonnull
-    public SwingUniformityCheckPresentation getPresentation()
+    public SwingUniformityCheckMeasurementPresentation getPresentation()
       {
         return builder.getInstance();
       }

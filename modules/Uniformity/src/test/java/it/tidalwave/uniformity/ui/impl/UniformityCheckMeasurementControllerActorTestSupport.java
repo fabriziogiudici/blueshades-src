@@ -32,11 +32,11 @@ import it.tidalwave.argyll.MeasurementRequest;
 import it.tidalwave.argyll.impl.MessageVerifier;
 import it.tidalwave.argyll.impl.MockSpotReadActor;
 import it.tidalwave.uniformity.UniformityCheckRequest;
-import it.tidalwave.uniformity.ui.UniformityCheckPresentation;
-import it.tidalwave.uniformity.ui.UniformityCheckPresentationProvider;
+import it.tidalwave.uniformity.ui.UniformityCheckMeasurementPresentation;
+import it.tidalwave.uniformity.ui.UniformityCheckMeasurementPresentationProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.mockito.InOrder;
-import static it.tidalwave.uniformity.ui.UniformityCheckPresentation.Position.pos;
+import static it.tidalwave.uniformity.ui.UniformityCheckMeasurementPresentation.Position.pos;
 import static org.mockito.Mockito.*;
 
 /***********************************************************************************************************************
@@ -46,7 +46,7 @@ import static org.mockito.Mockito.*;
  *
  **********************************************************************************************************************/
 @Slf4j
-public abstract class UniformityCheckControllerActorTestSupport 
+public abstract class UniformityCheckMeasurementControllerActorTestSupport 
   {
     /*******************************************************************************************************************
      * 
@@ -58,7 +58,7 @@ public abstract class UniformityCheckControllerActorTestSupport
           {
 //            add(new ActorActivator(SpotReadActor.class, 1)); // to test the real thing
             add(new ActorActivator(MockSpotReadActor.class, 1));
-            add(new ActorActivator(UniformityCheckControllerActor.class, 1));
+            add(new ActorActivator(UniformityCheckMeasurementControllerActor.class, 1));
           }
       }
     
@@ -68,9 +68,9 @@ public abstract class UniformityCheckControllerActorTestSupport
     
     protected MessageVerifier messageVerifier;
     
-    protected UniformityCheckPresentationProvider presentationBuilder;
+    protected UniformityCheckMeasurementPresentationProvider presentationBuilder;
     
-    protected UniformityCheckPresentation presentation;
+    protected UniformityCheckMeasurementPresentation presentation;
     
     /*******************************************************************************************************************
      * 

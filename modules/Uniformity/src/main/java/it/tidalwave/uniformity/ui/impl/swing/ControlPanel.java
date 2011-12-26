@@ -41,7 +41,7 @@ public class ControlPanel extends JPanel
       {
         initComponents();
         setOpaque(true);
-        setBackground(UniformityCheckPresentationPanel.CONTROL_PANEL_BACKGROUND);
+        setBackground(UniformityCheckMeasurementPresentationPanel.CONTROL_PANEL_BACKGROUND);
       }
 
     public ControlPanel (final @Nonnull Action continueAction, final @Nonnull Action cancelAction)

@@ -31,7 +31,7 @@ import java.awt.GridLayout;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import it.tidalwave.uniformity.ui.UniformityCheckPresentation;
+import it.tidalwave.uniformity.ui.UniformityCheckMeasurementPresentation;
 import lombok.extern.slf4j.Slf4j;
 import static it.tidalwave.blueargyle.util.SafeRunner.*;
 
@@ -44,7 +44,7 @@ import static it.tidalwave.blueargyle.util.SafeRunner.*;
  *
  **********************************************************************************************************************/
 @Slf4j
-public class UniformityCheckPresentationPanel extends JPanel implements UniformityCheckPresentation
+public class UniformityCheckMeasurementPresentationPanel extends JPanel implements UniformityCheckMeasurementPresentation
   {
     /* package */ final static Color DEFAULT_BACKGROUND = new Color(100, 100, 100);
     /* package */ final static Color CONTROL_PANEL_BACKGROUND = new Color(80, 80, 80);

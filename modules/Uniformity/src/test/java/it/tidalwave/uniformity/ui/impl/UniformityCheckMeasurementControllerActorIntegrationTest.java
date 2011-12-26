@@ -23,14 +23,15 @@
 package it.tidalwave.uniformity.ui.impl;
 
 import javax.annotation.Nonnull;
-import java.util.Timer;
-import java.util.TimerTask;
-import javax.swing.Action;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.Timer;
 import it.tidalwave.argyll.impl.MessageVerifier;
 import it.tidalwave.netbeans.util.test.MockLookup;
-import it.tidalwave.uniformity.ui.UniformityCheckPresentation;
-import it.tidalwave.uniformity.ui.UniformityCheckPresentation.Position;
-import it.tidalwave.uniformity.ui.UniformityCheckPresentationProvider;
+import it.tidalwave.uniformity.ui.UniformityCheckMeasurementPresentation;
+import it.tidalwave.uniformity.ui.UniformityCheckMeasurementPresentationProvider;
+import it.tidalwave.uniformity.ui.impl.swing.SwingUniformityCheckMeasurementPresentation;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -38,6 +39,7 @@ import org.testng.annotations.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import static org.mockito.Mockito.*;
+import static org.fest.swing.core.BasicComponentFinder.*;
 
 /***********************************************************************************************************************
  * 
@@ -46,10 +48,8 @@ import static org.mockito.Mockito.*;
  *
  **********************************************************************************************************************/
 @Slf4j
-public class UniformityCheckControllerActorTest extends UniformityCheckControllerActorTestSupport
+public class UniformityCheckMeasurementControllerActorIntegrationTest extends UniformityCheckMeasurementControllerActorTestSupport
   {
-    private Action continueAction;
-    
     /*******************************************************************************************************************
      * 
      *
@@ -58,31 +58,23 @@ public class UniformityCheckControllerActorTest extends UniformityCheckControlle
       {
         @Override
         public Void answer (final @Nonnull InvocationOnMock invocation) 
+          throws Throwable 
           {
-            new Timer().schedule(new TimerTask() 
+            invocation.callRealMethod();
+
+            final Timer timer = new Timer(1000, new ActionListener() 
               {
                 @Override
-                public void run() 
+                public void actionPerformed (final @Nonnull ActionEvent event) 
                   {
                     log.info("Clicking on 'Continue'...");
-                    continueAction.actionPerformed(null);
+                    finderWithCurrentAwtHierarchy().findByName("btContinue", JButton.class).doClick();
                   }
-              }, 1000);
+              });
 
-            return null;
-          }
-      };
-
-    /*******************************************************************************************************************
-     * 
-     *
-     ******************************************************************************************************************/
-    private final Answer<Void> storeActionReferences = new Answer<Void>()
-      {
-        @Override
-        public Void answer (final @Nonnull InvocationOnMock invocation) 
-          {
-            continueAction = (Action)invocation.getArguments()[0];
+            timer.setRepeats(false);
+            timer.start();
+            
             return null;
           }
       };
@@ -113,10 +105,9 @@ public class UniformityCheckControllerActorTest extends UniformityCheckControlle
     @Override
     protected void createPresentation()
       {
-        presentation = mock(UniformityCheckPresentation.class);
-        doAnswer(storeActionReferences).when(presentation).bind(any(Action.class), any(Action.class));
-        doAnswer(clickContinue).when(presentation).renderSensorPlacementInvitationCellAt(any(Position.class));
-        presentationBuilder = mock(UniformityCheckPresentationProvider.class);
+        presentation = spy(new SwingUniformityCheckMeasurementPresentation());
+        doAnswer(clickContinue).when(presentation).renderSensorPlacementInvitationCellAt(any(UniformityCheckMeasurementPresentation.Position.class));
+        presentationBuilder = mock(UniformityCheckMeasurementPresentationProvider.class);
         doReturn(presentation).when(presentationBuilder).getPresentation();
       }
     
@@ -126,13 +117,20 @@ public class UniformityCheckControllerActorTest extends UniformityCheckControlle
      ******************************************************************************************************************/
     @AfterMethod
     public void cleanup()
+      throws InterruptedException
       {
+        if (presentation != null)
+          {
+            Thread.sleep(2000);
+            presentation.dismiss();
+          }
+        
         messageVerifier.dispose();
         testActivator.deactivate();
         messageVerifier = null;
-        presentation = null;
         testActivator = null;
-        continueAction = null;
+        presentation = null;
+        
         MockLookup.reset();
       }
     

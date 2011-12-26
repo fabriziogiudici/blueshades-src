@@ -37,7 +37,7 @@ import lombok.ToString;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public interface UniformityCheckPresentation 
+public interface UniformityCheckMeasurementPresentation 
   {
     /*******************************************************************************************************************
      * 

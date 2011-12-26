@@ -36,7 +36,7 @@ import static it.tidalwave.blueargyle.util.SafeRunner.*;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class SwingUniformityCheckPresentation extends SwingUniformityCheckPresentationSupport
+public class SwingUniformityCheckMeasurementPresentation extends SwingUniformityCheckMeasurementPresentationSupport
   {    
     @Override
     public void showUp()

@@ -20,21 +20,33 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.ui;
+package it.tidalwave.uniformity.ui.impl.swing;
 
-import javax.annotation.Nonnull;
-import it.tidalwave.uniformity.ui.UniformityCheckPresentation;
+import javax.swing.JFrame;
+import it.tidalwave.uniformity.ui.UniformityCheckMeasurementPresentation;
+import lombok.Delegate;
 
 /***********************************************************************************************************************
  * 
- * @stereotype Factory
+ * FIXME: a separate base class which implements @Delegate methods. If you put everything together with 
+ * UniformityCheckPresentationWindow, strange compilation errors occur (also elsewhere) probably because of a Lombok
+ * bug. This class must be public, with public constructor, or mocking will fail.
  * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public interface UniformityCheckPresentationProvider 
+public abstract class SwingUniformityCheckMeasurementPresentationSupport implements UniformityCheckMeasurementPresentation
   {
-    @Nonnull
-    public UniformityCheckPresentation getPresentation();
+    protected final JFrame frame = new JFrame();
+    
+    @Delegate(types=UniformityCheckMeasurementPresentation.class)
+    protected final UniformityCheckMeasurementPresentationPanel panel = new UniformityCheckMeasurementPresentationPanel();
+    
+    public SwingUniformityCheckMeasurementPresentationSupport()
+      {
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setUndecorated(true); 
+        frame.add(panel);
+      }
   }

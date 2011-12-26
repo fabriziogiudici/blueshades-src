@@ -40,7 +40,7 @@ public class SensorPlacementInvitationComponent extends JComponent
   {
     public SensorPlacementInvitationComponent()
       {
-        setBackground(UniformityCheckPresentationPanel.DEFAULT_BACKGROUND);
+        setBackground(UniformityCheckMeasurementPresentationPanel.DEFAULT_BACKGROUND);
         setOpaque(true);
       }
     
