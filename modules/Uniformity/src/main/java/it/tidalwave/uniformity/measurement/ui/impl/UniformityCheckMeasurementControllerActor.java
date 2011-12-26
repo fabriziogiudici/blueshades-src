@@ -38,6 +38,7 @@ import it.tidalwave.actor.annotation.Actor;
 import it.tidalwave.actor.annotation.MessageListener;
 import it.tidalwave.argyll.MeasurementMessage;
 import it.tidalwave.argyll.MeasurementRequest;
+import it.tidalwave.argyll.ArgyllFailureMessage;
 import it.tidalwave.colorimetry.ColorPoint;
 import it.tidalwave.netbeans.util.Locator;
 import it.tidalwave.uniformity.UniformityCheckRequest;
@@ -47,7 +48,6 @@ import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresenta
 import lombok.extern.slf4j.Slf4j;
 import static java.util.concurrent.TimeUnit.*;
 import static it.tidalwave.actor.Collaboration.*;
-import it.tidalwave.argyll.ArgyllFailureMessage;
 import static it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation.Position.pos;
 
 /***********************************************************************************************************************
@@ -72,7 +72,7 @@ public class UniformityCheckMeasurementControllerActor
     
     private final int rows = 3;
 
-    private final List<Position> positions = new ArrayList<Position>();
+    private final List<Position> positionSequence = new ArrayList<Position>();
 
     private Iterator<Position> positionIterator;
     
@@ -264,18 +264,18 @@ public class UniformityCheckMeasurementControllerActor
      ******************************************************************************************************************/
     private void computePositions()
       {
-        positions.clear();
+        positionSequence.clear();
         
         for (int row = 0; row < rows; row++)
           {
             for (int column = 0; column < columns; column++)
               {
-                positions.add(pos(column, row));
+                positionSequence.add(pos(column, row));
               }
           }
         
-        positions.add(0, positions.remove((rows * columns) / 2));
-        positionIterator = positions.iterator();
+        positionSequence.add(0, positionSequence.remove((rows * columns) / 2));
+        positionIterator = positionSequence.iterator();
       }
   }
 
