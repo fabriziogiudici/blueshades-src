@@ -152,7 +152,7 @@ public class Executor
                   {
                     synchronized (this)
                       {
-                        wait(500); // FIXME: polls because it doesn't get notified
+                        wait(50); // FIXME: polls because it doesn't get notified
                       }
                   }
               }
