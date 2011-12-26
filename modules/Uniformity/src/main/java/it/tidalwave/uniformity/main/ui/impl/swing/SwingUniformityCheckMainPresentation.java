@@ -20,36 +20,29 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.action;
-
-import java.awt.event.ActionEvent;
-import javax.annotation.Nonnull;
-import javax.swing.AbstractAction;
-import org.openide.awt.ActionID;
-import org.openide.awt.ActionReference;
-import org.openide.awt.ActionReferences;
-import org.openide.awt.ActionRegistration;
-import it.tidalwave.uniformity.UniformityCheckRequest;
+package it.tidalwave.uniformity.main.ui.impl.swing;
 
 /***********************************************************************************************************************
- *
+ * 
+ * @stereotype Presentation
+ * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-@ActionID(id = "it.tidalwave.uniformity.action.UniformityCheckAction", category = "Tools")
-@ActionRegistration(displayName = "#CTL_UniformityCheckAction",
-                    iconBase = "it/tidalwave/uniformity/action/Uniformity.png")
-@ActionReferences(value =
-  {
-    @ActionReference(path = "Menu/Tools", position = 2500),
-    @ActionReference(path = "Toolbars/Standard", position = 2500)
-  })
-public final class UniformityCheckAction extends AbstractAction
+public class SwingUniformityCheckMainPresentation extends SwingUniformityCheckMainPresentationSupport
   {
     @Override
-    public void actionPerformed (final @Nonnull ActionEvent event)
+    public void showUp() 
       {
-        new UniformityCheckRequest().send();
+        panel.showUp();
+        topComponent.requestActive();
+      }
+
+    @Override
+    public void dismiss()
+      {
+        topComponent.close();
+        panel.dismiss();
       }
   }
