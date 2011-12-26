@@ -98,6 +98,7 @@ public class UniformityCheckMeasurementControllerActor
                 public void run() 
                   {
                     presentation.renderWhiteCellAt(currentPosition);
+                    presentation.showMeasureInProgress();
                     new MeasurementRequest().sendLater(500, MILLISECONDS);
                   }
               });
@@ -142,6 +143,7 @@ public class UniformityCheckMeasurementControllerActor
       throws NotFoundException
       {
         log.info("processMeasure({})", message);
+        presentation.hideMeasureInProgress();
         // FIXME: do the right math here
         final double c1 = message.getColorPoints().find(ColorPoint.ColorSpace.Lab).getC1();
         final int temp = message.getCcTemperature().getMeasure().getT();

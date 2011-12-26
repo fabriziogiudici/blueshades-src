@@ -52,6 +52,8 @@ public class UniformityCheckMeasurementPresentationPanel extends JPanel implemen
     
     private JPanel[][] cell;
     
+    private ControlPanel controlPanel;
+    
     private Action continueAction;
     
     private Action cancelAction;
@@ -188,7 +190,7 @@ public class UniformityCheckMeasurementPresentationPanel extends JPanel implemen
             @Override
             public void run() 
               {
-                setCell(position, new ControlPanel(continueAction, cancelAction));
+                setCell(position, controlPanel = new ControlPanel(continueAction, cancelAction));
               }
           });
       }
@@ -229,6 +231,34 @@ public class UniformityCheckMeasurementPresentationPanel extends JPanel implemen
           });
       }
     
+    /*******************************************************************************************************************
+     * 
+     * 
+     *
+     ******************************************************************************************************************/
+    @Override
+    public void showMeasureInProgress()
+      {
+        if (controlPanel != null)
+          { 
+            controlPanel.setProgressIndicatorVisible(true);  
+          }
+      }  
+    
+    /*******************************************************************************************************************
+     * 
+     * 
+     *
+     ******************************************************************************************************************/
+    @Override
+    public void hideMeasureInProgress()
+      {
+        if (controlPanel != null)
+          { 
+            controlPanel.setProgressIndicatorVisible(false);  
+          }
+      }  
+      
     /*******************************************************************************************************************
      * 
      *

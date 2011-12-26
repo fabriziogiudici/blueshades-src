@@ -47,6 +47,7 @@ public class ControlPanel extends JPanel
     public ControlPanel (final @Nonnull Action continueAction, final @Nonnull Action cancelAction)
       {
         this();
+        pbMeasurementInProgress.setVisible(false);
         btContinue.setAction(continueAction);
         btCancel.setAction(cancelAction);
       }
@@ -57,6 +58,12 @@ public class ControlPanel extends JPanel
         btContinue.setAction(null);
         btCancel.setAction(null);
         super.removeNotify();
+      }
+    
+
+    public void setProgressIndicatorVisible (final boolean visible) 
+      {
+        pbMeasurementInProgress.setVisible(visible);
       }
     
     /*******************************************************************************************************************
@@ -73,6 +80,8 @@ public class ControlPanel extends JPanel
         jPanel1 = new javax.swing.JPanel();
         btContinue = new javax.swing.JButton();
         btCancel = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        pbMeasurementInProgress = new javax.swing.JProgressBar();
 
         setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.name")); // NOI18N
 
@@ -101,6 +110,17 @@ public class ControlPanel extends JPanel
         btCancel.setSize(new java.awt.Dimension(102, 32));
         jPanel1.add(btCancel);
 
+        jPanel2.setMinimumSize(new java.awt.Dimension(20, 32));
+        jPanel2.setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.jPanel2.name")); // NOI18N
+        jPanel2.setOpaque(false);
+        jPanel2.setPreferredSize(new java.awt.Dimension(255, 32));
+        jPanel2.setSize(new java.awt.Dimension(100, 32));
+
+        pbMeasurementInProgress.setIndeterminate(true);
+        pbMeasurementInProgress.setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.pbMeasurementInProgress.name")); // NOI18N
+        pbMeasurementInProgress.setPreferredSize(new java.awt.Dimension(200, 20));
+        jPanel2.add(pbMeasurementInProgress);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -110,13 +130,16 @@ public class ControlPanel extends JPanel
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -126,5 +149,7 @@ public class ControlPanel extends JPanel
     private javax.swing.JButton btContinue;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JProgressBar pbMeasurementInProgress;
     // End of variables declaration//GEN-END:variables
   }
