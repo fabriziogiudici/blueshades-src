@@ -34,7 +34,7 @@ import org.openide.util.lookup.ServiceProvider;
  *
  **********************************************************************************************************************/
 @ServiceProvider(service=UniformityCheckerActivator.class)
-public class UniformityCheckerActivator extends ActorGroupActivator
+public class UniformityCheckerActivator extends ActorGroupActivator // TODO: rename
   {
     public UniformityCheckerActivator()
       {

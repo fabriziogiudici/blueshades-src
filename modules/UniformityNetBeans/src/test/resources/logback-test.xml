@@ -1,4 +1,5 @@
-/***********************************************************************************************************************
+<?xml version="1.0" encoding="UTF-8"?>
+<!--********************************************************************************************************************
  *
  * blueArgyle - a Java UI for Argyll
  * Copyright (C) 2011-2011 by Tidalwave s.a.s. (http://www.tidalwave.it)
@@ -19,21 +20,25 @@
  * WWW: http://blueargyle.java.net
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
- **********************************************************************************************************************/
-package it.tidalwave.uniformity;
+ ********************************************************************************************************************-->
+<configuration debug="true"> 
 
-import it.tidalwave.blueargyle.util.ModuleActorGroupActivator;
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>target/test.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%-20thread] %-5level %-50logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
 
-/***********************************************************************************************************************
- *
- * @author  Fabrizio Giudici
- * @version $Id$
- *
- **********************************************************************************************************************/
-public class Installer extends ModuleActorGroupActivator // TODO: move to impl
-  {
-    public Installer()
-      {
-        super(UniformityCheckerActivator.class);
-      }
-  }
+    <appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender"> 
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%-20thread] %-5level %-50logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="debug"> 
+        <appender-ref ref="STDERR" />
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>

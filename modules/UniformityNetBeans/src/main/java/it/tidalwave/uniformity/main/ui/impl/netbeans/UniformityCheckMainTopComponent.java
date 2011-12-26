@@ -24,15 +24,14 @@ package it.tidalwave.uniformity.main.ui.impl.netbeans;
 
 import javax.annotation.Nonnull;
 import java.awt.BorderLayout;
-import it.tidalwave.actor.spi.ActorActivator;
-import it.tidalwave.actor.spi.ActorGroupActivator;
-import it.tidalwave.uniformity.main.ui.impl.UniformityCheckMainControllerActor;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
 import org.openide.windows.TopComponent;
-import lombok.Getter;
 import org.openide.util.NbBundle;
+import it.tidalwave.actor.spi.ActorGroupActivator;
+import it.tidalwave.uniformity.UniformityCheckMainControllerActorActivator;
+import lombok.Getter;
 
 /***********************************************************************************************************************
  * 
@@ -60,10 +59,7 @@ public final class UniformityCheckMainTopComponent extends TopComponent
     @Getter @Nonnull
     private final UniformityCheckMainPanel panel;
     
-    private final ActorGroupActivator activator = new ActorGroupActivator()
-      {{
-        add(new ActorActivator(UniformityCheckMainControllerActor.class, 1));
-      }};
+    private final ActorGroupActivator activator = new UniformityCheckMainControllerActorActivator();
             
     public UniformityCheckMainTopComponent() 
       {

@@ -22,7 +22,9 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity;
 
-import it.tidalwave.blueargyle.util.ModuleActorGroupActivator;
+import it.tidalwave.actor.spi.ActorActivator;
+import it.tidalwave.actor.spi.ActorGroupActivator;
+import it.tidalwave.uniformity.main.ui.impl.UniformityCheckMainControllerActor;
 
 /***********************************************************************************************************************
  *
@@ -30,10 +32,10 @@ import it.tidalwave.blueargyle.util.ModuleActorGroupActivator;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class Installer extends ModuleActorGroupActivator // TODO: move to impl
+public class UniformityCheckMainControllerActorActivator extends ActorGroupActivator
   {
-    public Installer()
+    public UniformityCheckMainControllerActorActivator()
       {
-        super(UniformityCheckerActivator.class);
+        add(new ActorActivator(UniformityCheckMainControllerActor.class, 1));
       }
   }

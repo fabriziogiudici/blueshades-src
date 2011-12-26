@@ -23,7 +23,6 @@
 package it.tidalwave.uniformity.measurement.ui;
 
 import javax.annotation.Nonnull;
-import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation;
 
 /***********************************************************************************************************************
  * 
