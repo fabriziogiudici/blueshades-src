@@ -26,7 +26,6 @@ import javax.annotation.Nonnull;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.Timer;
 import it.tidalwave.argyll.impl.MessageVerifier;
 import it.tidalwave.netbeans.util.test.MockLookup;
@@ -51,8 +50,6 @@ import static org.fest.swing.core.BasicComponentFinder.*;
 @Slf4j
 public class UniformityCheckControllerActorIntegrationTest extends UniformityCheckControllerActorTestSupport
   {
-    private JFrame frame;
-    
     /*******************************************************************************************************************
      * 
      *
