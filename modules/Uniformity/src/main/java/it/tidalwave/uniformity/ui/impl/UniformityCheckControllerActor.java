@@ -47,6 +47,7 @@ import it.tidalwave.uniformity.ui.spi.UniformityCheckPresentationBuilder;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.concurrent.TimeUnit.*;
 import static it.tidalwave.actor.Collaboration.*;
+import it.tidalwave.argyll.ArgyllFailureMessage;
 import static it.tidalwave.uniformity.ui.UniformityCheckPresentation.Position.pos;
 
 /***********************************************************************************************************************
@@ -116,22 +117,7 @@ public class UniformityCheckControllerActor
         public void actionPerformed (final @Nonnull ActionEvent event) 
           {
             setEnabled(false);
-            
-            if (suspensionToken != null)
-              {
-                collaborationPendingUserIntervention.resume(suspensionToken, new Runnable()
-                  {
-                    @Override
-                    public void run() 
-                      {
-                        // do nothing, but it will resume the Collaboration
-                      }
-                  });
-              }
-            
-            presentation.dismiss();
-            suspensionToken = null;
-            collaborationPendingUserIntervention = NULL_COLLABORATION;
+            cancel();
           }
       };
     
@@ -170,6 +156,18 @@ public class UniformityCheckControllerActor
      * 
      *
      ******************************************************************************************************************/
+    @MessageListener
+    public void failure (final @Nonnull ArgyllFailureMessage message) 
+//      throws NotFoundException
+      {
+        log.info("failure({})", message);
+        cancel(); // FIXME: harsh, do a notification on the UI too
+      }
+        
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
     private void initialize()
       {
         log.info("initialize()");
@@ -181,6 +179,29 @@ public class UniformityCheckControllerActor
         presentation.setGridSize(columns, rows);
         presentation.showUp();
         presentation.renderControlPanelAt(DEFAULT_CONTROL_PANEL_POSITION);
+      }
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    private void cancel()
+      {
+        if (suspensionToken != null)
+          {
+            collaborationPendingUserIntervention.resume(suspensionToken, new Runnable()
+              {
+                @Override
+                public void run() 
+                  {
+                    // do nothing, but it will resume the Collaboration
+                  }
+                });
+          }
+
+        presentation.dismiss();
+        suspensionToken = null;
+        collaborationPendingUserIntervention = NULL_COLLABORATION;
       }
     
     /*******************************************************************************************************************

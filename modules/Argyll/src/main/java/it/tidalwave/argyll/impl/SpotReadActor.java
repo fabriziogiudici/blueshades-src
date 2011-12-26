@@ -28,6 +28,7 @@ import java.util.Scanner;
 import java.io.IOException;
 import it.tidalwave.actor.annotation.Actor;
 import it.tidalwave.actor.annotation.MessageListener;
+import it.tidalwave.argyll.ArgyllFailureMessage;
 import it.tidalwave.colorimetry.ColorPoint;
 import it.tidalwave.colorimetry.ColorPoints;
 import it.tidalwave.colorimetry.ColorTemperature;
@@ -64,18 +65,25 @@ public class SpotReadActor
      ******************************************************************************************************************/
     @MessageListener
     public void spotRead (final @Nonnull MeasurementRequest message)
-      throws IOException, InterruptedException
+      throws InterruptedException
       {
-        log.trace("spotRead({})", message);
+        try
+          {
+            log.info("spotRead({})", message);
 
-        final Executor executor = Executor.forExecutable("spotread")
-                                          .withArgument("-T")
-                                          .withArgument("-yl");
-        executor.start().getStdout().waitFor("(^.*to do a calibration.*$)").clear();
-        executor.send(COMMAND_DO_MEASUREMENT).getStdout().waitFor("(^.*to do a calibration.*$)");
-        executor.send(COMMAND_QUIT).waitForCompletion();
-        
-        parseMessage(executor.getStdout()).send();
+            final Executor executor = Executor.forExecutable("spotread")
+                                            .withArgument("-T")
+                                            .withArgument("-yl");
+            executor.start().getStdout().waitFor("(^.*to do a calibration.*$)").clear();
+            executor.send(COMMAND_DO_MEASUREMENT).getStdout().waitFor("(^.*to do a calibration.*$)");
+            executor.send(COMMAND_QUIT).waitForCompletion();
+
+            parseMessage(executor.getStdout()).send();
+          }
+        catch (IOException e)
+          {
+            new ArgyllFailureMessage(e).send(); 
+          }
       }
     
     /*******************************************************************************************************************
