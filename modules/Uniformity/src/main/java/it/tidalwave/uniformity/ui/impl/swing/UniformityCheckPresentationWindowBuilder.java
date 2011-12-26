@@ -23,14 +23,11 @@
 package it.tidalwave.uniformity.ui.impl.swing;
 
 import javax.annotation.Nonnull;
-import java.lang.ref.WeakReference;
-import java.lang.reflect.InvocationTargetException;
-import java.util.concurrent.atomic.AtomicReference;
-import java.awt.EventQueue;
 import org.openide.util.lookup.ServiceProvider;
-import it.tidalwave.uniformity.ui.UniformityCheckPresentation;
+import it.tidalwave.blueargyle.util.SafeSwingComponentBuilder;
 import it.tidalwave.uniformity.ui.spi.UniformityCheckPresentationBuilder;
 import lombok.extern.slf4j.Slf4j;
+import static it.tidalwave.blueargyle.util.SafeSwingComponentBuilder.*;
 
 /***********************************************************************************************************************
  * 
@@ -43,48 +40,11 @@ import lombok.extern.slf4j.Slf4j;
 @ServiceProvider(service=UniformityCheckPresentationBuilder.class) @Slf4j
 public class UniformityCheckPresentationWindowBuilder implements UniformityCheckPresentationBuilder
   {
-    private WeakReference<UniformityCheckPresentationWindow> presentationRef = new WeakReference<UniformityCheckPresentationWindow>(null);
+    private final SafeSwingComponentBuilder<UniformityCheckPresentationWindow> builder = builderFor(UniformityCheckPresentationWindow.class);
     
     @Override @Nonnull
-    public UniformityCheckPresentation buildUI()
+    public UniformityCheckPresentationWindow buildUI()
       {
-        log.info("buildUI()");
-        UniformityCheckPresentationWindow presentation = presentationRef.get();
-        
-        if (presentation == null)
-          {
-            presentation = buildUI2();
-            presentationRef = new WeakReference<UniformityCheckPresentationWindow>(presentation);
-          }
-        
-        return presentation;
-      }
-              
-    @Nonnull
-    private UniformityCheckPresentationWindow buildUI2()
-      {
-        final AtomicReference<UniformityCheckPresentationWindow> reference = new AtomicReference<UniformityCheckPresentationWindow>();
-        
-        try  
-          {
-            EventQueue.invokeAndWait(new Runnable() 
-              {
-                @Override
-                public void run() 
-                  {
-                    reference.set(new UniformityCheckPresentationWindow());
-                  }
-              });
-          } 
-        catch (InterruptedException e)
-          {
-            log.warn("", e);
-          }
-        catch (InvocationTargetException e) 
-          {
-            log.warn("", e);
-          }
-        
-        return reference.get();
+        return builder.getInstance();
       }
   }
