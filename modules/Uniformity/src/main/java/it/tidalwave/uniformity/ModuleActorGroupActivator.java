@@ -35,7 +35,7 @@ import lombok.extern.slf4j.Slf4j;
  *
  **********************************************************************************************************************/
 @Slf4j
-public class ModuleActorGroupActivator extends ModuleInstall
+public class ModuleActorGroupActivator extends ModuleInstall // FIXME: move to Actors
   {
     private final ActorGroupActivator actorActivator;
 
