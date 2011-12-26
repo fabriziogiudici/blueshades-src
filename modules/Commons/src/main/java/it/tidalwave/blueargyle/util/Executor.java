@@ -137,15 +137,23 @@ public class Executor
          ***************************************************************************************************************/
         @Nonnull
         public ConsoleOutput waitFor (final @Nonnull String regexp)
-          throws InterruptedException
+          throws InterruptedException, IOException
           {
             log.info("waitFor({})", regexp);
             
             while (filteredBy(regexp).isEmpty())
               {
-                synchronized (this)
+                try
                   {
-                    wait(500); // FIXME: polls because it doesn't get notified
+                    final int exitValue = process.exitValue();
+                    throw new IOException("Process exited with " + exitValue);  
+                  }
+                catch (IllegalThreadStateException e) // ok, process not terminated yet
+                  {
+                    synchronized (this)
+                      {
+                        wait(500); // FIXME: polls because it doesn't get notified
+                      }
                   }
               }
             
@@ -203,7 +211,7 @@ public class Executor
     private ConsoleOutput stderr;
     
     private PrintWriter stdin;
-                
+    
     /*******************************************************************************************************************
      * 
      *
@@ -249,6 +257,7 @@ public class Executor
         log.info(">>>> environment: {}", environment);
         process = Runtime.getRuntime().exec(arguments.toArray(new String[0]),
                                             environment.toArray(new String[0]));
+        
         stdout = new ConsoleOutput(process.getInputStream()).start();
         stderr = new ConsoleOutput(process.getErrorStream()).start();
         stdin  = new PrintWriter(process.getOutputStream(), true);
@@ -264,7 +273,11 @@ public class Executor
     public Executor waitForCompletion()
       throws IOException, InterruptedException
       {
-        process.waitFor();
+        if (process.waitFor() != 0)
+          {
+//            throw new IOException("Process exited with " + process.exitValue());  
+          }
+        
         return this;
       }
 
