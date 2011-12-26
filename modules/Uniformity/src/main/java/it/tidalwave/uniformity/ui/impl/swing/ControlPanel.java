@@ -22,6 +22,7 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.ui.impl.swing;
 
+import java.awt.Color;
 import javax.annotation.Nonnull;
 import javax.swing.Action;
 import javax.swing.JPanel;
@@ -39,11 +40,13 @@ public class ControlPanel extends JPanel
     public ControlPanel()
       {
         initComponents();
+        setOpaque(true);
+        setBackground(UniformityCheckPresentationPanel.CONTROL_PANEL_BACKGROUND);
       }
 
     public ControlPanel (final @Nonnull Action continueAction, final @Nonnull Action cancelAction)
       {
-        initComponents();
+        this();
         btContinue.setAction(continueAction);
         btCancel.setAction(cancelAction);
       }
@@ -73,6 +76,7 @@ public class ControlPanel extends JPanel
 
         setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.name")); // NOI18N
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.jLabel1.text")); // NOI18N
         jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(16, 16, 16, 16));
@@ -81,6 +85,7 @@ public class ControlPanel extends JPanel
         jPanel1.setMaximumSize(new java.awt.Dimension(32767, 48));
         jPanel1.setMinimumSize(new java.awt.Dimension(0, 48));
         jPanel1.setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.jPanel1.name")); // NOI18N
+        jPanel1.setOpaque(false);
         jPanel1.setPreferredSize(new java.awt.Dimension(0, 48));
         jPanel1.setSize(new java.awt.Dimension(0, 48));
 

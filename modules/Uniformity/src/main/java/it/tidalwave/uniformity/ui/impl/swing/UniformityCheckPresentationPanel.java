@@ -46,8 +46,9 @@ import static it.tidalwave.uniformity.ui.impl.swing.SafeRunner.*;
 @Slf4j
 public class UniformityCheckPresentationPanel extends JPanel implements UniformityCheckPresentation
   {
-    /* package */ final static Color DEFAULT_BACKGROUND = new Color(200, 200, 200);
-    /* package */ final static Color BORDER_COLOR = new Color(160, 160, 160);
+    /* package */ final static Color DEFAULT_BACKGROUND = new Color(100, 100, 100);
+    /* package */ final static Color CONTROL_PANEL_BACKGROUND = new Color(80, 80, 80);
+    /* package */ final static Color BORDER_COLOR = new Color(120, 120, 120);
     
     private JPanel[][] cell;
     
