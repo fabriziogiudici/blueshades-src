@@ -20,7 +20,7 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.argyll.impl;
+package it.tidalwave.blueargyle.util;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.ThreadSafe;
