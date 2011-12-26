@@ -22,6 +22,10 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity;
 
+import javax.annotation.Nonnull;
+import it.tidalwave.actor.spi.ActorGroupActivator;
+import it.tidalwave.netbeans.util.Locator;
+import org.openide.modules.ModuleInstall;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
@@ -31,10 +35,24 @@ import lombok.extern.slf4j.Slf4j;
  *
  **********************************************************************************************************************/
 @Slf4j
-public class Installer extends ModuleActorGroupActivator
+public class ModuleActorGroupActivator extends ModuleInstall
   {
-    public Installer()
+    private final ActorGroupActivator actorActivator;
+
+    protected ModuleActorGroupActivator (final @Nonnull Class<? extends ActorGroupActivator> activatorClass)
       {
-        super(UniformityCheckerActivator.class);
+        actorActivator = Locator.find(activatorClass);
       }
-  }
+    
+    @Override
+    public void restored()
+      {
+        actorActivator.activate();
+      }
+
+    @Override
+    public void close()
+      {
+        actorActivator.deactivate();
+      }
+  } 
