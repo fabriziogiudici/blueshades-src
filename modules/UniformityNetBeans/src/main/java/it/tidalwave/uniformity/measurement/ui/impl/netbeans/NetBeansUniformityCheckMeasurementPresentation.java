@@ -48,6 +48,10 @@ public class NetBeansUniformityCheckMeasurementPresentation implements Uniformit
     @Delegate(types=UniformityCheckMeasurementPresentation.class, excludes=DelegateExclusions.class)
     protected final UniformityCheckMeasurementPresentationPanel panel = new UniformityCheckMeasurementPresentationPanel();
     
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
     public NetBeansUniformityCheckMeasurementPresentation()
       {
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -55,6 +59,10 @@ public class NetBeansUniformityCheckMeasurementPresentation implements Uniformit
         frame.add(panel);
       }
     
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
     @Override
     public void showUp()
       {
@@ -72,6 +80,10 @@ public class NetBeansUniformityCheckMeasurementPresentation implements Uniformit
           });
       }
     
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
     @Override
     public void dismiss()
       {
