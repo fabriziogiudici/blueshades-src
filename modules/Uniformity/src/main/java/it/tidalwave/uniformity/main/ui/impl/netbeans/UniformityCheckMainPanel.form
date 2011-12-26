@@ -3,7 +3,7 @@
 <Form version="1.5" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <Properties>
     <Property name="name" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-      <ResourceString bundle="it/tidalwave/uniformity/main/ui/impl/swing/Bundle.properties" key="UniformityCheckMainPanel.name" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+      <ResourceString bundle="it/tidalwave/uniformity/main/ui/impl/netbeans/Bundle.properties" key="UniformityCheckMainPanel.name" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
     </Property>
   </Properties>
   <AuxValues>
@@ -50,13 +50,13 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Latest measurements">
-              <ResourceString PropertyName="titleX" bundle="it/tidalwave/uniformity/main/ui/impl/swing/Bundle.properties" key="UniformityCheckMainPanel.jPanel1.border.title" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+            <TitledBorder title="&lt;UniformityCheckMainPanel.jPanel1.border.title&gt;">
+              <ResourceString PropertyName="titleX" bundle="it/tidalwave/uniformity/main/ui/impl/netbeans/Bundle.properties" key="UniformityCheckMainPanel.jPanel1.border.title" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </TitledBorder>
           </Border>
         </Property>
         <Property name="name" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="it/tidalwave/uniformity/main/ui/impl/swing/Bundle.properties" key="UniformityCheckMainPanel.jPanel1.name" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+          <ResourceString bundle="it/tidalwave/uniformity/main/ui/impl/netbeans/Bundle.properties" key="UniformityCheckMainPanel.jPanel1.name" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
       </Properties>
 
@@ -77,13 +77,13 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Display selection">
-              <ResourceString PropertyName="titleX" bundle="it/tidalwave/uniformity/main/ui/impl/swing/Bundle.properties" key="UniformityCheckMainPanel.jPanel2.border.title" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+            <TitledBorder title="&lt;UniformityCheckMainPanel.jPanel2.border.title&gt;">
+              <ResourceString PropertyName="titleX" bundle="it/tidalwave/uniformity/main/ui/impl/netbeans/Bundle.properties" key="UniformityCheckMainPanel.jPanel2.border.title" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </TitledBorder>
           </Border>
         </Property>
         <Property name="name" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="it/tidalwave/uniformity/main/ui/impl/swing/Bundle.properties" key="UniformityCheckMainPanel.jPanel2.name" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+          <ResourceString bundle="it/tidalwave/uniformity/main/ui/impl/netbeans/Bundle.properties" key="UniformityCheckMainPanel.jPanel2.name" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
       </Properties>
 
@@ -103,7 +103,7 @@
     <Container class="javax.swing.JPanel" name="jPanel3">
       <Properties>
         <Property name="name" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="it/tidalwave/uniformity/main/ui/impl/swing/Bundle.properties" key="UniformityCheckMainPanel.jPanel3.name" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+          <ResourceString bundle="it/tidalwave/uniformity/main/ui/impl/netbeans/Bundle.properties" key="UniformityCheckMainPanel.jPanel3.name" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
       </Properties>
 
@@ -112,10 +112,10 @@
         <Component class="javax.swing.JButton" name="btStart">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="it/tidalwave/uniformity/main/ui/impl/swing/Bundle.properties" key="UniformityCheckMainPanel.btStart.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+              <ResourceString bundle="it/tidalwave/uniformity/main/ui/impl/netbeans/Bundle.properties" key="UniformityCheckMainPanel.btStart.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </Property>
             <Property name="name" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="it/tidalwave/uniformity/main/ui/impl/swing/Bundle.properties" key="UniformityCheckMainPanel.btStart.name" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+              <ResourceString bundle="it/tidalwave/uniformity/main/ui/impl/netbeans/Bundle.properties" key="UniformityCheckMainPanel.btStart.name" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </Property>
           </Properties>
         </Component>

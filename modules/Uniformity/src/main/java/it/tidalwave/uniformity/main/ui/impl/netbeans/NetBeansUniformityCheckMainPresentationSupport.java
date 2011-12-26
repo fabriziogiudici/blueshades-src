@@ -20,33 +20,34 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.measurement.ui.impl.swing;
+package it.tidalwave.uniformity.main.ui.impl.netbeans;
 
-import javax.swing.JFrame;
-import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation;
+import org.openide.windows.WindowManager;
+import it.tidalwave.uniformity.main.ui.UniformityCheckMainPresentation;
 import lombok.Delegate;
 
 /***********************************************************************************************************************
  * 
  * FIXME: a separate base class which implements @Delegate methods. If you put everything together with 
- * UniformityCheckPresentationWindow, strange compilation errors occur (also elsewhere) probably because of a Lombok
+ * SwingUniformityCheckMainPresentation, strange compilation errors occur (also elsewhere) probably because of a Lombok
  * bug. This class must be public, with public constructor, or mocking will fail.
+ * 
+ * @stereotype Presentation
  * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public abstract class SwingUniformityCheckMeasurementPresentationSupport implements UniformityCheckMeasurementPresentation
+public class NetBeansUniformityCheckMainPresentationSupport implements UniformityCheckMainPresentation
   {
-    protected final JFrame frame = new JFrame();
+    protected final UniformityCheckMainTopComponent topComponent;
     
-    @Delegate(types=UniformityCheckMeasurementPresentation.class)
-    protected final UniformityCheckMeasurementPresentationPanel panel = new UniformityCheckMeasurementPresentationPanel();
+    @Delegate(types=UniformityCheckMainPresentation.class)
+    protected final UniformityCheckMainPanel panel;
     
-    public SwingUniformityCheckMeasurementPresentationSupport()
+    public NetBeansUniformityCheckMainPresentationSupport()
       {
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        frame.setUndecorated(true); 
-        frame.add(panel);
+        topComponent = (UniformityCheckMainTopComponent)WindowManager.getDefault().findTopComponent("UniformityCheckMainTopComponent");
+        panel = topComponent.getPanel();
       }
   }

@@ -20,7 +20,7 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.main.ui.impl.swing;
+package it.tidalwave.uniformity.main.ui.impl.netbeans;
 
 import javax.annotation.Nonnull;
 import org.openide.util.lookup.ServiceProvider;
@@ -38,12 +38,12 @@ import static it.tidalwave.blueargyle.util.SafeSwingComponentBuilder.*;
  *
  **********************************************************************************************************************/
 @ServiceProvider(service=UniformityCheckMainPresentationProvider.class) @Slf4j
-public class SwingUniformityCheckMainPresentationProvider implements UniformityCheckMainPresentationProvider
+public class NetBeansUniformityCheckMainPresentationProvider implements UniformityCheckMainPresentationProvider
   {
-    private final SafeSwingComponentBuilder<SwingUniformityCheckMainPresentation> builder = builderFor(SwingUniformityCheckMainPresentation.class);
+    private final SafeSwingComponentBuilder<NetBeansUniformityCheckMainPresentation> builder = builderFor(NetBeansUniformityCheckMainPresentation.class);
     
     @Override @Nonnull
-    public SwingUniformityCheckMainPresentation getPresentation()
+    public NetBeansUniformityCheckMainPresentation getPresentation()
       {
         return builder.getInstance();
       }

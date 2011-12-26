@@ -56,11 +56,11 @@
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="it/tidalwave/uniformity/measurement/ui/impl/swing/Bundle.properties" key="MeasurementPanel.lbLuminance.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+          <ResourceString bundle="it/tidalwave/uniformity/measurement/ui/impl/netbeans/Bundle.properties" key="MeasurementPanel.lbLuminance.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
         <Property name="verticalAlignment" type="int" value="3"/>
         <Property name="name" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="it/tidalwave/uniformity/measurement/ui/impl/swing/Bundle.properties" key="MeasurementPanel.lbLuminance.name" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+          <ResourceString bundle="it/tidalwave/uniformity/measurement/ui/impl/netbeans/Bundle.properties" key="MeasurementPanel.lbLuminance.name" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
       </Properties>
     </Component>
@@ -76,11 +76,11 @@
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="it/tidalwave/uniformity/measurement/ui/impl/swing/Bundle.properties" key="MeasurementPanel.lbWhitePoint.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+          <ResourceString bundle="it/tidalwave/uniformity/measurement/ui/impl/netbeans/Bundle.properties" key="MeasurementPanel.lbWhitePoint.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
         <Property name="verticalAlignment" type="int" value="1"/>
         <Property name="name" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="it/tidalwave/uniformity/measurement/ui/impl/swing/Bundle.properties" key="MeasurementPanel.lbWhitePoint.name" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+          <ResourceString bundle="it/tidalwave/uniformity/measurement/ui/impl/netbeans/Bundle.properties" key="MeasurementPanel.lbWhitePoint.name" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
       </Properties>
     </Component>

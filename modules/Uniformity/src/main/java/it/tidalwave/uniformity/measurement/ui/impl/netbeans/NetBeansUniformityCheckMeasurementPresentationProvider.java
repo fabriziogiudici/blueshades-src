@@ -20,53 +20,31 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.measurement.ui.impl.swing;
+package it.tidalwave.uniformity.measurement.ui.impl.netbeans;
 
 import javax.annotation.Nonnull;
-import javax.swing.Action;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import static it.tidalwave.blueargyle.util.SafeRunner.*;
+import org.openide.util.lookup.ServiceProvider;
+import it.tidalwave.blueargyle.util.SafeSwingComponentBuilder;
+import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentationProvider;
+import lombok.extern.slf4j.Slf4j;
+import static it.tidalwave.blueargyle.util.SafeSwingComponentBuilder.*;
 
 /***********************************************************************************************************************
  * 
- * @stereotype Presentation
+ * @stereotype Factory
  * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class SwingUniformityCheckMeasurementPresentation extends SwingUniformityCheckMeasurementPresentationSupport
-  {    
-    @Override
-    public void showUp()
-      {
-        runSafely(new Runnable() 
-          {
-            @Override
-            public void run() 
-              {
-                panel.showUp();
-                final GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
-                final GraphicsDevice graphicsDevice = graphicsEnvironment.getScreenDevices()[0];
-                graphicsDevice.setFullScreenWindow(frame);
-                frame.setVisible(true);
-              }
-          });
-      }
+@ServiceProvider(service=NetBeansUniformityCheckMeasurementPresentationProvider.class) @Slf4j
+public class NetBeansUniformityCheckMeasurementPresentationProvider implements UniformityCheckMeasurementPresentationProvider
+  {
+    private final SafeSwingComponentBuilder<NetBeansUniformityCheckMeasurementPresentation> builder = builderFor(NetBeansUniformityCheckMeasurementPresentation.class);
     
-    @Override
-    public void dismiss()
+    @Override @Nonnull
+    public NetBeansUniformityCheckMeasurementPresentation getPresentation()
       {
-        runSafely(new Runnable() 
-          {
-            @Override
-            public void run() 
-              {
-                frame.setVisible(false);
-                frame.dispose();
-                panel.dismiss();
-              }
-          });
+        return builder.getInstance();
       }
   }

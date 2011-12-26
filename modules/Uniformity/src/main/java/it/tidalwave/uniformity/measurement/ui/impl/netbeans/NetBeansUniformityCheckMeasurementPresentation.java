@@ -20,17 +20,15 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.main.ui.impl.swing;
+package it.tidalwave.uniformity.measurement.ui.impl.netbeans;
 
-import org.openide.windows.WindowManager;
-import it.tidalwave.uniformity.main.ui.UniformityCheckMainPresentation;
-import lombok.Delegate;
+import javax.annotation.Nonnull;
+import javax.swing.Action;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import static it.tidalwave.blueargyle.util.SafeRunner.*;
 
 /***********************************************************************************************************************
- * 
- * FIXME: a separate base class which implements @Delegate methods. If you put everything together with 
- * SwingUniformityCheckMainPresentation, strange compilation errors occur (also elsewhere) probably because of a Lombok
- * bug. This class must be public, with public constructor, or mocking will fail.
  * 
  * @stereotype Presentation
  * 
@@ -38,16 +36,37 @@ import lombok.Delegate;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class SwingUniformityCheckMainPresentationSupport implements UniformityCheckMainPresentation
-  {
-    protected final UniformityCheckMainTopComponent topComponent;
-    
-    @Delegate(types=UniformityCheckMainPresentation.class)
-    protected final UniformityCheckMainPanel panel;
-    
-    public SwingUniformityCheckMainPresentationSupport()
+public class NetBeansUniformityCheckMeasurementPresentation extends NetBeansUniformityCheckMeasurementPresentationSupport
+  {    
+    @Override
+    public void showUp()
       {
-        topComponent = (UniformityCheckMainTopComponent)WindowManager.getDefault().findTopComponent("UniformityCheckMainTopComponent");
-        panel = topComponent.getPanel();
+        runSafely(new Runnable() 
+          {
+            @Override
+            public void run() 
+              {
+                panel.showUp();
+                final GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+                final GraphicsDevice graphicsDevice = graphicsEnvironment.getScreenDevices()[0];
+                graphicsDevice.setFullScreenWindow(frame);
+                frame.setVisible(true);
+              }
+          });
+      }
+    
+    @Override
+    public void dismiss()
+      {
+        runSafely(new Runnable() 
+          {
+            @Override
+            public void run() 
+              {
+                frame.setVisible(false);
+                frame.dispose();
+                panel.dismiss();
+              }
+          });
       }
   }

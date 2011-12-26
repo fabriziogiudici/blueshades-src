@@ -20,31 +20,29 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.measurement.ui.impl.swing;
-
-import javax.annotation.Nonnull;
-import org.openide.util.lookup.ServiceProvider;
-import it.tidalwave.blueargyle.util.SafeSwingComponentBuilder;
-import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentationProvider;
-import lombok.extern.slf4j.Slf4j;
-import static it.tidalwave.blueargyle.util.SafeSwingComponentBuilder.*;
+package it.tidalwave.uniformity.main.ui.impl.netbeans;
 
 /***********************************************************************************************************************
  * 
- * @stereotype Factory
+ * @stereotype Presentation
  * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-@ServiceProvider(service=SwingUniformityCheckMeasurementPresentationProvider.class) @Slf4j
-public class SwingUniformityCheckMeasurementPresentationProvider implements UniformityCheckMeasurementPresentationProvider
+public class NetBeansUniformityCheckMainPresentation extends NetBeansUniformityCheckMainPresentationSupport
   {
-    private final SafeSwingComponentBuilder<SwingUniformityCheckMeasurementPresentation> builder = builderFor(SwingUniformityCheckMeasurementPresentation.class);
-    
-    @Override @Nonnull
-    public SwingUniformityCheckMeasurementPresentation getPresentation()
+    @Override
+    public void showUp() 
       {
-        return builder.getInstance();
+        panel.showUp();
+        topComponent.requestActive();
+      }
+
+    @Override
+    public void dismiss()
+      {
+        topComponent.close();
+        panel.dismiss();
       }
   }
