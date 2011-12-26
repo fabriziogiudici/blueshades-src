@@ -20,8 +20,9 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.ui.impl;
+package it.tidalwave.uniformity.measurement.ui.impl;
 
+import it.tidalwave.uniformity.measurement.ui.impl.UniformityCheckMeasurementControllerActor;
 import java.awt.Component;
 import javax.swing.Action;
 import it.tidalwave.actor.Collaboration;
@@ -32,11 +33,11 @@ import it.tidalwave.argyll.MeasurementRequest;
 import it.tidalwave.argyll.impl.MessageVerifier;
 import it.tidalwave.argyll.impl.MockSpotReadActor;
 import it.tidalwave.uniformity.UniformityCheckRequest;
-import it.tidalwave.uniformity.ui.UniformityCheckMeasurementPresentation;
-import it.tidalwave.uniformity.ui.UniformityCheckMeasurementPresentationProvider;
+import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation;
+import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentationProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.mockito.InOrder;
-import static it.tidalwave.uniformity.ui.UniformityCheckMeasurementPresentation.Position.pos;
+import static it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation.Position.pos;
 import static org.mockito.Mockito.*;
 
 /***********************************************************************************************************************

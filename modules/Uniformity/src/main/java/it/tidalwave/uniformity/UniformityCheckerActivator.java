@@ -24,7 +24,7 @@ package it.tidalwave.uniformity;
 
 import it.tidalwave.actor.spi.ActorActivator;
 import it.tidalwave.actor.spi.ActorGroupActivator;
-import it.tidalwave.uniformity.ui.impl.UniformityCheckMeasurementControllerActor;
+import it.tidalwave.uniformity.measurement.ui.impl.UniformityCheckMeasurementControllerActor;
 import org.openide.util.lookup.ServiceProvider;
 
 /***********************************************************************************************************************

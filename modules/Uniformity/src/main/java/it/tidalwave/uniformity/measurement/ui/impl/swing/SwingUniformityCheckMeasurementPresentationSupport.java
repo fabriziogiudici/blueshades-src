@@ -20,10 +20,10 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.ui.impl.swing;
+package it.tidalwave.uniformity.measurement.ui.impl.swing;
 
 import javax.swing.JFrame;
-import it.tidalwave.uniformity.ui.UniformityCheckMeasurementPresentation;
+import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation;
 import lombok.Delegate;
 
 /***********************************************************************************************************************

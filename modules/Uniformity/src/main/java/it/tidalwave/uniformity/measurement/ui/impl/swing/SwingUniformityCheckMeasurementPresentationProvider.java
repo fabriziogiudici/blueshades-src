@@ -20,10 +20,14 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.ui;
+package it.tidalwave.uniformity.measurement.ui.impl.swing;
 
 import javax.annotation.Nonnull;
-import it.tidalwave.uniformity.ui.UniformityCheckMeasurementPresentation;
+import org.openide.util.lookup.ServiceProvider;
+import it.tidalwave.blueargyle.util.SafeSwingComponentBuilder;
+import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentationProvider;
+import lombok.extern.slf4j.Slf4j;
+import static it.tidalwave.blueargyle.util.SafeSwingComponentBuilder.*;
 
 /***********************************************************************************************************************
  * 
@@ -33,8 +37,14 @@ import it.tidalwave.uniformity.ui.UniformityCheckMeasurementPresentation;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public interface UniformityCheckMeasurementPresentationProvider 
+@ServiceProvider(service=SwingUniformityCheckMeasurementPresentationProvider.class) @Slf4j
+public class SwingUniformityCheckMeasurementPresentationProvider implements UniformityCheckMeasurementPresentationProvider
   {
-    @Nonnull
-    public UniformityCheckMeasurementPresentation getPresentation();
+    private final SafeSwingComponentBuilder<SwingUniformityCheckMeasurementPresentation> builder = builderFor(SwingUniformityCheckMeasurementPresentation.class);
+    
+    @Override @Nonnull
+    public SwingUniformityCheckMeasurementPresentation getPresentation()
+      {
+        return builder.getInstance();
+      }
   }

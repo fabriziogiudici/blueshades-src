@@ -20,7 +20,7 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.ui.impl;
+package it.tidalwave.uniformity.measurement.ui.impl;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
@@ -41,14 +41,14 @@ import it.tidalwave.argyll.MeasurementRequest;
 import it.tidalwave.colorimetry.ColorPoint;
 import it.tidalwave.netbeans.util.Locator;
 import it.tidalwave.uniformity.UniformityCheckRequest;
-import it.tidalwave.uniformity.ui.UniformityCheckMeasurementPresentation;
-import it.tidalwave.uniformity.ui.UniformityCheckMeasurementPresentation.Position;
-import it.tidalwave.uniformity.ui.UniformityCheckMeasurementPresentationProvider;
+import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation;
+import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation.Position;
+import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentationProvider;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.concurrent.TimeUnit.*;
 import static it.tidalwave.actor.Collaboration.*;
 import it.tidalwave.argyll.ArgyllFailureMessage;
-import static it.tidalwave.uniformity.ui.UniformityCheckMeasurementPresentation.Position.pos;
+import static it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation.Position.pos;
 
 /***********************************************************************************************************************
  *

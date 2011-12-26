@@ -20,101 +20,130 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.ui;
+package it.tidalwave.uniformity.measurement.ui.impl;
 
-import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.Action;
-import lombok.EqualsAndHashCode;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+import it.tidalwave.argyll.impl.MessageVerifier;
+import it.tidalwave.netbeans.util.test.MockLookup;
+import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation;
+import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation.Position;
+import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentationProvider;
+import lombok.extern.slf4j.Slf4j;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
+import static org.mockito.Mockito.*;
 
 /***********************************************************************************************************************
- *
- * @stereotype Presentation
  * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public interface UniformityCheckMeasurementPresentation 
+@Slf4j
+public class UniformityCheckMeasurementControllerActorTest extends UniformityCheckMeasurementControllerActorTestSupport
   {
+    private Action continueAction;
+    
     /*******************************************************************************************************************
      * 
      *
      ******************************************************************************************************************/
-    @RequiredArgsConstructor(staticName="pos") @EqualsAndHashCode @ToString
-    public static class Position
+    private final Answer<Void> clickContinue = new Answer<Void>()
       {
-        @Nonnegative
-        public final int column;
+        @Override
+        public Void answer (final @Nonnull InvocationOnMock invocation) 
+          {
+            new Timer().schedule(new TimerTask() 
+              {
+                @Override
+                public void run() 
+                  {
+                    log.info("Clicking on 'Continue'...");
+                    continueAction.actionPerformed(null);
+                  }
+              }, 1000);
+
+            return null;
+          }
+      };
+
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    private final Answer<Void> storeActionReferences = new Answer<Void>()
+      {
+        @Override
+        public Void answer (final @Nonnull InvocationOnMock invocation) 
+          {
+            continueAction = (Action)invocation.getArguments()[0];
+            return null;
+          }
+      };
+
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    @BeforeMethod
+    public void setupFixture()
+      {
+        messageVerifier = new MessageVerifier();
+        messageVerifier.initialize();
         
-        @Nonnegative
-        public final int row;
+        createPresentation();
+        MockLookup.setInstances(presentationBuilder);
+        
+        inOrder = inOrder(presentation);
+        
+        testActivator = new TestActivator();
+        testActivator.activate();
       }
-
-    /*******************************************************************************************************************
-     *
-     * Binds to some controller {@link Action}s.
-     *
-     ******************************************************************************************************************/
-    public void bind (@Nonnull Action continueAction, @Nonnull Action cancelAction);
     
     /*******************************************************************************************************************
      * 
-     * Sets the grid size.
      *
      ******************************************************************************************************************/
-    public void setGridSize (@Nonnegative int rows, @Nonnegative int columns);
+    @Override
+    protected void createPresentation()
+      {
+        presentation = mock(UniformityCheckMeasurementPresentation.class);
+        doAnswer(storeActionReferences).when(presentation).bind(any(Action.class), any(Action.class));
+        doAnswer(clickContinue).when(presentation).renderSensorPlacementInvitationCellAt(any(Position.class));
+        presentationBuilder = mock(UniformityCheckMeasurementPresentationProvider.class);
+        doReturn(presentation).when(presentationBuilder).getPresentation();
+      }
     
     /*******************************************************************************************************************
-     *
-     * Makes the UI visible.
+     * 
      *
      ******************************************************************************************************************/
-    public void showUp();
+    @AfterMethod
+    public void cleanup()
+      {
+        messageVerifier.dispose();
+        testActivator.deactivate();
+        messageVerifier = null;
+        presentation = null;
+        testActivator = null;
+        continueAction = null;
+        MockLookup.reset();
+      }
     
     /*******************************************************************************************************************
-     *
-     * Renders an empty cell at the given position.
-     *
-     ******************************************************************************************************************/
-    public void renderEmptyCellAt (@Nonnull Position position);
-
-    /*******************************************************************************************************************
      * 
-     * Renders a cell with an invitation to place the sensor at the given position.
      *
      ******************************************************************************************************************/
-    public void renderSensorPlacementInvitationCellAt (@Nonnull Position position);
-
-    /*******************************************************************************************************************
-     * 
-     * Renders the control panel at the given position.
-     *
-     ******************************************************************************************************************/
-    public void renderControlPanelAt (@Nonnull Position position);
-
-    /*******************************************************************************************************************
-     * 
-     * Renders a white cell for the measurement at the given position.
-     *
-     ******************************************************************************************************************/
-    public void renderWhiteCellAt (@Nonnull Position position);
-
-    /*******************************************************************************************************************
-     * 
-     * Renders a cell with the measurement results at the given position.
-     *
-     ******************************************************************************************************************/
-    public void renderMeasurementCellAt (@Nonnull Position position,
-                                         @Nonnull String luminance, 
-                                         @Nonnull String whitePoint);
-    
-    /*******************************************************************************************************************
-     *
-     * Dismisses the UI.
-     *
-     ******************************************************************************************************************/
-    public void dismiss();
+    @Test
+    public void must_follow_the_proper_sequence_3x3() 
+      throws InterruptedException
+      {
+        xxx();
+      }
   }
