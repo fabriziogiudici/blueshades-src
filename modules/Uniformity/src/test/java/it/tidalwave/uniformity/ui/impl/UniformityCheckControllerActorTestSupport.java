@@ -149,8 +149,4 @@ public abstract class UniformityCheckControllerActorTestSupport
         
         messageVerifier.verifyCollaborationCompleted();
       }
-        
-    private void waitForNextPressed()
-      {
-      }
   }
