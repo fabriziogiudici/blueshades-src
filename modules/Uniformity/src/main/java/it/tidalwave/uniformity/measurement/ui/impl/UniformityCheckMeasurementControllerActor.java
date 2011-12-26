@@ -148,7 +148,7 @@ public class UniformityCheckMeasurementControllerActor
         final double c1 = message.getColorPoints().find(ColorPoint.ColorSpace.Lab).getC1();
         final int temp = message.getCcTemperature().getMeasure().getT();
         presentation.renderMeasurementCellAt(currentPosition,
-                                             String.format("Luminance: %.0f cd/m2", c1), 
+                                             String.format("Luminance: %.0f cd/m\u00b2", c1), 
                                              String.format("White point: %d K", temp));
         eventuallyMoveInControlPanel();
         prepareNextMeasurement(message);  
