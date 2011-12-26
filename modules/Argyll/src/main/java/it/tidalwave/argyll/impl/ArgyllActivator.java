@@ -38,6 +38,14 @@ public class ArgyllActivator extends ActorGroupActivator
     public ArgyllActivator() 
       {
         add(new ActorActivator(DispwinActor.class, 1));
-        add(new ActorActivator(SpotReadActor.class, 1));
+        
+        if (Boolean.getBoolean("it.tidalwave.blueargyle.mockArgyll"))
+          {
+            add(new ActorActivator(MockSpotReadActor.class, 1));
+          }
+        else
+          {
+            add(new ActorActivator(SpotReadActor.class, 1));
+          }
       }
   }
