@@ -69,7 +69,8 @@ public class SpotReadActor
         log.trace("spotRead({})", message);
 
         final Executor executor = Executor.forExecutable("spotread")
-                                          .withArgument("-T");
+                                          .withArgument("-T")
+                                          .withArgument("-yl");
         executor.start().getStdout().waitFor("(^.*to do a calibration.*$)").clear();
         executor.send(COMMAND_DO_MEASUREMENT).getStdout().waitFor("(^.*to do a calibration.*$)");
         executor.send(COMMAND_QUIT).waitForCompletion();
