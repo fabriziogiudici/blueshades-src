@@ -47,13 +47,13 @@ import it.tidalwave.uniformity.UniformityMeasurement;
 import it.tidalwave.uniformity.UniformityMeasurements;
 import it.tidalwave.uniformity.UniformityMeasurementMessage;
 import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation;
-import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation.Position;
+import it.tidalwave.uniformity.Position;
 import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentationProvider;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.concurrent.TimeUnit.*;
 import static it.tidalwave.actor.Collaboration.*;
 import static it.tidalwave.colorimetry.ColorPoint.ColorSpace.*;
-import static it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation.Position.pos;
+import static it.tidalwave.uniformity.Position.pos;
 
 /***********************************************************************************************************************
  *

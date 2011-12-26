@@ -27,7 +27,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.Timer;
-import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation;
+import it.tidalwave.uniformity.Position;
 import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentationProvider;
 import it.tidalwave.uniformity.measurement.ui.impl.UniformityCheckMeasurementControllerActorTestSupport;
 import lombok.extern.slf4j.Slf4j;
@@ -82,7 +82,7 @@ public class NetBeansUniformityCheckMeasurementControllerActorTest extends Unifo
     protected void createPresentation()
       {
         presentation = spy(new NetBeansUniformityCheckMeasurementPresentation());
-        doAnswer(clickContinue).when(presentation).renderSensorPlacementInvitationCellAt(any(UniformityCheckMeasurementPresentation.Position.class));
+        doAnswer(clickContinue).when(presentation).renderSensorPlacementInvitationCellAt(any(Position.class));
         presentationBuilder = mock(UniformityCheckMeasurementPresentationProvider.class);
         doReturn(presentation).when(presentationBuilder).getPresentation();
       }

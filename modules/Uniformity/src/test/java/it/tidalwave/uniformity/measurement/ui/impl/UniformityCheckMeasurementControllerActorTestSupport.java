@@ -22,10 +22,10 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.measurement.ui.impl;
 
-import java.awt.Component;
-import javax.swing.Action;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.awt.Component;
+import javax.swing.Action;
 import it.tidalwave.actor.Collaboration;
 import it.tidalwave.actor.spi.ActorActivator;
 import it.tidalwave.actor.spi.ActorGroupActivator;
@@ -34,11 +34,12 @@ import it.tidalwave.argyll.MeasurementRequest;
 import it.tidalwave.argyll.impl.MessageVerifier;
 import it.tidalwave.argyll.impl.MockSpotReadActor;
 import it.tidalwave.netbeans.util.test.MockLookup;
+import it.tidalwave.uniformity.Position;
 import it.tidalwave.uniformity.UniformityCheckRequest;
 import it.tidalwave.uniformity.UniformityMeasurement;
 import it.tidalwave.uniformity.UniformityMeasurementMessage;
+import it.tidalwave.uniformity.UniformityMeasurements;
 import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation;
-import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation.Position;
 import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentationProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.AfterMethod;
@@ -46,9 +47,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.mockito.InOrder;
 import org.mockito.internal.matchers.Equals;
-import static it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation.Position.pos;
-import static it.tidalwave.colorimetry.ColorTemperature.kelvin;
-import it.tidalwave.uniformity.UniformityMeasurements;
+import static it.tidalwave.uniformity.Position.pos;import static it.tidalwave.colorimetry.ColorTemperature.kelvin;
 import static org.mockito.Mockito.*;
 
 /***********************************************************************************************************************

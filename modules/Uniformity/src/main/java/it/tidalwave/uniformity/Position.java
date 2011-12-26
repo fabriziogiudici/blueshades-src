@@ -22,54 +22,36 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
-import java.util.Map.Entry;
-import java.util.SortedMap;
-import java.util.TreeMap;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import lombok.EqualsAndHashCode;
+import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
- * 
+ *
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @EqualsAndHashCode
-public class UniformityMeasurements
+@RequiredArgsConstructor(staticName="pos") @EqualsAndHashCode
+public class Position implements Comparable<Position>
   {
-    @Nonnull
-    private final SortedMap<Position, UniformityMeasurement> measurementMapByPosition;
-    
-    public UniformityMeasurements (final @Nonnull SortedMap<Position, UniformityMeasurement> measurementMapByPosition)
+    @Nonnegative
+    public final int column;
+
+    @Nonnegative
+    public final int row;
+
+    @Override
+    public int compareTo (final @Nonnull Position other) 
       {
-        this.measurementMapByPosition = new TreeMap<Position, UniformityMeasurement>(measurementMapByPosition);
-      }
-    
-    @Nonnull
-    public UniformityMeasurement getAt (final @Nonnull Position position)
-      {
-        return measurementMapByPosition.get(position);  
-      }
-    
-    @Override @Nonnull 
+        return this.row * 100 + this.column - other.row * 100 - other.column;
+      } 
+
+    @Override @Nonnull
     public String toString()
       {
-        final StringWriter sw = new StringWriter();
-        final PrintWriter pw = new PrintWriter(sw);
-        
-        pw.println("UniformityMeasurements(");
-        
-        for (final Entry<Position, UniformityMeasurement> e : measurementMapByPosition.entrySet())
-          {
-            pw.printf("  %s - %s\n", e.getKey(), e.getValue());
-          }
-        
-        pw.println(")");
-        pw.close();
-        
-        return sw.toString();
-      }   
+        return String.format("(c:%d r:%d)", column, row);  
+      }
   }
+

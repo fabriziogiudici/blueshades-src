@@ -27,7 +27,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.Action;
 import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation;
-import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation.Position;
+import it.tidalwave.uniformity.Position;
 import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentationProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.AfterMethod;

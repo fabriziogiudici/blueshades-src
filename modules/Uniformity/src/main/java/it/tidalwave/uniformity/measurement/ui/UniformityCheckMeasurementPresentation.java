@@ -25,8 +25,7 @@ package it.tidalwave.uniformity.measurement.ui;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.swing.Action;
-import lombok.EqualsAndHashCode;
-import lombok.RequiredArgsConstructor;
+import it.tidalwave.uniformity.Position;
 
 /***********************************************************************************************************************
  *
@@ -38,32 +37,6 @@ import lombok.RequiredArgsConstructor;
  **********************************************************************************************************************/
 public interface UniformityCheckMeasurementPresentation 
   {
-    /*******************************************************************************************************************
-     * 
-     *
-     ******************************************************************************************************************/
-    @RequiredArgsConstructor(staticName="pos") @EqualsAndHashCode
-    public static class Position implements Comparable<Position>
-      {
-        @Nonnegative
-        public final int column;
-        
-        @Nonnegative
-        public final int row;
-
-        @Override
-        public int compareTo (final @Nonnull Position other) 
-          {
-            return this.row * 100 + this.column - other.row * 100 - other.column;
-          } 
-        
-        @Override @Nonnull
-        public String toString()
-          {
-            return String.format("(c:%d r:%d)", column, row);  
-          }
-      }
-
     /*******************************************************************************************************************
      *
      * Binds to some controller {@link Action}s.
