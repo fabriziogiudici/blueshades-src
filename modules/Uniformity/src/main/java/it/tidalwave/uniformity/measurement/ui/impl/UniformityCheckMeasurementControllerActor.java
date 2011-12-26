@@ -39,7 +39,6 @@ import it.tidalwave.actor.annotation.MessageListener;
 import it.tidalwave.argyll.MeasurementMessage;
 import it.tidalwave.argyll.MeasurementRequest;
 import it.tidalwave.argyll.ArgyllFailureMessage;
-import it.tidalwave.colorimetry.ColorPoint;
 import it.tidalwave.netbeans.util.Locator;
 import it.tidalwave.uniformity.UniformityCheckRequest;
 import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation;
@@ -48,6 +47,7 @@ import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresenta
 import lombok.extern.slf4j.Slf4j;
 import static java.util.concurrent.TimeUnit.*;
 import static it.tidalwave.actor.Collaboration.*;
+import static it.tidalwave.colorimetry.ColorPoint.ColorSpace.*;
 import static it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation.Position.pos;
 
 /***********************************************************************************************************************
@@ -61,16 +61,17 @@ import static it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementP
 @Actor(threadSafe=false) @NotThreadSafe @Slf4j
 public class UniformityCheckMeasurementControllerActor
   {
+    private static final int COLUMNS = 3;
+    private static final int ROWS = 3;
+
     private static final Position DEFAULT_CONTROL_PANEL_POSITION = pos(0, 0);
     private static final Position ALTERNATE_CONTROL_PANEL_POSITION = pos(0, 1);
+    
+    private static final int MEASUREMENT_DELAY = 100;
     
     private final Provider<UniformityCheckMeasurementPresentationProvider> presentationBuilder = Locator.createProviderFor(UniformityCheckMeasurementPresentationProvider.class);
     
     private UniformityCheckMeasurementPresentation presentation;
-
-    private final int columns = 3;
-    
-    private final int rows = 3;
 
     private final List<Position> positionSequence = new ArrayList<Position>();
 
@@ -86,25 +87,13 @@ public class UniformityCheckMeasurementControllerActor
      * 
      *
      ******************************************************************************************************************/
-    /* package */ final Action continueAction = new AbstractAction("Continue") 
+    private final Action continueAction = new AbstractAction("Continue") 
       {
         @Override
         public void actionPerformed (final @Nonnull ActionEvent event) 
           {
             setEnabled(false);
-            collaborationPendingUserIntervention.resume(suspensionToken, new Runnable()
-              {
-                @Override
-                public void run() 
-                  {
-                    presentation.renderWhiteCellAt(currentPosition);
-                    presentation.showMeasureInProgress();
-                    new MeasurementRequest().sendLater(500, MILLISECONDS);
-                  }
-              });
-            
-            suspensionToken = null;
-            collaborationPendingUserIntervention = NULL_COLLABORATION;
+            doMeasurement();
           }
       };
     
@@ -112,7 +101,7 @@ public class UniformityCheckMeasurementControllerActor
      * 
      *
      ******************************************************************************************************************/
-    /* package */ final Action cancelAction = new AbstractAction("Cancel") 
+    private final Action cancelAction = new AbstractAction("Cancel") 
       {
         @Override
         public void actionPerformed (final @Nonnull ActionEvent event) 
@@ -145,7 +134,7 @@ public class UniformityCheckMeasurementControllerActor
         log.info("processMeasure({})", message);
         presentation.hideMeasureInProgress();
         // FIXME: do the right math here
-        final double c1 = message.getColorPoints().find(ColorPoint.ColorSpace.Lab).getC1();
+        final double c1 = message.getColorPoints().find(Lab).getC1();
         final int temp = message.getCcTemperature().getMeasure().getT();
         presentation.renderMeasurementCellAt(currentPosition,
                                              String.format("Luminance: %.0f cd/m\u00b2", c1), 
@@ -160,7 +149,6 @@ public class UniformityCheckMeasurementControllerActor
      ******************************************************************************************************************/
     @MessageListener
     public void failure (final @Nonnull ArgyllFailureMessage message) 
-//      throws NotFoundException
       {
         log.info("failure({})", message);
         cancel(); // FIXME: harsh, do a notification on the UI too
@@ -178,9 +166,31 @@ public class UniformityCheckMeasurementControllerActor
         presentation = presentationBuilder.get().getPresentation();
         computePositions();
         presentation.bind(continueAction, cancelAction);
-        presentation.setGridSize(columns, rows);
+        presentation.setGridSize(COLUMNS, ROWS);
         presentation.showUp();
         presentation.renderControlPanelAt(DEFAULT_CONTROL_PANEL_POSITION);
+      }
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    private void doMeasurement()
+      {
+        log.info("doMeasurement()");
+        collaborationPendingUserIntervention.resume(suspensionToken, new Runnable()
+          {
+            @Override
+            public void run() 
+              {
+                presentation.renderWhiteCellAt(currentPosition);
+                presentation.showMeasureInProgress();
+                new MeasurementRequest().sendLater(MEASUREMENT_DELAY, MILLISECONDS);
+              }
+          });
+
+        suspensionToken = null;
+        collaborationPendingUserIntervention = NULL_COLLABORATION;
       }
     
     /*******************************************************************************************************************
@@ -196,14 +206,16 @@ public class UniformityCheckMeasurementControllerActor
                 @Override
                 public void run() 
                   {
-                    // do nothing, but it will resume the Collaboration
+                    // do nothing, but it will make the Collaboration to complete
+                    // TODO: perhaps a specific method on Collaboration would make sense (such as terminate()).
                   }
-                });
+              });
+
+            suspensionToken = null;
+            collaborationPendingUserIntervention = NULL_COLLABORATION;
           }
 
         presentation.dismiss();
-        suspensionToken = null;
-        collaborationPendingUserIntervention = NULL_COLLABORATION;
       }
     
     /*******************************************************************************************************************
@@ -253,7 +265,7 @@ public class UniformityCheckMeasurementControllerActor
       {
         if (currentPosition.equals(DEFAULT_CONTROL_PANEL_POSITION))
           {
-            presentation.renderControlPanelAt(currentPosition);
+            presentation.renderControlPanelAt(DEFAULT_CONTROL_PANEL_POSITION);
             presentation.renderEmptyCellAt(ALTERNATE_CONTROL_PANEL_POSITION);
           }
       }
@@ -268,16 +280,15 @@ public class UniformityCheckMeasurementControllerActor
       {
         positionSequence.clear();
         
-        for (int row = 0; row < rows; row++)
+        for (int row = 0; row < ROWS; row++)
           {
-            for (int column = 0; column < columns; column++)
+            for (int column = 0; column < COLUMNS; column++)
               {
                 positionSequence.add(pos(column, row));
               }
           }
         
-        positionSequence.add(0, positionSequence.remove((rows * columns) / 2));
+        positionSequence.add(0, positionSequence.remove((ROWS * COLUMNS) / 2));
         positionIterator = positionSequence.iterator();
       }
   }
-
