@@ -22,7 +22,6 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.measurement.ui.impl;
 
-import it.tidalwave.uniformity.measurement.ui.impl.UniformityCheckMeasurementControllerActor;
 import java.awt.Component;
 import javax.swing.Action;
 import it.tidalwave.actor.Collaboration;
@@ -36,6 +35,7 @@ import it.tidalwave.uniformity.UniformityCheckRequest;
 import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation;
 import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentationProvider;
 import lombok.extern.slf4j.Slf4j;
+import org.testng.annotations.Test;
 import org.mockito.InOrder;
 import static it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation.Position.pos;
 import static org.mockito.Mockito.*;
@@ -83,7 +83,8 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
      * 
      *
      ******************************************************************************************************************/
-    public void xxx() 
+    @Test
+    public void must_properly_drive_a_complete_3x3_sequence() 
       throws InterruptedException
       {
         final Collaboration collaboration = new UniformityCheckRequest().send();

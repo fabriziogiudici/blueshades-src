@@ -135,15 +135,4 @@ public class UniformityCheckMeasurementControllerActorTest extends UniformityChe
         continueAction = null;
         MockLookup.reset();
       }
-    
-    /*******************************************************************************************************************
-     * 
-     *
-     ******************************************************************************************************************/
-    @Test
-    public void must_follow_the_proper_sequence_3x3() 
-      throws InterruptedException
-      {
-        xxx();
-      }
   }
