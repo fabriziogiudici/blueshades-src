@@ -20,9 +20,10 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity;
+package it.tidalwave.uniformity.impl;
 
 import it.tidalwave.blueargyle.util.ModuleActorGroupActivator;
+import it.tidalwave.uniformity.UniformityCheckMeasurementControllerActorActivator;
 
 /***********************************************************************************************************************
  *
@@ -30,7 +31,7 @@ import it.tidalwave.blueargyle.util.ModuleActorGroupActivator;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class Installer extends ModuleActorGroupActivator // TODO: move to impl
+public class Installer extends ModuleActorGroupActivator
   {
     public Installer()
       {
