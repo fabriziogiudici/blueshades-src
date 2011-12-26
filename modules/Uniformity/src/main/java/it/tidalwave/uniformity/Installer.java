@@ -34,6 +34,6 @@ public class Installer extends ModuleActorGroupActivator // TODO: move to impl
   {
     public Installer()
       {
-        super(UniformityCheckerActivator.class);
+        super(UniformityCheckMeasurementControllerActorActivator.class);
       }
   }

@@ -33,10 +33,10 @@ import org.openide.util.lookup.ServiceProvider;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@ServiceProvider(service=UniformityCheckerActivator.class)
-public class UniformityCheckerActivator extends ActorGroupActivator // TODO: rename
+@ServiceProvider(service=UniformityCheckMeasurementControllerActorActivator.class)
+public class UniformityCheckMeasurementControllerActorActivator extends ActorGroupActivator 
   {
-    public UniformityCheckerActivator()
+    public UniformityCheckMeasurementControllerActorActivator()
       {
         add(new ActorActivator(UniformityCheckMeasurementControllerActor.class, 1));
       }
