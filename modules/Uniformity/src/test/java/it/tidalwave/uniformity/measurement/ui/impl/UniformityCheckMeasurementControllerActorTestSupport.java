@@ -24,6 +24,8 @@ package it.tidalwave.uniformity.measurement.ui.impl;
 
 import java.awt.Component;
 import javax.swing.Action;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import it.tidalwave.actor.Collaboration;
 import it.tidalwave.actor.spi.ActorActivator;
 import it.tidalwave.actor.spi.ActorGroupActivator;
@@ -33,14 +35,20 @@ import it.tidalwave.argyll.impl.MessageVerifier;
 import it.tidalwave.argyll.impl.MockSpotReadActor;
 import it.tidalwave.netbeans.util.test.MockLookup;
 import it.tidalwave.uniformity.UniformityCheckRequest;
+import it.tidalwave.uniformity.UniformityMeasurement;
+import it.tidalwave.uniformity.UniformityMeasurementMessage;
 import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation;
+import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation.Position;
 import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentationProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.mockito.InOrder;
+import org.mockito.internal.matchers.Equals;
 import static it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation.Position.pos;
+import static it.tidalwave.colorimetry.ColorTemperature.kelvin;
+import it.tidalwave.uniformity.UniformityMeasurements;
 import static org.mockito.Mockito.*;
 
 /***********************************************************************************************************************
@@ -204,6 +212,19 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
             messageVerifier.verify(MeasurementRequest.class);  
             messageVerifier.verify(MeasurementMessage.class);  
           }
+        
+        final SortedMap<Position, UniformityMeasurement> m = new TreeMap<Position, UniformityMeasurement>();
+        m.put(pos(0, 0), new UniformityMeasurement(kelvin(6002), 102));
+        m.put(pos(1, 0), new UniformityMeasurement(kelvin(6003), 103));
+        m.put(pos(2, 0), new UniformityMeasurement(kelvin(6004), 104));
+        m.put(pos(0, 1), new UniformityMeasurement(kelvin(6005), 105));
+        m.put(pos(1, 1), new UniformityMeasurement(kelvin(6001), 101));
+        m.put(pos(2, 1), new UniformityMeasurement(kelvin(6006), 106));
+        m.put(pos(0, 2), new UniformityMeasurement(kelvin(6007), 107));
+        m.put(pos(1, 2), new UniformityMeasurement(kelvin(6008), 108));
+        m.put(pos(2, 2), new UniformityMeasurement(kelvin(6009), 109));
+        final UniformityMeasurements measurements = new UniformityMeasurements(m);
+        messageVerifier.verify(UniformityMeasurementMessage.class).with("measurements", new Equals(measurements)); 
         
         messageVerifier.verifyCollaborationCompleted();
       }

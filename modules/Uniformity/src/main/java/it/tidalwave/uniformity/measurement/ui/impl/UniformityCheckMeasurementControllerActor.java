@@ -28,6 +28,8 @@ import javax.inject.Provider;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -41,6 +43,9 @@ import it.tidalwave.argyll.MeasurementRequest;
 import it.tidalwave.argyll.ArgyllFailureMessage;
 import it.tidalwave.netbeans.util.Locator;
 import it.tidalwave.uniformity.UniformityCheckRequest;
+import it.tidalwave.uniformity.UniformityMeasurement;
+import it.tidalwave.uniformity.UniformityMeasurements;
+import it.tidalwave.uniformity.UniformityMeasurementMessage;
 import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation;
 import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation.Position;
 import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentationProvider;
@@ -82,6 +87,8 @@ public class UniformityCheckMeasurementControllerActor
     private Collaboration collaborationPendingUserIntervention = NULL_COLLABORATION;
     
     private Object suspensionToken;
+    
+    private final SortedMap<Position, UniformityMeasurement> measurementMapByPosition = new TreeMap<Position, UniformityMeasurement>();
     
     /*******************************************************************************************************************
      * 
@@ -134,11 +141,12 @@ public class UniformityCheckMeasurementControllerActor
         log.info("processMeasure({})", message);
         presentation.hideMeasureInProgress();
         // FIXME: do the right math here
-        final double c1 = message.getColorPoints().find(Lab).getC1();
-        final int temp = message.getCcTemperature().getMeasure().getT();
+        final UniformityMeasurement measurement = new UniformityMeasurement(message.getCcTemperature().getMeasure(), 
+                                                                            (int)message.getColorPoints().find(Lab).getC1());
+        measurementMapByPosition.put(currentPosition, measurement);
         presentation.renderMeasurementCellAt(currentPosition,
-                                             String.format("Luminance: %.0f cd/m\u00b2", c1), 
-                                             String.format("White point: %d K", temp));
+                                             String.format("Luminance: %d cd/m\u00b2", measurement.getLuminance()), 
+                                             String.format("White point: %d K", measurement.getTemperature().getT()));
         eventuallyMoveInControlPanel();
         prepareNextMeasurement(message);  
       }
@@ -165,6 +173,7 @@ public class UniformityCheckMeasurementControllerActor
         cancelAction.setEnabled(false);
         presentation = presentationBuilder.get().getPresentation();
         computePositions();
+        measurementMapByPosition.clear();
         presentation.bind(continueAction, cancelAction);
         presentation.setGridSize(COLUMNS, ROWS);
         presentation.showUp();
@@ -230,6 +239,7 @@ public class UniformityCheckMeasurementControllerActor
         if (!positionIterator.hasNext())
           {
             presentation.dismiss();  
+            new UniformityMeasurementMessage(new UniformityMeasurements(measurementMapByPosition)).send();
           }
         else
           {
