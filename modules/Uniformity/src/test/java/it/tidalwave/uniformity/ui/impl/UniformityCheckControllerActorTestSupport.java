@@ -56,6 +56,7 @@ public abstract class UniformityCheckControllerActorTestSupport
       {
         public TestActivator() 
           {
+//            add(new ActorActivator(SpotReadActor.class, 1)); // to test the real thing
             add(new ActorActivator(MockSpotReadActor.class, 1));
             add(new ActorActivator(UniformityCheckControllerActor.class, 1));
           }
