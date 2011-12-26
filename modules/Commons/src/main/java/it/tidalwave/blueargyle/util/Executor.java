@@ -192,8 +192,6 @@ public class Executor
           }
       }
     
-    private final static String argyllPath = "/Users/fritz/Applications/Argyll_V1.3.5/bin";
-    
     private final List<String> arguments = new ArrayList<String>();
 
     private Process process;
@@ -213,8 +211,9 @@ public class Executor
     @Nonnull
     public static Executor forExecutable (final @Nonnull String executable)
       {
+        final String path = System.getenv("ARGYLL_HOME");
         final Executor executor = new Executor();
-        executor.arguments.add(argyllPath + File.separator + executable);
+        executor.arguments.add(path + File.separator + "bin" + File.separator + executable);
         return executor;
       }
     
