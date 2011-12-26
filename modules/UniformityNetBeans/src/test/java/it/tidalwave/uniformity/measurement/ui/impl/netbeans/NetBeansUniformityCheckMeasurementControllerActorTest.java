@@ -20,7 +20,7 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.measurement.ui.impl;
+package it.tidalwave.uniformity.measurement.ui.impl.netbeans;
 
 import javax.annotation.Nonnull;
 import java.awt.event.ActionEvent;
@@ -29,7 +29,7 @@ import javax.swing.JButton;
 import javax.swing.Timer;
 import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation;
 import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentationProvider;
-import it.tidalwave.uniformity.measurement.ui.impl.netbeans.NetBeansUniformityCheckMeasurementPresentation;
+import it.tidalwave.uniformity.measurement.ui.impl.UniformityCheckMeasurementControllerActorTestSupport;
 import lombok.extern.slf4j.Slf4j;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -43,7 +43,7 @@ import static org.fest.swing.core.BasicComponentFinder.*;
  *
  **********************************************************************************************************************/
 @Slf4j
-public class UniformityCheckMeasurementControllerActorIntegrationTest extends UniformityCheckMeasurementControllerActorTestSupport
+public class NetBeansUniformityCheckMeasurementControllerActorTest extends UniformityCheckMeasurementControllerActorTestSupport
   {
     /*******************************************************************************************************************
      * 
