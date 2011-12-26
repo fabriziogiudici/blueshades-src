@@ -22,22 +22,39 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.measurement.ui.impl.netbeans;
 
-import javax.annotation.Nonnull;
-import javax.swing.Action;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import javax.swing.JFrame;
+import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation;
+import lombok.Delegate;
 import static it.tidalwave.blueargyle.util.SafeRunner.*;
 
 /***********************************************************************************************************************
- * 
- * @stereotype Presentation
  * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class NetBeansUniformityCheckMeasurementPresentation extends NetBeansUniformityCheckMeasurementPresentationSupport
-  {    
+public class NetBeansUniformityCheckMeasurementPresentation implements UniformityCheckMeasurementPresentation
+  {
+    private static interface DelegateExclusions
+      {
+        public void showUp();
+        public void dismiss();    
+      }
+    
+    protected final JFrame frame = new JFrame();
+    
+    @Delegate(types=UniformityCheckMeasurementPresentation.class, excludes=DelegateExclusions.class)
+    protected final UniformityCheckMeasurementPresentationPanel panel = new UniformityCheckMeasurementPresentationPanel();
+    
+    public NetBeansUniformityCheckMeasurementPresentation()
+      {
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setUndecorated(true); 
+        frame.add(panel);
+      }
+    
     @Override
     public void showUp()
       {

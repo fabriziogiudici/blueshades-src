@@ -22,6 +22,10 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.main.ui.impl.netbeans;
 
+import org.openide.windows.WindowManager;
+import it.tidalwave.uniformity.main.ui.UniformityCheckMainPresentation;
+import lombok.Delegate;
+
 /***********************************************************************************************************************
  * 
  * @stereotype Presentation
@@ -30,8 +34,25 @@ package it.tidalwave.uniformity.main.ui.impl.netbeans;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class NetBeansUniformityCheckMainPresentation extends NetBeansUniformityCheckMainPresentationSupport
+public class NetBeansUniformityCheckMainPresentation implements UniformityCheckMainPresentation
   {
+    private static interface DelegateExclusions
+      {
+        public void showUp();
+        public void dismiss();    
+      }
+    
+    protected final UniformityCheckMainTopComponent topComponent;
+    
+    @Delegate(types=UniformityCheckMainPresentation.class, excludes=DelegateExclusions.class)
+    protected final UniformityCheckMainPanel panel;
+    
+    public NetBeansUniformityCheckMainPresentation()
+      {
+        topComponent = (UniformityCheckMainTopComponent)WindowManager.getDefault().findTopComponent("UniformityCheckMainTopComponent");
+        panel = topComponent.getPanel();
+      }
+    
     @Override
     public void showUp() 
       {
