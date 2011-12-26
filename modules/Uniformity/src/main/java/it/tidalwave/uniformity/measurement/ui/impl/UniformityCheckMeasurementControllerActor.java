@@ -129,7 +129,7 @@ public class UniformityCheckMeasurementControllerActor
     public void start (final @Nonnull UniformityCheckRequest message)
       {
         log.info("start({})", message);
-        initialize();
+        initializeMeasurement();
         prepareNextMeasurement(message);  
       }
         
@@ -168,9 +168,9 @@ public class UniformityCheckMeasurementControllerActor
      * 
      *
      ******************************************************************************************************************/
-    private void initialize()
+    private void initializeMeasurement()
       {
-        log.info("initialize()");
+        log.info("initializeMeasurement()");
         continueAction.setEnabled(false);
         cancelAction.setEnabled(false);
         presentation = presentationBuilder.get().getPresentation();
