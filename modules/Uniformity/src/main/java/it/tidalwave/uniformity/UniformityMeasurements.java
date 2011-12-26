@@ -22,6 +22,7 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.util.Map.Entry;
@@ -30,6 +31,7 @@ import java.util.TreeMap;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 /***********************************************************************************************************************
  * 
@@ -40,12 +42,29 @@ import lombok.EqualsAndHashCode;
 @Immutable @EqualsAndHashCode
 public class UniformityMeasurements
   {
+    @Nonnegative @Getter
+    private final int columns;
+   
+    @Nonnegative @Getter
+    private final int rows;
+    
     @Nonnull
     private final SortedMap<Position, UniformityMeasurement> measurementMapByPosition;
     
     public UniformityMeasurements (final @Nonnull SortedMap<Position, UniformityMeasurement> measurementMapByPosition)
       {
         this.measurementMapByPosition = new TreeMap<Position, UniformityMeasurement>(measurementMapByPosition);
+        
+        int c = 0, r = 0;
+        
+        for (final Position pos : measurementMapByPosition.keySet())
+          {
+            c = Math.max(c, pos.column + 1);
+            r = Math.max(r, pos.row + 1);
+          }
+        
+        this.columns = c;
+        this.rows = r;
       }
     
     @Nonnull
