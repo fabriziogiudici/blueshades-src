@@ -37,72 +37,54 @@
     </parent>
 
     <groupId>it.tidalwave.blueargyle</groupId>
-    <artifactId>it-tidalwave-uniformity</artifactId>
+    <artifactId>it-tidalwave-blueargyle-commons</artifactId>
     <packaging>nbm</packaging>
     <version>1.0.0-SNAPSHOT</version>
-    <name>blueArgyle - Uniformity</name>
-    <description>blueArgyle - Uniformity</description>
+    <name>blueArgyle - Commons</name>
+    <description>blueArgyle - Commons</description>
     
     <dependencies>
-        <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-argyll</artifactId>
-        </dependency>
-        <dependency>
-            <artifactId>it-tidalwave-colorimetry</artifactId>
-            <groupId>it.tidalwave.blueargyle</groupId>
-        </dependency>
-        <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-blueargyle-commons</artifactId>
-        </dependency>
         <dependency>
             <groupId>it.tidalwave.solidblue</groupId>
             <artifactId>it-tidalwave-actor</artifactId>
         </dependency>
+        
         <dependency>
             <groupId>it.tidalwave.netbeans</groupId>
             <artifactId>it-tidalwave-netbeans-util</artifactId>
         </dependency>
         <dependency>
-            <artifactId>it-tidalwave-util</artifactId>
             <groupId>it.tidalwave.thesefoolishthings</groupId>
+            <artifactId>it-tidalwave-util</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.kenai.nbpwr</groupId>
-            <artifactId>org-slf4j-jdk14</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>org.netbeans.api</groupId>
-            <artifactId>org-openide-awt</artifactId>
+            <artifactId>org-openide-modules</artifactId>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-util</artifactId>
         </dependency>
         
-        <!-- TEST DEPENDENCIES -->
         <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-argyll</artifactId>
-            <classifier>tests</classifier>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>it.tidalwave.netbeans</groupId>
-            <artifactId>it-tidalwave-netbeans-util-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.easytesting</groupId>
-            <artifactId>fest-swing</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.netbeans.api</groupId>
-            <artifactId>org-openide-modules</artifactId>
-            <version>RELEASE70</version>
+            <groupId>com.kenai.nbpwr</groupId>
+            <artifactId>org-slf4j-jdk14</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>nbm-maven-plugin</artifactId>
+                <configuration>
+                    <publicPackages>
+                        <publicPackage>it.tidalwave.blueargyle.util</publicPackage>
+                    </publicPackages>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

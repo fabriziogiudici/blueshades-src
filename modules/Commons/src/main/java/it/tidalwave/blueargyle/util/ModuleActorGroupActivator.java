@@ -20,7 +20,7 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity;
+package it.tidalwave.blueargyle.util;
 
 import javax.annotation.Nonnull;
 import it.tidalwave.actor.spi.ActorGroupActivator;
@@ -55,4 +55,4 @@ public class ModuleActorGroupActivator extends ModuleInstall // FIXME: move to A
       {
         actorActivator.deactivate();
       }
-  } 
+  }

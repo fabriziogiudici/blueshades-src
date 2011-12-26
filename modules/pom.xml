@@ -143,6 +143,7 @@
         <module>ApplicationCustomization</module>
         <module>Argyll</module>
         <module>Colorimetry</module>
+        <module>Commons</module>
         <module>Uniformity</module>
     </modules>
 

@@ -53,6 +53,10 @@
             <groupId>it.tidalwave.blueargyle</groupId>
             <artifactId>it-tidalwave-colorimetry</artifactId>
         </dependency>
+        <dependency>
+            <groupId>it.tidalwave.blueargyle</groupId>
+            <artifactId>it-tidalwave-blueargyle-commons</artifactId>
+        </dependency>
             
         <dependency>
             <groupId>it.tidalwave.netbeans</groupId>
