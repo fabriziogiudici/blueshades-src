@@ -126,9 +126,6 @@
               <ResourceString bundle="it/tidalwave/uniformity/main/ui/impl/netbeans/Bundle.properties" key="UniformityCheckMainPanel.rbLuminance.name" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbLuminanceActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rbTemperature">
           <Properties>
@@ -142,9 +139,6 @@
               <ResourceString bundle="it/tidalwave/uniformity/main/ui/impl/netbeans/Bundle.properties" key="UniformityCheckMainPanel.rbTemperature.name" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbTemperatureActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

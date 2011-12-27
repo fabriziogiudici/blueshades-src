@@ -26,20 +26,10 @@ import javax.annotation.Nonnull;
 import java.awt.BorderLayout;
 import javax.swing.Action;
 import javax.swing.JPanel;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import it.tidalwave.blueargyle.util.MutableProperty;
+import it.tidalwave.blueargyle.util.RadioButtonsSelector;
 import it.tidalwave.uniformity.main.ui.UniformityCheckMainPresentation;
 import static it.tidalwave.blueargyle.util.SafeRunner.*;
-//import static java.util.Collections.*;
-//import javax.annotation.Nonnegative;
-//import javax.swing.AbstractButton;
-//import org.jdesktop.beansbinding.AutoBinding;
-//import static org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.*;
-//import static org.jdesktop.beansbinding.BeanProperty.create;
-//import org.jdesktop.beansbinding.BindingGroup;
-//import static org.jdesktop.beansbinding.Bindings.*;
-//import org.jdesktop.observablecollections.ObservableList;
 
 /***********************************************************************************************************************
  * 
@@ -54,41 +44,21 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
     public static final String PROP_SELECTED_MEASURE = "selectedMeasure";
     
     private final UniformityMeasurementsPanel measurementsPanel = new UniformityMeasurementsPanel();
+ 
+    private final RadioButtonsSelector radioButtonsSelector;
     
-    private MutableProperty<Integer> selectedMeasurement;
-    
-    private final PropertyChangeListener pcl = new PropertyChangeListener() 
-      {
-        @Override
-        public void propertyChange (final @Nonnull PropertyChangeEvent event) 
-          {
-            switch (selectedMeasurement.getValue())
-              {
-                case 0: rbLuminance.setSelected(true); break;  
-                case 1: rbTemperature.setSelected(true); break;  
-              }
-          }
-      };
-
     public UniformityCheckMainPanel() 
       {
         initComponents();
+        radioButtonsSelector = new RadioButtonsSelector(rbLuminance, rbTemperature);
         pnInnerMeasurements.add(measurementsPanel, BorderLayout.CENTER);
-        //        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, org.jdesktop.beansbinding.ELProperty.create("${selectedMeasure}"), rbLuminance, org.jdesktop.beansbinding.BeanProperty.create("iconTextGap"));
-        
       }
 
     @Override
     public void bind (final @Nonnull Action startAction, final @Nonnull MutableProperty<Integer> selectedMeasurement)
       {
         btStart.setAction(startAction);
-        this.selectedMeasurement = selectedMeasurement;
-        this.selectedMeasurement.addPropertyChangeListener(pcl);
-        pcl.propertyChange(null);
-//        final AbstractButton[] buttons = list(bgMeasurement.getElements()).toArray(new AbstractButton[0]);
-//        bindingGroup.addBinding(createAutoBinding(READ_WRITE, buttons[0], null, create("selected"), create("selected1")));
-//        bindingGroup.addBinding(createAutoBinding(READ_WRITE, buttons[1], null, create("selected"), create("selected2")));
-//        bindingGroup.bind();
+        radioButtonsSelector.bind(selectedMeasurement);
       }
     
     @Override
@@ -118,8 +88,7 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
     public void removeNotify()
       {
         btStart.setAction(null);
-        this.selectedMeasurement.removePropertyChangeListener(pcl);
-        selectedMeasurement = null;
+        radioButtonsSelector.unbind();
         super.removeNotify();
       } 
     
@@ -151,20 +120,10 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
         bgMeasurement.add(rbLuminance);
         rbLuminance.setText(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.rbLuminance.text")); // NOI18N
         rbLuminance.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.rbLuminance.name")); // NOI18N
-        rbLuminance.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbLuminanceActionPerformed(evt);
-            }
-        });
 
         bgMeasurement.add(rbTemperature);
         rbTemperature.setText(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.rbTemperature.text")); // NOI18N
         rbTemperature.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.rbTemperature.name")); // NOI18N
-        rbTemperature.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbTemperatureActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout pnMeasurementsLayout = new javax.swing.GroupLayout(pnMeasurements);
         pnMeasurements.setLayout(pnMeasurementsLayout);
@@ -236,20 +195,6 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void rbLuminanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbLuminanceActionPerformed
-        if (selectedMeasurement != null)
-          {
-            selectedMeasurement.setValue(0);  
-          }
-    }//GEN-LAST:event_rbLuminanceActionPerformed
-
-    private void rbTemperatureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbTemperatureActionPerformed
-        if (selectedMeasurement != null)
-          {
-            selectedMeasurement.setValue(1);  
-          }
-    }//GEN-LAST:event_rbTemperatureActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgMeasurement;
