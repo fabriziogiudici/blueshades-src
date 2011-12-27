@@ -44,6 +44,15 @@
             <artifactId>it-tidalwave-netbeans-licensepanel</artifactId>
         </dependency> 
 
+        <dependency>
+            <groupId>it.tidalwave.netbeans</groupId>
+            <artifactId>it-tidalwave-netbeans-lookandfeel</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.netbeans</groupId>
+            <artifactId>it-tidalwave-netbeans-util</artifactId>
+        </dependency>
+
 <!-- Uncomment if you want to expose AutoUpdate services
 
         <dependency>
