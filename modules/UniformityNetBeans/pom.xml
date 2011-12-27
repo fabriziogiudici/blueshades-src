@@ -126,12 +126,6 @@
             <artifactId>fest-swing</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.jdesktop</groupId>
-            <artifactId>beansbinding</artifactId>
-            <version>1.2.1</version>
-            <type>jar</type>
-        </dependency>
     </dependencies>
 
 </project>
