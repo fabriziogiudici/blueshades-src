@@ -35,6 +35,7 @@ import lombok.extern.slf4j.Slf4j;
 import static it.tidalwave.colorimetry.ColorPoint.*;
 import static it.tidalwave.colorimetry.ColorTemperature.*;
 import static it.tidalwave.colorimetry.MeasureWithPrecision.*;
+import java.util.Random;
 
 /***********************************************************************************************************************
  * 
@@ -47,7 +48,7 @@ import static it.tidalwave.colorimetry.MeasureWithPrecision.*;
 @Actor(threadSafe=false) @NotThreadSafe @Slf4j
 public class MockSpotReadActor 
   {
-    private int n = 0;
+    private final Random r = new Random(423526923857L);
     
     /*******************************************************************************************************************
      * 
@@ -61,14 +62,13 @@ public class MockSpotReadActor
         log.info("spotRead({})", message);
 
         Thread.sleep(500);
-        n++;
         
-        final ColorPoints colorPoints = new ColorPoints(colorLab(100.123456 + n, 200.234567 + n, 300.345678 + n), 
-                                                        colorXYZ(400.123456 + n, 500.234567 + n, 600.345678 + n));
+        final ColorPoints colorPoints = new ColorPoints(colorLab(r.nextDouble() * 100, r.nextDouble() * 100, r.nextDouble() * 100), 
+                                                        colorXYZ(r.nextDouble() * 100, r.nextDouble() * 100, r.nextDouble() * 100));
         
-        final MeasureWithPrecision<ColorTemperature> ccTemp        = measureWithPrecision(kelvin(6000 + n), 0. + n / 100.0);
-        final MeasureWithPrecision<ColorTemperature> planckianTemp = measureWithPrecision(kelvin(6100 + n), 1. + n / 100.0);
-        final MeasureWithPrecision<ColorTemperature> daylightTemp  = measureWithPrecision(kelvin(6200 + n), 2. + n / 100.0);
+        final MeasureWithPrecision<ColorTemperature> ccTemp        = measureWithPrecision(kelvin(2000 + r.nextInt(6000)), r.nextDouble() * 10);
+        final MeasureWithPrecision<ColorTemperature> planckianTemp = measureWithPrecision(kelvin(2000 + r.nextInt(6000)), r.nextDouble() * 10);
+        final MeasureWithPrecision<ColorTemperature> daylightTemp  = measureWithPrecision(kelvin(2000 + r.nextInt(6000)), r.nextDouble() * 10);
         
         new MeasurementMessage(colorPoints, ccTemp, planckianTemp, daylightTemp).send();
       }
