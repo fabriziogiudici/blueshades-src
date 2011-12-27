@@ -41,7 +41,7 @@ public class ArgyllActivator extends ActorGroupActivator
         
         if (Boolean.getBoolean("it.tidalwave.blueargyle.mockArgyll"))
           {
-            add(new ActorActivator(MockSpotReadActor.class, 1));
+            add(new ActorActivator(FakeSpotReadActor.class, 1));
           }
         else
           {

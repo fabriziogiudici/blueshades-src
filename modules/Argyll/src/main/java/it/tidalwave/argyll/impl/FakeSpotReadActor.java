@@ -46,7 +46,7 @@ import java.util.Random;
  *
  **********************************************************************************************************************/
 @Actor(threadSafe=false) @NotThreadSafe @Slf4j
-public class MockSpotReadActor 
+public class FakeSpotReadActor 
   {
     private final Random r = new Random(423526923857L);
     

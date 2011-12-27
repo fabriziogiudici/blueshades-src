@@ -32,7 +32,7 @@ import it.tidalwave.actor.spi.ActorGroupActivator;
 import it.tidalwave.argyll.MeasurementMessage;
 import it.tidalwave.argyll.MeasurementRequest;
 import it.tidalwave.argyll.impl.MessageVerifier;
-import it.tidalwave.argyll.impl.MockSpotReadActor;
+import it.tidalwave.argyll.impl.FakeSpotReadActor;
 import it.tidalwave.netbeans.util.test.MockLookup;
 import it.tidalwave.uniformity.Position;
 import it.tidalwave.uniformity.UniformityCheckRequest;
@@ -68,7 +68,7 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
         public TestActivator() 
           {
 //            add(new ActorActivator(SpotReadActor.class, 1)); // to test the real thing
-            add(new ActorActivator(MockSpotReadActor.class, 1));
+            add(new ActorActivator(FakeSpotReadActor.class, 1));
             add(new ActorActivator(UniformityCheckMeasurementControllerActor.class, 1));
           }
       }
