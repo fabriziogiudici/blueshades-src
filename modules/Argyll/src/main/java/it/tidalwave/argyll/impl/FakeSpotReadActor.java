@@ -24,6 +24,7 @@ package it.tidalwave.argyll.impl;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
+import java.util.Random;
 import it.tidalwave.actor.annotation.Actor;
 import it.tidalwave.actor.annotation.MessageListener;
 import it.tidalwave.colorimetry.ColorPoints;
@@ -35,7 +36,6 @@ import lombok.extern.slf4j.Slf4j;
 import static it.tidalwave.colorimetry.ColorPoint.*;
 import static it.tidalwave.colorimetry.ColorTemperature.*;
 import static it.tidalwave.colorimetry.MeasureWithPrecision.*;
-import java.util.Random;
 
 /***********************************************************************************************************************
  * 
@@ -48,6 +48,7 @@ import java.util.Random;
 @Actor(threadSafe=false) @NotThreadSafe @Slf4j
 public class FakeSpotReadActor 
   {
+    // TODO: implement a message that allows to change the seed, for testing.
     private final Random r = new Random(423526923857L);
     
     /*******************************************************************************************************************
