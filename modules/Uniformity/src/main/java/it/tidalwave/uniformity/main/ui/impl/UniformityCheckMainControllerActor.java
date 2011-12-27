@@ -25,12 +25,17 @@ package it.tidalwave.uniformity.main.ui.impl;
 import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
 import javax.annotation.concurrent.NotThreadSafe;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import it.tidalwave.actor.annotation.Actor;
 import it.tidalwave.actor.annotation.MessageListener;
 import it.tidalwave.netbeans.util.Locator;
+import it.tidalwave.blueargyle.util.MutableProperty;
 import it.tidalwave.uniformity.UniformityCheckRequest;
 import it.tidalwave.uniformity.UniformityMeasurement;
 import it.tidalwave.uniformity.UniformityMeasurementMessage;
@@ -52,10 +57,111 @@ import static it.tidalwave.uniformity.Position.*;
 @Actor(threadSafe=false) @NotThreadSafe @Slf4j
 public class UniformityCheckMainControllerActor
   {
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    abstract class MeasurementProcessor
+      {
+        public void render (@Nonnull UniformityMeasurements measurements)
+          {
+            final int columns = measurements.getColumns();
+            final int rows = measurements.getRows();
+            final UniformityMeasurement centerMeasurement = measurements.getAt(pos(columns / 2, rows / 2));
+
+            final String[][] s = new String[rows][columns];
+
+            for (int row = 0; row < rows; row++)  
+              {
+                for (int column = 0; column < columns; column++)
+                  {
+                    s[row][column] = formatMeasurement(centerMeasurement, measurements.getAt(pos(column, row)));
+                  }
+              }
+
+            presentation.renderMeasurements(s);
+          }
+        
+        @Nonnull
+        protected abstract String formatMeasurement (@Nonnull UniformityMeasurement centerMeasurement,
+                                                     @Nonnull UniformityMeasurement measurement);
+      }
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    class TemperatureProcessor extends MeasurementProcessor
+      {
+        @Override @Nonnull
+        protected String formatMeasurement (final @Nonnull UniformityMeasurement centerMeasurement,
+                                            final @Nonnull UniformityMeasurement measurement)
+          {
+            final int centerValue = centerMeasurement.getTemperature().getT();  
+            final int value = measurement.getTemperature().getT();
+            final int delta = value - centerValue;
+            
+            final StringBuilder buffer = new StringBuilder();
+            buffer.append(String.format("%d K", value));
+            
+            if (centerMeasurement != measurement)
+              {
+                buffer.append(String.format("\n\u0394 = %+d K", delta));
+              }
+            
+            return buffer.toString();
+          }
+      }
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    class LuminanceProcessor extends MeasurementProcessor
+      {
+        @Override @Nonnull
+        protected String formatMeasurement (final @Nonnull UniformityMeasurement centerMeasurement,
+                                            final @Nonnull UniformityMeasurement measurement)
+          {
+            final double centerValue = centerMeasurement.getLuminance();  
+            final double value = measurement.getLuminance();
+            final double delta = value - centerValue;
+
+            final StringBuilder buffer = new StringBuilder();
+            buffer.append(String.format("%.0f cd/m\u00b2", value));
+            
+            if (centerMeasurement != measurement)
+              {
+                buffer.append(String.format("\n\u0394 = %+.0f cd/m\u00b2", delta));
+              }
+            
+            return buffer.toString();
+          }
+      }
+    
     private final UniformityCheckMainPresentationProvider presentationBuilder = Locator.find(UniformityCheckMainPresentationProvider.class);
     
     private UniformityCheckMainPresentation presentation;
+
+    private UniformityMeasurements measurements;
     
+    private final MutableProperty<Integer> selectedMeasurement = new MutableProperty<Integer>(0);
+    
+    private final List<MeasurementProcessor> measurementProcessors = new ArrayList<MeasurementProcessor>();
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    private final PropertyChangeListener pcl = new PropertyChangeListener() 
+      {
+        @Override
+        public void propertyChange (final @Nonnull PropertyChangeEvent event) 
+          {
+            refreshPresentation();
+          }
+      };
+
     /*******************************************************************************************************************
      * 
      *
@@ -74,11 +180,23 @@ public class UniformityCheckMainControllerActor
      * 
      *
      ******************************************************************************************************************/
+    public UniformityCheckMainControllerActor()
+      {
+        selectedMeasurement.addPropertyChangeListener(pcl);
+      }
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
     @PostConstruct
     public void initialize()
       {
+        measurementProcessors.clear();
+        measurementProcessors.add(new LuminanceProcessor());
+        measurementProcessors.add(new TemperatureProcessor());
         presentation = presentationBuilder.getPresentation();
-        presentation.bind(startAction);  
+        presentation.bind(startAction, selectedMeasurement);
       }
     
     /*******************************************************************************************************************
@@ -89,24 +207,21 @@ public class UniformityCheckMainControllerActor
     public void renderMeasurements (final @Nonnull UniformityMeasurementMessage message)
       {
         log.info("renderMeasurements({})", message);
-        final UniformityMeasurements measurements = message.getMeasurements();
-        final int columns = measurements.getColumns();
-        final int rows = measurements.getRows();
-        final UniformityMeasurement centerMeasurement = measurements.getAt(pos(columns / 2, rows / 2));
-        final int centerValue = centerMeasurement.getTemperature().getT();  
-        
-        final String[][] s = new String[rows][columns];
-        
-        for (int row = 0; row < rows; row++)
-          {
-            for (int column = 0; column < columns; column++)
-              {
-                final int value = measurements.getAt(pos(column, row)).getTemperature().getT();
-                final int delta = value - centerValue;
-                s[row][column] = String.format("%d K\n\u0394 = %d K", value, delta);
-              }
-          }
-        
-        presentation.renderMeasurements(s);
+        measurements = null; // prevents a double refresh because of changing selectedMeasurement
+        selectedMeasurement.setValue(0);
+        measurements = message.getMeasurements();
+        refreshPresentation();
       }  
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    private void refreshPresentation()
+      {
+        if (measurements != null)
+          {
+            measurementProcessors.get(selectedMeasurement.getValue()).render(measurements);
+          }
+      }
   }

@@ -20,27 +20,47 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.main.ui;
+package it.tidalwave.blueargyle.util;
 
 import javax.annotation.Nonnull;
-import javax.swing.Action;
-import it.tidalwave.blueargyle.util.MutableProperty;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /***********************************************************************************************************************
- * 
- * @stereotype Presentation
  * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public interface UniformityCheckMainPresentation
+@AllArgsConstructor @NoArgsConstructor @EqualsAndHashCode(exclude="pcs") @ToString(exclude="pcs")
+public class MutableProperty<T>
   {
-    public void showUp();
+    private transient final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
     
-    public void dismiss();
+    public static final String PROP_VALUE = "value";
 
-    public void bind (@Nonnull Action startAction, @Nonnull MutableProperty<Integer> selectedMeasurement);
-    
-    public void renderMeasurements (@Nonnull String[][] measurements);
+    @Getter
+    private T value;
+
+    public void setValue (final T value) 
+      {
+        final T oldValue = this.value;
+        this.value = value;
+        pcs.firePropertyChange(PROP_VALUE, oldValue, value);
+      }
+
+    public void addPropertyChangeListener (final @Nonnull PropertyChangeListener listener) 
+      {
+        pcs.addPropertyChangeListener(listener);
+      }
+
+    public void removePropertyChangeListener (final @Nonnull PropertyChangeListener listener)
+      {
+        pcs.removePropertyChangeListener(listener);
+      }
   }
