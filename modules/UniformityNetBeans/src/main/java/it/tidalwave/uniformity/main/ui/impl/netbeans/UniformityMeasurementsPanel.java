@@ -65,5 +65,7 @@ public class UniformityMeasurementsPanel extends JPanel
                 add(label);
               }
           }
+        
+        validate();
       }
   }
