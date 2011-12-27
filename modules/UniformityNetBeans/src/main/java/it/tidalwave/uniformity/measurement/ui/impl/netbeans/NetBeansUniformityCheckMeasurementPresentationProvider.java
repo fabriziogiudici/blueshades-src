@@ -24,10 +24,10 @@ package it.tidalwave.uniformity.measurement.ui.impl.netbeans;
 
 import javax.annotation.Nonnull;
 import org.openide.util.lookup.ServiceProvider;
-import it.tidalwave.blueargyle.util.SafeSwingComponentBuilder;
+import it.tidalwave.blueargyle.util.SwingSafeComponentBuilder;
 import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentationProvider;
 import lombok.extern.slf4j.Slf4j;
-import static it.tidalwave.blueargyle.util.SafeSwingComponentBuilder.*;
+import static it.tidalwave.blueargyle.util.SwingSafeComponentBuilder.*;
 
 /***********************************************************************************************************************
  * 
@@ -40,7 +40,7 @@ import static it.tidalwave.blueargyle.util.SafeSwingComponentBuilder.*;
 @ServiceProvider(service=UniformityCheckMeasurementPresentationProvider.class) @Slf4j
 public class NetBeansUniformityCheckMeasurementPresentationProvider implements UniformityCheckMeasurementPresentationProvider
   {
-    private final SafeSwingComponentBuilder<NetBeansUniformityCheckMeasurementPresentation> builder = builderFor(NetBeansUniformityCheckMeasurementPresentation.class);
+    private final SwingSafeComponentBuilder<NetBeansUniformityCheckMeasurementPresentation> builder = builderFor(NetBeansUniformityCheckMeasurementPresentation.class);
     
     @Override @Nonnull
     public NetBeansUniformityCheckMeasurementPresentation getPresentation()

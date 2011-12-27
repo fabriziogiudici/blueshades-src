@@ -24,10 +24,10 @@ package it.tidalwave.uniformity.main.ui.impl.netbeans;
 
 import javax.annotation.Nonnull;
 import org.openide.util.lookup.ServiceProvider;
-import it.tidalwave.blueargyle.util.SafeSwingComponentBuilder;
+import it.tidalwave.blueargyle.util.SwingSafeComponentBuilder;
 import it.tidalwave.uniformity.main.ui.UniformityCheckMainPresentationProvider;
 import lombok.extern.slf4j.Slf4j;
-import static it.tidalwave.blueargyle.util.SafeSwingComponentBuilder.*;
+import static it.tidalwave.blueargyle.util.SwingSafeComponentBuilder.*;
 
 /***********************************************************************************************************************
  * 
@@ -40,7 +40,7 @@ import static it.tidalwave.blueargyle.util.SafeSwingComponentBuilder.*;
 @ServiceProvider(service=UniformityCheckMainPresentationProvider.class) @Slf4j
 public class NetBeansUniformityCheckMainPresentationProvider implements UniformityCheckMainPresentationProvider
   {
-    private final SafeSwingComponentBuilder<NetBeansUniformityCheckMainPresentation> builder = builderFor(NetBeansUniformityCheckMainPresentation.class);
+    private final SwingSafeComponentBuilder<NetBeansUniformityCheckMainPresentation> builder = builderFor(NetBeansUniformityCheckMainPresentation.class);
     
     @Override @Nonnull
     public NetBeansUniformityCheckMainPresentation getPresentation()

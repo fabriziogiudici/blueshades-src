@@ -29,7 +29,7 @@ import javax.swing.JPanel;
 import it.tidalwave.blueargyle.util.MutableProperty;
 import it.tidalwave.blueargyle.util.RadioButtonsSelector;
 import it.tidalwave.uniformity.main.ui.UniformityCheckMainPresentation;
-import static it.tidalwave.blueargyle.util.SafeRunner.*;
+import static it.tidalwave.blueargyle.util.SwingSafeRunner.*;
 
 /***********************************************************************************************************************
  * 

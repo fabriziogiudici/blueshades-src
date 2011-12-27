@@ -34,7 +34,7 @@ import javax.swing.JPanel;
 import it.tidalwave.uniformity.Position;
 import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation;
 import lombok.extern.slf4j.Slf4j;
-import static it.tidalwave.blueargyle.util.SafeRunner.*;
+import static it.tidalwave.blueargyle.util.SwingSafeRunner.*;
 
 /***********************************************************************************************************************
  * 

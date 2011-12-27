@@ -40,7 +40,7 @@ import static lombok.AccessLevel.PRIVATE;
  *
  **********************************************************************************************************************/
 @RequiredArgsConstructor(access=PRIVATE) @Slf4j
-public class SafeSwingComponentBuilder<T>
+public class SwingSafeComponentBuilder<T>
   {
     @Nonnull
     private final Class<T> componentClass;
@@ -48,9 +48,9 @@ public class SafeSwingComponentBuilder<T>
     private WeakReference<T> presentationRef = new WeakReference<T>(null);
     
     @Nonnull
-    public static <X> SafeSwingComponentBuilder<X> builderFor (final @Nonnull Class<X> componentClass)
+    public static <X> SwingSafeComponentBuilder<X> builderFor (final @Nonnull Class<X> componentClass)
       {
-        return new SafeSwingComponentBuilder<X>(componentClass);  
+        return new SwingSafeComponentBuilder<X>(componentClass);  
       }
     
     @Nonnull
