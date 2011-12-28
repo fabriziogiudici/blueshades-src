@@ -70,7 +70,7 @@ public class ActionVerifier // FIXME: rename to ActionTestHelper
     private Action action;
     
     @Getter
-    private Verifier spy; // FIXME: change name
+    private Verifier verifier;
     
     /*******************************************************************************************************************
      * 
@@ -87,7 +87,7 @@ public class ActionVerifier // FIXME: rename to ActionTestHelper
               {
                 final Boolean enabled = (Boolean)event.getNewValue();
                 log.info("action \"{}\".setEnabled({})", action.getValue(Action.NAME), enabled);
-                spy.setEnabled(enabled);   
+                verifier.setEnabled(enabled);   
               }
           }
       };
@@ -99,7 +99,7 @@ public class ActionVerifier // FIXME: rename to ActionTestHelper
     @Nonnull
     public ActionVerifier()
       {
-        spy = mock(Verifier.class);
+        verifier = mock(Verifier.class);
       }
     
     /*******************************************************************************************************************
@@ -117,7 +117,7 @@ public class ActionVerifier // FIXME: rename to ActionTestHelper
             public void actionPerformed (final @Nonnull ActionEvent event) 
               {
                 log.info("Performing action on \"{}\" ...", delegate.getValue(Action.NAME));
-                spy.actionPerformed(event);
+                verifier.actionPerformed(event);
                 delegate.actionPerformed(event);
               }
           };
