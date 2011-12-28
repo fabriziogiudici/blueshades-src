@@ -84,7 +84,7 @@ public class NetBeansUniformityCheckMeasurementControllerActorTest extends Unifo
     protected UniformityCheckMeasurementPresentation createPresentation()
       {
         final UniformityCheckMeasurementPresentation presentation = spy(new NetBeansUniformityCheckMeasurementPresentation());
-        doAnswer(continueActionTestHelper.performActionWithDelay(500)).when(presentation).renderSensorPlacementInvitationCellAt(any(Position.class));
+        doAnswer(clickContinue).when(presentation).renderSensorPlacementInvitationCellAt(any(Position.class));
         return presentation;
       }
   }
