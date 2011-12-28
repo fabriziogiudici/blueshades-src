@@ -83,7 +83,6 @@
             <artifactId>org-netbeans-core-nativeaccess</artifactId>
         </dependency>
 
-        <!-- TODO: add dependencies here -->
     </dependencies>
 
     <build>
