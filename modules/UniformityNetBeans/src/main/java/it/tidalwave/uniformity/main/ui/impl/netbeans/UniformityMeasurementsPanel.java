@@ -25,9 +25,13 @@ package it.tidalwave.uniformity.main.ui.impl.netbeans;
 import javax.annotation.Nonnull;
 import java.awt.Color;
 import java.awt.GridLayout;
+import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import it.tidalwave.swing.JPanelWithBackground;
+import it.tidalwave.swing.FixedAspectRatioLayout;
+import it.tidalwave.swing.ProportionalLayout;
 
 /***********************************************************************************************************************
  * 
@@ -39,16 +43,28 @@ import javax.swing.JPanel;
  **********************************************************************************************************************/
 public class UniformityMeasurementsPanel extends JPanel
   {
+    private ImageIcon backgroundImage;
+    
     private final GridLayout gridLayout = new GridLayout();
+    
+    private final JPanelWithBackground displayPanel = new JPanelWithBackground(new ProportionalLayout(0.035, 0.034, 0.045, 0.30));
+    
+    private final JPanel innerPanel = new JPanel(gridLayout);
     
     public UniformityMeasurementsPanel()
       {
-        setLayout(gridLayout);
+        backgroundImage = new ImageIcon(getClass().getResource("/it/tidalwave/uniformity/netbeans/2000px-Flat_monitor.svg.png"));
+        displayPanel.setBackgroundImage(backgroundImage);
+        final double imageAspectRatio = (double)backgroundImage.getIconWidth() / backgroundImage.getIconHeight();
+        setLayout(new FixedAspectRatioLayout(imageAspectRatio));
+        add(displayPanel);
+        displayPanel.add(innerPanel);
+        setOpaque(false);
       }
-    
+        
     public void renderMeasurements (final @Nonnull String[][] measurements)
       {
-        removeAll();
+        innerPanel.removeAll();
         gridLayout.setColumns(measurements[0].length);
         gridLayout.setRows(measurements.length);
         gridLayout.setHgap(8);
@@ -62,10 +78,10 @@ public class UniformityMeasurementsPanel extends JPanel
                 label.setHorizontalAlignment(SwingConstants.CENTER);
                 label.setOpaque(true);
                 label.setBackground(Color.WHITE);
-                add(label);
+                innerPanel.add(label);
               }
           }
         
-        validate();
+        innerPanel.validate();
       }
   }
