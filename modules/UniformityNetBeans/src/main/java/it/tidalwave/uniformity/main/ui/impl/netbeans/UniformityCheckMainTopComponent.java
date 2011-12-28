@@ -22,7 +22,6 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.main.ui.impl.netbeans;
 
-import javax.annotation.Nonnull;
 import java.awt.BorderLayout;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
@@ -32,6 +31,7 @@ import org.openide.util.NbBundle;
 import it.tidalwave.actor.spi.ActorGroupActivator;
 import it.tidalwave.uniformity.UniformityCheckMainControllerActorActivator;
 import lombok.Getter;
+import static org.openide.windows.TopComponent.*;
 
 /***********************************************************************************************************************
  * 
@@ -58,19 +58,19 @@ import lombok.Getter;
 @TopComponent.OpenActionRegistration(displayName = "#CTL_UniformityCheckMainAction", preferredID = "UniformityCheckMainTopComponent")
 public final class UniformityCheckMainTopComponent extends TopComponent
   {
-    @Getter @Nonnull
-    private final UniformityCheckMainPanel panel;
+    @Getter
+    private final UniformityCheckMainPanel panel = new UniformityCheckMainPanel();
     
     private final ActorGroupActivator activator = new UniformityCheckMainControllerActorActivator();
             
     public UniformityCheckMainTopComponent() 
       {
         setName(NbBundle.getMessage(UniformityCheckMainTopComponent.class, "CTL_UniformityCheckMainTopComponent"));
-        putClientProperty(TopComponent.PROP_DRAGGING_DISABLED, Boolean.TRUE);
-        putClientProperty(TopComponent.PROP_MAXIMIZATION_DISABLED, Boolean.TRUE);
-        putClientProperty(TopComponent.PROP_UNDOCKING_DISABLED, Boolean.TRUE);
+        putClientProperty(PROP_DRAGGING_DISABLED, true);
+        putClientProperty(PROP_MAXIMIZATION_DISABLED, true);
+        putClientProperty(PROP_UNDOCKING_DISABLED, true);
         setLayout(new BorderLayout());
-        add(panel = new UniformityCheckMainPanel(), BorderLayout.CENTER);
+        add(panel, BorderLayout.CENTER);
       }
 
     @Override
