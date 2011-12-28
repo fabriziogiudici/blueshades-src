@@ -54,7 +54,7 @@ class ActionProxy implements Action
   }
 
 @Slf4j
-public class ActionVerifier // FIXME: rename to ActionTestHelper
+public class ActionTestHelper
   {
     /*******************************************************************************************************************
      * 
@@ -97,7 +97,7 @@ public class ActionVerifier // FIXME: rename to ActionTestHelper
      *
      ******************************************************************************************************************/
     @Nonnull
-    public ActionVerifier()
+    public ActionTestHelper()
       {
         verifier = mock(Verifier.class);
       }

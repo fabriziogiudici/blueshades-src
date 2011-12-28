@@ -41,7 +41,7 @@ public class UniformityCheckMeasurementControllerActorTest extends UniformityChe
     protected UniformityCheckMeasurementPresentation createPresentation()
       {
         final UniformityCheckMeasurementPresentation presentation = mock(UniformityCheckMeasurementPresentation.class);
-        doAnswer(continueActionTracker.performActionWithDelay(500)).when(presentation).renderSensorPlacementInvitationCellAt(any(Position.class));
+        doAnswer(continueActionTestHelper.performActionWithDelay(500)).when(presentation).renderSensorPlacementInvitationCellAt(any(Position.class));
         return presentation;
       }
   }

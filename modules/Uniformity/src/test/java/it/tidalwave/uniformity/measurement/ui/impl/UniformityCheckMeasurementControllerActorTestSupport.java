@@ -63,7 +63,7 @@ import org.mockito.internal.invocation.Invocation;
  **********************************************************************************************************************/
 @Slf4j
 public abstract class UniformityCheckMeasurementControllerActorTestSupport
-  {
+  {    
     /*******************************************************************************************************************
      * 
      *
@@ -88,9 +88,9 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
     
     private UniformityCheckMeasurementPresentation presentation;
     
-    protected ActionVerifier continueActionTracker;
+    protected ActionTestHelper continueActionTestHelper;
     
-    protected ActionVerifier cancelActionTracker;
+    protected ActionTestHelper cancelActionTestHelper;
     
     /*******************************************************************************************************************
      * 
@@ -102,8 +102,8 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
         public Void answer (final @Nonnull InvocationOnMock invocation)
           throws Throwable 
           {
-            final Action continueActionDecorator = continueActionTracker.attach((Action)invocation.getArguments()[0]);
-            final Action cancelActionDecorator = cancelActionTracker.attach((Action)invocation.getArguments()[1]);
+            final Action continueActionDecorator = continueActionTestHelper.attach((Action)invocation.getArguments()[0]);
+            final Action cancelActionDecorator = cancelActionTestHelper.attach((Action)invocation.getArguments()[1]);
             
             // FIXME: below is tricky because we also call some Mockito stuff not part of the public API
 //            invocation.getMethod().invoke(invocation.getMock(), continueActionDecorator, cancelActionDecorator);
@@ -139,8 +139,8 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
       {
         messageVerifier = new MessageVerifier();
         messageVerifier.initialize();
-        continueActionTracker = new ActionVerifier();
-        cancelActionTracker = new ActionVerifier();
+        continueActionTestHelper = new ActionTestHelper();
+        cancelActionTestHelper = new ActionTestHelper();
         
         presentation = createPresentation();
         doAnswer(storeActionReferences).when(presentation).bind(any(Action.class), any(Action.class));
@@ -148,7 +148,7 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
         doReturn(presentation).when(presentationBuilder).getPresentation();
         MockLookup.setInstances(presentationBuilder);
         
-        inOrder = inOrder(presentation, continueActionTracker.getVerifier(), cancelActionTracker.getVerifier());
+        inOrder = inOrder(presentation, continueActionTestHelper.getVerifier(), cancelActionTestHelper.getVerifier());
         
         testActivator = new TestActivator();
         testActivator.activate();
@@ -163,13 +163,13 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
       {
         messageVerifier.dispose();
         testActivator.deactivate();
-        continueActionTracker.dispose();
-        cancelActionTracker.dispose();
+        continueActionTestHelper.dispose();
+        cancelActionTestHelper.dispose();
         messageVerifier = null;
         presentation = null;
         testActivator = null;
-        continueActionTracker = null;
-        cancelActionTracker = null;
+        continueActionTestHelper = null;
+        cancelActionTestHelper = null;
         MockLookup.reset();
       }
     
@@ -186,17 +186,17 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
         
         inOrder.verify(presentation).bind(any(Action.class), any(Action.class));
         inOrder.verify(presentation).setGridSize(eq(3), eq(3));
-        inOrder.verify(continueActionTracker.getVerifier()).setEnabled(eq(false));
-        inOrder.verify(cancelActionTracker.getVerifier()).setEnabled(eq(false));
+        inOrder.verify(continueActionTestHelper.getVerifier()).setEnabled(eq(false));
+        inOrder.verify(cancelActionTestHelper.getVerifier()).setEnabled(eq(false));
         inOrder.verify(presentation).showUp();
         inOrder.verify(presentation).renderControlPanelAt(eq(pos(0, 0)));
         
         inOrder.verify(presentation).renderSensorPlacementInvitationCellAt(eq(pos(1, 1)));
-        inOrder.verify(continueActionTracker.getVerifier()).setEnabled(eq(true));
-        inOrder.verify(cancelActionTracker.getVerifier()).setEnabled(eq(true));
-        inOrder.verify(continueActionTracker.getVerifier()).actionPerformed(any(ActionEvent.class));
-        inOrder.verify(continueActionTracker.getVerifier()).setEnabled(eq(false));
-        inOrder.verify(cancelActionTracker.getVerifier()).setEnabled(eq(false));
+        inOrder.verify(continueActionTestHelper.getVerifier()).setEnabled(eq(true));
+        inOrder.verify(cancelActionTestHelper.getVerifier()).setEnabled(eq(true));
+        inOrder.verify(continueActionTestHelper.getVerifier()).actionPerformed(any(ActionEvent.class));
+        inOrder.verify(continueActionTestHelper.getVerifier()).setEnabled(eq(false));
+        inOrder.verify(cancelActionTestHelper.getVerifier()).setEnabled(eq(false));
         inOrder.verify(presentation).renderWhiteCellAt(                    eq(pos(1, 1)));
         inOrder.verify(presentation).showMeasureInProgress();
         inOrder.verify(presentation).hideMeasureInProgress();
@@ -204,11 +204,11 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
 
         inOrder.verify(presentation).renderSensorPlacementInvitationCellAt(eq(pos(0, 0)));
         inOrder.verify(presentation).renderControlPanelAt(                 eq(pos(0, 1)));
-        inOrder.verify(continueActionTracker.getVerifier()).setEnabled(eq(true));
-        inOrder.verify(cancelActionTracker.getVerifier()).setEnabled(eq(true));
-        inOrder.verify(continueActionTracker.getVerifier()).actionPerformed(any(ActionEvent.class));
-        inOrder.verify(continueActionTracker.getVerifier()).setEnabled(eq(false));
-        inOrder.verify(cancelActionTracker.getVerifier()).setEnabled(eq(false));
+        inOrder.verify(continueActionTestHelper.getVerifier()).setEnabled(eq(true));
+        inOrder.verify(cancelActionTestHelper.getVerifier()).setEnabled(eq(true));
+        inOrder.verify(continueActionTestHelper.getVerifier()).actionPerformed(any(ActionEvent.class));
+        inOrder.verify(continueActionTestHelper.getVerifier()).setEnabled(eq(false));
+        inOrder.verify(cancelActionTestHelper.getVerifier()).setEnabled(eq(false));
         inOrder.verify(presentation).renderWhiteCellAt(                    eq(pos(0, 0)));
         inOrder.verify(presentation).showMeasureInProgress();
         inOrder.verify(presentation).hideMeasureInProgress();
@@ -217,77 +217,77 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
         inOrder.verify(presentation).renderEmptyCellAt(                    eq(pos(0, 1)));
 
         inOrder.verify(presentation).renderSensorPlacementInvitationCellAt(eq(pos(1, 0)));
-        inOrder.verify(continueActionTracker.getVerifier()).setEnabled(eq(true));
-        inOrder.verify(cancelActionTracker.getVerifier()).setEnabled(eq(true));
-        inOrder.verify(continueActionTracker.getVerifier()).actionPerformed(any(ActionEvent.class));
-        inOrder.verify(continueActionTracker.getVerifier()).setEnabled(eq(false));
-        inOrder.verify(cancelActionTracker.getVerifier()).setEnabled(eq(false));
+        inOrder.verify(continueActionTestHelper.getVerifier()).setEnabled(eq(true));
+        inOrder.verify(cancelActionTestHelper.getVerifier()).setEnabled(eq(true));
+        inOrder.verify(continueActionTestHelper.getVerifier()).actionPerformed(any(ActionEvent.class));
+        inOrder.verify(continueActionTestHelper.getVerifier()).setEnabled(eq(false));
+        inOrder.verify(cancelActionTestHelper.getVerifier()).setEnabled(eq(false));
         inOrder.verify(presentation).renderWhiteCellAt(                    eq(pos(1, 0)));
         inOrder.verify(presentation).showMeasureInProgress();
         inOrder.verify(presentation).hideMeasureInProgress();
         inOrder.verify(presentation).renderMeasurementCellAt(              eq(pos(1, 0)), eq("Luminance: 6 cd/m\u00b2"), eq("White point: 6507 K"));
 
         inOrder.verify(presentation).renderSensorPlacementInvitationCellAt(eq(pos(2, 0)));
-        inOrder.verify(continueActionTracker.getVerifier()).setEnabled(eq(true));
-        inOrder.verify(cancelActionTracker.getVerifier()).setEnabled(eq(true));
-        inOrder.verify(continueActionTracker.getVerifier()).actionPerformed(any(ActionEvent.class));
-        inOrder.verify(continueActionTracker.getVerifier()).setEnabled(eq(false));
-        inOrder.verify(cancelActionTracker.getVerifier()).setEnabled(eq(false));
+        inOrder.verify(continueActionTestHelper.getVerifier()).setEnabled(eq(true));
+        inOrder.verify(cancelActionTestHelper.getVerifier()).setEnabled(eq(true));
+        inOrder.verify(continueActionTestHelper.getVerifier()).actionPerformed(any(ActionEvent.class));
+        inOrder.verify(continueActionTestHelper.getVerifier()).setEnabled(eq(false));
+        inOrder.verify(cancelActionTestHelper.getVerifier()).setEnabled(eq(false));
         inOrder.verify(presentation).renderWhiteCellAt(                    eq(pos(2, 0)));
         inOrder.verify(presentation).showMeasureInProgress();
         inOrder.verify(presentation).hideMeasureInProgress();
         inOrder.verify(presentation).renderMeasurementCellAt(              eq(pos(2, 0)), eq("Luminance: 31 cd/m\u00b2"), eq("White point: 7284 K"));
 
         inOrder.verify(presentation).renderSensorPlacementInvitationCellAt(eq(pos(0, 1)));
-        inOrder.verify(continueActionTracker.getVerifier()).setEnabled(eq(true));
-        inOrder.verify(cancelActionTracker.getVerifier()).setEnabled(eq(true));
-        inOrder.verify(continueActionTracker.getVerifier()).actionPerformed(any(ActionEvent.class));
-        inOrder.verify(continueActionTracker.getVerifier()).setEnabled(eq(false));
-        inOrder.verify(cancelActionTracker.getVerifier()).setEnabled(eq(false));
+        inOrder.verify(continueActionTestHelper.getVerifier()).setEnabled(eq(true));
+        inOrder.verify(cancelActionTestHelper.getVerifier()).setEnabled(eq(true));
+        inOrder.verify(continueActionTestHelper.getVerifier()).actionPerformed(any(ActionEvent.class));
+        inOrder.verify(continueActionTestHelper.getVerifier()).setEnabled(eq(false));
+        inOrder.verify(cancelActionTestHelper.getVerifier()).setEnabled(eq(false));
         inOrder.verify(presentation).renderWhiteCellAt(                    eq(pos(0, 1)));
         inOrder.verify(presentation).showMeasureInProgress();
         inOrder.verify(presentation).hideMeasureInProgress();
         inOrder.verify(presentation).renderMeasurementCellAt(              eq(pos(0, 1)), eq("Luminance: 37 cd/m\u00b2"), eq("White point: 4102 K"));
 
         inOrder.verify(presentation).renderSensorPlacementInvitationCellAt(eq(pos(2, 1)));
-        inOrder.verify(continueActionTracker.getVerifier()).setEnabled(eq(true));
-        inOrder.verify(cancelActionTracker.getVerifier()).setEnabled(eq(true));
-        inOrder.verify(continueActionTracker.getVerifier()).actionPerformed(any(ActionEvent.class));
-        inOrder.verify(continueActionTracker.getVerifier()).setEnabled(eq(false));
-        inOrder.verify(cancelActionTracker.getVerifier()).setEnabled(eq(false));
+        inOrder.verify(continueActionTestHelper.getVerifier()).setEnabled(eq(true));
+        inOrder.verify(cancelActionTestHelper.getVerifier()).setEnabled(eq(true));
+        inOrder.verify(continueActionTestHelper.getVerifier()).actionPerformed(any(ActionEvent.class));
+        inOrder.verify(continueActionTestHelper.getVerifier()).setEnabled(eq(false));
+        inOrder.verify(cancelActionTestHelper.getVerifier()).setEnabled(eq(false));
         inOrder.verify(presentation).renderWhiteCellAt(                    eq(pos(2, 1)));
         inOrder.verify(presentation).showMeasureInProgress();
         inOrder.verify(presentation).hideMeasureInProgress();
         inOrder.verify(presentation).renderMeasurementCellAt(              eq(pos(2, 1)), eq("Luminance: 81 cd/m\u00b2"), eq("White point: 6456 K"));
 
         inOrder.verify(presentation).renderSensorPlacementInvitationCellAt(eq(pos(0, 2)));
-        inOrder.verify(continueActionTracker.getVerifier()).setEnabled(eq(true));
-        inOrder.verify(cancelActionTracker.getVerifier()).setEnabled(eq(true));
-        inOrder.verify(continueActionTracker.getVerifier()).actionPerformed(any(ActionEvent.class));
-        inOrder.verify(continueActionTracker.getVerifier()).setEnabled(eq(false));
-        inOrder.verify(cancelActionTracker.getVerifier()).setEnabled(eq(false));
+        inOrder.verify(continueActionTestHelper.getVerifier()).setEnabled(eq(true));
+        inOrder.verify(cancelActionTestHelper.getVerifier()).setEnabled(eq(true));
+        inOrder.verify(continueActionTestHelper.getVerifier()).actionPerformed(any(ActionEvent.class));
+        inOrder.verify(continueActionTestHelper.getVerifier()).setEnabled(eq(false));
+        inOrder.verify(cancelActionTestHelper.getVerifier()).setEnabled(eq(false));
         inOrder.verify(presentation).renderWhiteCellAt(                    eq(pos(0, 2)));
         inOrder.verify(presentation).showMeasureInProgress();
         inOrder.verify(presentation).hideMeasureInProgress();
         inOrder.verify(presentation).renderMeasurementCellAt(              eq(pos(0, 2)), eq("Luminance: 97 cd/m\u00b2"), eq("White point: 3813 K"));
         
         inOrder.verify(presentation).renderSensorPlacementInvitationCellAt(eq(pos(1, 2)));
-        inOrder.verify(continueActionTracker.getVerifier()).setEnabled(eq(true));
-        inOrder.verify(cancelActionTracker.getVerifier()).setEnabled(eq(true));
-        inOrder.verify(continueActionTracker.getVerifier()).actionPerformed(any(ActionEvent.class));
-        inOrder.verify(continueActionTracker.getVerifier()).setEnabled(eq(false));
-        inOrder.verify(cancelActionTracker.getVerifier()).setEnabled(eq(false));
+        inOrder.verify(continueActionTestHelper.getVerifier()).setEnabled(eq(true));
+        inOrder.verify(cancelActionTestHelper.getVerifier()).setEnabled(eq(true));
+        inOrder.verify(continueActionTestHelper.getVerifier()).actionPerformed(any(ActionEvent.class));
+        inOrder.verify(continueActionTestHelper.getVerifier()).setEnabled(eq(false));
+        inOrder.verify(cancelActionTestHelper.getVerifier()).setEnabled(eq(false));
         inOrder.verify(presentation).renderWhiteCellAt(                    eq(pos(1, 2)));
         inOrder.verify(presentation).showMeasureInProgress();
         inOrder.verify(presentation).hideMeasureInProgress();
         inOrder.verify(presentation).renderMeasurementCellAt(              eq(pos(1, 2)), eq("Luminance: 33 cd/m\u00b2"), eq("White point: 2879 K"));
 
         inOrder.verify(presentation).renderSensorPlacementInvitationCellAt(eq(pos(2, 2)));
-        inOrder.verify(continueActionTracker.getVerifier()).setEnabled(eq(true));
-        inOrder.verify(cancelActionTracker.getVerifier()).setEnabled(eq(true));
-        inOrder.verify(continueActionTracker.getVerifier()).actionPerformed(any(ActionEvent.class));
-        inOrder.verify(continueActionTracker.getVerifier()).setEnabled(eq(false));
-        inOrder.verify(cancelActionTracker.getVerifier()).setEnabled(eq(false));
+        inOrder.verify(continueActionTestHelper.getVerifier()).setEnabled(eq(true));
+        inOrder.verify(cancelActionTestHelper.getVerifier()).setEnabled(eq(true));
+        inOrder.verify(continueActionTestHelper.getVerifier()).actionPerformed(any(ActionEvent.class));
+        inOrder.verify(continueActionTestHelper.getVerifier()).setEnabled(eq(false));
+        inOrder.verify(cancelActionTestHelper.getVerifier()).setEnabled(eq(false));
         inOrder.verify(presentation).renderWhiteCellAt(                    eq(pos(2, 2)));
         inOrder.verify(presentation).showMeasureInProgress();
         inOrder.verify(presentation).hideMeasureInProgress();
