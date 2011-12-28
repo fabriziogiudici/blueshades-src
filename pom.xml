@@ -32,6 +32,7 @@
         <netbeans.brandingToken>blueargyle</netbeans.brandingToken>
         <netbeans.cluster>blueargyle</netbeans.cluster>
 
+        <actors.version>1.0.1</actors.version>
         <openbluesky.version>0.14</openbluesky.version>
         <thesefoolishthings.version>1.19</thesefoolishthings.version>
         <libraries.version>1.1.5</libraries.version>

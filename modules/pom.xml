@@ -51,7 +51,7 @@
             <dependency>
                 <groupId>it.tidalwave.solidblue</groupId>
                 <artifactId>it-tidalwave-actor</artifactId>
-                <version>1.0.1-SNAPSHOT</version>
+                <version>${actors.version}</version>
             </dependency>
             
             <dependency>
@@ -132,11 +132,11 @@
             <artifactId>mockito-all</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
+<!--        <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <scope>test</scope>
-        </dependency>
+        </dependency>-->
     </dependencies>
 
     <modules>
