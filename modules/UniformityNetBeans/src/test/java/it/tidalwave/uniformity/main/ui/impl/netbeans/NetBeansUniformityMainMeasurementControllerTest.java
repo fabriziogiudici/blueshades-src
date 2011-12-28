@@ -43,6 +43,6 @@ public class NetBeansUniformityMainMeasurementControllerTest
         frame.add(presentation);
         frame.setSize(800, 600);
         frame.setVisible(true);
-        Thread.sleep(99999);
+        Thread.sleep(10000);
       }
   }
