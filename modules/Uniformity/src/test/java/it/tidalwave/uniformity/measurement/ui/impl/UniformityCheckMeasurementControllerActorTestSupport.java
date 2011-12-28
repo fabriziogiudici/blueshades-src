@@ -68,7 +68,7 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
      * 
      *
      ******************************************************************************************************************/
-    protected static class TestActivator extends ActorGroupActivator
+    private static class TestActivator extends ActorGroupActivator
       {
         public TestActivator() 
           {
@@ -78,15 +78,15 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
           }
       }
     
-    protected TestActivator testActivator;
+    private TestActivator testActivator;
     
-    protected InOrder inOrder;
+    private InOrder inOrder;
     
-    protected MessageVerifier messageVerifier;
+    private MessageVerifier messageVerifier;
     
-    protected UniformityCheckMeasurementPresentationProvider presentationBuilder;
+    private UniformityCheckMeasurementPresentationProvider presentationBuilder;
     
-    protected UniformityCheckMeasurementPresentation presentation;
+    private UniformityCheckMeasurementPresentation presentation;
     
     protected ActionVerifier continueActionTracker;
     
@@ -96,7 +96,7 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
      * 
      *
      ******************************************************************************************************************/
-    protected final Answer<Void> storeActionReferences = new Answer<Void>()
+    private final Answer<Void> storeActionReferences = new Answer<Void>()
       {
         @Override
         public Void answer (final @Nonnull InvocationOnMock invocation)
@@ -104,6 +104,8 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
           {
             final Action continueActionDecorator = continueActionTracker.attach((Action)invocation.getArguments()[0]);
             final Action cancelActionDecorator = cancelActionTracker.attach((Action)invocation.getArguments()[1]);
+            
+            // FIXME: below is tricky because we also call some Mockito stuff not part of the public API
 //            invocation.getMethod().invoke(invocation.getMock(), continueActionDecorator, cancelActionDecorator);
             ((Invocation)invocation).getRawArguments()[0] = continueActionDecorator;
             ((Invocation)invocation).getRawArguments()[1] = cancelActionDecorator;
@@ -125,7 +127,8 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
      * 
      *
      ******************************************************************************************************************/
-    protected abstract void createPresentation();
+    @Nonnull
+    protected abstract UniformityCheckMeasurementPresentation createPresentation();
     
     /*******************************************************************************************************************
      * 
@@ -139,7 +142,10 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
         continueActionTracker = new ActionVerifier();
         cancelActionTracker = new ActionVerifier();
         
-        createPresentation();
+        presentation = createPresentation();
+        doAnswer(storeActionReferences).when(presentation).bind(any(Action.class), any(Action.class));
+        presentationBuilder = mock(UniformityCheckMeasurementPresentationProvider.class);
+        doReturn(presentation).when(presentationBuilder).getPresentation();
         MockLookup.setInstances(presentationBuilder);
         
         inOrder = inOrder(presentation, continueActionTracker.getSpy(), cancelActionTracker.getSpy());

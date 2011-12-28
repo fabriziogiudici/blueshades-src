@@ -22,10 +22,9 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.measurement.ui.impl;
 
-import javax.swing.Action;
-import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation;
+import javax.annotation.Nonnull;
 import it.tidalwave.uniformity.Position;
-import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentationProvider;
+import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation;
 import lombok.extern.slf4j.Slf4j;
 import static org.mockito.Mockito.*;
 
@@ -38,17 +37,11 @@ import static org.mockito.Mockito.*;
 @Slf4j
 public class UniformityCheckMeasurementControllerActorTest extends UniformityCheckMeasurementControllerActorTestSupport
   {
-    /*******************************************************************************************************************
-     * 
-     *
-     ******************************************************************************************************************/
-    @Override
-    protected void createPresentation()
+    @Override @Nonnull
+    protected UniformityCheckMeasurementPresentation createPresentation()
       {
-        presentation = mock(UniformityCheckMeasurementPresentation.class);
-        doAnswer(storeActionReferences).when(presentation).bind(any(Action.class), any(Action.class));
+        final UniformityCheckMeasurementPresentation presentation = mock(UniformityCheckMeasurementPresentation.class);
         doAnswer(continueActionTracker.performActionWithDelay(500)).when(presentation).renderSensorPlacementInvitationCellAt(any(Position.class));
-        presentationBuilder = mock(UniformityCheckMeasurementPresentationProvider.class);
-        doReturn(presentation).when(presentationBuilder).getPresentation();
+        return presentation;
       }
   }
