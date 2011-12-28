@@ -50,6 +50,7 @@ import org.testng.annotations.Test;
 import org.mockito.InOrder;
 import org.mockito.internal.matchers.Equals;
 import static it.tidalwave.uniformity.Position.pos;import static it.tidalwave.colorimetry.ColorTemperature.kelvin;
+import it.tidalwave.netbeans.util.test.TestLoggerSetup;
 import java.util.ArrayList;
 import java.util.List;
 import static org.mockito.Mockito.*;
@@ -103,6 +104,8 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
     @BeforeMethod
     public void setupFixture()
       {
+        TestLoggerSetup.setupLogging(getClass());
+          
         messageVerifier = new MessageVerifier();
         messageVerifier.initialize();
         actions = new ActionsTestHelper();
