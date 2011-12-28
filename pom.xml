@@ -11,7 +11,7 @@
 
     <groupId>it.tidalwave.blueargyle</groupId>
     <artifactId>it-tidalwave-blueargyle</artifactId>
-    <version>1.0-ALPHA-2-SNAPSHOT</version>
+    <version>1.0-ALPHA-2</version>
     <packaging>pom</packaging>
     <name>blueArgyle (master)</name>
     <description>blueArgyle - a Java UI for Argyll</description>
@@ -64,60 +64,60 @@
             <dependency>
                 <groupId>it.tidalwave.blueargyle</groupId>
                 <artifactId>it-tidalwave-blueargyle-application-customization</artifactId>
-                <version>1.0-ALPHA-2-SNAPSHOT</version>
+                <version>1.0-ALPHA-2</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueargyle</groupId>
                 <artifactId>it-tidalwave-blueargyle-branding</artifactId>
-                <version>1.0-ALPHA-2-SNAPSHOT</version>
+                <version>1.0-ALPHA-2</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueargyle</groupId>
                 <artifactId>it-tidalwave-blueargyle-application</artifactId>
-                <version>1.0-ALPHA-2-SNAPSHOT</version>
+                <version>1.0-ALPHA-2</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueargyle</groupId>
                 <artifactId>it-tidalwave-argyll</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>1.0.0</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueargyle</groupId>
                 <artifactId>it-tidalwave-argyll</artifactId>
                 <classifier>tests</classifier>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>1.0.0</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueargyle</groupId>
                 <artifactId>it-tidalwave-colorimetry</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>1.0.0</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueargyle</groupId>
                 <artifactId>it-tidalwave-uniformity</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>1.0.0</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueargyle</groupId>
                 <artifactId>it-tidalwave-uniformity</artifactId>
                 <classifier>tests</classifier>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>1.0.0</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueargyle</groupId>
                 <artifactId>it-tidalwave-uniformity-netbeans</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>1.0.0</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueargyle</groupId>
                 <artifactId>it-tidalwave-blueargyle-commons</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>1.0.0</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueargyle</groupId>
                 <artifactId>it-tidalwave-blueargyle-commons</artifactId>
                 <classifier>tests</classifier>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>1.0.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
