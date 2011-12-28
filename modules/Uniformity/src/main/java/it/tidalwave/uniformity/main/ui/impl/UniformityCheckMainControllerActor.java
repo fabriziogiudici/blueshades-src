@@ -211,6 +211,7 @@ public class UniformityCheckMainControllerActor
         selectedMeasurement.setValue(0);
         measurements = message.getMeasurements();
         refreshPresentation();
+        startAction.setEnabled(true);
       }  
     
     /*******************************************************************************************************************
