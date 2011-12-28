@@ -47,7 +47,7 @@ import static org.mockito.Mockito.*;
  *
  **********************************************************************************************************************/
 @Slf4j
-public class ActionsTestHelper 
+public class ActionsTestHelper
   {
     @RequiredArgsConstructor
     public static class On<T> // syntactic sugar
@@ -155,7 +155,7 @@ public class ActionsTestHelper
      *
      ******************************************************************************************************************/
     @Nonnull
-    public Verifier getVerifierFor (final @Nonnull String actionName)
+    public Verifier action (final @Nonnull String actionName)
       {
         return findHelperByName(actionName).getVerifier();  
       }    
