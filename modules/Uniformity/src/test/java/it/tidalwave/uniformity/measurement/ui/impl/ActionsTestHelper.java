@@ -155,7 +155,7 @@ public class ActionsTestHelper
      *
      ******************************************************************************************************************/
     @Nonnull
-    public Verifier action (final @Nonnull String actionName)
+    public Verifier getVerifierFor (final @Nonnull String actionName)
       {
         return findHelperByName(actionName).getVerifier();  
       }    
