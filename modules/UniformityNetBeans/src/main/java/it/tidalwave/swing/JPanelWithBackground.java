@@ -24,11 +24,13 @@ package it.tidalwave.swing;
 
 import javax.annotation.Nonnull;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.LayoutManager;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import lombok.Getter;
 import lombok.Setter;
+import static java.awt.RenderingHints.*;
 
 /***********************************************************************************************************************
  * 
@@ -58,7 +60,9 @@ public class JPanelWithBackground extends JPanel
         final int height = getHeight();
         g.fillRect(0, 0, width, height);
 
-//        ((Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        ((Graphics2D)g).setRenderingHint(KEY_INTERPOLATION, VALUE_INTERPOLATION_BILINEAR);
+        ((Graphics2D)g).setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON);
+        ((Graphics2D)g).setRenderingHint(KEY_RENDERING, VALUE_RENDER_QUALITY);
         g.drawImage(backgroundImage.getImage(), 0, 0, width, height, null);
         paintComponents(g);
       }
