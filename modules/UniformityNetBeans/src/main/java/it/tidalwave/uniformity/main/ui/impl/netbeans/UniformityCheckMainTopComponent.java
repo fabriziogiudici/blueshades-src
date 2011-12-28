@@ -45,7 +45,9 @@ import lombok.Getter;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@TopComponent.Description(preferredID = "UniformityCheckMainTopComponent", persistenceType = TopComponent.PERSISTENCE_NEVER)
+@TopComponent.Description(preferredID = "UniformityCheckMainTopComponent", 
+                          iconBase="it/tidalwave/uniformity/main/ui/impl/netbeans/Uniformity-24.png",
+                          persistenceType = TopComponent.PERSISTENCE_NEVER)
 @TopComponent.Registration(mode = "editor", openAtStartup = false)
 @ActionID(category = "Tools", id = "it.tidalwave.uniformity.main.ui.impl.swing.UniformityCheckMainTopComponent")
 @ActionReferences(value =
