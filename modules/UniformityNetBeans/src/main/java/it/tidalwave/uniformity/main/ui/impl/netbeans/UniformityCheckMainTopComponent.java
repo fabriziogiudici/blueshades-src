@@ -22,15 +22,13 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.main.ui.impl.netbeans;
 
-import java.awt.BorderLayout;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
 import org.openide.windows.TopComponent;
 import org.openide.util.NbBundle;
-import it.tidalwave.actor.spi.ActorGroupActivator;
+import it.tidalwave.actor.netbeans.ActorTopComponent;
 import it.tidalwave.uniformity.UniformityCheckMainControllerActorActivator;
-import lombok.Getter;
 import static org.openide.windows.TopComponent.*;
 
 /***********************************************************************************************************************
@@ -56,32 +54,14 @@ import static org.openide.windows.TopComponent.*;
     @ActionReference(path = "Toolbars/Standard", position = 2500)
   })
 @TopComponent.OpenActionRegistration(displayName = "#CTL_UniformityCheckMainAction", preferredID = "UniformityCheckMainTopComponent")
-public final class UniformityCheckMainTopComponent extends TopComponent
+public final class UniformityCheckMainTopComponent extends ActorTopComponent<UniformityCheckMainPanel>
   {
-    @Getter
-    private final UniformityCheckMainPanel panel = new UniformityCheckMainPanel();
-    
-    private final ActorGroupActivator activator = new UniformityCheckMainControllerActorActivator();
-            
     public UniformityCheckMainTopComponent() 
       {
+        super(UniformityCheckMainControllerActorActivator.class, UniformityCheckMainPanel.class);
         setName(NbBundle.getMessage(UniformityCheckMainTopComponent.class, "CTL_UniformityCheckMainTopComponent"));
         putClientProperty(PROP_DRAGGING_DISABLED, true);
         putClientProperty(PROP_MAXIMIZATION_DISABLED, true);
         putClientProperty(PROP_UNDOCKING_DISABLED, true);
-        setLayout(new BorderLayout());
-        add(panel, BorderLayout.CENTER);
-      }
-
-    @Override
-    public void componentOpened()
-      {
-        activator.activate();
-      }
-
-    @Override
-    public void componentClosed() 
-      {
-        activator.deactivate();
       }
   }

@@ -20,50 +20,63 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.main.ui.impl.netbeans;
+package it.tidalwave.actor.netbeans;
 
-import org.openide.windows.WindowManager;
-import it.tidalwave.uniformity.main.ui.UniformityCheckMainPresentation;
-import lombok.Delegate;
+import javax.annotation.Nonnull;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import org.openide.windows.TopComponent;
+import it.tidalwave.actor.spi.ActorGroupActivator;
+import lombok.Getter;
 
 /***********************************************************************************************************************
- * 
- * @stereotype Presentation
  * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class NetBeansUniformityCheckMainPresentation implements UniformityCheckMainPresentation
+public class ActorTopComponent<T extends Component> extends TopComponent
   {
-    private static interface DelegateExclusions
+    private final ActorGroupActivator activator;
+            
+    @Getter
+    private final T content;
+    
+    protected ActorTopComponent (final @Nonnull Class<? extends ActorGroupActivator> actorGroupActivatorClass,
+                                 final @Nonnull Class<T> contentClass) 
       {
-        public void showUp();
-        public void dismiss();    
-      }
-    
-    protected final UniformityCheckMainTopComponent topComponent;
-    
-    @Delegate(types=UniformityCheckMainPresentation.class, excludes=DelegateExclusions.class)
-    protected final UniformityCheckMainPanel panel;
-    
-    public NetBeansUniformityCheckMainPresentation()
-      {
-        topComponent = (UniformityCheckMainTopComponent)WindowManager.getDefault().findTopComponent("UniformityCheckMainTopComponent");
-        panel = topComponent.getContent();
-      }
-    
-    @Override
-    public void showUp() 
-      {
-        panel.showUp();
-        topComponent.requestActive();
+        activator = instantiate(actorGroupActivatorClass);
+        content = instantiate(contentClass);
+        setLayout(new BorderLayout());
+        add(content, BorderLayout.CENTER);
       }
 
     @Override
-    public void dismiss()
+    public void componentOpened()
       {
-        topComponent.close();
-        panel.dismiss();
+        activator.activate();
+      }
+
+    @Override
+    public void componentClosed() 
+      {
+        activator.deactivate();
+      }
+    
+    @Nonnull
+    private <X> X instantiate (final @Nonnull Class<X> clazz)
+      {
+        try
+          {
+            return clazz.newInstance();
+          } 
+        catch (InstantiationException e)
+          {
+            throw new RuntimeException(e);
+          } 
+        catch (IllegalAccessException e) 
+          {
+            throw new RuntimeException(e);
+          }
       }
   }
