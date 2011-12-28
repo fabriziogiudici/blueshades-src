@@ -26,8 +26,12 @@ import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Component;
 import java.awt.GridLayout;
+import java.awt.Point;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -240,6 +244,8 @@ public class UniformityCheckMeasurementPresentationPanel extends JPanel implemen
     @Override
     public void showMeasureInProgress()
       {
+        setCursor(createBlankCursor());
+        
         if (controlPanel != null)
           { 
             controlPanel.setProgressIndicatorVisible(true);  
@@ -258,6 +264,8 @@ public class UniformityCheckMeasurementPresentationPanel extends JPanel implemen
           { 
             controlPanel.setProgressIndicatorVisible(false);  
           }
+        
+        setCursor(Cursor.getDefaultCursor());
       }  
       
     /*******************************************************************************************************************
@@ -279,5 +287,16 @@ public class UniformityCheckMeasurementPresentationPanel extends JPanel implemen
         cell[position.row][position.column].removeAll();
         cell[position.row][position.column].add(component, BorderLayout.CENTER);
         validate();
+      }
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    @Nonnull
+    private static Cursor createBlankCursor()
+      {
+        final BufferedImage blank = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+        return Toolkit.getDefaultToolkit().createCustomCursor(blank, new Point(0, 0), "blank cursor");
       }
   }
