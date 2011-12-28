@@ -22,17 +22,11 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.measurement.ui.impl;
 
-import javax.annotation.Nonnull;
-import java.util.Timer;
-import java.util.TimerTask;
 import javax.swing.Action;
 import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentation;
 import it.tidalwave.uniformity.Position;
 import it.tidalwave.uniformity.measurement.ui.UniformityCheckMeasurementPresentationProvider;
 import lombok.extern.slf4j.Slf4j;
-import org.testng.annotations.AfterMethod;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 import static org.mockito.Mockito.*;
 
 /***********************************************************************************************************************
@@ -44,55 +38,6 @@ import static org.mockito.Mockito.*;
 @Slf4j
 public class UniformityCheckMeasurementControllerActorTest extends UniformityCheckMeasurementControllerActorTestSupport
   {
-    private Action continueAction;
-    
-    /*******************************************************************************************************************
-     * 
-     *
-     ******************************************************************************************************************/
-    private final Answer<Void> clickContinue = new Answer<Void>()
-      {
-        @Override
-        public Void answer (final @Nonnull InvocationOnMock invocation) 
-          {
-            new Timer().schedule(new TimerTask() 
-              {
-                @Override
-                public void run() 
-                  {
-                    log.info("Clicking on 'Continue'...");
-                    continueAction.actionPerformed(null);
-                  }
-              }, 1000);
-
-            return null;
-          }
-      };
-
-    /*******************************************************************************************************************
-     * 
-     *
-     ******************************************************************************************************************/
-    private final Answer<Void> storeActionReferences = new Answer<Void>()
-      {
-        @Override
-        public Void answer (final @Nonnull InvocationOnMock invocation) 
-          {
-            continueAction = (Action)invocation.getArguments()[0];
-            return null;
-          }
-      };
-
-    /*******************************************************************************************************************
-     * 
-     *
-     ******************************************************************************************************************/
-    @AfterMethod
-    public void cleanupAction()
-      {
-        continueAction = null;
-      }
-    
     /*******************************************************************************************************************
      * 
      *
@@ -102,7 +47,7 @@ public class UniformityCheckMeasurementControllerActorTest extends UniformityChe
       {
         presentation = mock(UniformityCheckMeasurementPresentation.class);
         doAnswer(storeActionReferences).when(presentation).bind(any(Action.class), any(Action.class));
-        doAnswer(clickContinue).when(presentation).renderSensorPlacementInvitationCellAt(any(Position.class));
+        doAnswer(continueActionTracker.performActionWithDelay(500)).when(presentation).renderSensorPlacementInvitationCellAt(any(Position.class));
         presentationBuilder = mock(UniformityCheckMeasurementPresentationProvider.class);
         doReturn(presentation).when(presentationBuilder).getPresentation();
       }

@@ -99,7 +99,6 @@ public class UniformityCheckMeasurementControllerActor
         @Override
         public void actionPerformed (final @Nonnull ActionEvent event) 
           {
-            setEnabled(false);
             doMeasurement();
           }
       };
@@ -113,7 +112,6 @@ public class UniformityCheckMeasurementControllerActor
         @Override
         public void actionPerformed (final @Nonnull ActionEvent event) 
           {
-            setEnabled(false);
             cancel();
           }
       };
@@ -169,13 +167,13 @@ public class UniformityCheckMeasurementControllerActor
     private void initializeMeasurement()
       {
         log.info("initializeMeasurement()");
-        continueAction.setEnabled(false);
-        cancelAction.setEnabled(false);
         presentation = presentationBuilder.get().getPresentation();
         computePositions();
         measurementMapByPosition.clear();
         presentation.bind(continueAction, cancelAction);
         presentation.setGridSize(COLUMNS, ROWS);
+        continueAction.setEnabled(false);
+        cancelAction.setEnabled(false);
         presentation.showUp();
         presentation.renderControlPanelAt(DEFAULT_CONTROL_PANEL_POSITION);
       }
@@ -187,6 +185,8 @@ public class UniformityCheckMeasurementControllerActor
     private void doMeasurement()
       {
         log.info("doMeasurement()");
+        continueAction.setEnabled(false);
+        cancelAction.setEnabled(false);
         collaborationPendingUserIntervention.resume(suspensionToken, new Runnable()
           {
             @Override
@@ -208,6 +208,8 @@ public class UniformityCheckMeasurementControllerActor
      ******************************************************************************************************************/
     private void cancel()
       {
+        cancelAction.setEnabled(false);
+        
         if (suspensionToken != null)
           {
             collaborationPendingUserIntervention.resume(suspensionToken, new Runnable()
