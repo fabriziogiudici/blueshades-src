@@ -6,13 +6,13 @@
     <parent>
         <groupId>it.tidalwave.blueargyle</groupId>
         <artifactId>it-tidalwave-blueargyle-modules</artifactId>
-        <version>1.0-ALPHA-2</version>
+        <version>1.0-ALPHA-3-SNAPSHOT</version>
         <relativePath>../modules/pom.xml</relativePath>
     </parent>
 
     <groupId>it.tidalwave.blueargyle</groupId>
     <artifactId>it-tidalwave-blueargyle-application</artifactId>
-    <version>1.0-ALPHA-2</version>
+    <version>1.0-ALPHA-3-SNAPSHOT</version>
     <packaging>nbm-application</packaging>
     <name>blueArgyle (application)</name>
     <description>blueArgyle (application)</description>

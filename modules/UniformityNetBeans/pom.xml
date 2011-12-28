@@ -32,14 +32,14 @@
     <parent>
         <groupId>it.tidalwave.blueargyle</groupId>
         <artifactId>it-tidalwave-blueargyle-modules</artifactId>
-        <version>1.0-ALPHA-2</version>
+        <version>1.0-ALPHA-3-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>it.tidalwave.blueargyle</groupId>
     <artifactId>it-tidalwave-uniformity-netbeans</artifactId>
     <packaging>nbm</packaging>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <name>blueArgyle - Uniformity (NetBeans UI)</name>
     <description>blueArgyle - Uniformity (NetBeans UI)</description>
 
