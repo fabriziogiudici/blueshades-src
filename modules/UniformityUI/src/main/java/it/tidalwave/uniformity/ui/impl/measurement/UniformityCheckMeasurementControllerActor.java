@@ -105,10 +105,6 @@ public class UniformityCheckMeasurementControllerActor
     
     private final Action continueAction = new ActionMessageAdapter("Continue", new DoMeasurementMessage()); 
     
-    /*******************************************************************************************************************
-     * 
-     *
-     ******************************************************************************************************************/
     private final Action cancelAction = new ActionMessageAdapter("Cancel", new CancelMessage()); 
     
     /*******************************************************************************************************************
