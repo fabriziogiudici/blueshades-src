@@ -20,24 +20,27 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.ui;
+package it.tidalwave.uniformity.ui.main;
 
-import it.tidalwave.actor.spi.ActorActivator;
-import it.tidalwave.actor.spi.ActorGroupActivator;
-import it.tidalwave.uniformity.ui.impl.main.UniformityCheckMainControllerActor;
-import it.tidalwave.uniformity.ui.impl.measurement.UniformityCheckMeasurementControllerActor;
+import javax.annotation.Nonnull;
+import javax.swing.Action;
+import it.tidalwave.blueargyle.util.MutableProperty;
 
 /***********************************************************************************************************************
- *
+ * 
+ * @stereotype Presentation
+ * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class UniformityCheckActorActivator extends ActorGroupActivator
+public interface UniformityCheckMainPresentation
   {
-    public UniformityCheckActorActivator()
-      {
-        add(new ActorActivator(UniformityCheckMainControllerActor.class, 1));
-        add(new ActorActivator(UniformityCheckMeasurementControllerActor.class, 1));
-      }
+    public void showUp();
+    
+    public void dismiss();
+
+    public void bind (@Nonnull Action startAction, @Nonnull MutableProperty<Integer> selectedMeasurement);
+    
+    public void renderMeasurements (@Nonnull String[][] measurements);
   }

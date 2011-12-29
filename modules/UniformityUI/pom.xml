@@ -114,8 +114,8 @@
                 <configuration>
                     <publicPackages>
                         <publicPackage>it.tidalwave.uniformity.ui</publicPackage>
-                        <publicPackage>it.tidalwave.uniformity.main.ui</publicPackage>
-                        <publicPackage>it.tidalwave.uniformity.measurement.ui</publicPackage>
+                        <publicPackage>it.tidalwave.uniformity.ui.main</publicPackage>
+                        <publicPackage>it.tidalwave.uniformity.ui.measurement</publicPackage>
                     </publicPackages>
                 </configuration>
             </plugin>

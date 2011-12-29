@@ -20,24 +20,28 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.ui;
+package it.tidalwave.uniformity.ui.impl.measurement;
 
-import it.tidalwave.actor.spi.ActorActivator;
-import it.tidalwave.actor.spi.ActorGroupActivator;
-import it.tidalwave.uniformity.ui.impl.main.UniformityCheckMainControllerActor;
-import it.tidalwave.uniformity.ui.impl.measurement.UniformityCheckMeasurementControllerActor;
+import javax.annotation.Nonnull;
+import it.tidalwave.uniformity.Position;
+import it.tidalwave.uniformity.ui.measurement.UniformityCheckMeasurementPresentation;
+import lombok.extern.slf4j.Slf4j;
+import static org.mockito.Mockito.*;
 
 /***********************************************************************************************************************
- *
+ * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class UniformityCheckActorActivator extends ActorGroupActivator
+@Slf4j
+public class UniformityCheckMeasurementControllerActorTest extends UniformityCheckMeasurementControllerActorTestSupport
   {
-    public UniformityCheckActorActivator()
+    @Override @Nonnull
+    protected UniformityCheckMeasurementPresentation createPresentation()
       {
-        add(new ActorActivator(UniformityCheckMainControllerActor.class, 1));
-        add(new ActorActivator(UniformityCheckMeasurementControllerActor.class, 1));
+        final UniformityCheckMeasurementPresentation presentation = mock(UniformityCheckMeasurementPresentation.class);
+        doAnswer(actions.performActionWithDelay("Continue", 500)).when(presentation).renderSensorPlacementInvitationCellAt(any(Position.class));
+        return presentation;
       }
   }

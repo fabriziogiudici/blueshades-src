@@ -20,24 +20,29 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.ui;
+package it.tidalwave.uniformity.ui.impl.main.netbeans;
 
-import it.tidalwave.actor.spi.ActorActivator;
-import it.tidalwave.actor.spi.ActorGroupActivator;
-import it.tidalwave.uniformity.ui.impl.main.UniformityCheckMainControllerActor;
-import it.tidalwave.uniformity.ui.impl.measurement.UniformityCheckMeasurementControllerActor;
+import javax.swing.JFrame;
+import org.testng.annotations.Test;
 
 /***********************************************************************************************************************
- *
+ * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class UniformityCheckActorActivator extends ActorGroupActivator
+public class NetBeansUniformityMainMeasurementControllerTest
   {
-    public UniformityCheckActorActivator()
+    @Test
+    public void run() 
+      throws InterruptedException
       {
-        add(new ActorActivator(UniformityCheckMainControllerActor.class, 1));
-        add(new ActorActivator(UniformityCheckMeasurementControllerActor.class, 1));
+        final JFrame frame = new JFrame();
+        final UniformityCheckMainPanel presentation = new UniformityCheckMainPanel();
+        presentation.renderMeasurements(new String[][] {{"a","b","c"},{"a","b","c"},{"a","b","c"}});
+        frame.add(presentation);
+        frame.setSize(800, 600);
+        frame.setVisible(true);
+        Thread.sleep(10000);
       }
   }

@@ -20,24 +20,31 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.ui;
+package it.tidalwave.uniformity.ui.impl.main.netbeans;
 
-import it.tidalwave.actor.spi.ActorActivator;
-import it.tidalwave.actor.spi.ActorGroupActivator;
-import it.tidalwave.uniformity.ui.impl.main.UniformityCheckMainControllerActor;
-import it.tidalwave.uniformity.ui.impl.measurement.UniformityCheckMeasurementControllerActor;
+import javax.annotation.Nonnull;
+import org.openide.util.lookup.ServiceProvider;
+import it.tidalwave.blueargyle.util.SwingSafeComponentBuilder;
+import it.tidalwave.uniformity.ui.main.UniformityCheckMainPresentationProvider;
+import lombok.extern.slf4j.Slf4j;
+import static it.tidalwave.blueargyle.util.SwingSafeComponentBuilder.*;
 
 /***********************************************************************************************************************
- *
+ * 
+ * @stereotype Factory
+ * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class UniformityCheckActorActivator extends ActorGroupActivator
+@ServiceProvider(service=UniformityCheckMainPresentationProvider.class) @Slf4j
+public class NetBeansUniformityCheckMainPresentationProvider implements UniformityCheckMainPresentationProvider
   {
-    public UniformityCheckActorActivator()
+    private final SwingSafeComponentBuilder<NetBeansUniformityCheckMainPresentation> builder = builderFor(NetBeansUniformityCheckMainPresentation.class);
+    
+    @Override @Nonnull
+    public NetBeansUniformityCheckMainPresentation getPresentation()
       {
-        add(new ActorActivator(UniformityCheckMainControllerActor.class, 1));
-        add(new ActorActivator(UniformityCheckMeasurementControllerActor.class, 1));
+        return builder.getInstance();
       }
   }

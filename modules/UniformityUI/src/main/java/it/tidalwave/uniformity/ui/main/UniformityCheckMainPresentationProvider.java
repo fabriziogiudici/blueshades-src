@@ -20,24 +20,20 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.ui;
+package it.tidalwave.uniformity.ui.main;
 
-import it.tidalwave.actor.spi.ActorActivator;
-import it.tidalwave.actor.spi.ActorGroupActivator;
-import it.tidalwave.uniformity.ui.impl.main.UniformityCheckMainControllerActor;
-import it.tidalwave.uniformity.ui.impl.measurement.UniformityCheckMeasurementControllerActor;
+import javax.annotation.Nonnull;
 
 /***********************************************************************************************************************
- *
+ * 
+ * @stereotype Factory
+ * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class UniformityCheckActorActivator extends ActorGroupActivator
+public interface UniformityCheckMainPresentationProvider 
   {
-    public UniformityCheckActorActivator()
-      {
-        add(new ActorActivator(UniformityCheckMainControllerActor.class, 1));
-        add(new ActorActivator(UniformityCheckMeasurementControllerActor.class, 1));
-      }
+    @Nonnull
+    public UniformityCheckMainPresentation getPresentation();
   }

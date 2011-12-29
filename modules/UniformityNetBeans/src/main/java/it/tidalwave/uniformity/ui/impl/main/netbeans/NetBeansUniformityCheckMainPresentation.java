@@ -20,24 +20,50 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.ui;
+package it.tidalwave.uniformity.ui.impl.main.netbeans;
 
-import it.tidalwave.actor.spi.ActorActivator;
-import it.tidalwave.actor.spi.ActorGroupActivator;
-import it.tidalwave.uniformity.ui.impl.main.UniformityCheckMainControllerActor;
-import it.tidalwave.uniformity.ui.impl.measurement.UniformityCheckMeasurementControllerActor;
+import org.openide.windows.WindowManager;
+import it.tidalwave.uniformity.ui.main.UniformityCheckMainPresentation;
+import lombok.Delegate;
 
 /***********************************************************************************************************************
- *
+ * 
+ * @stereotype Presentation
+ * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class UniformityCheckActorActivator extends ActorGroupActivator
+public class NetBeansUniformityCheckMainPresentation implements UniformityCheckMainPresentation
   {
-    public UniformityCheckActorActivator()
+    private static interface DelegateExclusions
       {
-        add(new ActorActivator(UniformityCheckMainControllerActor.class, 1));
-        add(new ActorActivator(UniformityCheckMeasurementControllerActor.class, 1));
+        public void showUp();
+        public void dismiss();    
+      }
+    
+    protected final UniformityCheckMainTopComponent topComponent;
+    
+    @Delegate(types=UniformityCheckMainPresentation.class, excludes=DelegateExclusions.class)
+    protected final UniformityCheckMainPanel panel;
+    
+    public NetBeansUniformityCheckMainPresentation()
+      {
+        topComponent = (UniformityCheckMainTopComponent)WindowManager.getDefault().findTopComponent("UniformityCheckMainTopComponent");
+        panel = topComponent.getContent();
+      }
+    
+    @Override
+    public void showUp() 
+      {
+        panel.showUp();
+        topComponent.requestActive();
+      }
+
+    @Override
+    public void dismiss()
+      {
+        topComponent.close();
+        panel.dismiss();
       }
   }
