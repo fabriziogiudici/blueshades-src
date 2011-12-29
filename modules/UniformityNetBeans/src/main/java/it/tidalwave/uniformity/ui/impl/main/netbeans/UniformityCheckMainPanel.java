@@ -27,10 +27,10 @@ import java.awt.BorderLayout;
 import javax.swing.Action;
 import javax.swing.JPanel;
 import it.tidalwave.swing.ActionAdapter;
+import it.tidalwave.swing.RadioButtonsSelector;
 import it.tidalwave.blueargyle.util.MutableProperty;
-import it.tidalwave.blueargyle.util.RadioButtonsSelector;
 import it.tidalwave.uniformity.ui.main.UniformityCheckMainPresentation;
-import static it.tidalwave.blueargyle.util.SwingSafeRunner.*;
+import static it.tidalwave.swing.SwingSafeRunner.*;
 
 /***********************************************************************************************************************
  * 

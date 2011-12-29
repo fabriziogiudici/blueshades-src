@@ -20,7 +20,7 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.blueargyle.util;
+package it.tidalwave.swing;
 
 import javax.annotation.Nonnull;
 import java.beans.PropertyChangeEvent;
@@ -31,6 +31,7 @@ import java.util.List;
 import javax.swing.JRadioButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import it.tidalwave.blueargyle.util.MutableProperty;
 
 /***********************************************************************************************************************
  * 

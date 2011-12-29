@@ -20,11 +20,11 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.blueargyle.util;
+package it.tidalwave.swing;
 
-import java.awt.EventQueue;
 import java.lang.reflect.InvocationTargetException;
 import javax.annotation.Nonnull;
+import java.awt.EventQueue;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

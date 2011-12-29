@@ -24,10 +24,10 @@ package it.tidalwave.uniformity.ui.impl.measurement.netbeans;
 
 import javax.annotation.Nonnull;
 import org.openide.util.lookup.ServiceProvider;
-import it.tidalwave.blueargyle.util.SwingSafeComponentBuilder;
+import it.tidalwave.swing.SwingSafeComponentBuilder;
 import it.tidalwave.uniformity.ui.measurement.UniformityCheckMeasurementPresentationProvider;
 import lombok.extern.slf4j.Slf4j;
-import static it.tidalwave.blueargyle.util.SwingSafeComponentBuilder.*;
+import static it.tidalwave.swing.SwingSafeComponentBuilder.*;
 
 /***********************************************************************************************************************
  * 

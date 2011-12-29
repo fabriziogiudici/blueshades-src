@@ -28,7 +28,7 @@ import java.awt.GraphicsEnvironment;
 import javax.swing.JFrame;
 import it.tidalwave.uniformity.ui.measurement.UniformityCheckMeasurementPresentation;
 import lombok.Delegate;
-import static it.tidalwave.blueargyle.util.SwingSafeRunner.*;
+import static it.tidalwave.swing.SwingSafeRunner.*;
 
 /***********************************************************************************************************************
  * 
