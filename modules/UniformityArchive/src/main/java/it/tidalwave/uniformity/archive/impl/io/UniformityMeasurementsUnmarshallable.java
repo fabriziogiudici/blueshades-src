@@ -65,7 +65,7 @@ public class UniformityMeasurementsUnmarshallable implements Unmarshallable
             throw new EOFException();  
           }
         
-        final Scanner scanner = new Scanner(s.trim()).useDelimiter(" ");
+        final Scanner scanner = new Scanner(s.trim()).useDelimiter(";");
         final DateTime dateTime = ISODateTimeFormat.dateTimeNoMillis().parseDateTime(scanner.next());
         
         String displayName = "";
