@@ -153,28 +153,9 @@ public class UniformityCheckMeasurementControllerActor
     public void failure (final @Nonnull ArgyllFailureMessage message) 
       {
         log.info("failure({})", message);
-        new CancelMessage().send();
-//        cancel(); // FIXME: harsh, do a notification on the UI too
+        new CancelMessage().send(); // FIXME: harsh, do a notification on the UI too
       }
         
-    /*******************************************************************************************************************
-     * 
-     *
-     ******************************************************************************************************************/
-    private void initializeMeasurement()
-      {
-        log.info("initializeMeasurement()");
-        presentation = presentationBuilder.get().getPresentation();
-        computePositions();
-        measurementMapByPosition.clear();
-        presentation.bind(continueAction, cancelAction);
-        presentation.setGridSize(COLUMNS, ROWS);
-        continueAction.setEnabled(false);
-        cancelAction.setEnabled(false);
-        presentation.showUp();
-        presentation.renderControlPanelAt(DEFAULT_CONTROL_PANEL_POSITION);
-      }
-    
     /*******************************************************************************************************************
      * 
      *
@@ -207,6 +188,7 @@ public class UniformityCheckMeasurementControllerActor
     @MessageListener
     private void cancel (final @Nonnull CancelMessage message)
       {
+        log.info("cancel()");
         cancelAction.setEnabled(false);
         
         if (suspensionToken != null)
@@ -226,6 +208,24 @@ public class UniformityCheckMeasurementControllerActor
           }
 
         presentation.dismiss();
+      }
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    private void initializeMeasurement()
+      {
+        log.info("initializeMeasurement()");
+        presentation = presentationBuilder.get().getPresentation();
+        computePositions();
+        measurementMapByPosition.clear();
+        presentation.bind(continueAction, cancelAction);
+        presentation.setGridSize(COLUMNS, ROWS);
+        continueAction.setEnabled(false);
+        cancelAction.setEnabled(false);
+        presentation.showUp();
+        presentation.renderControlPanelAt(DEFAULT_CONTROL_PANEL_POSITION);
       }
     
     /*******************************************************************************************************************
