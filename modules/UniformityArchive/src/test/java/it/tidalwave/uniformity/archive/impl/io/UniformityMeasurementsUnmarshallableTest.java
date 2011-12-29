@@ -51,10 +51,10 @@ public class UniformityMeasurementsUnmarshallableTest
     public void must_properly_unmarshal() 
       throws IOException
       {
-        final String s = "2011-12-29T02:21:02+01:00 D='\\Display0' "
-                       + "L[0,0]=67 T[0,0]=2753 L[1,0]=6 T[1,0]=6507 L[2,0]=31 T[2,0]=7284 "
-                       + "L[0,1]=37 T[0,1]=4102 L[1,1]=63 T[1,1]=5925 L[2,1]=81 T[2,1]=6456 "
-                       + "L[0,2]=97 T[0,2]=3813 L[1,2]=33 T[1,2]=2879 L[2,2]=19 T[2,2]=6071\n";  
+        final String s = "2011-12-29T02:21:02+01:00 ; D='\\Display0' ; "
+                       + "L[0,0]= 67 ; T[0,0]= 2753 ; L[1,0]=  6 ; T[1,0]= 6507 ; L[2,0]= 31 ; T[2,0]= 7284 "
+                       + "L[0,1]= 37 ; T[0,1]= 4102 ; L[1,1]= 63 ; T[1,1]= 5925 ; L[2,1]= 81 ; T[2,1]= 6456 "
+                       + "L[0,2]= 97 ; T[0,2]= 3813 ; L[1,2]= 33 ; T[1,2]= 2879 ; L[2,2]= 19 ; T[2,2]= 6071\n";  
         
         final InputStream is = new ByteArrayInputStream(s.getBytes());
         final UniformityMeasurements measurements = fixture.unmarshal(is);

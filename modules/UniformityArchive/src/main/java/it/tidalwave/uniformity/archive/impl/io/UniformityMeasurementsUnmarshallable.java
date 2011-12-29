@@ -66,7 +66,7 @@ public class UniformityMeasurementsUnmarshallable implements Unmarshallable
           }
         
         final Scanner scanner = new Scanner(s.trim()).useDelimiter(";");
-        final DateTime dateTime = ISODateTimeFormat.dateTimeNoMillis().parseDateTime(scanner.next());
+        final DateTime dateTime = ISODateTimeFormat.dateTimeNoMillis().parseDateTime(scanner.next().trim());
         
         String displayName = "";
         int luminance = 0;
