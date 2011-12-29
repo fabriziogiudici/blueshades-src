@@ -195,7 +195,7 @@ public class UniformityCheckMeasurementControllerActor
                 public void run() 
                   {
                     // do nothing, but it will make the Collaboration to complete
-                    // TODO: perhaps a specific method on Collaboration would make sense (such as terminate()).
+                    // TODO: perhaps a specific method on Collaboration would make sense (such as collaborationPendingUserIntervention.terminate()).
                   }
               });
 
