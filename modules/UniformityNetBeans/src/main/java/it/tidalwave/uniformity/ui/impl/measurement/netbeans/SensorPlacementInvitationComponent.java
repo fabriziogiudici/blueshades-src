@@ -25,6 +25,7 @@ package it.tidalwave.uniformity.ui.impl.measurement.netbeans;
 import javax.annotation.Nonnull;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JComponent;
@@ -40,6 +41,7 @@ public class SensorPlacementInvitationComponent extends JComponent
   {
     public SensorPlacementInvitationComponent()
       {
+        assert EventQueue.isDispatchThread();
         setBackground(UniformityCheckMeasurementPresentationPanel.DEFAULT_BACKGROUND);
         setOpaque(true);
       }
@@ -47,6 +49,7 @@ public class SensorPlacementInvitationComponent extends JComponent
     @Override
     public void paint (final @Nonnull Graphics graphics)
       {
+        assert EventQueue.isDispatchThread();
         final int w = getWidth();
         final int h = getHeight();
         final Graphics2D g2 = (Graphics2D)graphics;
@@ -73,6 +76,5 @@ public class SensorPlacementInvitationComponent extends JComponent
         g2.drawLine(cx, cy + er, cx, cy + cr);
         g2.drawLine(cx - er, cy, cx - cr, cy);
         g2.drawLine(cx + er, cy, cx + cr, cy);
-
       }
   }

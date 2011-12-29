@@ -22,8 +22,9 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.ui.impl.measurement.netbeans;
 
-import java.awt.Color;
 import javax.annotation.Nonnull;
+import java.awt.Color;
+import java.awt.EventQueue;
 import javax.swing.JPanel;
 
 /***********************************************************************************************************************
@@ -38,6 +39,7 @@ public class MeasurementPanel extends JPanel
   {
     public MeasurementPanel() 
       {
+        assert EventQueue.isDispatchThread();
         initComponents();
         setOpaque(true);
         setBackground(UniformityCheckMeasurementPresentationPanel.DEFAULT_BACKGROUND);

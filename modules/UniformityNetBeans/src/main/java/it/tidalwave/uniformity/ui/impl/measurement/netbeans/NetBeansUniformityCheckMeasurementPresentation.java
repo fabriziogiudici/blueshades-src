@@ -22,6 +22,7 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.ui.impl.measurement.netbeans;
 
+import java.awt.EventQueue;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import javax.swing.JFrame;
@@ -54,6 +55,7 @@ public class NetBeansUniformityCheckMeasurementPresentation implements Uniformit
      ******************************************************************************************************************/
     public NetBeansUniformityCheckMeasurementPresentation()
       {
+        assert EventQueue.isDispatchThread();
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setUndecorated(true); 
         frame.add(panel);
@@ -71,6 +73,7 @@ public class NetBeansUniformityCheckMeasurementPresentation implements Uniformit
             @Override
             public void run() 
               {
+                assert EventQueue.isDispatchThread();
                 panel.showUp();
                 final GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
                 final GraphicsDevice graphicsDevice = graphicsEnvironment.getScreenDevices()[0];
@@ -92,6 +95,7 @@ public class NetBeansUniformityCheckMeasurementPresentation implements Uniformit
             @Override
             public void run() 
               {
+                assert EventQueue.isDispatchThread();
                 frame.setVisible(false);
                 frame.dispose();
                 panel.dismiss();

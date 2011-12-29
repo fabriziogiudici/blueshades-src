@@ -23,6 +23,7 @@
 package it.tidalwave.uniformity.ui.impl.measurement.netbeans;
 
 import javax.annotation.Nonnull;
+import java.awt.EventQueue;
 import javax.swing.Action;
 import javax.swing.JPanel;
 import it.tidalwave.swing.ActionAdapter;
@@ -43,6 +44,7 @@ public class ControlPanel extends JPanel
     
     public ControlPanel()
       {
+        assert EventQueue.isDispatchThread();
         initComponents();
         setOpaque(true);
         setBackground(UniformityCheckMeasurementPresentationPanel.CONTROL_PANEL_BACKGROUND);
@@ -59,6 +61,7 @@ public class ControlPanel extends JPanel
     @Override
     public void removeNotify()
       {
+        assert EventQueue.isDispatchThread();
         continueAction.unbind();
         cancelAction.unbind();
         super.removeNotify();
@@ -66,6 +69,7 @@ public class ControlPanel extends JPanel
     
     public void setProgressIndicatorVisible (final boolean visible) 
       {
+        assert EventQueue.isDispatchThread();
         pbMeasurementInProgress.setVisible(visible);
       }
     
