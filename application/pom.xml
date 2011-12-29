@@ -36,7 +36,7 @@
         </dependency>
         <dependency>
             <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-uniformity-netbeans</artifactId>
+            <artifactId>it-tidalwave-uniformity-ui-netbeans</artifactId>
         </dependency>
         <dependency>
             <groupId>it.tidalwave.blueargyle</groupId>

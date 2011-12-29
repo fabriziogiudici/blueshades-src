@@ -110,7 +110,7 @@
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueargyle</groupId>
-                <artifactId>it-tidalwave-uniformity-netbeans</artifactId>
+                <artifactId>it-tidalwave-uniformity-ui-netbeans</artifactId>
                 <version>1.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
