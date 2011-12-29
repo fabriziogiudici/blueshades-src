@@ -22,26 +22,24 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.archive.impl.io;
 
-import it.tidalwave.colorimetry.ColorTemperature;
 import javax.annotation.Nonnull;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.IOException;
+import org.joda.time.DateTime;
+import org.joda.time.format.ISODateTimeFormat;
 import it.tidalwave.role.Unmarshallable;
+import it.tidalwave.colorimetry.ColorTemperature;
 import it.tidalwave.uniformity.Position;
 import it.tidalwave.uniformity.UniformityMeasurement;
 import it.tidalwave.uniformity.UniformityMeasurements;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.StringTokenizer;
-import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.ISODateTimeFormat;
 
 /***********************************************************************************************************************
  * 
@@ -77,7 +75,6 @@ public class UniformityMeasurementsUnmarshallable implements Unmarshallable
         while (scanner.hasNext())
           {  
             final String t = scanner.next();
-              System.err.println("SCANNED " + t);
             
             final Matcher displayNameMatcher = PATTERN_DISPLAY_NAME.matcher(t);
             
