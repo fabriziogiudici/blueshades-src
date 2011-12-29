@@ -44,14 +44,6 @@ import static lombok.AccessLevel.PRIVATE;
 @RequiredArgsConstructor(access=PRIVATE) @Slf4j
 public class SwingSafeComponentBuilder<T, I>
   {
-    public static interface TestHelper<I>
-      {
-        public void setDelegate (@Nonnull I delegate);
-        
-        @Nonnull
-        public I getDelegate();
-      }
-    
     @Nonnull
     private final Class<T> componentClass;
     
@@ -77,7 +69,7 @@ public class SwingSafeComponentBuilder<T, I>
           {
             presentation = EventQueue.isDispatchThread() ? createComponentInstance() : createComponentInstanceInEDT();            
             presentation = (T)Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(), 
-                                                     new Class[] { interfaceClass, TestHelper.class }, 
+                                                     new Class[] { interfaceClass }, 
                                                      new SwingSafeProxy<T>(presentation));
             presentationRef = new WeakReference<T>(presentation);
           }

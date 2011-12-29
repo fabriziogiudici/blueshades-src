@@ -22,7 +22,6 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.ui.impl.measurement.netbeans;
 
-import it.tidalwave.swing.SwingSafeComponentBuilder.TestHelper;
 import javax.annotation.Nonnull;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,6 +31,8 @@ import it.tidalwave.uniformity.Position;
 import it.tidalwave.uniformity.ui.measurement.UniformityCheckMeasurementPresentation;
 import it.tidalwave.uniformity.ui.impl.measurement.UniformityCheckMeasurementControllerActorTestSupport;
 import it.tidalwave.uniformity.ui.measurement.UniformityCheckMeasurementPresentationProvider;
+import lombok.Delegate;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -78,18 +79,27 @@ public class NetBeansUniformityCheckMeasurementControllerActorTest extends Unifo
     
     /*******************************************************************************************************************
      * 
+     * Mockito can't spy() synthetic proxies and unfortunately our Presentation is one. So we wrap it with a regular
+     * class.
+     *
+     ******************************************************************************************************************/
+    @RequiredArgsConstructor
+    static class Wrapper implements UniformityCheckMeasurementPresentation
+      {
+        @Nonnull @Delegate(types=UniformityCheckMeasurementPresentation.class)
+        private final UniformityCheckMeasurementPresentation delegate;
+      }
+            
+    /*******************************************************************************************************************
+     * 
      *
      ******************************************************************************************************************/
     @Override @Nonnull
     protected UniformityCheckMeasurementPresentation createPresentation()
       {
         final UniformityCheckMeasurementPresentationProvider presentationProvider = new NetBeansUniformityCheckMeasurementPresentationProvider();
-//        final UniformityCheckMeasurementPresentation presentation = spy(presentationProvider.getPresentation());
-        final UniformityCheckMeasurementPresentation presentation2 = presentationProvider.getPresentation();
-        final UniformityCheckMeasurementPresentation delegate = ((TestHelper<UniformityCheckMeasurementPresentation>)presentation2).getDelegate();
-        presentation = spy(delegate);
-        ((TestHelper<UniformityCheckMeasurementPresentation>)presentation2).setDelegate(presentation);
+        final UniformityCheckMeasurementPresentation presentation = spy(new Wrapper(presentationProvider.getPresentation()));
         doAnswer(clickContinue).when(presentation).renderSensorPlacementInvitationCellAt(any(Position.class));
-        return presentation2;
+        return presentation;
       }
   }

@@ -26,7 +26,6 @@ import javax.annotation.Nonnull;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.concurrent.atomic.AtomicReference;
-import it.tidalwave.swing.SwingSafeComponentBuilder.TestHelper;
 import it.tidalwave.swing.SwingSafeRunner;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -42,7 +41,7 @@ import lombok.extern.slf4j.Slf4j;
  *
  **********************************************************************************************************************/
 @RequiredArgsConstructor @Slf4j
-public class SwingSafeProxy<T> implements InvocationHandler, TestHelper<T>
+public class SwingSafeProxy<T> implements InvocationHandler
   {
     @Nonnull @Getter @Setter
     private T delegate;
@@ -62,16 +61,7 @@ public class SwingSafeProxy<T> implements InvocationHandler, TestHelper<T>
                 try 
                   {
                     log.trace(">>>> safely invoking {}", method);
-                    
-                    if (method.getDeclaringClass().equals(TestHelper.class))
-                      {
-                        result.set(method.invoke(SwingSafeProxy.this, args));
-                      }
-                    else
-                      {
-                        result.set(method.invoke(delegate, args));
-                      }
-                    
+                    result.set(method.invoke(delegate, args));
                   }
                 catch (Throwable t)
                   {

@@ -89,10 +89,7 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
     
     private UniformityCheckMeasurementPresentationProvider presentationBuilder;
     
-    private UniformityCheckMeasurementPresentation presentation2;
-    
-    // FIXME: try to get rid of this
-    protected UniformityCheckMeasurementPresentation presentation;
+    private UniformityCheckMeasurementPresentation presentation;
     
     protected ActionsTestHelper actions;
     
@@ -116,10 +113,10 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
         messageVerifier.initialize();
         actions = new ActionsTestHelper();
         
-        presentation2 = createPresentation();
+        presentation = createPresentation();
         actions.register(presentation).on().bind(any(Action.class), any(Action.class));
         presentationBuilder = mock(UniformityCheckMeasurementPresentationProvider.class);
-        doReturn(presentation2).when(presentationBuilder).getPresentation();
+        doReturn(presentation).when(presentationBuilder).getPresentation();
         MockLookup.setInstances(presentationBuilder);
         
         final List<Object> mockObjects = new ArrayList<Object>();
@@ -142,7 +139,7 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
         testActivator.deactivate();
         actions.dispose();
         messageVerifier = null;
-        presentation2 = null;
+        presentation = null;
         testActivator = null;
         actions = null;
         MockLookup.reset();
