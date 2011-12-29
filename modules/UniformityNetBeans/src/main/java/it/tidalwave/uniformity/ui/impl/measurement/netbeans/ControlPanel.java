@@ -23,7 +23,6 @@
 package it.tidalwave.uniformity.ui.impl.measurement.netbeans;
 
 import javax.annotation.Nonnull;
-import java.awt.Color;
 import javax.swing.Action;
 import javax.swing.JPanel;
 import it.tidalwave.swing.ActionAdapter;
