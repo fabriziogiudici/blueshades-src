@@ -146,6 +146,7 @@
         <module>Commons</module>
         <module>Uniformity</module>
         <module>UniformityNetBeans</module>
+        <module>UniformityArchive</module>
     </modules>
 
 </project>

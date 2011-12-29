@@ -25,6 +25,7 @@ package it.tidalwave.uniformity;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -47,7 +48,7 @@ public class UniformityMeasurements
     private final String displayName;
             
     @Getter
-    private final DateTime dateTime = new DateTime();
+    private final DateTime dateTime;
     
     @Nonnegative @Getter
     private final int columns;
@@ -59,9 +60,17 @@ public class UniformityMeasurements
     private final SortedMap<Position, UniformityMeasurement> measurementMapByPosition;
     
     public UniformityMeasurements (final @Nonnull String displayName,
-                                   final @Nonnull SortedMap<Position, UniformityMeasurement> measurementMapByPosition)
+                                   final @Nonnull Map<Position, UniformityMeasurement> measurementMapByPosition)
+      {
+        this(displayName, new DateTime(), measurementMapByPosition);
+      }
+    
+    public UniformityMeasurements (final @Nonnull String displayName,
+                                   final @Nonnull DateTime dateTime,
+                                   final @Nonnull Map<Position, UniformityMeasurement> measurementMapByPosition)
       {
         this.displayName = displayName;
+        this.dateTime = dateTime;
         this.measurementMapByPosition = new TreeMap<Position, UniformityMeasurement>(measurementMapByPosition);
         
         int c = 0, r = 0;
@@ -88,7 +97,7 @@ public class UniformityMeasurements
         final StringWriter sw = new StringWriter();
         final PrintWriter pw = new PrintWriter(sw);
         
-        pw.println("UniformityMeasurements(");
+        pw.printf("UniformityMeasurements('%s', %s\n", displayName, dateTime);
         
         for (final Entry<Position, UniformityMeasurement> e : measurementMapByPosition.entrySet())
           {
