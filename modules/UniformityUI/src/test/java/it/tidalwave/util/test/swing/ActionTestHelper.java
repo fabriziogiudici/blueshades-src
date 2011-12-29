@@ -20,7 +20,7 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.ui.impl.measurement;
+package it.tidalwave.util.test.swing;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;

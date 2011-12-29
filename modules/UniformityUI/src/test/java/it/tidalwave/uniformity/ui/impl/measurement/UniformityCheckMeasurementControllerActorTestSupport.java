@@ -23,6 +23,8 @@
 package it.tidalwave.uniformity.ui.impl.measurement;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.awt.Component;
@@ -49,10 +51,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.mockito.InOrder;
 import org.mockito.internal.matchers.Equals;
-import static it.tidalwave.uniformity.Position.pos;import static it.tidalwave.colorimetry.ColorTemperature.kelvin;
 import it.tidalwave.netbeans.util.test.TestLoggerSetup;
-import java.util.ArrayList;
-import java.util.List;
+import it.tidalwave.util.test.swing.ActionsTestHelper;
+import it.tidalwave.util.test.swing.ActionTestHelper;
+import static it.tidalwave.uniformity.Position.pos;
+import static it.tidalwave.colorimetry.ColorTemperature.kelvin;
 import static org.mockito.Mockito.*;
 
 /***********************************************************************************************************************

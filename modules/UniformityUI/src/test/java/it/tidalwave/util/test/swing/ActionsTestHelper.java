@@ -20,7 +20,7 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.ui.impl.measurement;
+package it.tidalwave.util.test.swing;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
@@ -29,8 +29,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.Action;
-import it.tidalwave.uniformity.ui.impl.measurement.ActionTestHelper.Verifier;
-import lombok.Getter;
+import it.tidalwave.util.test.swing.ActionTestHelper.Verifier;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.mockito.internal.invocation.Invocation;
