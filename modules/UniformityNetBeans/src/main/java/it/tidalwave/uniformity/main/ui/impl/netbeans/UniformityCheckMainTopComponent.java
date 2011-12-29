@@ -28,7 +28,7 @@ import org.openide.awt.ActionReferences;
 import org.openide.windows.TopComponent;
 import org.openide.util.NbBundle;
 import it.tidalwave.actor.netbeans.ActorTopComponent;
-import it.tidalwave.uniformity.ui.UniformityCheckMainControllerActorActivator;
+import it.tidalwave.uniformity.ui.UniformityCheckActorActivator;
 import static org.openide.windows.TopComponent.*;
 
 /***********************************************************************************************************************
@@ -58,7 +58,7 @@ public final class UniformityCheckMainTopComponent extends ActorTopComponent<Uni
   {
     public UniformityCheckMainTopComponent() 
       {
-        super(UniformityCheckMainControllerActorActivator.class, UniformityCheckMainPanel.class);
+        super(UniformityCheckActorActivator.class, UniformityCheckMainPanel.class);
         setName(NbBundle.getMessage(UniformityCheckMainTopComponent.class, "CTL_UniformityCheckMainTopComponent"));
         putClientProperty(PROP_DRAGGING_DISABLED, true);
         putClientProperty(PROP_MAXIMIZATION_DISABLED, true);

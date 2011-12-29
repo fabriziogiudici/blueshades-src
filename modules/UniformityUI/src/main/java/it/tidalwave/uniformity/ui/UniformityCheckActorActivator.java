@@ -24,8 +24,8 @@ package it.tidalwave.uniformity.ui;
 
 import it.tidalwave.actor.spi.ActorActivator;
 import it.tidalwave.actor.spi.ActorGroupActivator;
+import it.tidalwave.uniformity.main.ui.impl.UniformityCheckMainControllerActor;
 import it.tidalwave.uniformity.measurement.ui.impl.UniformityCheckMeasurementControllerActor;
-import org.openide.util.lookup.ServiceProvider;
 
 /***********************************************************************************************************************
  *
@@ -33,11 +33,11 @@ import org.openide.util.lookup.ServiceProvider;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@ServiceProvider(service=UniformityCheckMeasurementControllerActorActivator.class)
-public class UniformityCheckMeasurementControllerActorActivator extends ActorGroupActivator 
+public class UniformityCheckActorActivator extends ActorGroupActivator
   {
-    public UniformityCheckMeasurementControllerActorActivator()
+    public UniformityCheckActorActivator()
       {
+        add(new ActorActivator(UniformityCheckMainControllerActor.class, 1));
         add(new ActorActivator(UniformityCheckMeasurementControllerActor.class, 1));
       }
   }
