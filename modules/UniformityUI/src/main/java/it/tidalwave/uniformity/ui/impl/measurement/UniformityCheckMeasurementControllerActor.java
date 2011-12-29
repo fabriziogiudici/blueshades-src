@@ -54,7 +54,7 @@ import lombok.extern.slf4j.Slf4j;
 import static java.util.concurrent.TimeUnit.*;
 import static it.tidalwave.actor.Collaboration.*;
 import static it.tidalwave.colorimetry.ColorPoint.ColorSpace.*;
-import static it.tidalwave.uniformity.Position.pos;
+import static it.tidalwave.uniformity.Position.xy;
 
 /***********************************************************************************************************************
  *
@@ -80,8 +80,8 @@ public class UniformityCheckMeasurementControllerActor
     private static final int COLUMNS = 3;
     private static final int ROWS = 3;
 
-    private static final Position DEFAULT_CONTROL_PANEL_POSITION = pos(0, 0);
-    private static final Position ALTERNATE_CONTROL_PANEL_POSITION = pos(0, 1);
+    private static final Position DEFAULT_CONTROL_PANEL_POSITION = xy(0, 0);
+    private static final Position ALTERNATE_CONTROL_PANEL_POSITION = xy(0, 1);
     
     private static final int MEASUREMENT_DELAY = 100;
     
@@ -291,7 +291,7 @@ public class UniformityCheckMeasurementControllerActor
           {
             for (int column = 0; column < COLUMNS; column++)
               {
-                positionSequence.add(pos(column, row));
+                positionSequence.add(xy(column, row));
               }
           }
         

@@ -97,9 +97,9 @@ public class UniformityMeasurementsUnmarshallable implements Unmarshallable
             
             if (temperatureMatcher.matches())
               {
-                final Position pos = Position.pos(Integer.parseInt(temperatureMatcher.group(1)), Integer.parseInt(temperatureMatcher.group(2)));
+                final Position xy = Position.xy(Integer.parseInt(temperatureMatcher.group(1)), Integer.parseInt(temperatureMatcher.group(2)));
                 final ColorTemperature temperature = ColorTemperature.kelvin(Integer.parseInt(temperatureMatcher.group(3)));
-                map.put(pos, new UniformityMeasurement(temperature, luminance));
+                map.put(xy, new UniformityMeasurement(temperature, luminance));
                 continue;
               }
           }

@@ -69,7 +69,7 @@ public class UniformityCheckMainControllerActor
           {
             final int columns = measurements.getColumns();
             final int rows = measurements.getRows();
-            final UniformityMeasurement centerMeasurement = measurements.getAt(pos(columns / 2, rows / 2));
+            final UniformityMeasurement centerMeasurement = measurements.getAt(xy(columns / 2, rows / 2));
 
             final String[][] s = new String[rows][columns];
 
@@ -77,7 +77,7 @@ public class UniformityCheckMainControllerActor
               {
                 for (int column = 0; column < columns; column++)
                   {
-                    s[row][column] = formatMeasurement(centerMeasurement, measurements.getAt(pos(column, row)));
+                    s[row][column] = formatMeasurement(centerMeasurement, measurements.getAt(xy(column, row)));
                   }
               }
 

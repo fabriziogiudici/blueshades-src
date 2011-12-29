@@ -33,7 +33,7 @@ import lombok.RequiredArgsConstructor;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@RequiredArgsConstructor(staticName="pos") @EqualsAndHashCode
+@RequiredArgsConstructor(staticName="xy") @EqualsAndHashCode
 public class Position implements Comparable<Position>
   {
     @Nonnegative
