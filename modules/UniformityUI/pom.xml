@@ -37,20 +37,16 @@
     </parent>
 
     <groupId>it.tidalwave.blueargyle</groupId>
-    <artifactId>it-tidalwave-uniformity-ui-netbeans</artifactId>
+    <artifactId>it-tidalwave-uniformity-ui</artifactId>
     <packaging>nbm</packaging>
     <version>1.0.1-SNAPSHOT</version>
-    <name>blueArgyle - Uniformity UI (NetBeans)</name>
-    <description>blueArgyle - Uniformity UI (NetBeans)</description>
+    <name>blueArgyle - Uniformity UI</name>
+    <description>blueArgyle - Uniformity UI</description>
 
     <dependencies>
         <dependency>
             <groupId>it.tidalwave.blueargyle</groupId>
             <artifactId>it-tidalwave-uniformity</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-uniformity-ui</artifactId>
         </dependency>
         <dependency>
             <groupId>it.tidalwave.blueargyle</groupId>
@@ -83,37 +79,19 @@
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
-            <artifactId>org-openide-windows</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.netbeans.api</groupId>
-            <artifactId>org-openide-util-lookup</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.netbeans.api</groupId>
-            <artifactId>org-netbeans-modules-settings</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.netbeans.api</groupId>
-            <artifactId>org-openide-awt</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-util</artifactId>
         </dependency>
         
         <dependency>
             <groupId>com.kenai.nbpwr</groupId>
+            <artifactId>joda-time</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.kenai.nbpwr</groupId>
             <artifactId>org-slf4j-jdk14</artifactId>
         </dependency>
-        
+
         <!-- TEST DEPENDENCIES -->
-        <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-uniformity-ui</artifactId>
-            <classifier>tests</classifier>
-            <scope>test</scope>
-        </dependency>
         <dependency>
             <groupId>it.tidalwave.blueargyle</groupId>
             <artifactId>it-tidalwave-argyll</artifactId>
@@ -125,11 +103,23 @@
             <artifactId>it-tidalwave-netbeans-util-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.easytesting</groupId>
-            <artifactId>fest-swing</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>nbm-maven-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <publicPackages>
+                        <publicPackage>it.tidalwave.uniformity.ui</publicPackage>
+                        <publicPackage>it.tidalwave.uniformity.main.ui</publicPackage>
+                        <publicPackage>it.tidalwave.uniformity.measurement.ui</publicPackage>
+                    </publicPackages>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    
 </project>

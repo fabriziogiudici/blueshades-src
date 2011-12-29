@@ -28,7 +28,7 @@ import org.openide.awt.ActionReferences;
 import org.openide.windows.TopComponent;
 import org.openide.util.NbBundle;
 import it.tidalwave.actor.netbeans.ActorTopComponent;
-import it.tidalwave.uniformity.UniformityCheckMainControllerActorActivator;
+import it.tidalwave.uniformity.ui.UniformityCheckMainControllerActorActivator;
 import static org.openide.windows.TopComponent.*;
 
 /***********************************************************************************************************************

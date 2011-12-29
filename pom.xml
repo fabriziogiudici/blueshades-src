@@ -104,7 +104,12 @@
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueargyle</groupId>
-                <artifactId>it-tidalwave-uniformity</artifactId>
+                <artifactId>it-tidalwave-uniformity-ui</artifactId>
+                <version>1.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.blueargyle</groupId>
+                <artifactId>it-tidalwave-uniformity-ui</artifactId>
                 <classifier>tests</classifier>
                 <version>1.0.1-SNAPSHOT</version>
             </dependency>

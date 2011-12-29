@@ -20,12 +20,10 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity;
+package it.tidalwave.uniformity.ui.impl;
 
-import it.tidalwave.actor.spi.ActorActivator;
-import it.tidalwave.actor.spi.ActorGroupActivator;
-import it.tidalwave.uniformity.measurement.ui.impl.UniformityCheckMeasurementControllerActor;
-import org.openide.util.lookup.ServiceProvider;
+import it.tidalwave.blueargyle.util.ModuleActorGroupActivator;
+import it.tidalwave.uniformity.ui.UniformityCheckMeasurementControllerActorActivator;
 
 /***********************************************************************************************************************
  *
@@ -33,11 +31,10 @@ import org.openide.util.lookup.ServiceProvider;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@ServiceProvider(service=UniformityCheckMeasurementControllerActorActivator.class)
-public class UniformityCheckMeasurementControllerActorActivator extends ActorGroupActivator 
+public class Installer extends ModuleActorGroupActivator
   {
-    public UniformityCheckMeasurementControllerActorActivator()
+    public Installer()
       {
-        add(new ActorActivator(UniformityCheckMeasurementControllerActor.class, 1));
+        super(UniformityCheckMeasurementControllerActorActivator.class);
       }
   }
