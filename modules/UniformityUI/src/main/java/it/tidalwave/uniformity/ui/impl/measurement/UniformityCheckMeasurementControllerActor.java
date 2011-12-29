@@ -117,7 +117,7 @@ public class UniformityCheckMeasurementControllerActor
         log.info("start({})", message);
         displayName = message.getDisplayName();
         initializeMeasurement();
-        prepareNextMeasurement(message);  
+        prepareNextMeasurement(message.getCollaboration());  
       }
         
     /*******************************************************************************************************************
@@ -138,7 +138,7 @@ public class UniformityCheckMeasurementControllerActor
                                              String.format("Luminance: %d cd/m\u00b2", measurement.getLuminance()), 
                                              String.format("White point: %d K", measurement.getTemperature().getT()));
         eventuallyMoveInControlPanel();
-        prepareNextMeasurement(message);  
+        prepareNextMeasurement(message.getCollaboration());  
       }
         
     /*******************************************************************************************************************
@@ -229,7 +229,7 @@ public class UniformityCheckMeasurementControllerActor
      * Prepares the next measurement inviting the user to properly position the sensor.
      *
      ******************************************************************************************************************/
-    private void prepareNextMeasurement (final @Nonnull MessageSupport message)
+    private void prepareNextMeasurement (final @Nonnull Collaboration collaboration)
       {
         log.info("prepareNextMeasurement()");
         
@@ -241,7 +241,7 @@ public class UniformityCheckMeasurementControllerActor
         else
           {
             currentPosition = positionIterator.next(); 
-            collaborationPendingUserIntervention = message.getCollaboration();
+            collaborationPendingUserIntervention = collaboration;
             suspensionToken = collaborationPendingUserIntervention.suspend();
             presentation.renderSensorPlacementInvitationCellAt(currentPosition);
             eventuallyMoveOutControlPanel();
