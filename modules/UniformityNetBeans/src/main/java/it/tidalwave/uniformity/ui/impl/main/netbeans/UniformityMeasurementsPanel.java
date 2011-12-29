@@ -70,8 +70,8 @@ public class UniformityMeasurementsPanel extends JPanel
         innerPanel.removeAll();
         gridLayout.setColumns(measurements[0].length);
         gridLayout.setRows(measurements.length);
-        gridLayout.setHgap(8);
-        gridLayout.setVgap(8);
+        gridLayout.setHgap(1);
+        gridLayout.setVgap(1);
         
         for (int row = 0; row < gridLayout.getRows(); row++)
           {
