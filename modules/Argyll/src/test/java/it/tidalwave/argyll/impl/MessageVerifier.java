@@ -35,6 +35,8 @@ import it.tidalwave.actor.CollaborationCompletedMessage;
 import it.tidalwave.actor.CollaborationStartedMessage;
 import it.tidalwave.actor.MessageSupport;
 import it.tidalwave.actor.spi.CollaborationAwareMessageBus;
+import it.tidalwave.messagebus.MessageBus;
+import java.lang.reflect.Modifier;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hamcrest.Matcher;
@@ -42,6 +44,10 @@ import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 
 /***********************************************************************************************************************
+ * 
+ * A facility that records all the message flowing through the {@link MessageBus} so they can be verified in tests.
+ * Note that private messages, as well as their relative {@link CollaborationStartedMessage} and
+ * {@link CollaborationCompletedMessage}, are ignored.
  * 
  * @author  Fabrizio Giudici
  * @version $Id$
@@ -81,8 +87,30 @@ public class MessageVerifier
         @Override
         public void notify (final @Nonnull Object message) 
           {
+            if (isPrivate(message))
+              {
+                return;  
+              }
+            
+            if ((message instanceof CollaborationStartedMessage) 
+                && isPrivate(((CollaborationStartedMessage)message).getCollaboration().getOriginatingMessage()))
+              {
+                return;  
+              }
+            
+            if ((message instanceof CollaborationCompletedMessage) 
+                && isPrivate(((CollaborationCompletedMessage)message).getCollaboration().getOriginatingMessage()))
+              {
+                return;  
+              }
+            
             messages.add(message);
           }
+        
+        private boolean isPrivate (final @Nonnull Object message)
+          {
+            return Modifier.isPrivate(message.getClass().getModifiers());
+          } 
       };
     
     private final List<Object> messages = new ArrayList<Object>();

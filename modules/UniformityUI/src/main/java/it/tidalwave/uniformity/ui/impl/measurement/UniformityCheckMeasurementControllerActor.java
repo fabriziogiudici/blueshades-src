@@ -30,14 +30,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
-import java.awt.event.ActionEvent;
-import javax.swing.AbstractAction;
 import javax.swing.Action;
 import it.tidalwave.util.NotFoundException;
 import it.tidalwave.actor.Collaboration;
 import it.tidalwave.actor.MessageSupport;
 import it.tidalwave.actor.annotation.Actor;
+import it.tidalwave.actor.annotation.Message;
 import it.tidalwave.actor.annotation.MessageListener;
+import it.tidalwave.swing.ActionMessageAdapter;
 import it.tidalwave.argyll.MeasurementMessage;
 import it.tidalwave.argyll.MeasurementRequest;
 import it.tidalwave.argyll.ArgyllFailureMessage;
@@ -49,6 +49,7 @@ import it.tidalwave.uniformity.UniformityMeasurements;
 import it.tidalwave.uniformity.UniformityMeasurementMessage;
 import it.tidalwave.uniformity.ui.measurement.UniformityCheckMeasurementPresentation;
 import it.tidalwave.uniformity.ui.measurement.UniformityCheckMeasurementPresentationProvider;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.concurrent.TimeUnit.*;
 import static it.tidalwave.actor.Collaboration.*;
@@ -66,6 +67,16 @@ import static it.tidalwave.uniformity.Position.pos;
 @Actor(threadSafe=false) @NotThreadSafe @Slf4j
 public class UniformityCheckMeasurementControllerActor
   {
+    @Message(outOfBand=true) @ToString
+    private static class DoMeasurementMessage extends MessageSupport
+      {
+      }
+    
+    @Message(outOfBand=true) @ToString
+    private static class CancelMessage extends MessageSupport
+      {
+      }
+    
     private static final int COLUMNS = 3;
     private static final int ROWS = 3;
 
@@ -92,31 +103,13 @@ public class UniformityCheckMeasurementControllerActor
     
     private final SortedMap<Position, UniformityMeasurement> measurementMapByPosition = new TreeMap<Position, UniformityMeasurement>();
     
-    /*******************************************************************************************************************
-     * 
-     *
-     ******************************************************************************************************************/
-    private final Action continueAction = new AbstractAction("Continue") 
-      {
-        @Override
-        public void actionPerformed (final @Nonnull ActionEvent event) 
-          {
-            doMeasurement();
-          }
-      };
+    private final Action continueAction = new ActionMessageAdapter("Continue", new DoMeasurementMessage()); 
     
     /*******************************************************************************************************************
      * 
      *
      ******************************************************************************************************************/
-    private final Action cancelAction = new AbstractAction("Cancel") 
-      {
-        @Override
-        public void actionPerformed (final @Nonnull ActionEvent event) 
-          {
-            cancel();
-          }
-      };
+    private final Action cancelAction = new ActionMessageAdapter("Cancel", new CancelMessage()); 
     
     /*******************************************************************************************************************
      * 
@@ -160,7 +153,8 @@ public class UniformityCheckMeasurementControllerActor
     public void failure (final @Nonnull ArgyllFailureMessage message) 
       {
         log.info("failure({})", message);
-        cancel(); // FIXME: harsh, do a notification on the UI too
+        new CancelMessage().send();
+//        cancel(); // FIXME: harsh, do a notification on the UI too
       }
         
     /*******************************************************************************************************************
@@ -185,7 +179,8 @@ public class UniformityCheckMeasurementControllerActor
      * 
      *
      ******************************************************************************************************************/
-    private void doMeasurement()
+    @MessageListener
+    private void doMeasurement (final @Nonnull DoMeasurementMessage message)
       {
         log.info("doMeasurement()");
         continueAction.setEnabled(false);
@@ -209,7 +204,8 @@ public class UniformityCheckMeasurementControllerActor
      * 
      *
      ******************************************************************************************************************/
-    private void cancel()
+    @MessageListener
+    private void cancel (final @Nonnull CancelMessage message)
       {
         cancelAction.setEnabled(false);
         
