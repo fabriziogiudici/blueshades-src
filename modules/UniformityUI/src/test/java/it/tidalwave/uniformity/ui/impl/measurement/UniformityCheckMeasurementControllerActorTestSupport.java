@@ -266,10 +266,7 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
         
         inOrder.verify(presentation).dismiss();
         
-        if (!(presentation instanceof Component)) // Swing makes its own interactions
-          {
-            verifyNoMoreInteractions(presentation);
-          }
+        verifyNoMoreInteractions(presentation);
         
         messageVerifier.verifyCollaborationStarted();
         messageVerifier.verify(UniformityCheckRequest.class);
