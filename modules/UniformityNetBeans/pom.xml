@@ -116,8 +116,7 @@
         </dependency>
         <dependency>
             <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-argyll</artifactId>
-            <classifier>tests</classifier>
+            <artifactId>it-tidalwave-blueargyle-test-commons</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
