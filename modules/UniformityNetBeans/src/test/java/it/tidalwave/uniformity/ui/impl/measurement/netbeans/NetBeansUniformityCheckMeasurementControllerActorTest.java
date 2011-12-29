@@ -85,11 +85,11 @@ public class NetBeansUniformityCheckMeasurementControllerActorTest extends Unifo
       {
         final UniformityCheckMeasurementPresentationProvider presentationProvider = new NetBeansUniformityCheckMeasurementPresentationProvider();
 //        final UniformityCheckMeasurementPresentation presentation = spy(presentationProvider.getPresentation());
-        final UniformityCheckMeasurementPresentation presentation = presentationProvider.getPresentation();
-        final UniformityCheckMeasurementPresentation delegate = ((TestHelper<UniformityCheckMeasurementPresentation>)presentation).getDelegate();
-        presentationSpy = spy(delegate);
-        ((TestHelper<UniformityCheckMeasurementPresentation>)presentation).setDelegate(presentationSpy);
-        doAnswer(clickContinue).when(presentationSpy).renderSensorPlacementInvitationCellAt(any(Position.class));
-        return presentation;
+        final UniformityCheckMeasurementPresentation presentation2 = presentationProvider.getPresentation();
+        final UniformityCheckMeasurementPresentation delegate = ((TestHelper<UniformityCheckMeasurementPresentation>)presentation2).getDelegate();
+        presentation = spy(delegate);
+        ((TestHelper<UniformityCheckMeasurementPresentation>)presentation2).setDelegate(presentation);
+        doAnswer(clickContinue).when(presentation).renderSensorPlacementInvitationCellAt(any(Position.class));
+        return presentation2;
       }
   }

@@ -89,10 +89,10 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
     
     private UniformityCheckMeasurementPresentationProvider presentationBuilder;
     
-    private UniformityCheckMeasurementPresentation presentation;
+    private UniformityCheckMeasurementPresentation presentation2;
     
     // FIXME: try to get rid of this
-    protected UniformityCheckMeasurementPresentation presentationSpy;
+    protected UniformityCheckMeasurementPresentation presentation;
     
     protected ActionsTestHelper actions;
     
@@ -116,14 +116,14 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
         messageVerifier.initialize();
         actions = new ActionsTestHelper();
         
-        presentation = createPresentation();
-        actions.register(presentationSpy).on().bind(any(Action.class), any(Action.class));
+        presentation2 = createPresentation();
+        actions.register(presentation).on().bind(any(Action.class), any(Action.class));
         presentationBuilder = mock(UniformityCheckMeasurementPresentationProvider.class);
-        doReturn(presentation).when(presentationBuilder).getPresentation();
+        doReturn(presentation2).when(presentationBuilder).getPresentation();
         MockLookup.setInstances(presentationBuilder);
         
         final List<Object> mockObjects = new ArrayList<Object>();
-        mockObjects.add(presentationSpy);
+        mockObjects.add(presentation);
         mockObjects.addAll(actions.getVerifiers());
         inOrder = inOrder(mockObjects.toArray());
         
@@ -142,7 +142,7 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
         testActivator.deactivate();
         actions.dispose();
         messageVerifier = null;
-        presentation = null;
+        presentation2 = null;
         testActivator = null;
         actions = null;
         MockLookup.reset();
@@ -159,120 +159,120 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
         final Collaboration collaboration = new UniformityCheckRequest("display1").send();
         collaboration.waitForCompletion();
         
-        inOrder.verify(presentationSpy).bind(any(Action.class), any(Action.class));
-        inOrder.verify(presentationSpy).setGridSize(eq(3), eq(3));
+        inOrder.verify(presentation).bind(any(Action.class), any(Action.class));
+        inOrder.verify(presentation).setGridSize(eq(3), eq(3));
         inOrder.verify(action("Continue")).setEnabled(eq(false));
         inOrder.verify(action("Cancel")).setEnabled(eq(false));
-        inOrder.verify(presentationSpy).showUp();
-        inOrder.verify(presentationSpy).renderControlPanelAt(eq(pos(0, 0)));
+        inOrder.verify(presentation).showUp();
+        inOrder.verify(presentation).renderControlPanelAt(eq(pos(0, 0)));
         
-        inOrder.verify(presentationSpy).renderSensorPlacementInvitationCellAt(eq(pos(1, 1)));
+        inOrder.verify(presentation).renderSensorPlacementInvitationCellAt(eq(pos(1, 1)));
         inOrder.verify(action("Continue")).setEnabled(eq(true));
         inOrder.verify(action("Cancel")).setEnabled(eq(true));
         inOrder.verify(action("Continue")).actionPerformed(any(ActionEvent.class));
         inOrder.verify(action("Continue")).setEnabled(eq(false));
         inOrder.verify(action("Cancel")).setEnabled(eq(false));
-        inOrder.verify(presentationSpy).renderWhiteCellAt(                    eq(pos(1, 1)));
-        inOrder.verify(presentationSpy).showMeasureInProgress();
-        inOrder.verify(presentationSpy).hideMeasureInProgress();
-        inOrder.verify(presentationSpy).renderMeasurementCellAt(              eq(pos(1, 1)), eq("Luminance: 63 cd/m\u00b2"), eq("White point: 5925 K"));
+        inOrder.verify(presentation).renderWhiteCellAt(                    eq(pos(1, 1)));
+        inOrder.verify(presentation).showMeasureInProgress();
+        inOrder.verify(presentation).hideMeasureInProgress();
+        inOrder.verify(presentation).renderMeasurementCellAt(              eq(pos(1, 1)), eq("Luminance: 63 cd/m\u00b2"), eq("White point: 5925 K"));
 
-        inOrder.verify(presentationSpy).renderSensorPlacementInvitationCellAt(eq(pos(0, 0)));
-        inOrder.verify(presentationSpy).renderControlPanelAt(                 eq(pos(0, 1)));
+        inOrder.verify(presentation).renderSensorPlacementInvitationCellAt(eq(pos(0, 0)));
+        inOrder.verify(presentation).renderControlPanelAt(                 eq(pos(0, 1)));
         inOrder.verify(action("Continue")).setEnabled(eq(true));
         inOrder.verify(action("Cancel")).setEnabled(eq(true));
         inOrder.verify(action("Continue")).actionPerformed(any(ActionEvent.class));
         inOrder.verify(action("Continue")).setEnabled(eq(false));
         inOrder.verify(action("Cancel")).setEnabled(eq(false));
-        inOrder.verify(presentationSpy).renderWhiteCellAt(                    eq(pos(0, 0)));
-        inOrder.verify(presentationSpy).showMeasureInProgress();
-        inOrder.verify(presentationSpy).hideMeasureInProgress();
-        inOrder.verify(presentationSpy).renderMeasurementCellAt(              eq(pos(0, 0)), eq("Luminance: 67 cd/m\u00b2"), eq("White point: 2753 K"));
-        inOrder.verify(presentationSpy).renderControlPanelAt(                 eq(pos(0, 0)));
-        inOrder.verify(presentationSpy).renderEmptyCellAt(                    eq(pos(0, 1)));
+        inOrder.verify(presentation).renderWhiteCellAt(                    eq(pos(0, 0)));
+        inOrder.verify(presentation).showMeasureInProgress();
+        inOrder.verify(presentation).hideMeasureInProgress();
+        inOrder.verify(presentation).renderMeasurementCellAt(              eq(pos(0, 0)), eq("Luminance: 67 cd/m\u00b2"), eq("White point: 2753 K"));
+        inOrder.verify(presentation).renderControlPanelAt(                 eq(pos(0, 0)));
+        inOrder.verify(presentation).renderEmptyCellAt(                    eq(pos(0, 1)));
 
-        inOrder.verify(presentationSpy).renderSensorPlacementInvitationCellAt(eq(pos(1, 0)));
+        inOrder.verify(presentation).renderSensorPlacementInvitationCellAt(eq(pos(1, 0)));
         inOrder.verify(action("Continue")).setEnabled(eq(true));
         inOrder.verify(action("Cancel")).setEnabled(eq(true));
         inOrder.verify(action("Continue")).actionPerformed(any(ActionEvent.class));
         inOrder.verify(action("Continue")).setEnabled(eq(false));
         inOrder.verify(action("Cancel")).setEnabled(eq(false));
-        inOrder.verify(presentationSpy).renderWhiteCellAt(                    eq(pos(1, 0)));
-        inOrder.verify(presentationSpy).showMeasureInProgress();
-        inOrder.verify(presentationSpy).hideMeasureInProgress();
-        inOrder.verify(presentationSpy).renderMeasurementCellAt(              eq(pos(1, 0)), eq("Luminance: 6 cd/m\u00b2"), eq("White point: 6507 K"));
+        inOrder.verify(presentation).renderWhiteCellAt(                    eq(pos(1, 0)));
+        inOrder.verify(presentation).showMeasureInProgress();
+        inOrder.verify(presentation).hideMeasureInProgress();
+        inOrder.verify(presentation).renderMeasurementCellAt(              eq(pos(1, 0)), eq("Luminance: 6 cd/m\u00b2"), eq("White point: 6507 K"));
 
-        inOrder.verify(presentationSpy).renderSensorPlacementInvitationCellAt(eq(pos(2, 0)));
+        inOrder.verify(presentation).renderSensorPlacementInvitationCellAt(eq(pos(2, 0)));
         inOrder.verify(action("Continue")).setEnabled(eq(true));
         inOrder.verify(action("Cancel")).setEnabled(eq(true));
         inOrder.verify(action("Continue")).actionPerformed(any(ActionEvent.class));
         inOrder.verify(action("Continue")).setEnabled(eq(false));
         inOrder.verify(action("Cancel")).setEnabled(eq(false));
-        inOrder.verify(presentationSpy).renderWhiteCellAt(                    eq(pos(2, 0)));
-        inOrder.verify(presentationSpy).showMeasureInProgress();
-        inOrder.verify(presentationSpy).hideMeasureInProgress();
-        inOrder.verify(presentationSpy).renderMeasurementCellAt(              eq(pos(2, 0)), eq("Luminance: 31 cd/m\u00b2"), eq("White point: 7284 K"));
+        inOrder.verify(presentation).renderWhiteCellAt(                    eq(pos(2, 0)));
+        inOrder.verify(presentation).showMeasureInProgress();
+        inOrder.verify(presentation).hideMeasureInProgress();
+        inOrder.verify(presentation).renderMeasurementCellAt(              eq(pos(2, 0)), eq("Luminance: 31 cd/m\u00b2"), eq("White point: 7284 K"));
 
-        inOrder.verify(presentationSpy).renderSensorPlacementInvitationCellAt(eq(pos(0, 1)));
+        inOrder.verify(presentation).renderSensorPlacementInvitationCellAt(eq(pos(0, 1)));
         inOrder.verify(action("Continue")).setEnabled(eq(true));
         inOrder.verify(action("Cancel")).setEnabled(eq(true));
         inOrder.verify(action("Continue")).actionPerformed(any(ActionEvent.class));
         inOrder.verify(action("Continue")).setEnabled(eq(false));
         inOrder.verify(action("Cancel")).setEnabled(eq(false));
-        inOrder.verify(presentationSpy).renderWhiteCellAt(                    eq(pos(0, 1)));
-        inOrder.verify(presentationSpy).showMeasureInProgress();
-        inOrder.verify(presentationSpy).hideMeasureInProgress();
-        inOrder.verify(presentationSpy).renderMeasurementCellAt(              eq(pos(0, 1)), eq("Luminance: 37 cd/m\u00b2"), eq("White point: 4102 K"));
+        inOrder.verify(presentation).renderWhiteCellAt(                    eq(pos(0, 1)));
+        inOrder.verify(presentation).showMeasureInProgress();
+        inOrder.verify(presentation).hideMeasureInProgress();
+        inOrder.verify(presentation).renderMeasurementCellAt(              eq(pos(0, 1)), eq("Luminance: 37 cd/m\u00b2"), eq("White point: 4102 K"));
 
-        inOrder.verify(presentationSpy).renderSensorPlacementInvitationCellAt(eq(pos(2, 1)));
+        inOrder.verify(presentation).renderSensorPlacementInvitationCellAt(eq(pos(2, 1)));
         inOrder.verify(action("Continue")).setEnabled(eq(true));
         inOrder.verify(action("Cancel")).setEnabled(eq(true));
         inOrder.verify(action("Continue")).actionPerformed(any(ActionEvent.class));
         inOrder.verify(action("Continue")).setEnabled(eq(false));
         inOrder.verify(action("Cancel")).setEnabled(eq(false));
-        inOrder.verify(presentationSpy).renderWhiteCellAt(                    eq(pos(2, 1)));
-        inOrder.verify(presentationSpy).showMeasureInProgress();
-        inOrder.verify(presentationSpy).hideMeasureInProgress();
-        inOrder.verify(presentationSpy).renderMeasurementCellAt(              eq(pos(2, 1)), eq("Luminance: 81 cd/m\u00b2"), eq("White point: 6456 K"));
+        inOrder.verify(presentation).renderWhiteCellAt(                    eq(pos(2, 1)));
+        inOrder.verify(presentation).showMeasureInProgress();
+        inOrder.verify(presentation).hideMeasureInProgress();
+        inOrder.verify(presentation).renderMeasurementCellAt(              eq(pos(2, 1)), eq("Luminance: 81 cd/m\u00b2"), eq("White point: 6456 K"));
 
-        inOrder.verify(presentationSpy).renderSensorPlacementInvitationCellAt(eq(pos(0, 2)));
+        inOrder.verify(presentation).renderSensorPlacementInvitationCellAt(eq(pos(0, 2)));
         inOrder.verify(action("Continue")).setEnabled(eq(true));
         inOrder.verify(action("Cancel")).setEnabled(eq(true));
         inOrder.verify(action("Continue")).actionPerformed(any(ActionEvent.class));
         inOrder.verify(action("Continue")).setEnabled(eq(false));
         inOrder.verify(action("Cancel")).setEnabled(eq(false));
-        inOrder.verify(presentationSpy).renderWhiteCellAt(                    eq(pos(0, 2)));
-        inOrder.verify(presentationSpy).showMeasureInProgress();
-        inOrder.verify(presentationSpy).hideMeasureInProgress();
-        inOrder.verify(presentationSpy).renderMeasurementCellAt(              eq(pos(0, 2)), eq("Luminance: 97 cd/m\u00b2"), eq("White point: 3813 K"));
+        inOrder.verify(presentation).renderWhiteCellAt(                    eq(pos(0, 2)));
+        inOrder.verify(presentation).showMeasureInProgress();
+        inOrder.verify(presentation).hideMeasureInProgress();
+        inOrder.verify(presentation).renderMeasurementCellAt(              eq(pos(0, 2)), eq("Luminance: 97 cd/m\u00b2"), eq("White point: 3813 K"));
         
-        inOrder.verify(presentationSpy).renderSensorPlacementInvitationCellAt(eq(pos(1, 2)));
+        inOrder.verify(presentation).renderSensorPlacementInvitationCellAt(eq(pos(1, 2)));
         inOrder.verify(action("Continue")).setEnabled(eq(true));
         inOrder.verify(action("Cancel")).setEnabled(eq(true));
         inOrder.verify(action("Continue")).actionPerformed(any(ActionEvent.class));
         inOrder.verify(action("Continue")).setEnabled(eq(false));
         inOrder.verify(action("Cancel")).setEnabled(eq(false));
-        inOrder.verify(presentationSpy).renderWhiteCellAt(                    eq(pos(1, 2)));
-        inOrder.verify(presentationSpy).showMeasureInProgress();
-        inOrder.verify(presentationSpy).hideMeasureInProgress();
-        inOrder.verify(presentationSpy).renderMeasurementCellAt(              eq(pos(1, 2)), eq("Luminance: 33 cd/m\u00b2"), eq("White point: 2879 K"));
+        inOrder.verify(presentation).renderWhiteCellAt(                    eq(pos(1, 2)));
+        inOrder.verify(presentation).showMeasureInProgress();
+        inOrder.verify(presentation).hideMeasureInProgress();
+        inOrder.verify(presentation).renderMeasurementCellAt(              eq(pos(1, 2)), eq("Luminance: 33 cd/m\u00b2"), eq("White point: 2879 K"));
 
-        inOrder.verify(presentationSpy).renderSensorPlacementInvitationCellAt(eq(pos(2, 2)));
+        inOrder.verify(presentation).renderSensorPlacementInvitationCellAt(eq(pos(2, 2)));
         inOrder.verify(action("Continue")).setEnabled(eq(true));
         inOrder.verify(action("Cancel")).setEnabled(eq(true));
         inOrder.verify(action("Continue")).actionPerformed(any(ActionEvent.class));
         inOrder.verify(action("Continue")).setEnabled(eq(false));
         inOrder.verify(action("Cancel")).setEnabled(eq(false));
-        inOrder.verify(presentationSpy).renderWhiteCellAt(                    eq(pos(2, 2)));
-        inOrder.verify(presentationSpy).showMeasureInProgress();
-        inOrder.verify(presentationSpy).hideMeasureInProgress();
-        inOrder.verify(presentationSpy).renderMeasurementCellAt(              eq(pos(2, 2)), eq("Luminance: 19 cd/m\u00b2"), eq("White point: 6071 K"));
+        inOrder.verify(presentation).renderWhiteCellAt(                    eq(pos(2, 2)));
+        inOrder.verify(presentation).showMeasureInProgress();
+        inOrder.verify(presentation).hideMeasureInProgress();
+        inOrder.verify(presentation).renderMeasurementCellAt(              eq(pos(2, 2)), eq("Luminance: 19 cd/m\u00b2"), eq("White point: 6071 K"));
         
-        inOrder.verify(presentationSpy).dismiss();
+        inOrder.verify(presentation).dismiss();
         
-        if (!(presentationSpy instanceof Component)) // Swing makes its own interactions
+        if (!(presentation instanceof Component)) // Swing makes its own interactions
           {
-            verifyNoMoreInteractions(presentationSpy);
+            verifyNoMoreInteractions(presentation);
           }
         
         messageVerifier.verifyCollaborationStarted();
