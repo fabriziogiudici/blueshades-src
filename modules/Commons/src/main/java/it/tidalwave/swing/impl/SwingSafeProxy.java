@@ -20,37 +20,71 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.ui.impl.main.netbeans;
+package it.tidalwave.swing.impl;
 
-import javax.swing.JFrame;
-import org.testng.annotations.Test;
+import javax.annotation.Nonnull;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.util.concurrent.atomic.AtomicReference;
+import it.tidalwave.swing.SwingSafeComponentBuilder.TestHelper;
 import it.tidalwave.swing.SwingSafeRunner;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
+ * 
+ * @stereotype Factory
  * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class NetBeansUniformityMainMeasurementControllerTest
+@RequiredArgsConstructor @Slf4j
+public class SwingSafeProxy<T> implements InvocationHandler, TestHelper<T>
   {
-    @Test
-    public void run() 
-      throws InterruptedException
+    @Nonnull @Getter @Setter
+    private T delegate;
+    
+    @Override
+    public Object invoke (final @Nonnull Object proxy, final @Nonnull Method method, final @Nonnull Object[] args)
+      throws Throwable 
       {
+        final AtomicReference<Object> result = new AtomicReference<Object>();
+        final AtomicReference<Throwable> throwable = new AtomicReference<Throwable>();
+        
         SwingSafeRunner.runSafely(new Runnable() 
           {
             @Override
             public void run() 
               {
-                final JFrame frame = new JFrame();
-                final UniformityCheckMainPanel presentation = new UniformityCheckMainPanel();
-                presentation.renderMeasurements(new String[][] {{"a","b","c"},{"a","b","c"},{"a","b","c"}});
-                frame.add(presentation);
-                frame.setSize(800, 600);
-                frame.setVisible(true);
-             }
+                try 
+                  {
+                    log.trace(">>>> safely invoking {}", method);
+                    
+                    if (method.getDeclaringClass().equals(TestHelper.class))
+                      {
+                        result.set(method.invoke(SwingSafeProxy.this, args));
+                      }
+                    else
+                      {
+                        result.set(method.invoke(delegate, args));
+                      }
+                    
+                  }
+                catch (Throwable t)
+                  {
+                    throwable.set(t);
+                  }
+              }
           });
-        Thread.sleep(10000);
+        
+        if (throwable.get() != null)
+          {
+            throw throwable.get();  
+          }
+        
+        return result.get();
       }
   }

@@ -32,6 +32,7 @@ import javax.swing.JPanel;
 import it.tidalwave.swing.JPanelWithBackground;
 import it.tidalwave.swing.FixedAspectRatioLayout;
 import it.tidalwave.swing.ProportionalLayout;
+import java.awt.EventQueue;
 
 /***********************************************************************************************************************
  * 
@@ -53,6 +54,7 @@ public class UniformityMeasurementsPanel extends JPanel
     
     public UniformityMeasurementsPanel()
       {
+        assert EventQueue.isDispatchThread();
         backgroundImage = new ImageIcon(getClass().getResource("/it/tidalwave/uniformity/ui/impl/netbeans/2000px-Flat_monitor.svg.png"));
         displayPanel.setBackgroundImage(backgroundImage);
         final double imageAspectRatio = (double)backgroundImage.getIconWidth() / backgroundImage.getIconHeight();
@@ -64,6 +66,7 @@ public class UniformityMeasurementsPanel extends JPanel
         
     public void renderMeasurements (final @Nonnull String[][] measurements)
       {
+        assert EventQueue.isDispatchThread();
         innerPanel.removeAll();
         gridLayout.setColumns(measurements[0].length);
         gridLayout.setRows(measurements.length);

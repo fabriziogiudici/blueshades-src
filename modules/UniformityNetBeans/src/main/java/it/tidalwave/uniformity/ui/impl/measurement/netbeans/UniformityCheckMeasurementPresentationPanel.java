@@ -39,7 +39,6 @@ import javax.swing.JPanel;
 import it.tidalwave.uniformity.Position;
 import it.tidalwave.uniformity.ui.measurement.UniformityCheckMeasurementPresentation;
 import lombok.extern.slf4j.Slf4j;
-import static it.tidalwave.swing.SwingSafeRunner.*;
 
 /***********************************************************************************************************************
  * 
@@ -108,28 +107,21 @@ public class UniformityCheckMeasurementPresentationPanel extends JPanel implemen
     @Override
     public void setGridSize (final @Nonnegative int rows, final @Nonnegative int columns)
       {
-        runSafely(new Runnable() 
+        assert EventQueue.isDispatchThread();
+        removeAll();
+        setLayout(new GridLayout(rows, columns));
+
+        cell = new JPanel[rows][columns];
+
+        for (int row = 0; row < rows; row++)
           {
-            @Override
-            public void run() 
+            for (int column = 0; column < columns; column++)
               {
-                assert EventQueue.isDispatchThread();
-                removeAll();
-                setLayout(new GridLayout(rows, columns));
-
-                cell = new JPanel[rows][columns];
-
-                for (int row = 0; row < rows; row++)
-                  {
-                    for (int column = 0; column < columns; column++)
-                      {
-                        add(cell[row][column] = new JPanel(new BorderLayout()));
-                        cell[row][column].setBorder(BorderFactory.createLineBorder(BORDER_COLOR));
-                        cell[row][column].add(new Empty(), BorderLayout.CENTER);
-                      }
-                  }
+                add(cell[row][column] = new JPanel(new BorderLayout()));
+                cell[row][column].setBorder(BorderFactory.createLineBorder(BORDER_COLOR));
+                cell[row][column].add(new Empty(), BorderLayout.CENTER);
               }
-          });
+          }
       }
 
     /*******************************************************************************************************************
@@ -149,15 +141,8 @@ public class UniformityCheckMeasurementPresentationPanel extends JPanel implemen
     @Override
     public void renderEmptyCellAt (final @Nonnull Position position) 
       {
-        runSafely(new Runnable() 
-          {
-            @Override
-            public void run() 
-              {
-                assert EventQueue.isDispatchThread();
-                setCell(position, new Empty());
-              }
-          });
+        assert EventQueue.isDispatchThread();
+        setCell(position, new Empty());
       }
 
     /*******************************************************************************************************************
@@ -167,15 +152,8 @@ public class UniformityCheckMeasurementPresentationPanel extends JPanel implemen
     @Override
     public void renderSensorPlacementInvitationCellAt (final @Nonnull Position position) 
       {
-        runSafely(new Runnable() 
-          {
-            @Override
-            public void run() 
-              {
-                assert EventQueue.isDispatchThread();
-                setCell(position, new SensorPlacementInvitationComponent());
-              }
-          });
+        assert EventQueue.isDispatchThread();
+        setCell(position, new SensorPlacementInvitationComponent());
       }
 
     /*******************************************************************************************************************
@@ -185,15 +163,8 @@ public class UniformityCheckMeasurementPresentationPanel extends JPanel implemen
     @Override
     public void renderControlPanelAt (final @Nonnull Position position) 
       {
-        runSafely(new Runnable() 
-          {
-            @Override
-            public void run() 
-              {
-                assert EventQueue.isDispatchThread();
-                setCell(position, controlPanel = new ControlPanel(continueAction, cancelAction));
-              }
-          });
+        assert EventQueue.isDispatchThread();
+        setCell(position, controlPanel = new ControlPanel(continueAction, cancelAction));
       }
 
     /*******************************************************************************************************************
@@ -203,15 +174,8 @@ public class UniformityCheckMeasurementPresentationPanel extends JPanel implemen
     @Override
     public void renderWhiteCellAt (final @Nonnull Position position) 
       {
-        runSafely(new Runnable() 
-          {
-            @Override
-            public void run() 
-              {
-                assert EventQueue.isDispatchThread();
-                setCell(position, new White());
-              }
-          });
+        assert EventQueue.isDispatchThread();
+        setCell(position, new White());
       }
 
     /*******************************************************************************************************************
@@ -223,15 +187,8 @@ public class UniformityCheckMeasurementPresentationPanel extends JPanel implemen
                                    final @Nonnull String luminance, 
                                    final @Nonnull String whitePoint) 
       {
-        runSafely(new Runnable() 
-          {
-            @Override
-            public void run() 
-              {
-                assert EventQueue.isDispatchThread();
-                setCell(position, new MeasurementPanel(luminance, whitePoint));
-              }
-          });
+        assert EventQueue.isDispatchThread();
+        setCell(position, new MeasurementPanel(luminance, whitePoint));
       }
     
     /*******************************************************************************************************************
@@ -242,20 +199,13 @@ public class UniformityCheckMeasurementPresentationPanel extends JPanel implemen
     @Override
     public void showMeasureInProgress()
       {
-        runSafely(new Runnable() 
-          {
-            @Override
-            public void run() 
-              {
-                assert EventQueue.isDispatchThread();
-                setCursor(createBlankCursor());
+        assert EventQueue.isDispatchThread();
+        setCursor(createBlankCursor());
 
-                if (controlPanel != null)
-                  { 
-                    controlPanel.setProgressIndicatorVisible(true);  
-                  }
-              }
-          });
+        if (controlPanel != null)
+          { 
+            controlPanel.setProgressIndicatorVisible(true);  
+          }
       }  
     
     /*******************************************************************************************************************
@@ -266,21 +216,14 @@ public class UniformityCheckMeasurementPresentationPanel extends JPanel implemen
     @Override
     public void hideMeasureInProgress()
       {
-        runSafely(new Runnable() 
-          {
-            @Override
-            public void run() 
-              {
-                assert EventQueue.isDispatchThread();
+        assert EventQueue.isDispatchThread();
 
-                if (controlPanel != null)
-                  { 
-                    controlPanel.setProgressIndicatorVisible(false);  
-                  }
+        if (controlPanel != null)
+          { 
+            controlPanel.setProgressIndicatorVisible(false);  
+          }
 
-                setCursor(Cursor.getDefaultCursor());
-              }
-          });
+        setCursor(Cursor.getDefaultCursor());
       }  
       
     /*******************************************************************************************************************

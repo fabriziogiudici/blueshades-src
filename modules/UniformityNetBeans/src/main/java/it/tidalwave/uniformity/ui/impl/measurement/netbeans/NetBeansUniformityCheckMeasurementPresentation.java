@@ -28,7 +28,6 @@ import java.awt.GraphicsEnvironment;
 import javax.swing.JFrame;
 import it.tidalwave.uniformity.ui.measurement.UniformityCheckMeasurementPresentation;
 import lombok.Delegate;
-import static it.tidalwave.swing.SwingSafeRunner.*;
 
 /***********************************************************************************************************************
  * 
@@ -68,19 +67,12 @@ public class NetBeansUniformityCheckMeasurementPresentation implements Uniformit
     @Override
     public void showUp()
       {
-        runSafely(new Runnable() 
-          {
-            @Override
-            public void run() 
-              {
-                assert EventQueue.isDispatchThread();
-                panel.showUp();
-                final GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
-                final GraphicsDevice graphicsDevice = graphicsEnvironment.getScreenDevices()[0];
-                graphicsDevice.setFullScreenWindow(frame);
-                frame.setVisible(true);
-              }
-          });
+        assert EventQueue.isDispatchThread();
+        panel.showUp();
+        final GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        final GraphicsDevice graphicsDevice = graphicsEnvironment.getScreenDevices()[0];
+        graphicsDevice.setFullScreenWindow(frame);
+        frame.setVisible(true);
       }
     
     /*******************************************************************************************************************
@@ -90,16 +82,9 @@ public class NetBeansUniformityCheckMeasurementPresentation implements Uniformit
     @Override
     public void dismiss()
       {
-        runSafely(new Runnable() 
-          {
-            @Override
-            public void run() 
-              {
-                assert EventQueue.isDispatchThread();
-                frame.setVisible(false);
-                frame.dispose();
-                panel.dismiss();
-              }
-          });
+        assert EventQueue.isDispatchThread();
+        frame.setVisible(false);
+        frame.dispose();
+        panel.dismiss();
       }
   }

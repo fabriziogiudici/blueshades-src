@@ -22,6 +22,7 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.ui.impl.measurement.netbeans;
 
+import it.tidalwave.swing.SwingSafeComponentBuilder.TestHelper;
 import javax.annotation.Nonnull;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -83,8 +84,12 @@ public class NetBeansUniformityCheckMeasurementControllerActorTest extends Unifo
     protected UniformityCheckMeasurementPresentation createPresentation()
       {
         final UniformityCheckMeasurementPresentationProvider presentationProvider = new NetBeansUniformityCheckMeasurementPresentationProvider();
-        final UniformityCheckMeasurementPresentation presentation = spy(presentationProvider.getPresentation());
-        doAnswer(clickContinue).when(presentation).renderSensorPlacementInvitationCellAt(any(Position.class));
+//        final UniformityCheckMeasurementPresentation presentation = spy(presentationProvider.getPresentation());
+        final UniformityCheckMeasurementPresentation presentation = presentationProvider.getPresentation();
+        final UniformityCheckMeasurementPresentation delegate = ((TestHelper<UniformityCheckMeasurementPresentation>)presentation).getDelegate();
+        presentationSpy = spy(delegate);
+        ((TestHelper<UniformityCheckMeasurementPresentation>)presentation).setDelegate(presentationSpy);
+        doAnswer(clickContinue).when(presentationSpy).renderSensorPlacementInvitationCellAt(any(Position.class));
         return presentation;
       }
   }

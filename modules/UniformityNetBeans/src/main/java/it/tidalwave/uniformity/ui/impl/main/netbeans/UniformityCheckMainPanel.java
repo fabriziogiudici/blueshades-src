@@ -24,6 +24,7 @@ package it.tidalwave.uniformity.ui.impl.main.netbeans;
 
 import javax.annotation.Nonnull;
 import java.awt.BorderLayout;
+import java.awt.EventQueue;
 import javax.swing.Action;
 import javax.swing.JPanel;
 import it.tidalwave.swing.ActionAdapter;
@@ -52,6 +53,7 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
     
     public UniformityCheckMainPanel() 
       {
+        assert EventQueue.isDispatchThread();
         initComponents();
         radioButtonsSelector = new RadioButtonsSelector(rbLuminance, rbTemperature);
         pnInnerMeasurements.add(measurementsPanel, BorderLayout.CENTER);
@@ -60,6 +62,7 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
     @Override
     public void bind (final @Nonnull Action startAction, final @Nonnull MutableProperty<Integer> selectedMeasurement)
       {
+        assert EventQueue.isDispatchThread();
         this.startAction.bind(startAction);
         radioButtonsSelector.bind(selectedMeasurement);
       }
@@ -67,11 +70,13 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
     @Override
     public void showUp() 
       {
+        assert EventQueue.isDispatchThread();
       }
 
     @Override
     public void dismiss()
       {
+        assert EventQueue.isDispatchThread();
       }
     
     @Override
@@ -82,6 +87,7 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
             @Override
             public void run() 
               {
+                assert EventQueue.isDispatchThread();
                 measurementsPanel.renderMeasurements(measurements);  
               }
           });
@@ -90,6 +96,7 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
     @Override
     public void removeNotify()
       {
+        assert EventQueue.isDispatchThread();
         startAction.unbind();
         radioButtonsSelector.unbind();
         super.removeNotify();

@@ -27,6 +27,7 @@ import org.openide.util.lookup.ServiceProvider;
 import it.tidalwave.swing.SwingSafeComponentBuilder;
 import it.tidalwave.uniformity.ui.measurement.UniformityCheckMeasurementPresentationProvider;
 import lombok.extern.slf4j.Slf4j;
+import it.tidalwave.uniformity.ui.measurement.UniformityCheckMeasurementPresentation;
 import static it.tidalwave.swing.SwingSafeComponentBuilder.*;
 
 /***********************************************************************************************************************
@@ -40,10 +41,11 @@ import static it.tidalwave.swing.SwingSafeComponentBuilder.*;
 @ServiceProvider(service=UniformityCheckMeasurementPresentationProvider.class) @Slf4j
 public class NetBeansUniformityCheckMeasurementPresentationProvider implements UniformityCheckMeasurementPresentationProvider
   {
-    private final SwingSafeComponentBuilder<NetBeansUniformityCheckMeasurementPresentation> builder = builderFor(NetBeansUniformityCheckMeasurementPresentation.class);
+    private final SwingSafeComponentBuilder<NetBeansUniformityCheckMeasurementPresentation, UniformityCheckMeasurementPresentation> builder = 
+            builderFor(NetBeansUniformityCheckMeasurementPresentation.class, UniformityCheckMeasurementPresentation.class);
     
     @Override @Nonnull
-    public NetBeansUniformityCheckMeasurementPresentation getPresentation()
+    public UniformityCheckMeasurementPresentation getPresentation()
       {
         return builder.getInstance();
       }

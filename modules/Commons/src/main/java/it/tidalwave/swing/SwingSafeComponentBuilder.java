@@ -25,8 +25,10 @@ package it.tidalwave.swing;
 import javax.annotation.Nonnull;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Proxy;
 import java.util.concurrent.atomic.AtomicReference;
 import java.awt.EventQueue;
+import it.tidalwave.swing.impl.SwingSafeProxy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static lombok.AccessLevel.PRIVATE;
@@ -40,17 +42,29 @@ import static lombok.AccessLevel.PRIVATE;
  *
  **********************************************************************************************************************/
 @RequiredArgsConstructor(access=PRIVATE) @Slf4j
-public class SwingSafeComponentBuilder<T>
+public class SwingSafeComponentBuilder<T, I>
   {
+    public static interface TestHelper<I>
+      {
+        public void setDelegate (@Nonnull I delegate);
+        
+        @Nonnull
+        public I getDelegate();
+      }
+    
     @Nonnull
     private final Class<T> componentClass;
+    
+    @Nonnull
+    private final Class<I> interfaceClass;
     
     private WeakReference<T> presentationRef = new WeakReference<T>(null);
     
     @Nonnull
-    public static <X> SwingSafeComponentBuilder<X> builderFor (final @Nonnull Class<X> componentClass)
+    public static <X, J> SwingSafeComponentBuilder<X, J> builderFor (final @Nonnull Class<X> componentClass,    
+                                                                     final @Nonnull Class<J> interfaceClass)
       {
-        return new SwingSafeComponentBuilder<X>(componentClass);  
+        return new SwingSafeComponentBuilder<X, J>(componentClass, interfaceClass);  
       }
     
     @Nonnull
@@ -61,7 +75,10 @@ public class SwingSafeComponentBuilder<T>
         
         if (presentation == null)
           {
-            presentation = EventQueue.isDispatchThread() ? createComponentInstance() : createComponentInstanceInEDT();
+            presentation = EventQueue.isDispatchThread() ? createComponentInstance() : createComponentInstanceInEDT();            
+            presentation = (T)Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(), 
+                                                     new Class[] { interfaceClass, TestHelper.class }, 
+                                                     new SwingSafeProxy<T>(presentation));
             presentationRef = new WeakReference<T>(presentation);
           }
         

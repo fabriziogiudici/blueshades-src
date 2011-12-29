@@ -28,6 +28,7 @@ import it.tidalwave.swing.SwingSafeComponentBuilder;
 import it.tidalwave.uniformity.ui.main.UniformityCheckMainPresentationProvider;
 import lombok.extern.slf4j.Slf4j;
 import static it.tidalwave.swing.SwingSafeComponentBuilder.*;
+import it.tidalwave.uniformity.ui.main.UniformityCheckMainPresentation;
 
 /***********************************************************************************************************************
  * 
@@ -40,10 +41,11 @@ import static it.tidalwave.swing.SwingSafeComponentBuilder.*;
 @ServiceProvider(service=UniformityCheckMainPresentationProvider.class) @Slf4j
 public class NetBeansUniformityCheckMainPresentationProvider implements UniformityCheckMainPresentationProvider
   {
-    private final SwingSafeComponentBuilder<NetBeansUniformityCheckMainPresentation> builder = builderFor(NetBeansUniformityCheckMainPresentation.class);
+    private final SwingSafeComponentBuilder<NetBeansUniformityCheckMainPresentation, UniformityCheckMainPresentation> builder = 
+            builderFor(NetBeansUniformityCheckMainPresentation.class, UniformityCheckMainPresentation.class);
     
     @Override @Nonnull
-    public NetBeansUniformityCheckMainPresentation getPresentation()
+    public UniformityCheckMainPresentation getPresentation()
       {
         return builder.getInstance();
       }

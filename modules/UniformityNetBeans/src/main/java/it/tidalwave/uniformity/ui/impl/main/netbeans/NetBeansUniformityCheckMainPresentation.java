@@ -22,6 +22,7 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.ui.impl.main.netbeans;
 
+import java.awt.EventQueue;
 import org.openide.windows.WindowManager;
 import it.tidalwave.uniformity.ui.main.UniformityCheckMainPresentation;
 import lombok.Delegate;
@@ -49,6 +50,7 @@ public class NetBeansUniformityCheckMainPresentation implements UniformityCheckM
     
     public NetBeansUniformityCheckMainPresentation()
       {
+        assert EventQueue.isDispatchThread();
         topComponent = (UniformityCheckMainTopComponent)WindowManager.getDefault().findTopComponent("UniformityCheckMainTopComponent");
         panel = topComponent.getContent();
       }
@@ -56,6 +58,7 @@ public class NetBeansUniformityCheckMainPresentation implements UniformityCheckM
     @Override
     public void showUp() 
       {
+        assert EventQueue.isDispatchThread();
         panel.showUp();
         topComponent.requestActive();
       }
@@ -63,6 +66,7 @@ public class NetBeansUniformityCheckMainPresentation implements UniformityCheckM
     @Override
     public void dismiss()
       {
+        assert EventQueue.isDispatchThread();
         topComponent.close();
         panel.dismiss();
       }

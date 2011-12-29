@@ -25,6 +25,7 @@ package it.tidalwave.actor.netbeans;
 import javax.annotation.Nonnull;
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.EventQueue;
 import org.openide.windows.TopComponent;
 import it.tidalwave.actor.spi.ActorGroupActivator;
 import lombok.Getter;
@@ -45,6 +46,7 @@ public class ActorTopComponent<T extends Component> extends TopComponent
     protected ActorTopComponent (final @Nonnull Class<? extends ActorGroupActivator> actorGroupActivatorClass,
                                  final @Nonnull Class<T> contentClass) 
       {
+        assert EventQueue.isDispatchThread();
         activator = instantiate(actorGroupActivatorClass);
         content = instantiate(contentClass);
         setLayout(new BorderLayout());
