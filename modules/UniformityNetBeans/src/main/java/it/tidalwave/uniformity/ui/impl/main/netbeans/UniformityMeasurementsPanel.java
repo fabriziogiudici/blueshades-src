@@ -24,6 +24,7 @@ package it.tidalwave.uniformity.ui.impl.main.netbeans;
 
 import javax.annotation.Nonnull;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.GridLayout;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
@@ -32,7 +33,6 @@ import javax.swing.JPanel;
 import it.tidalwave.swing.JPanelWithBackground;
 import it.tidalwave.swing.FixedAspectRatioLayout;
 import it.tidalwave.swing.ProportionalLayout;
-import java.awt.EventQueue;
 
 /***********************************************************************************************************************
  * 
