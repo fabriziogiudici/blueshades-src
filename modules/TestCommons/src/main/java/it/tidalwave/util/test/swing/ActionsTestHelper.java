@@ -129,7 +129,7 @@ public class ActionsTestHelper
      ******************************************************************************************************************/
     public <T> On<T> register (final @Nonnull T presentation)
       {
-        return new On(doAnswer(storeActionReferences).when(presentation)); 
+        return new On<T>(doAnswer(storeActionReferences).when(presentation)); 
       }
     
     /*******************************************************************************************************************
