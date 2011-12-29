@@ -24,6 +24,7 @@ package it.tidalwave.uniformity.ui.impl.measurement;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -115,19 +116,17 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
         
         presentation = createPresentation();
         actions.register(presentation).on().bind(any(Action.class), any(Action.class));
+        
         presentationBuilder = mock(UniformityCheckMeasurementPresentationProvider.class);
         doReturn(presentation).when(presentationBuilder).getPresentation();
         MockLookup.setInstances(presentationBuilder);
-        
-        final List<Object> mockObjects = new ArrayList<Object>();
-        mockObjects.add(presentation);
-        mockObjects.addAll(actions.getVerifiers());
-        inOrder = inOrder(mockObjects.toArray());
+
+        inOrder = inOrder(concatenate(presentation, actions.getVerifiers()));
         
         testActivator = new TestActivator();
         testActivator.activate();
       }
-    
+
     /*******************************************************************************************************************
      * 
      *
@@ -297,9 +296,26 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
         messageVerifier.verifyCollaborationCompleted();
       }
     
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
     @Nonnull
     private ActionTestHelper.Verifier action (final @Nonnull String actionName) // syntactic sugar
       {
         return actions.getVerifierFor(actionName);  
+      }
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    @Nonnull
+    private static Object[] concatenate (final @Nonnull Object object, final @Nonnull Collection<Object> objects) 
+      {
+        final List<Object> result = new ArrayList<Object>();
+        result.add(object);
+        result.addAll(objects);
+        return result.toArray();
       }
   }
