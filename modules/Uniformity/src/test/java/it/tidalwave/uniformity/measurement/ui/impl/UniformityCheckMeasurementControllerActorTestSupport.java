@@ -150,7 +150,7 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
     public void must_properly_drive_a_complete_3x3_sequence() 
       throws InterruptedException
       {
-        final Collaboration collaboration = new UniformityCheckRequest().send();
+        final Collaboration collaboration = new UniformityCheckRequest("display1").send();
         collaboration.waitForCompletion();
         
         inOrder.verify(presentation).bind(any(Action.class), any(Action.class));
@@ -288,7 +288,7 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
         m.put(pos(0, 2), new UniformityMeasurement(kelvin(3813), 97));
         m.put(pos(1, 2), new UniformityMeasurement(kelvin(2879), 33));
         m.put(pos(2, 2), new UniformityMeasurement(kelvin(6071), 19));
-        final UniformityMeasurements measurements = new UniformityMeasurements(m);
+        final UniformityMeasurements measurements = new UniformityMeasurements("display1", m);
         messageVerifier.verify(UniformityMeasurementMessage.class).with("measurements", new Equals(measurements)); 
         
         messageVerifier.verifyCollaborationCompleted();

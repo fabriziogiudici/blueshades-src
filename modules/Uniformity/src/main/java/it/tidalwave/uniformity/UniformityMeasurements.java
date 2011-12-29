@@ -30,6 +30,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import org.joda.time.DateTime;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
@@ -42,6 +43,12 @@ import lombok.Getter;
 @Immutable @EqualsAndHashCode
 public class UniformityMeasurements
   {
+    @Getter
+    private final String displayName;
+            
+    @Getter
+    private final DateTime dateTime = new DateTime();
+    
     @Nonnegative @Getter
     private final int columns;
    
@@ -51,8 +58,10 @@ public class UniformityMeasurements
     @Nonnull
     private final SortedMap<Position, UniformityMeasurement> measurementMapByPosition;
     
-    public UniformityMeasurements (final @Nonnull SortedMap<Position, UniformityMeasurement> measurementMapByPosition)
+    public UniformityMeasurements (final @Nonnull String displayName,
+                                   final @Nonnull SortedMap<Position, UniformityMeasurement> measurementMapByPosition)
       {
+        this.displayName = displayName;
         this.measurementMapByPosition = new TreeMap<Position, UniformityMeasurement>(measurementMapByPosition);
         
         int c = 0, r = 0;

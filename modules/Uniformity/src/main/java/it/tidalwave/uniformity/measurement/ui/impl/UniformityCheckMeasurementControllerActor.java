@@ -78,6 +78,8 @@ public class UniformityCheckMeasurementControllerActor
     
     private UniformityCheckMeasurementPresentation presentation;
 
+    private String displayName;
+    
     private final List<Position> positionSequence = new ArrayList<Position>();
 
     private Iterator<Position> positionIterator;
@@ -124,6 +126,7 @@ public class UniformityCheckMeasurementControllerActor
     public void start (final @Nonnull UniformityCheckRequest message)
       {
         log.info("start({})", message);
+        displayName = message.getDisplayName();
         initializeMeasurement();
         prepareNextMeasurement(message);  
       }
@@ -241,7 +244,7 @@ public class UniformityCheckMeasurementControllerActor
         if (!positionIterator.hasNext())
           {
             presentation.dismiss();  
-            new UniformityMeasurementMessage(new UniformityMeasurements(measurementMapByPosition)).send();
+            new UniformityMeasurementMessage(new UniformityMeasurements(displayName, measurementMapByPosition)).send();
           }
         else
           {

@@ -44,6 +44,8 @@ import it.tidalwave.uniformity.main.ui.UniformityCheckMainPresentation;
 import it.tidalwave.uniformity.main.ui.UniformityCheckMainPresentationProvider;
 import lombok.extern.slf4j.Slf4j;
 import static it.tidalwave.uniformity.Position.*;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 
 /***********************************************************************************************************************
  * 
@@ -171,8 +173,10 @@ public class UniformityCheckMainControllerActor
         @Override
         public void actionPerformed (final @Nonnull ActionEvent event) 
           {
+            final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            final GraphicsDevice[] screenDevices = ge.getScreenDevices();
             setEnabled(false);
-            new UniformityCheckRequest().send();
+            new UniformityCheckRequest(screenDevices[0].getIDstring()).send();
           }
       };
     
