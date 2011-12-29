@@ -22,10 +22,11 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.ui.impl.measurement.netbeans;
 
-import java.awt.Color;
 import javax.annotation.Nonnull;
+import java.awt.Color;
 import javax.swing.Action;
 import javax.swing.JPanel;
+import it.tidalwave.swing.ActionAdapter;
 
 /***********************************************************************************************************************
  * 
@@ -37,6 +38,10 @@ import javax.swing.JPanel;
  **********************************************************************************************************************/
 public class ControlPanel extends JPanel 
   {
+    private final ActionAdapter continueAction = new ActionAdapter();
+    
+    private final ActionAdapter cancelAction = new ActionAdapter();
+    
     public ControlPanel()
       {
         initComponents();
@@ -48,19 +53,18 @@ public class ControlPanel extends JPanel
       {
         this();
         pbMeasurementInProgress.setVisible(false);
-        btContinue.setAction(continueAction);
-        btCancel.setAction(cancelAction);
+        this.continueAction.bind(continueAction);
+        this.cancelAction.bind(cancelAction);
       }
 
     @Override
     public void removeNotify()
       {
-        btContinue.setAction(null);
-        btCancel.setAction(null);
+        continueAction.unbind();
+        cancelAction.unbind();
         super.removeNotify();
       }
     
-
     public void setProgressIndicatorVisible (final boolean visible) 
       {
         pbMeasurementInProgress.setVisible(visible);
@@ -98,12 +102,14 @@ public class ControlPanel extends JPanel
         jPanel1.setPreferredSize(new java.awt.Dimension(0, 48));
         jPanel1.setSize(new java.awt.Dimension(0, 48));
 
+        btContinue.setAction(continueAction);
         btContinue.setText(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.btContinue.text")); // NOI18N
         btContinue.setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.btContinue.name")); // NOI18N
         btContinue.setPreferredSize(new java.awt.Dimension(102, 32));
         btContinue.setSize(new java.awt.Dimension(102, 32));
         jPanel1.add(btContinue);
 
+        btCancel.setAction(cancelAction);
         btCancel.setText(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.btCancel.text")); // NOI18N
         btCancel.setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.btCancel.name")); // NOI18N
         btCancel.setPreferredSize(new java.awt.Dimension(102, 32));

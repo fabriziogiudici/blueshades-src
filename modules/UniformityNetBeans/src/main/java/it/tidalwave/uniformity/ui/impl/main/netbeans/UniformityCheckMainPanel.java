@@ -26,6 +26,7 @@ import javax.annotation.Nonnull;
 import java.awt.BorderLayout;
 import javax.swing.Action;
 import javax.swing.JPanel;
+import it.tidalwave.swing.ActionAdapter;
 import it.tidalwave.blueargyle.util.MutableProperty;
 import it.tidalwave.blueargyle.util.RadioButtonsSelector;
 import it.tidalwave.uniformity.ui.main.UniformityCheckMainPresentation;
@@ -47,6 +48,8 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
  
     private final RadioButtonsSelector radioButtonsSelector;
     
+    private final ActionAdapter startAction = new ActionAdapter();
+    
     public UniformityCheckMainPanel() 
       {
         initComponents();
@@ -57,7 +60,7 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
     @Override
     public void bind (final @Nonnull Action startAction, final @Nonnull MutableProperty<Integer> selectedMeasurement)
       {
-        btStart.setAction(startAction);
+        this.startAction.bind(startAction);
         radioButtonsSelector.bind(selectedMeasurement);
       }
     
@@ -81,13 +84,13 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
               {
                 measurementsPanel.renderMeasurements(measurements);  
               }
-        });
+          });
       }
     
     @Override
     public void removeNotify()
       {
-        btStart.setAction(null);
+        startAction.unbind();
         radioButtonsSelector.unbind();
         super.removeNotify();
       } 
@@ -167,6 +170,7 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
 
         jPanel3.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.jPanel3.name")); // NOI18N
 
+        btStart.setAction(startAction);
         btStart.setText(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.btStart.text")); // NOI18N
         btStart.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.btStart.name")); // NOI18N
         jPanel3.add(btStart);

@@ -63,7 +63,7 @@
           <Border info="org.netbeans.modules.form.compat2.border.CompoundBorderInfo">
             <CompoundBorder>
               <Border PropertyName="outside" info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="&lt;UniformityCheckMainPanel.pnMeasurements.border.outsideBorder.title&gt;">
+                <TitledBorder title="Measurements">
                   <ResourceString PropertyName="titleX" bundle="it/tidalwave/uniformity/ui/impl/main/netbeans/Bundle.properties" key="UniformityCheckMainPanel.pnMeasurements.border.outsideBorder.title" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
                 </TitledBorder>
               </Border>
@@ -150,7 +150,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="&lt;UniformityCheckMainPanel.jPanel2.border.title&gt;">
+            <TitledBorder title="Display selection">
               <ResourceString PropertyName="titleX" bundle="it/tidalwave/uniformity/ui/impl/main/netbeans/Bundle.properties" key="UniformityCheckMainPanel.jPanel2.border.title" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </TitledBorder>
           </Border>
@@ -184,6 +184,9 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btStart">
           <Properties>
+            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="startAction" type="code"/>
+            </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
               <ResourceString bundle="it/tidalwave/uniformity/ui/impl/main/netbeans/Bundle.properties" key="UniformityCheckMainPanel.btStart.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </Property>
@@ -198,7 +201,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="&lt;UniformityCheckMainPanel.jPanel1.border.title&gt;">
+            <TitledBorder title="Archive">
               <ResourceString PropertyName="titleX" bundle="it/tidalwave/uniformity/ui/impl/main/netbeans/Bundle.properties" key="UniformityCheckMainPanel.jPanel1.border.title" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </TitledBorder>
           </Border>
