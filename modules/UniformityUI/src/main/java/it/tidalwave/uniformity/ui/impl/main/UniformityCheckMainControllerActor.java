@@ -104,10 +104,10 @@ public class UniformityCheckMainControllerActor
     abstract class MeasurementRenderer
       {
         @Nonnull
-         final String upperFormat;
+        private final String upperFormat;
         
         @Nonnull
-         final String lowerFormat;
+        private final String lowerFormat;
         
         public void render (@Nonnull UniformityMeasurements measurements)
           {
