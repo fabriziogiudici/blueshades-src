@@ -101,8 +101,11 @@ public class UniformityCheckMainControllerActor
      *
      ******************************************************************************************************************/
     @RequiredArgsConstructor
-    abstract class MeasurementRenderer
+    static abstract class MeasurementRenderer
       {
+        @Nonnull
+        private final UniformityCheckMainPresentation presentation;
+        
         @Nonnull
         private final String upperFormat;
         
@@ -154,11 +157,11 @@ public class UniformityCheckMainControllerActor
      * 
      *
      ******************************************************************************************************************/
-    class TemperatureRenderer extends MeasurementRenderer
+    static class TemperatureRenderer extends MeasurementRenderer
       {
-        public TemperatureRenderer()
+        public TemperatureRenderer (final @Nonnull UniformityCheckMainPresentation presentation)
           {
-            super("%.0f K", "\n\u0394 = %+.0f K");  
+            super(presentation, "%.0f K", "\n\u0394 = %+.0f K");  
           }
         
         @Override
@@ -172,11 +175,11 @@ public class UniformityCheckMainControllerActor
      * 
      *
      ******************************************************************************************************************/
-    class LuminanceRenderer extends MeasurementRenderer
+    static class LuminanceRenderer extends MeasurementRenderer
       {
-        public LuminanceRenderer()
+        public LuminanceRenderer (final UniformityCheckMainPresentation presentation)
           {
-            super("%.0f cd/m\u00b2", "\n\u0394 = %+.0f cd/m\u00b2");  
+            super(presentation, "%.0f cd/m\u00b2", "\n\u0394 = %+.0f cd/m\u00b2");  
           }
         
         @Override
@@ -244,8 +247,8 @@ public class UniformityCheckMainControllerActor
         log.info("initialize()");
         presentation = presentationBuilder.getPresentation();
         measurementRenderers.clear();
-        measurementRenderers.add(new LuminanceRenderer());
-        measurementRenderers.add(new TemperatureRenderer());
+        measurementRenderers.add(new LuminanceRenderer(presentation));
+        measurementRenderers.add(new TemperatureRenderer(presentation));
         presentation.bind(startAction, selectedMeasurement);
         
         new UniformityArchiveQuery().sendLater(1, TimeUnit.SECONDS); // FIXME
