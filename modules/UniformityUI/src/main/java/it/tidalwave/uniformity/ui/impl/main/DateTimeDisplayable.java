@@ -25,7 +25,6 @@ package it.tidalwave.uniformity.ui.impl.main;
 import javax.annotation.Nonnull;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-import org.openide.util.Lookup;
 import it.tidalwave.role.Displayable;
 import it.tidalwave.uniformity.UniformityMeasurements;
 import lombok.RequiredArgsConstructor;
@@ -39,16 +38,15 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 class DateTimeDisplayable implements Displayable
   {
-    private final DateTimeFormatter dateFormat = DateTimeFormat.shortDateTime();
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormat.shortDateTime();
 
     @Nonnull
-    private final Lookup lookup;
-
+    private final UniformityMeasurements measurements;
+    
     @Override @Nonnull
     public String getDisplayName() 
       {
-        final UniformityMeasurements measurements = lookup.lookup(UniformityMeasurements.class);
-        return (measurements != null) ? dateFormat.print(measurements.getDateTime()) : "???";
+        return DATE_FORMAT.print(measurements.getDateTime());
       }
   }
 

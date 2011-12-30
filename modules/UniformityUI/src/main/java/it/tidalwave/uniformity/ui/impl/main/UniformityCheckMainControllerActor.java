@@ -261,7 +261,7 @@ public class UniformityCheckMainControllerActor
               {
                 final UniformityMeasurements measurements = lookup.lookup(UniformityMeasurements.class);                  
                 return (measurements == null) ? lookup // e.g. the root node
-                                              : new ProxyLookup(Lookups.fixed(new DateTimeDisplayable(lookup), 
+                                              : new ProxyLookup(Lookups.fixed(new DateTimeDisplayable(measurements), 
                                                                               new MeasurementsActionProvider(measurements)), 
                                                                 lookup);
               }
