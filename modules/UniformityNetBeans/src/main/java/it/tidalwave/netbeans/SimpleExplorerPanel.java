@@ -24,12 +24,17 @@ package it.tidalwave.netbeans;
 
 import javax.annotation.Nonnull;
 import java.awt.BorderLayout;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import javax.swing.ActionMap;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.text.DefaultEditorKit;
+import org.openide.nodes.Node;
 import org.openide.explorer.ExplorerManager;
 import org.openide.explorer.ExplorerUtils;
+import it.tidalwave.util.NotFoundException;
+import it.tidalwave.netbeans.nodes.role.ActionProvider;
 import lombok.Getter;
 
 /***********************************************************************************************************************
@@ -42,6 +47,36 @@ public class SimpleExplorerPanel extends JPanel implements ExplorerManager.Provi
   {
     @Getter
     private final ExplorerManager explorerManager = new ExplorerManager();
+    
+    private final PropertyChangeListener pcl = new PropertyChangeListener() 
+      {
+        @Override
+        public void propertyChange (final @Nonnull PropertyChangeEvent event) 
+          {
+            if (ExplorerManager.PROP_SELECTED_NODES.equals(event.getPropertyName()))
+              {
+                final Node[] selectedNodes = (Node[])event.getNewValue();
+                
+                for (final Node selectedNode : selectedNodes)
+                  {
+                    final ActionProvider actionProvider = selectedNode.getLookup().lookup(ActionProvider.class);
+                    
+                    if (actionProvider != null)
+                      {
+                        try
+                          {
+                            // FIXME: introduce a new specific getSelectionAction()?
+                            actionProvider.getPreferredAction().actionPerformed(null);// FIXME: null  
+                          }
+                        catch (NotFoundException e)
+                          {
+                            // ok, no selection action 
+                          }
+                      }
+                  }
+              }
+          }
+      };
 
     public SimpleExplorerPanel() 
       {
@@ -50,6 +85,8 @@ public class SimpleExplorerPanel extends JPanel implements ExplorerManager.Provi
         actionMap.put(DefaultEditorKit.cutAction, ExplorerUtils.actionCut(explorerManager));
         actionMap.put(DefaultEditorKit.pasteAction, ExplorerUtils.actionPaste(explorerManager));
         actionMap.put("delete", ExplorerUtils.actionDelete(explorerManager, true));
+        
+        explorerManager.addPropertyChangeListener(pcl);
       }
     
     public SimpleExplorerPanel (final @Nonnull JComponent component)
