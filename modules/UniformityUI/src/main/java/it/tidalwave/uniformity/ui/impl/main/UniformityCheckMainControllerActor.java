@@ -165,15 +165,6 @@ public class UniformityCheckMainControllerActor
         public Action getPreferredAction() 
           {
             return new ActionMessageAdapter("Select", new UniformityMeasurementsSelectedMessage(measurements));
-//            return new AbstractAction("Select") 
-//              {
-//                @Override
-//                public void actionPerformed (final @Nonnull ActionEvent event) 
-//                  {
-//                    log.info("selected({})", measurements);
-//                    new UniformityMeasurementsSelectedMessage(measurements).send();
-//                  }
-//              };
           }
 
         @Override @Nonnull
