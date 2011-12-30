@@ -48,4 +48,12 @@ public interface UniformityCheckMainPresentation
     public void populateDisplays (@Nonnull PresentationModel presentationModel);
 
     public void populateMeasurementsArchive (@Nonnull PresentationModel presentationModel);
+
+    public void showWaitingOnDisplayList();
+
+    public void showWaitingOnMeasurementsArchive();
+
+    public void hideWaitingOnDisplayList();
+
+    public void hideWaitingOnMeasurementsArchive();
   }

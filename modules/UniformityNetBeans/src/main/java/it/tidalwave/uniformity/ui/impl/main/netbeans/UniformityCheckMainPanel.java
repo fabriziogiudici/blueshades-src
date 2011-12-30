@@ -110,6 +110,31 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
       }
     
     @Override
+    public void showWaitingOnDisplayList() 
+      {
+        assert EventQueue.isDispatchThread();
+        // FIXME: TODO
+      }
+
+    @Override
+    public void showWaitingOnMeasurementsArchive() 
+      {
+        // FIXME: TODO
+      } 
+
+    @Override
+    public void hideWaitingOnDisplayList() 
+      {
+        // FIXME: TODO
+      }
+
+    @Override
+    public void hideWaitingOnMeasurementsArchive() 
+      {
+        // FIXME: TODO
+      }
+    
+    @Override
     public void removeNotify()
       {
         assert EventQueue.isDispatchThread();

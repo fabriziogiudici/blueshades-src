@@ -240,6 +240,8 @@ public class UniformityCheckMainControllerActor
         propertyRenderers.add(new TemperatureRenderer(presentation));
         presentation.bind(startNewMeasurementAction, selectedPropertyRendereIndex);
         
+        presentation.showWaitingOnDisplayList();
+        presentation.showWaitingOnMeasurementsArchive();
         archivedMeasurementsRequestor.start();
         displayDiscoveryRequestor.start();
       }
@@ -253,6 +255,7 @@ public class UniformityCheckMainControllerActor
         log.info("onDiscoveredDisplays({})", message);
         displayDiscoveryRequestor.stop();
         populateDisplays(message.findDisplays());
+        presentation.hideWaitingOnDisplayList();
       }  
     
     /*******************************************************************************************************************
@@ -264,6 +267,7 @@ public class UniformityCheckMainControllerActor
         log.info("onArchivedMeasurementsNotified({})", message);
         archivedMeasurementsRequestor.stop();
         populateMeasurementsArchive(message.findMeasurements());
+        presentation.hideWaitingOnMeasurementsArchive();
       }  
     
     /*******************************************************************************************************************
