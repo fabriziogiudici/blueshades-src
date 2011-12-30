@@ -176,9 +176,9 @@ public class UniformityCheckMainControllerActor
      * 
      *
      ******************************************************************************************************************/
-    public void renderMeasurements (final @ListensTo @Nonnull UniformityMeasurementMessage message)
+    public void renderNewMeasurements (final @ListensTo @Nonnull UniformityMeasurementMessage message)
       {
-        log.info("renderMeasurements({})", message);
+        log.info("renderNewMeasurements({})", message);
         measurements = null; // prevents a double refresh because of changing selectedMeasurement
         selectedMeasurement.setValue(0);
         measurements = message.getMeasurements();
@@ -190,9 +190,9 @@ public class UniformityCheckMainControllerActor
      * 
      *
      ******************************************************************************************************************/
-    public void renderUpdatedArchive (final @ListensTo @Nonnull UniformityArchiveUpdatedMessage message)
+    public void populateMeasurementsArchive (final @ListensTo @Nonnull UniformityArchiveUpdatedMessage message)
       {
-        log.info("renderUpdatedArchive({})", message);
+        log.info("populateMeasurementsArchive({})", message);
         populateMeasurementsArchive(message.findMeasurements());
       }  
     
@@ -200,9 +200,9 @@ public class UniformityCheckMainControllerActor
      * 
      *
      ******************************************************************************************************************/
-    public void renderArchiveContents (final @ListensTo @Nonnull UniformityArchiveContentMessage message)
+    public void populateMeasurementsArchive (final @ListensTo @Nonnull UniformityArchiveContentMessage message)
       {
-        log.info("renderArchiveContents({})", message);
+        log.info("populateMeasurementsArchive({})", message);
         populateMeasurementsArchive(message.findMeasurements());
       }  
     
