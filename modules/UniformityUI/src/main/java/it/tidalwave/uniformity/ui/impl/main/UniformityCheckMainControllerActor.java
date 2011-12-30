@@ -28,6 +28,8 @@ import javax.annotation.concurrent.NotThreadSafe;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.awt.GraphicsDevice;
@@ -48,15 +50,18 @@ import it.tidalwave.netbeans.nodes.NodePresentationModel;
 import it.tidalwave.netbeans.nodes.LookupFilterDecoratorNode;
 import it.tidalwave.netbeans.nodes.LookupFilterDecoratorNode.LookupFilter;
 import it.tidalwave.blueargyle.util.MutableProperty;
+import it.tidalwave.netbeans.nodes.role.ActionProvider;
+import it.tidalwave.swing.ActionMessageAdapter;
 import it.tidalwave.uniformity.UniformityCheckRequest;
 import it.tidalwave.uniformity.UniformityMeasurement;
 import it.tidalwave.uniformity.UniformityMeasurementMessage;
 import it.tidalwave.uniformity.UniformityMeasurements;
 import it.tidalwave.uniformity.archive.UniformityArchiveContentMessage;
 import it.tidalwave.uniformity.archive.UniformityArchiveQuery;
-import it.tidalwave.uniformity.archive.UniformityArchiveUpdatedMessage;
+import it.tidalwave.uniformity.ui.UniformityMeasurementsSelectedMessage;
 import it.tidalwave.uniformity.ui.main.UniformityCheckMainPresentation;
 import it.tidalwave.uniformity.ui.main.UniformityCheckMainPresentationProvider;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
@@ -150,6 +155,38 @@ public class UniformityCheckMainControllerActor
      * 
      *
      ******************************************************************************************************************/
+    @RequiredArgsConstructor
+    private static class MeasurementsActionProvider implements ActionProvider
+      {
+        @Nonnull
+        private final UniformityMeasurements measurements;
+        
+        @Override @Nonnull
+        public Action getPreferredAction() 
+          {
+            return new ActionMessageAdapter("Select", new UniformityMeasurementsSelectedMessage(measurements));
+//            return new AbstractAction("Select") 
+//              {
+//                @Override
+//                public void actionPerformed (final @Nonnull ActionEvent event) 
+//                  {
+//                    log.info("selected({})", measurements);
+//                    new UniformityMeasurementsSelectedMessage(measurements).send();
+//                  }
+//              };
+          }
+
+        @Override @Nonnull
+        public Collection<? extends Action> getActions() 
+          {
+            return Collections.<Action>emptyList();
+          }
+      };
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
     public UniformityCheckMainControllerActor()
       {
         selectedMeasurement.addPropertyChangeListener(pcl);
@@ -176,9 +213,9 @@ public class UniformityCheckMainControllerActor
      * 
      *
      ******************************************************************************************************************/
-    public void renderNewMeasurements (final @ListensTo @Nonnull UniformityMeasurementMessage message)
+    public void onNewMeasurements (final @ListensTo @Nonnull UniformityMeasurementMessage message)
       {
-        log.info("renderNewMeasurements({})", message);
+        log.info("onNewMeasurements({})", message);
         measurements = null; // prevents a double refresh because of changing selectedMeasurement
         selectedMeasurement.setValue(0);
         measurements = message.getMeasurements();
@@ -190,19 +227,30 @@ public class UniformityCheckMainControllerActor
      * 
      *
      ******************************************************************************************************************/
-    public void populateMeasurementsArchive (final @ListensTo @Nonnull UniformityArchiveUpdatedMessage message)
+    public void onSelectedArchivedMeasurements (final @ListensTo @Nonnull UniformityMeasurementsSelectedMessage message)
       {
-        log.info("populateMeasurementsArchive({})", message);
-        populateMeasurementsArchive(message.findMeasurements());
+        log.info("onSelectedArchivedMeasurements({})", message);
+        measurements = message.getMeasurements();
+        refreshPresentation();
       }  
     
     /*******************************************************************************************************************
      * 
      *
      ******************************************************************************************************************/
-    public void populateMeasurementsArchive (final @ListensTo @Nonnull UniformityArchiveContentMessage message)
+//    public void populateMeasurementsArchive (final @ListensTo @Nonnull UniformityArchiveUpdatedMessage message)
+//      {
+//        log.info("populateMeasurementsArchive({})", message);
+//        populateMeasurementsArchive(message.findMeasurements());
+//      }  
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    public void onArchivedMeasurementsNotified (final @ListensTo @Nonnull UniformityArchiveContentMessage message)
       {
-        log.info("populateMeasurementsArchive({})", message);
+        log.info("onArchivedMeasurementsNotified({})", message);
         populateMeasurementsArchive(message.findMeasurements());
       }  
     
@@ -219,7 +267,11 @@ public class UniformityCheckMainControllerActor
             @Override @Nonnull
             public Lookup filter (final @Nonnull Lookup lookup)
               {
-                return new ProxyLookup(Lookups.fixed(new DateTimeDisplayable(lookup)), lookup);
+                final UniformityMeasurements measurements = lookup.lookup(UniformityMeasurements.class);                  
+                return (measurements == null) ? lookup // e.g. the root node
+                                              : new ProxyLookup(Lookups.fixed(new DateTimeDisplayable(lookup), 
+                                                                              new MeasurementsActionProvider(measurements)), 
+                                                                lookup);
               }
           }));
       }
