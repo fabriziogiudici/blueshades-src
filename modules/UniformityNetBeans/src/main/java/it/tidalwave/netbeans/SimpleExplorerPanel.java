@@ -20,30 +20,57 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.ui.main;
+package it.tidalwave.netbeans;
 
 import javax.annotation.Nonnull;
-import javax.swing.Action;
-import it.tidalwave.role.ui.PresentationModel;
-import it.tidalwave.blueargyle.util.MutableProperty;
+import java.awt.BorderLayout;
+import javax.swing.ActionMap;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.text.DefaultEditorKit;
+import org.openide.explorer.ExplorerManager;
+import org.openide.explorer.ExplorerUtils;
+import lombok.Getter;
 
 /***********************************************************************************************************************
- * 
- * @stereotype Presentation
  * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public interface UniformityCheckMainPresentation
+public class SimpleExplorerPanel extends JPanel implements ExplorerManager.Provider 
   {
-    public void showUp();
-    
-    public void dismiss();
+    @Getter
+    private final ExplorerManager explorerManager = new ExplorerManager();
 
-    public void bind (@Nonnull Action startAction, @Nonnull MutableProperty<Integer> selectedMeasurement);
+    public SimpleExplorerPanel() 
+      {
+        final ActionMap actionMap = getActionMap();
+        actionMap.put(DefaultEditorKit.copyAction, ExplorerUtils.actionCopy(explorerManager));
+        actionMap.put(DefaultEditorKit.cutAction, ExplorerUtils.actionCut(explorerManager));
+        actionMap.put(DefaultEditorKit.pasteAction, ExplorerUtils.actionPaste(explorerManager));
+        actionMap.put("delete", ExplorerUtils.actionDelete(explorerManager, true));
+      }
     
-    public void renderMeasurements (@Nonnull String[][] measurements);
+    public SimpleExplorerPanel (final @Nonnull JComponent component)
+      {
+        this();
+        setLayout(new BorderLayout());
+        add(component, BorderLayout.CENTER);
+      }  
 
-    public void populateMeasurementsArchive (@Nonnull PresentationModel presentationModel);
+    @Override
+    public void addNotify() 
+      {
+        super.addNotify();
+        ExplorerUtils.activateActions(explorerManager, true);
+      }
+    
+    @Override
+    public void removeNotify() 
+      {
+        ExplorerUtils.activateActions(explorerManager, false);
+        super.removeNotify();
+      }
   }
+
