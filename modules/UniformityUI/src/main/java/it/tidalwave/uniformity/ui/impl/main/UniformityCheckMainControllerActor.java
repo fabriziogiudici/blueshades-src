@@ -31,7 +31,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
@@ -45,6 +44,7 @@ import it.tidalwave.util.Finder;
 import it.tidalwave.role.spi.DefaultSimpleComposite;
 import it.tidalwave.actor.annotation.Actor;
 import it.tidalwave.actor.annotation.ListensTo;
+import it.tidalwave.actor.RepeatingMessageSender;
 import it.tidalwave.netbeans.util.Locator;
 import it.tidalwave.netbeans.nodes.NodePresentationModel;
 import it.tidalwave.netbeans.nodes.LookupFilterDecoratorNode;
@@ -87,6 +87,8 @@ public class UniformityCheckMainControllerActor
     private final MutableProperty<Integer> selectedPropertyIndex = new MutableProperty<Integer>(0);
     
     private final List<PropertyRenderer> propertyRenderers = new ArrayList<PropertyRenderer>();
+    
+    private final RepeatingMessageSender archivedMeasurementsRequestor = new RepeatingMessageSender(new UniformityArchiveQuery());
     
     /*******************************************************************************************************************
      * 
@@ -216,7 +218,7 @@ public class UniformityCheckMainControllerActor
         propertyRenderers.add(new TemperatureRenderer(presentation));
         presentation.bind(startAction, selectedPropertyIndex);
         
-        new UniformityArchiveQuery().sendLater(1, TimeUnit.SECONDS); // FIXME
+        archivedMeasurementsRequestor.start();
       }
     
     /*******************************************************************************************************************
@@ -251,6 +253,7 @@ public class UniformityCheckMainControllerActor
     public void onUpdatedArchivedMeasurements (final @ListensTo @Nonnull UniformityArchiveUpdatedMessage message)
       {
         log.info("onUpdatedArchivedMeasurements({})", message);
+        archivedMeasurementsRequestor.stop();
         populateMeasurementsArchive(message.findMeasurements());
       }  
     
@@ -261,6 +264,7 @@ public class UniformityCheckMainControllerActor
     public void onArchivedMeasurementsNotified (final @ListensTo @Nonnull UniformityArchiveContentMessage message)
       {
         log.info("onArchivedMeasurementsNotified({})", message);
+        archivedMeasurementsRequestor.stop();
         populateMeasurementsArchive(message.findMeasurements());
       }  
     

@@ -81,6 +81,7 @@
                 <configuration>
                     <publicPackages>
                         <publicPackage>it.tidalwave.blueargyle.util</publicPackage>
+                        <publicPackage>it.tidalwave.actor</publicPackage>
                         <publicPackage>it.tidalwave.swing</publicPackage>
                     </publicPackages>
                 </configuration>
