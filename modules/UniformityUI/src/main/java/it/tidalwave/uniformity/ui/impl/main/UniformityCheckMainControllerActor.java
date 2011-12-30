@@ -63,6 +63,7 @@ import it.tidalwave.uniformity.ui.main.UniformityCheckMainPresentationProvider;
 import lombok.extern.slf4j.Slf4j;
 import lombok.RequiredArgsConstructor;
 import static it.tidalwave.uniformity.Position.*;
+import org.joda.time.format.DateTimeFormatter;
 
 /***********************************************************************************************************************
  * 
@@ -83,14 +84,16 @@ public class UniformityCheckMainControllerActor
     @RequiredArgsConstructor
     private static class DateTimeDisplayable implements Displayable
       {
+        private final DateTimeFormatter dateFormat = DateTimeFormat.shortDateTime();
+        
         @Nonnull
         private final Lookup lookup;
 
         @Override @Nonnull
         public String getDisplayName() 
           {
-            final DateTime dateTime = lookup.lookup(UniformityMeasurements.class).getDateTime();
-            return DateTimeFormat.shortDateTime().print(dateTime);
+            final UniformityMeasurements measurements = lookup.lookup(UniformityMeasurements.class);
+            return (measurements != null) ? dateFormat.print(measurements.getDateTime()) : "???";
           }
       }
     
