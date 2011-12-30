@@ -140,6 +140,23 @@ public class UniformityCheckMainControllerActor
      * 
      *
      ******************************************************************************************************************/
+    private final LookupFilter capabilityInjectorLookupFilter = new LookupFilter() 
+      {
+        @Override @Nonnull
+        public Lookup filter (final @Nonnull Lookup lookup)
+          {
+            final UniformityMeasurements measurements = lookup.lookup(UniformityMeasurements.class);        
+            return (measurements == null) ? /* e.g. the root node */ lookup 
+                                          : new ProxyLookup(Lookups.fixed(new DateTimeDisplayable(measurements), 
+                                                                          new MeasurementsActionProvider(measurements)),
+                                                            lookup);
+          }
+      };
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
     private final Action startAction = new AbstractAction("Start measurement") 
       {
         @Override
@@ -254,18 +271,7 @@ public class UniformityCheckMainControllerActor
       {
         final Node pm = new NodePresentationModel(new DefaultSimpleComposite<UniformityMeasurements>(finder));
         // Can't use ThreadLookupBinder as model objects have already been created.
-        presentation.populateMeasurementsArchive(new LookupFilterDecoratorNode(pm, new LookupFilter() 
-          {
-            @Override @Nonnull
-            public Lookup filter (final @Nonnull Lookup lookup)
-              {
-                final UniformityMeasurements measurements = lookup.lookup(UniformityMeasurements.class);                  
-                return (measurements == null) ? lookup // e.g. the root node
-                                              : new ProxyLookup(Lookups.fixed(new DateTimeDisplayable(measurements), 
-                                                                              new MeasurementsActionProvider(measurements)), 
-                                                                lookup);
-              }
-          }));
+        presentation.populateMeasurementsArchive(new LookupFilterDecoratorNode(pm, capabilityInjectorLookupFilter));
       }
     
     /*******************************************************************************************************************
