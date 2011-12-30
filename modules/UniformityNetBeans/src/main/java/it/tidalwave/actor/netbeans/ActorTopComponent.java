@@ -56,6 +56,7 @@ public class ActorTopComponent<T extends Component> extends TopComponent
     @Override
     public void componentOpened()
       {
+        super.componentOpened();
         activator.activate();
       }
 
@@ -63,6 +64,7 @@ public class ActorTopComponent<T extends Component> extends TopComponent
     public void componentClosed() 
       {
         activator.deactivate();
+        super.componentClosed();
       }
     
     @Nonnull
