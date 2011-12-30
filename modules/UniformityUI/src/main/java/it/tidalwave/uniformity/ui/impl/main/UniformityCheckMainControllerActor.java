@@ -53,6 +53,10 @@ import it.tidalwave.netbeans.nodes.LookupFilterDecoratorNode.LookupFilter;
 import it.tidalwave.netbeans.nodes.role.ActionProvider;
 import it.tidalwave.swing.ActionMessageAdapter;
 import it.tidalwave.blueargyle.util.MutableProperty;
+import it.tidalwave.argyll.DisplayDiscoveryMessage;
+import it.tidalwave.argyll.DisplayDiscoveryQueryMessage;
+import it.tidalwave.argyll.Display;
+import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.uniformity.UniformityCheckRequest;
 import it.tidalwave.uniformity.UniformityMeasurement;
 import it.tidalwave.uniformity.UniformityMeasurementMessage;
@@ -63,6 +67,7 @@ import it.tidalwave.uniformity.archive.UniformityArchiveUpdatedMessage;
 import it.tidalwave.uniformity.ui.UniformityMeasurementsSelectedMessage;
 import it.tidalwave.uniformity.ui.main.UniformityCheckMainPresentation;
 import it.tidalwave.uniformity.ui.main.UniformityCheckMainPresentationProvider;
+import it.tidalwave.util.spi.SimpleFinderSupport;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -94,8 +99,11 @@ public class UniformityCheckMainControllerActor
     /** The property renderers. */
     private final List<PropertyRenderer> propertyRenderers = new ArrayList<PropertyRenderer>();
     
-    /** The requestor sending query messages at initialization. */
+    /** The requestor sending query messages to the archive at initialization. */
     private final RepeatingMessageSender archivedMeasurementsRequestor = new RepeatingMessageSender(new UniformityArchiveQuery());
+ 
+    /** The requestor sending discovery messages for displays at initialization. */
+    private final RepeatingMessageSender displayDiscoveryRequestor = new RepeatingMessageSender(new DisplayDiscoveryQueryMessage());
     
     /*******************************************************************************************************************
      *
@@ -233,7 +241,19 @@ public class UniformityCheckMainControllerActor
         presentation.bind(startNewMeasurementAction, selectedPropertyRendereIndex);
         
         archivedMeasurementsRequestor.start();
+        displayDiscoveryRequestor.start();
       }
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    public void onDiscoveredDisplays (final @ListensTo @Nonnull DisplayDiscoveryMessage message)
+      {
+        log.info("onDiscoveredDisplays({})", message);
+        displayDiscoveryRequestor.stop();
+        populateDisplays(message.findDisplays());
+      }  
     
     /*******************************************************************************************************************
      * 
@@ -281,6 +301,16 @@ public class UniformityCheckMainControllerActor
         selectedMeasurements = message.getMeasurements();
         refreshPresentation();
       }  
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    private void populateDisplays (final @Nonnull Finder<Display> finder)
+      {
+        final PresentationModel presentationModel = new NodePresentationModel(new DefaultSimpleComposite<Display>(finder));
+        presentation.populateDisplays(presentationModel);
+      }
     
     /*******************************************************************************************************************
      * 

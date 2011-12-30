@@ -45,5 +45,7 @@ public interface UniformityCheckMainPresentation
     
     public void renderMeasurements (@Nonnull String[][] measurements);
 
+    public void populateDisplays (@Nonnull PresentationModel presentationModel);
+
     public void populateMeasurementsArchive (@Nonnull PresentationModel presentationModel);
   }
