@@ -35,6 +35,7 @@ import it.tidalwave.actor.annotation.ListensTo;
 import it.tidalwave.uniformity.UniformityMeasurementMessage;
 import it.tidalwave.uniformity.archive.UniformityArchiveContentMessage;
 import it.tidalwave.uniformity.archive.UniformityArchiveQuery;
+import it.tidalwave.uniformity.archive.UniformityArchiveUpdatedMessage;
 import it.tidalwave.uniformity.archive.impl.io.UniformityArchiveMarshallable;
 import it.tidalwave.uniformity.archive.impl.io.UniformityArchiveUnmarshallable;
 import lombok.Cleanup;
@@ -57,12 +58,13 @@ public class UniformityArchiveActor
         log.info("storeUniformityMeasurement({})", message);
         archive.add(message.getMeasurements());
         storeArchive();
+        new UniformityArchiveUpdatedMessage(archive.findMeasurements()).send();
       }
     
     public void query (final @ListensTo @Nonnull UniformityArchiveQuery message)
       {
         log.info("query({})", message);
-        new UniformityArchiveContentMessage(archive.getAll()).send();
+        new UniformityArchiveContentMessage(archive.findMeasurements()).send();
       }
     
     @PostConstruct

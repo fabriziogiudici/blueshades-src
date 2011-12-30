@@ -50,7 +50,8 @@ public class UniformityArchiveMarshallable implements Marshallable
     public void marshal (final @Nonnull OutputStream os)
       throws IOException 
       {
-        final List<UniformityMeasurements> measurements = new ArrayList<UniformityMeasurements>(archive.getAll());
+        final List<? extends UniformityMeasurements> measurements = archive.findMeasurements().results();
+        // FIXME: use Finder.sortedBy()
         Collections.sort(measurements, new Comparator<UniformityMeasurements>()
           {
             @Override
@@ -59,7 +60,7 @@ public class UniformityArchiveMarshallable implements Marshallable
               {
                 return m1.getDateTime().compareTo(m2.getDateTime());
               }
-        });
+          });
         
         for (final UniformityMeasurements uniformityMeasurements : measurements)
           {

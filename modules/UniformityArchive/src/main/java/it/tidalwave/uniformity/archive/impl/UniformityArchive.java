@@ -24,11 +24,13 @@ package it.tidalwave.uniformity.archive.impl;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.List;
-import it.tidalwave.uniformity.UniformityMeasurements;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import it.tidalwave.util.Finder;
+import it.tidalwave.util.spi.SimpleFinderSupport;
+import it.tidalwave.uniformity.UniformityMeasurements;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -49,19 +51,20 @@ public class UniformityArchive
       }
 
     @Nonnull
-    public List<UniformityMeasurements> getAll() 
+    public Finder<UniformityMeasurements> findMeasurements() 
       {
-        return new CopyOnWriteArrayList<UniformityMeasurements>(archive);   
+        return new SimpleFinderSupport<UniformityMeasurements>("measurements") 
+          {
+            @Override @Nonnull
+            protected List<? extends UniformityMeasurements> computeNeededResults()  
+              {
+                return new ArrayList<UniformityMeasurements>(archive);
+              }                      
+          };
       }
     
     public void clear() 
       {
         archive.clear();
-      }
-    
-    @Nonnegative
-    public int getSize()
-      {
-        return archive.size();  
       }
   }
