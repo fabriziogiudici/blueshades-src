@@ -168,7 +168,7 @@ public class UniformityCheckMainControllerActor
      * 
      *
      ******************************************************************************************************************/
-    /* package */ final Action startAction = new AbstractAction("Start measurement") 
+    private final Action startAction = new AbstractAction("Start measurement") 
       {
         @Override
         public void actionPerformed (final @Nonnull ActionEvent event) 
