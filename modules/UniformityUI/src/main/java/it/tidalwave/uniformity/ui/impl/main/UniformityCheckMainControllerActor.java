@@ -67,7 +67,6 @@ import it.tidalwave.uniformity.archive.UniformityArchiveUpdatedMessage;
 import it.tidalwave.uniformity.ui.UniformityMeasurementsSelectedMessage;
 import it.tidalwave.uniformity.ui.main.UniformityCheckMainPresentation;
 import it.tidalwave.uniformity.ui.main.UniformityCheckMainPresentationProvider;
-import it.tidalwave.util.spi.SimpleFinderSupport;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
