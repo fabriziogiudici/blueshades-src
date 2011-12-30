@@ -35,8 +35,6 @@ import it.tidalwave.swing.RadioButtonsSelector;
 import it.tidalwave.netbeans.SimpleExplorerPanel;
 import it.tidalwave.uniformity.ui.main.UniformityCheckMainPresentation;
 import it.tidalwave.blueargyle.util.MutableProperty;
-import lombok.extern.slf4j.Slf4j;
-import static it.tidalwave.swing.SwingSafeRunner.*;
 
 /***********************************************************************************************************************
  * 
@@ -90,15 +88,8 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
     @Override
     public void renderMeasurements (final @Nonnull String[][] measurements)
       {
-        runSafely(new Runnable() 
-          {
-            @Override
-            public void run() 
-              {
-                assert EventQueue.isDispatchThread();
-                measurementsPanel.renderMeasurements(measurements);  
-              }
-          });
+        assert EventQueue.isDispatchThread();
+        measurementsPanel.renderMeasurements(measurements);  
       }
     
     @Override
