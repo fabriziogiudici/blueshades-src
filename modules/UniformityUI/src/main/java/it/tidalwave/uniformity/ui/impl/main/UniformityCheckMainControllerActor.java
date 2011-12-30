@@ -242,10 +242,10 @@ public class UniformityCheckMainControllerActor
     public void initialize()
       {
         log.info("initialize()");
+        presentation = presentationBuilder.getPresentation();
         measurementRenderers.clear();
         measurementRenderers.add(new LuminanceRenderer());
         measurementRenderers.add(new TemperatureRenderer());
-        presentation = presentationBuilder.getPresentation();
         presentation.bind(startAction, selectedMeasurement);
         
         new UniformityArchiveQuery().sendLater(1, TimeUnit.SECONDS); // FIXME
