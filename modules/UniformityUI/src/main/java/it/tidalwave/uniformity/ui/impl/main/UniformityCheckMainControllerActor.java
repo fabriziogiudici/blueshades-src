@@ -29,23 +29,40 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.openide.util.Lookup;
+import org.openide.util.lookup.Lookups;
+import org.openide.util.lookup.ProxyLookup;
+import org.openide.nodes.Node;
+import it.tidalwave.util.Finder;
+import it.tidalwave.role.Displayable;
+import it.tidalwave.role.spi.DefaultSimpleComposite;
 import it.tidalwave.actor.annotation.Actor;
 import it.tidalwave.actor.annotation.ListensTo;
 import it.tidalwave.netbeans.util.Locator;
+import it.tidalwave.netbeans.nodes.NodePresentationModel;
+import it.tidalwave.netbeans.nodes.LookupFilterDecoratorNode;
+import it.tidalwave.netbeans.nodes.LookupFilterDecoratorNode.LookupFilter;
 import it.tidalwave.blueargyle.util.MutableProperty;
 import it.tidalwave.uniformity.UniformityCheckRequest;
 import it.tidalwave.uniformity.UniformityMeasurement;
 import it.tidalwave.uniformity.UniformityMeasurementMessage;
 import it.tidalwave.uniformity.UniformityMeasurements;
+import it.tidalwave.uniformity.archive.UniformityArchiveContentMessage;
+import it.tidalwave.uniformity.archive.UniformityArchiveQuery;
+import it.tidalwave.uniformity.archive.UniformityArchiveUpdatedMessage;
 import it.tidalwave.uniformity.ui.main.UniformityCheckMainPresentation;
 import it.tidalwave.uniformity.ui.main.UniformityCheckMainPresentationProvider;
 import lombok.extern.slf4j.Slf4j;
+import lombok.RequiredArgsConstructor;
 import static it.tidalwave.uniformity.Position.*;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 
 /***********************************************************************************************************************
  * 
@@ -59,6 +76,24 @@ import java.awt.GraphicsEnvironment;
 @Actor(threadSafe=false) @NotThreadSafe @Slf4j
 public class UniformityCheckMainControllerActor
   {
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    @RequiredArgsConstructor
+    private static class DateTimeDisplayable implements Displayable
+      {
+        @Nonnull
+        private final Lookup lookup;
+
+        @Override @Nonnull
+        public String getDisplayName() 
+          {
+            final DateTime dateTime = lookup.lookup(UniformityMeasurements.class).getDateTime();
+            return DateTimeFormat.shortDateTime().print(dateTime);
+          }
+      }
+    
     /*******************************************************************************************************************
      * 
      *
@@ -196,11 +231,14 @@ public class UniformityCheckMainControllerActor
     @PostConstruct
     public void initialize()
       {
+        log.info("initialize()");
         measurementProcessors.clear();
         measurementProcessors.add(new LuminanceProcessor());
         measurementProcessors.add(new TemperatureProcessor());
         presentation = presentationBuilder.getPresentation();
         presentation.bind(startAction, selectedMeasurement);
+        
+        new UniformityArchiveQuery().sendLater(1, TimeUnit.SECONDS); // FIXME
       }
     
     /*******************************************************************************************************************
@@ -216,6 +254,44 @@ public class UniformityCheckMainControllerActor
         refreshPresentation();
         startAction.setEnabled(true);
       }  
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    public void renderUpdatedArchive (final @ListensTo @Nonnull UniformityArchiveUpdatedMessage message)
+      {
+        log.info("renderUpdatedArchive({})", message);
+        populateMeasurementsArchive(message.findMeasurements());
+      }  
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    public void renderArchiveContents (final @ListensTo @Nonnull UniformityArchiveContentMessage message)
+      {
+        log.info("renderArchiveContents({})", message);
+        populateMeasurementsArchive(message.findMeasurements());
+      }  
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    private void populateMeasurementsArchive (final @Nonnull Finder<UniformityMeasurements> finder)
+      {
+        final Node pm = new NodePresentationModel(new DefaultSimpleComposite<UniformityMeasurements>(finder));
+        // Can't use ThreadLookupBinder as model objects have already been created.
+        presentation.populateMeasurementsArchive(new LookupFilterDecoratorNode(pm, new LookupFilter() 
+          {
+            @Override @Nonnull
+            public Lookup filter (final @Nonnull Lookup lookup)
+              {
+                return new ProxyLookup(Lookups.fixed(new DateTimeDisplayable(lookup)), lookup);
+              }
+          }));
+      }
     
     /*******************************************************************************************************************
      * 

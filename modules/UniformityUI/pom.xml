@@ -50,6 +50,10 @@
         </dependency>
         <dependency>
             <groupId>it.tidalwave.blueargyle</groupId>
+            <artifactId>it-tidalwave-uniformity-archive</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.blueargyle</groupId>
             <artifactId>it-tidalwave-argyll</artifactId>
         </dependency>
         <dependency>
@@ -66,6 +70,14 @@
         </dependency>
         <dependency>
             <groupId>it.tidalwave.netbeans</groupId>
+            <artifactId>it-tidalwave-netbeans-nodes</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.netbeans</groupId>
+            <artifactId>it-tidalwave-netbeans-capabilitiesprovider</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.netbeans</groupId>
             <artifactId>it-tidalwave-netbeans-util</artifactId>
         </dependency>
         <dependency>
@@ -76,6 +88,14 @@
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-modules</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-nodes</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-util-lookup</artifactId>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
