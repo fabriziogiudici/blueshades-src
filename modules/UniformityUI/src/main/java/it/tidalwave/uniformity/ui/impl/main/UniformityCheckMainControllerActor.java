@@ -35,13 +35,11 @@ import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-import org.joda.time.format.DateTimeFormat;
 import org.openide.util.Lookup;
 import org.openide.util.lookup.Lookups;
 import org.openide.util.lookup.ProxyLookup;
 import org.openide.nodes.Node;
 import it.tidalwave.util.Finder;
-import it.tidalwave.role.Displayable;
 import it.tidalwave.role.spi.DefaultSimpleComposite;
 import it.tidalwave.actor.annotation.Actor;
 import it.tidalwave.actor.annotation.ListensTo;
@@ -60,9 +58,6 @@ import it.tidalwave.uniformity.archive.UniformityArchiveUpdatedMessage;
 import it.tidalwave.uniformity.ui.main.UniformityCheckMainPresentation;
 import it.tidalwave.uniformity.ui.main.UniformityCheckMainPresentationProvider;
 import lombok.extern.slf4j.Slf4j;
-import lombok.RequiredArgsConstructor;
-import static it.tidalwave.uniformity.Position.*;
-import org.joda.time.format.DateTimeFormatter;
 
 /***********************************************************************************************************************
  * 
@@ -76,82 +71,15 @@ import org.joda.time.format.DateTimeFormatter;
 @Actor(threadSafe=false) @NotThreadSafe @Slf4j
 public class UniformityCheckMainControllerActor
   {
-    /*******************************************************************************************************************
-     * 
-     *
-     ******************************************************************************************************************/
-    @RequiredArgsConstructor
-    private static class DateTimeDisplayable implements Displayable
-      {
-        private final DateTimeFormatter dateFormat = DateTimeFormat.shortDateTime();
-        
-        @Nonnull
-        private final Lookup lookup;
-
-        @Override @Nonnull
-        public String getDisplayName() 
-          {
-            final UniformityMeasurements measurements = lookup.lookup(UniformityMeasurements.class);
-            return (measurements != null) ? dateFormat.print(measurements.getDateTime()) : "???";
-          }
-      }
+    private final UniformityCheckMainPresentationProvider presentationBuilder = Locator.find(UniformityCheckMainPresentationProvider.class);
     
-    /*******************************************************************************************************************
-     * 
-     *
-     ******************************************************************************************************************/
-    @RequiredArgsConstructor
-    static abstract class MeasurementRenderer
-      {
-        @Nonnull
-        private final UniformityCheckMainPresentation presentation;
-        
-        @Nonnull
-        private final String upperFormat;
-        
-        @Nonnull
-        private final String lowerFormat;
-        
-        public void render (@Nonnull UniformityMeasurements measurements)
-          {
-            final int columns = measurements.getColumns();
-            final int rows = measurements.getRows();
-            final UniformityMeasurement centerMeasurement = measurements.getAt(xy(columns / 2, rows / 2));
+    private UniformityCheckMainPresentation presentation;
 
-            final String[][] s = new String[rows][columns];
-
-            for (int row = 0; row < rows; row++)  
-              {
-                for (int column = 0; column < columns; column++)
-                  {
-                    s[row][column] = formatMeasurement(centerMeasurement, measurements.getAt(xy(column, row)));
-                  }
-              }
-
-            presentation.renderMeasurements(s);
-          }
-        
-        @Nonnull
-        protected String formatMeasurement (final @Nonnull UniformityMeasurement centerMeasurement,
-                                            final @Nonnull UniformityMeasurement measurement)
-          {
-            final double centerValue = getValue(centerMeasurement);  
-            final double value = getValue(measurement);
-            final double delta = value - centerValue;
-
-            final StringBuilder buffer = new StringBuilder();
-            buffer.append(String.format(upperFormat, value));
-            
-            if (centerMeasurement != measurement)
-              {
-                buffer.append(String.format(lowerFormat, delta));
-              }
-            
-            return buffer.toString();
-          }
-        
-        protected abstract double getValue (@Nonnull UniformityMeasurement measurement);
-      }
+    private UniformityMeasurements measurements;
+    
+    private final MutableProperty<Integer> selectedMeasurement = new MutableProperty<Integer>(0);
+    
+    private final List<MeasurementRenderer> measurementRenderers = new ArrayList<MeasurementRenderer>();
     
     /*******************************************************************************************************************
      * 
@@ -188,16 +116,6 @@ public class UniformityCheckMainControllerActor
             return measurement.getLuminance();  
           }
       }
-    
-    private final UniformityCheckMainPresentationProvider presentationBuilder = Locator.find(UniformityCheckMainPresentationProvider.class);
-    
-    private UniformityCheckMainPresentation presentation;
-
-    private UniformityMeasurements measurements;
-    
-    private final MutableProperty<Integer> selectedMeasurement = new MutableProperty<Integer>(0);
-    
-    private final List<MeasurementRenderer> measurementRenderers = new ArrayList<MeasurementRenderer>();
     
     /*******************************************************************************************************************
      * 
