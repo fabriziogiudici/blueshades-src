@@ -32,6 +32,7 @@ import java.util.TreeMap;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import org.joda.time.DateTime;
+import it.tidalwave.netbeans.util.AsLookupSupport;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
@@ -41,13 +42,13 @@ import lombok.Getter;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @EqualsAndHashCode(exclude="dateTime") // FIXME: dateTime temporarily excluded for testing problems
-public class UniformityMeasurements
+@Immutable @EqualsAndHashCode(callSuper=false, exclude="dateTime") // FIXME: dateTime temporarily excluded for testing problems
+public class UniformityMeasurements extends AsLookupSupport
   {
-    @Getter
+    @Nonnull @Getter
     private final String displayName;
             
-    @Getter
+    @Nonnull @Getter
     private final DateTime dateTime;
     
     @Nonnegative @Getter
