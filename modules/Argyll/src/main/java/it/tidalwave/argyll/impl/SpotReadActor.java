@@ -27,12 +27,12 @@ import javax.annotation.concurrent.NotThreadSafe;
 import java.util.Scanner;
 import java.io.IOException;
 import it.tidalwave.actor.annotation.Actor;
-import it.tidalwave.actor.annotation.MessageListener;
-import it.tidalwave.argyll.ArgyllFailureMessage;
+import it.tidalwave.actor.annotation.ListensTo;
 import it.tidalwave.colorimetry.ColorPoint;
 import it.tidalwave.colorimetry.ColorPoints;
 import it.tidalwave.colorimetry.ColorTemperature;
 import it.tidalwave.colorimetry.MeasureWithPrecision;
+import it.tidalwave.argyll.ArgyllFailureMessage;
 import it.tidalwave.argyll.MeasurementMessage;
 import it.tidalwave.argyll.MeasurementRequest;
 import it.tidalwave.blueargyle.util.Executor;
@@ -63,8 +63,7 @@ public class SpotReadActor
      * Answers to the request for a measurement.
      * 
      ******************************************************************************************************************/
-    @MessageListener
-    public void spotRead (final @Nonnull MeasurementRequest message)
+    public void spotRead (final @ListensTo @Nonnull MeasurementRequest message)
       throws InterruptedException
       {
         try

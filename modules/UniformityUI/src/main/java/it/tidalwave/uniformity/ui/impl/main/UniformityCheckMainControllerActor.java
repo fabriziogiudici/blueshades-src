@@ -33,7 +33,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import it.tidalwave.actor.annotation.Actor;
-import it.tidalwave.actor.annotation.MessageListener;
+import it.tidalwave.actor.annotation.ListensTo;
 import it.tidalwave.netbeans.util.Locator;
 import it.tidalwave.blueargyle.util.MutableProperty;
 import it.tidalwave.uniformity.UniformityCheckRequest;
@@ -207,8 +207,7 @@ public class UniformityCheckMainControllerActor
      * 
      *
      ******************************************************************************************************************/
-    @MessageListener
-    public void renderMeasurements (final @Nonnull UniformityMeasurementMessage message)
+    public void renderMeasurements (final @ListensTo @Nonnull UniformityMeasurementMessage message)
       {
         log.info("renderMeasurements({})", message);
         measurements = null; // prevents a double refresh because of changing selectedMeasurement

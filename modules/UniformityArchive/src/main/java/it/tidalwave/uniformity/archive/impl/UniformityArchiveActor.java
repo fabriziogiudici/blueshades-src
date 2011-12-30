@@ -31,7 +31,7 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import it.tidalwave.actor.annotation.Actor;
-import it.tidalwave.actor.annotation.MessageListener;
+import it.tidalwave.actor.annotation.ListensTo;
 import it.tidalwave.uniformity.UniformityMeasurementMessage;
 import it.tidalwave.uniformity.archive.UniformityArchiveContentMessage;
 import it.tidalwave.uniformity.archive.UniformityArchiveQuery;
@@ -51,8 +51,7 @@ public class UniformityArchiveActor
   {
     private UniformityArchive archive = new UniformityArchive();
     
-    @MessageListener
-    public void storeUniformityMeasurement (final @Nonnull UniformityMeasurementMessage message)
+    public void storeUniformityMeasurement (final @ListensTo @Nonnull UniformityMeasurementMessage message)
       throws IOException
       {
         log.info("storeUniformityMeasurement({})", message);
@@ -60,8 +59,7 @@ public class UniformityArchiveActor
         storeArchive();
       }
     
-    @MessageListener
-    public void query (final @Nonnull UniformityArchiveQuery message)
+    public void query (final @ListensTo @Nonnull UniformityArchiveQuery message)
       {
         log.info("query({})", message);
         new UniformityArchiveContentMessage(archive.getAll()).send();

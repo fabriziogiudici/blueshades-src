@@ -26,7 +26,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 import java.io.IOException;
 import it.tidalwave.actor.annotation.Actor;
-import it.tidalwave.actor.annotation.MessageListener;
+import it.tidalwave.actor.annotation.ListensTo;
 import it.tidalwave.argyll.DisplayDiscoveryMessage;
 import it.tidalwave.argyll.DisplayDiscoveryQueryMessage;
 import it.tidalwave.blueargyle.util.Executor; 
@@ -50,8 +50,7 @@ public class DispwinActor
      * Answers to the query for the existing displays.
      * 
      ******************************************************************************************************************/
-    @MessageListener
-    public void discoverDisplays (final @Nonnull DisplayDiscoveryQueryMessage message)
+    public void discoverDisplays (final @ListensTo @Nonnull DisplayDiscoveryQueryMessage message)
       throws IOException, InterruptedException
       {
         log.trace("discoverDisplays({})", message);

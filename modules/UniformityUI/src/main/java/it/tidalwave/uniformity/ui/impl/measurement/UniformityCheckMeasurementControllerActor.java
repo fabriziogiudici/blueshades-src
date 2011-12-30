@@ -35,8 +35,8 @@ import it.tidalwave.util.NotFoundException;
 import it.tidalwave.actor.Collaboration;
 import it.tidalwave.actor.MessageSupport;
 import it.tidalwave.actor.annotation.Actor;
+import it.tidalwave.actor.annotation.ListensTo;
 import it.tidalwave.actor.annotation.Message;
-import it.tidalwave.actor.annotation.MessageListener;
 import it.tidalwave.swing.ActionMessageAdapter;
 import it.tidalwave.argyll.MeasurementMessage;
 import it.tidalwave.argyll.MeasurementRequest;
@@ -111,8 +111,7 @@ public class UniformityCheckMeasurementControllerActor
      * 
      *
      ******************************************************************************************************************/
-    @MessageListener
-    public void start (final @Nonnull UniformityCheckRequest message)
+    public void start (final @ListensTo @Nonnull UniformityCheckRequest message)
       {
         log.info("start({})", message);
         displayName = message.getDisplayName();
@@ -124,8 +123,7 @@ public class UniformityCheckMeasurementControllerActor
      * 
      *
      ******************************************************************************************************************/
-    @MessageListener
-    public void processMeasure (final @Nonnull MeasurementMessage message) 
+    public void processMeasure (final @ListensTo @Nonnull MeasurementMessage message) 
       throws NotFoundException
       {
         log.info("processMeasure({})", message);
@@ -145,8 +143,7 @@ public class UniformityCheckMeasurementControllerActor
      * 
      *
      ******************************************************************************************************************/
-    @MessageListener
-    public void failure (final @Nonnull ArgyllFailureMessage message) 
+    public void failure (final @ListensTo @Nonnull ArgyllFailureMessage message) 
       {
         log.info("failure({})", message);
         new CancelMessage().send(); // FIXME: harsh, do a notification on the UI too
@@ -156,8 +153,7 @@ public class UniformityCheckMeasurementControllerActor
      * 
      *
      ******************************************************************************************************************/
-    @MessageListener
-    private void doMeasurement (final @Nonnull DoMeasurementMessage message)
+    private void doMeasurement (final @ListensTo @Nonnull DoMeasurementMessage message)
       {
         log.info("doMeasurement()");
         continueAction.setEnabled(false);
@@ -181,8 +177,7 @@ public class UniformityCheckMeasurementControllerActor
      * 
      *
      ******************************************************************************************************************/
-    @MessageListener
-    private void cancel (final @Nonnull CancelMessage message)
+    private void cancel (final @ListensTo @Nonnull CancelMessage message)
       {
         log.info("cancel()");
         cancelAction.setEnabled(false);

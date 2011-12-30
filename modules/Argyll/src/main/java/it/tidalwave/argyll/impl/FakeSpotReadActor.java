@@ -26,7 +26,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 import java.util.Random;
 import it.tidalwave.actor.annotation.Actor;
-import it.tidalwave.actor.annotation.MessageListener;
+import it.tidalwave.actor.annotation.ListensTo;
 import it.tidalwave.colorimetry.ColorPoints;
 import it.tidalwave.colorimetry.ColorTemperature;
 import it.tidalwave.colorimetry.MeasureWithPrecision;
@@ -56,8 +56,7 @@ public class FakeSpotReadActor
      * Answers to the request for a measurement.
      * 
      ******************************************************************************************************************/
-    @MessageListener
-    public void spotRead (final @Nonnull MeasurementRequest message)
+    public void spotRead (final @ListensTo @Nonnull MeasurementRequest message)
       throws InterruptedException
       {
         log.info("spotRead({})", message);
