@@ -22,6 +22,7 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.ui.impl.main;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
 import javax.annotation.concurrent.NotThreadSafe;
@@ -80,18 +81,25 @@ public class UniformityCheckMainControllerActor
     // FIXME: use @Inject
     private final UniformityCheckMainPresentationProvider presentationBuilder = Locator.find(UniformityCheckMainPresentationProvider.class);
     
+    /** The presentation controlled by this class */
     private UniformityCheckMainPresentation presentation;
 
+    /** The measurements currently selected and rendered in details. */
+    @CheckForNull
     private UniformityMeasurements selectedMeasurements;
     
-    private final MutableProperty<Integer> selectedPropertyIndex = new MutableProperty<Integer>(0);
+    /** The index [0..1] pointing to the property to render in details (Luminance, Temperature) */
+    private final MutableProperty<Integer> selectedPropertyRendereIndex = new MutableProperty<Integer>(0);
     
+    /** The property renderers. */
     private final List<PropertyRenderer> propertyRenderers = new ArrayList<PropertyRenderer>();
     
+    /** The requestor sending query messages at initialization. */
     private final RepeatingMessageSender archivedMeasurementsRequestor = new RepeatingMessageSender(new UniformityArchiveQuery());
     
     /*******************************************************************************************************************
-     * 
+     *
+     * The renderer for temperature.
      *
      ******************************************************************************************************************/
     static class TemperatureRenderer extends PropertyRenderer
@@ -110,6 +118,7 @@ public class UniformityCheckMainControllerActor
     
     /*******************************************************************************************************************
      * 
+     * The renderer for luminance.
      *
      ******************************************************************************************************************/
     static class LuminanceRenderer extends PropertyRenderer
@@ -128,9 +137,10 @@ public class UniformityCheckMainControllerActor
     
     /*******************************************************************************************************************
      * 
+     * Tracks the currently selected property render and eventually refreshes the presentation.
      *
      ******************************************************************************************************************/
-    private final PropertyChangeListener selectedPropertyTracker = new PropertyChangeListener() 
+    private final PropertyChangeListener selectedPropertyRendererTracker = new PropertyChangeListener() 
       {
         @Override
         public void propertyChange (final @Nonnull PropertyChangeEvent event) 
@@ -141,6 +151,7 @@ public class UniformityCheckMainControllerActor
 
     /*******************************************************************************************************************
      * 
+     * Injects some capabilities into the PresentationModel for measurements. 
      *
      ******************************************************************************************************************/
     private final LookupFilter capabilityInjectorLookupFilter = new LookupFilter() 
@@ -149,7 +160,7 @@ public class UniformityCheckMainControllerActor
         public Lookup filter (final @Nonnull Lookup lookup)
           {
             final UniformityMeasurements measurements = lookup.lookup(UniformityMeasurements.class);        
-            return (measurements == null) ? /* e.g. the root node */ lookup 
+            return (measurements == null) ? lookup // e.g. the root node 
                                           : new ProxyLookup(Lookups.fixed(new DateTimeDisplayable(measurements), 
                                                                           new MeasurementsActionProvider(measurements)),
                                                             lookup);
@@ -158,13 +169,15 @@ public class UniformityCheckMainControllerActor
     
     /*******************************************************************************************************************
      * 
+     * Starts a new measurement sequence.
      *
      ******************************************************************************************************************/
-    private final Action startAction = new AbstractAction("Start measurement") 
+    private final Action startNewMeasurementAction = new AbstractAction("Start measurement") 
       {
         @Override
         public void actionPerformed (final @Nonnull ActionEvent event) 
           {
+            // TODO: query Argyll for existing devices
             final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             final GraphicsDevice[] screenDevices = ge.getScreenDevices();
             setEnabled(false);
@@ -174,6 +187,7 @@ public class UniformityCheckMainControllerActor
     
     /*******************************************************************************************************************
      * 
+     * The ActionProvider for measurements.
      *
      ******************************************************************************************************************/
     @RequiredArgsConstructor
@@ -201,7 +215,7 @@ public class UniformityCheckMainControllerActor
      ******************************************************************************************************************/
     public UniformityCheckMainControllerActor()
       {
-        selectedPropertyIndex.addPropertyChangeListener(selectedPropertyTracker);
+        selectedPropertyRendereIndex.addPropertyChangeListener(selectedPropertyRendererTracker);
       }
     
     /*******************************************************************************************************************
@@ -216,7 +230,7 @@ public class UniformityCheckMainControllerActor
         propertyRenderers.clear();
         propertyRenderers.add(new LuminanceRenderer(presentation));
         propertyRenderers.add(new TemperatureRenderer(presentation));
-        presentation.bind(startAction, selectedPropertyIndex);
+        presentation.bind(startNewMeasurementAction, selectedPropertyRendereIndex);
         
         archivedMeasurementsRequestor.start();
       }
@@ -225,25 +239,11 @@ public class UniformityCheckMainControllerActor
      * 
      *
      ******************************************************************************************************************/
-    public void onNewMeasurements (final @ListensTo @Nonnull UniformityMeasurementMessage message)
+    public void onArchivedMeasurementsNotified (final @ListensTo @Nonnull UniformityArchiveContentMessage message)
       {
-        log.info("onNewMeasurements({})", message);
-        selectedMeasurements = null; // prevents a double refresh because of changing selectedMeasurement
-        selectedPropertyIndex.setValue(0);
-        selectedMeasurements = message.getMeasurements();
-        refreshPresentation();
-        startAction.setEnabled(true);
-      }  
-    
-    /*******************************************************************************************************************
-     * 
-     *
-     ******************************************************************************************************************/
-    public void onSelectedArchivedMeasurements (final @ListensTo @Nonnull UniformityMeasurementsSelectedMessage message)
-      {
-        log.info("onSelectedArchivedMeasurements({})", message);
-        selectedMeasurements = message.getMeasurements();
-        refreshPresentation();
+        log.info("onArchivedMeasurementsNotified({})", message);
+        archivedMeasurementsRequestor.stop();
+        populateMeasurementsArchive(message.findMeasurements());
       }  
     
     /*******************************************************************************************************************
@@ -261,11 +261,25 @@ public class UniformityCheckMainControllerActor
      * 
      *
      ******************************************************************************************************************/
-    public void onArchivedMeasurementsNotified (final @ListensTo @Nonnull UniformityArchiveContentMessage message)
+    public void onNewMeasurements (final @ListensTo @Nonnull UniformityMeasurementMessage message)
       {
-        log.info("onArchivedMeasurementsNotified({})", message);
-        archivedMeasurementsRequestor.stop();
-        populateMeasurementsArchive(message.findMeasurements());
+        log.info("onNewMeasurements({})", message);
+        selectedMeasurements = null; // prevents a double refresh because of changing selectedMeasurement
+        selectedPropertyRendereIndex.setValue(0);
+        selectedMeasurements = message.getMeasurements();
+        refreshPresentation();
+        startNewMeasurementAction.setEnabled(true);
+      }  
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    public void onSelectedArchivedMeasurements (final @ListensTo @Nonnull UniformityMeasurementsSelectedMessage message)
+      {
+        log.info("onSelectedArchivedMeasurements({})", message);
+        selectedMeasurements = message.getMeasurements();
+        refreshPresentation();
       }  
     
     /*******************************************************************************************************************
@@ -274,9 +288,8 @@ public class UniformityCheckMainControllerActor
      ******************************************************************************************************************/
     private void populateMeasurementsArchive (final @Nonnull Finder<UniformityMeasurements> finder)
       {
-        final Node pm = new NodePresentationModel(new DefaultSimpleComposite<UniformityMeasurements>(finder));
-        // Can't use ThreadLookupBinder as model objects have already been created.
-        presentation.populateMeasurementsArchive(new LookupFilterDecoratorNode(pm, capabilityInjectorLookupFilter));
+        final Node presentationModel = new NodePresentationModel(new DefaultSimpleComposite<UniformityMeasurements>(finder));
+        presentation.populateMeasurementsArchive(new LookupFilterDecoratorNode(presentationModel, capabilityInjectorLookupFilter));
       }
     
     /*******************************************************************************************************************
@@ -287,7 +300,7 @@ public class UniformityCheckMainControllerActor
       {
         if (selectedMeasurements != null)
           {
-            propertyRenderers.get(selectedPropertyIndex.getValue()).render(selectedMeasurements);
+            propertyRenderers.get(selectedPropertyRendereIndex.getValue()).render(selectedMeasurements);
           }
       }
   }
