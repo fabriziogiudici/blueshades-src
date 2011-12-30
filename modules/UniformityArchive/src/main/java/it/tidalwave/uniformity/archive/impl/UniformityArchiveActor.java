@@ -49,7 +49,7 @@ import lombok.extern.slf4j.Slf4j;
 @Actor @NotThreadSafe @Slf4j
 public class UniformityArchiveActor
   {
-    private final UniformityArchive archive = new UniformityArchive();
+    private UniformityArchive archive = new UniformityArchive();
     
     @MessageListener
     public void storeUniformityMeasurement (final @Nonnull UniformityMeasurementMessage message)
@@ -76,7 +76,7 @@ public class UniformityArchiveActor
         
         final @Cleanup InputStream is = new FileInputStream("/tmp/UniformityMeasurements.txt");
         // FIXME: uniformityArchive.as(Marshallable).unmarshal(is);
-        new UniformityArchiveUnmarshallable(archive).unmarshal(is);
+        archive = new UniformityArchiveUnmarshallable().unmarshal(is);
         is.close();
       }
     

@@ -28,6 +28,10 @@ import java.io.OutputStream;
 import it.tidalwave.role.Marshallable;
 import it.tidalwave.uniformity.UniformityMeasurements;
 import it.tidalwave.uniformity.archive.impl.UniformityArchive;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
@@ -46,7 +50,18 @@ public class UniformityArchiveMarshallable implements Marshallable
     public void marshal (final @Nonnull OutputStream os)
       throws IOException 
       {
-        for (final UniformityMeasurements uniformityMeasurements : archive.getAll())
+        final List<UniformityMeasurements> measurements = new ArrayList<UniformityMeasurements>(archive.getAll());
+        Collections.sort(measurements, new Comparator<UniformityMeasurements>()
+          {
+            @Override
+            public int compare (final @Nonnull UniformityMeasurements m1, 
+                                final @Nonnull UniformityMeasurements m2) 
+              {
+                return m1.getDateTime().compareTo(m2.getDateTime());
+              }
+        });
+        
+        for (final UniformityMeasurements uniformityMeasurements : measurements)
           {
             // FIXME: uniformityMeasurements.as(Marshallable).marshal(os);
             new UniformityMeasurementsMarshallable(uniformityMeasurements).marshal(os);

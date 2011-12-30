@@ -22,17 +22,19 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.archive.impl.io;
 
-import javax.annotation.Nonnull;
+import javax.annotation.Nonnegative;
 import java.util.Random;
-import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.io.IOException;
-import it.tidalwave.netbeans.util.test.TestLoggerSetup;
 import it.tidalwave.uniformity.FakeUniformityMeasurementsGenerator;
-import it.tidalwave.uniformity.UniformityMeasurements;
-import lombok.extern.slf4j.Slf4j;
-import org.testng.annotations.Test;
+import it.tidalwave.uniformity.archive.impl.UniformityArchive;
+import it.tidalwave.netbeans.util.test.TestLoggerSetup;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
 
@@ -42,32 +44,38 @@ import static org.hamcrest.MatcherAssert.*;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Slf4j
-public class UniformityMeasurementsUnmarshallableTest 
+public class UniformityArchiveUnmarshallableTest 
   {
     @BeforeMethod
     public void setupLogging()
       {
-        TestLoggerSetup.setupLogging(UniformityMeasurementsUnmarshallableTest.class);  
+        TestLoggerSetup.setupLogging(UniformityArchiveUnmarshallableTest.class);  
       }
     
     @Test(dataProvider="testCaseProvider")
-    public void must_properly_unmarshall (final long seed, final @Nonnull String marshalledData) 
-      throws IOException
+    public void must_properly_unmarshall (final @Nonnegative int size, final long seed)
+      throws FileNotFoundException, IOException
       {
-        final UniformityMeasurementsUnmarshallable fixture = new UniformityMeasurementsUnmarshallable();    
-        final ByteArrayInputStream os = new ByteArrayInputStream(marshalledData.getBytes());
-        final UniformityMeasurements measurements = fixture.unmarshal(os);
-        os.close();
+        final UniformityArchiveUnmarshallable unmarshallable = new UniformityArchiveUnmarshallable();
+        final File file = new File("src/test/resources/expected-results/" + seed + ".txt");
+        final InputStream is = new FileInputStream(file);
+        final UniformityArchive archive = unmarshallable.unmarshal(is);
+        is.close();
         
+        final UniformityArchive expectedArchive = new UniformityArchive();
         final Random r = new Random(seed);
-        final UniformityMeasurements expectedMeasurements = FakeUniformityMeasurementsGenerator.createMeasurements("display1", r);
-        assertThat(measurements, is(expectedMeasurements));
+        
+        for (int i = 0; i < size; i++)
+          {
+            expectedArchive.add(FakeUniformityMeasurementsGenerator.createMeasurements("display1", r));  
+          }
+        
+        assertThat(archive, is(expectedArchive));
       }
     
     @DataProvider(name="testCaseProvider")
     public Object[][] testCaseProvider()
       {
-        return TestDataProvider.pr1();
+        return TestDataProvider.pr2();
       }
   }

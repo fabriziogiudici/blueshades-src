@@ -28,7 +28,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import it.tidalwave.role.Unmarshallable;
 import it.tidalwave.uniformity.archive.impl.UniformityArchive;
-import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
  * 
@@ -36,16 +35,14 @@ import lombok.RequiredArgsConstructor;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@RequiredArgsConstructor
 public class UniformityArchiveUnmarshallable implements Unmarshallable
   {
-    @Nonnull
-    private final UniformityArchive archive;
-
     @Override @Nonnull
     public UniformityArchive unmarshal (final @Nonnull InputStream is) 
       throws IOException
       {
+        final UniformityArchive archive = new UniformityArchive();
+        
         for (;;)
           {
             try

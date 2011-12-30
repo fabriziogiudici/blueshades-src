@@ -99,6 +99,12 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>it.tidalwave.blueargyle</groupId>
+            <artifactId>it-tidalwave-uniformity</artifactId>
+            <classifier>tests</classifier>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>it.tidalwave.netbeans</groupId>
             <artifactId>it-tidalwave-netbeans-util-test</artifactId>
             <scope>test</scope>

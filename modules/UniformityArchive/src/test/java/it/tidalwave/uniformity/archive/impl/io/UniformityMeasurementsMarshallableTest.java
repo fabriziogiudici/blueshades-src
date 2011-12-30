@@ -24,15 +24,14 @@ package it.tidalwave.uniformity.archive.impl.io;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
-import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import it.tidalwave.netbeans.util.test.TestLoggerSetup;
 import it.tidalwave.uniformity.FakeUniformityMeasurementsGenerator;
 import it.tidalwave.uniformity.UniformityMeasurements;
-import lombok.extern.slf4j.Slf4j;
-import org.testng.annotations.Test;
+import it.tidalwave.netbeans.util.test.TestLoggerSetup;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
 
@@ -42,27 +41,27 @@ import static org.hamcrest.MatcherAssert.*;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Slf4j
-public class UniformityMeasurementsUnmarshallableTest 
+public class UniformityMeasurementsMarshallableTest 
   {
     @BeforeMethod
     public void setupLogging()
       {
-        TestLoggerSetup.setupLogging(UniformityMeasurementsUnmarshallableTest.class);  
+        TestLoggerSetup.setupLogging(UniformityMeasurementsMarshallableTest.class);  
       }
     
     @Test(dataProvider="testCaseProvider")
-    public void must_properly_unmarshall (final long seed, final @Nonnull String marshalledData) 
+    public void must_properly_marshall (final long seed, final @Nonnull String expectedValue) 
       throws IOException
       {
-        final UniformityMeasurementsUnmarshallable fixture = new UniformityMeasurementsUnmarshallable();    
-        final ByteArrayInputStream os = new ByteArrayInputStream(marshalledData.getBytes());
-        final UniformityMeasurements measurements = fixture.unmarshal(os);
-        os.close();
-        
         final Random r = new Random(seed);
-        final UniformityMeasurements expectedMeasurements = FakeUniformityMeasurementsGenerator.createMeasurements("display1", r);
-        assertThat(measurements, is(expectedMeasurements));
+        final UniformityMeasurements measurements = FakeUniformityMeasurementsGenerator.createMeasurements("display1", r);
+        final UniformityMeasurementsMarshallable fixture = new UniformityMeasurementsMarshallable(measurements);    
+        final ByteArrayOutputStream os = new ByteArrayOutputStream();
+        fixture.marshal(os);
+        os.close();
+        final String s = new String(os.toByteArray());
+        
+        assertThat(s, is(expectedValue));
       }
     
     @DataProvider(name="testCaseProvider")

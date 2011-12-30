@@ -28,10 +28,8 @@ import java.util.Scanner;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.IOException;
 import org.joda.time.DateTime;
 import org.joda.time.format.ISODateTimeFormat;
@@ -50,17 +48,16 @@ import it.tidalwave.uniformity.UniformityMeasurements;
 public class UniformityMeasurementsUnmarshallable implements Unmarshallable
   {
     private static final Pattern PATTERN_DISPLAY_NAME = Pattern.compile("D='([^']*)'");
-    private static final Pattern PATTERN_LUMINANCE = Pattern.compile("L\\[([0-9]*),([0-9]*)\\]=([0-9]*)");
-    private static final Pattern PATTERN_TEMPERATURE = Pattern.compile("T\\[([0-9]*),([0-9]*)\\]=([0-9]*)");
+    private static final Pattern PATTERN_LUMINANCE = Pattern.compile("L\\[([0-9]*),([0-9]*)\\]= *([0-9]*)");
+    private static final Pattern PATTERN_TEMPERATURE = Pattern.compile("T\\[([0-9]*),([0-9]*)\\]= *([0-9]*)");
     
     @Override
     public UniformityMeasurements unmarshal (final @Nonnull InputStream is) 
       throws IOException
       {  
-        final BufferedReader br = new BufferedReader(new InputStreamReader(is));
-        final String s = br.readLine();
+        final String s = readLine(is);
         
-        if (s == null)
+        if ("".equals(s))
           {
             throw new EOFException();  
           }
@@ -74,7 +71,7 @@ public class UniformityMeasurementsUnmarshallable implements Unmarshallable
         
         while (scanner.hasNext())
           {  
-            final String t = scanner.next();
+            final String t = scanner.next().trim();
             
             final Matcher displayNameMatcher = PATTERN_DISPLAY_NAME.matcher(t);
             
@@ -97,13 +94,39 @@ public class UniformityMeasurementsUnmarshallable implements Unmarshallable
             
             if (temperatureMatcher.matches())
               {
-                final Position xy = Position.xy(Integer.parseInt(temperatureMatcher.group(1)), Integer.parseInt(temperatureMatcher.group(2)));
+                final Position pos = Position.xy(Integer.parseInt(temperatureMatcher.group(1)), Integer.parseInt(temperatureMatcher.group(2)));
                 final ColorTemperature temperature = ColorTemperature.kelvin(Integer.parseInt(temperatureMatcher.group(3)));
-                map.put(xy, new UniformityMeasurement(temperature, luminance));
+                map.put(pos, new UniformityMeasurement(temperature, luminance));
                 continue;
               }
           }
 
         return new UniformityMeasurements(displayName, dateTime, map);
-      }    
+      }   
+    
+    @Nonnull
+    private String readLine (final @Nonnull InputStream is) 
+      throws IOException
+      {
+        final StringBuilder buffer = new StringBuilder();
+        
+        for (;;)
+          {
+            final int c = is.read();
+            
+            if (c < 0)
+              {
+                break;    
+              }     
+            
+            if (c == '\n')
+              {
+                break;    
+              }     
+            
+            buffer.append((char)c);
+          }
+        
+        return buffer.toString();
+      }
   } 

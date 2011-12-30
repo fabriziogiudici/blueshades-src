@@ -22,19 +22,20 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.archive.impl.io;
 
-import javax.annotation.Nonnull;
+import javax.annotation.Nonnegative;
 import java.util.Random;
-import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import it.tidalwave.netbeans.util.test.TestLoggerSetup;
+import it.tidalwave.uniformity.archive.impl.UniformityArchive;
 import it.tidalwave.uniformity.FakeUniformityMeasurementsGenerator;
-import it.tidalwave.uniformity.UniformityMeasurements;
-import lombok.extern.slf4j.Slf4j;
-import org.testng.annotations.Test;
+import it.tidalwave.util.test.FileComparisonUtils;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
-import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.MatcherAssert.*;
+import org.testng.annotations.Test;
 
 /***********************************************************************************************************************
  * 
@@ -42,32 +43,41 @@ import static org.hamcrest.MatcherAssert.*;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Slf4j
-public class UniformityMeasurementsUnmarshallableTest 
+public class UniformityArchiveMarshallableTest 
   {
     @BeforeMethod
     public void setupLogging()
       {
-        TestLoggerSetup.setupLogging(UniformityMeasurementsUnmarshallableTest.class);  
+        TestLoggerSetup.setupLogging(UniformityArchiveMarshallableTest.class);  
       }
     
     @Test(dataProvider="testCaseProvider")
-    public void must_properly_unmarshall (final long seed, final @Nonnull String marshalledData) 
-      throws IOException
+    public void must_properly_marshall (final @Nonnegative int size, final long seed)
+      throws FileNotFoundException, IOException
       {
-        final UniformityMeasurementsUnmarshallable fixture = new UniformityMeasurementsUnmarshallable();    
-        final ByteArrayInputStream os = new ByteArrayInputStream(marshalledData.getBytes());
-        final UniformityMeasurements measurements = fixture.unmarshal(os);
+        final UniformityArchive archive = new UniformityArchive();
+        final Random r = new Random(seed);
+        
+        for (int i = 0; i < size; i++)
+          {
+            archive.add(FakeUniformityMeasurementsGenerator.createMeasurements("display1", r));  
+          }
+        
+        final UniformityArchiveMarshallable marshallable = new UniformityArchiveMarshallable(archive);
+        final File targetFolder = new File("target/test-artifacts");
+        final File actualFile = new File(targetFolder, "" + seed + ".txt");
+        final File expectedFile = new File("src/test/resources/expected-results/" + seed + ".txt");
+        targetFolder.mkdirs();
+        final OutputStream os = new FileOutputStream(actualFile);
+        marshallable.marshal(os);
         os.close();
         
-        final Random r = new Random(seed);
-        final UniformityMeasurements expectedMeasurements = FakeUniformityMeasurementsGenerator.createMeasurements("display1", r);
-        assertThat(measurements, is(expectedMeasurements));
+        FileComparisonUtils.assertSameContents(actualFile, expectedFile);
       }
     
     @DataProvider(name="testCaseProvider")
     public Object[][] testCaseProvider()
       {
-        return TestDataProvider.pr1();
+        return TestDataProvider.pr2();
       }
   }

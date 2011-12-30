@@ -22,11 +22,15 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.archive.impl;
 
+import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.List;
 import it.tidalwave.uniformity.UniformityMeasurements;
+import java.util.HashSet;
+import java.util.Set;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /***********************************************************************************************************************
  * 
@@ -34,9 +38,10 @@ import it.tidalwave.uniformity.UniformityMeasurements;
  * @version $Id$
  *
  **********************************************************************************************************************/
+@EqualsAndHashCode @ToString
 public class UniformityArchive 
   {
-    private final List<UniformityMeasurements> archive = new ArrayList<UniformityMeasurements>();
+    private final Set<UniformityMeasurements> archive = new HashSet<UniformityMeasurements>();
 
     public void add (final @Nonnull UniformityMeasurements measurements) 
       {
@@ -52,5 +57,11 @@ public class UniformityArchive
     public void clear() 
       {
         archive.clear();
+      }
+    
+    @Nonnegative
+    public int getSize()
+      {
+        return archive.size();  
       }
   }
