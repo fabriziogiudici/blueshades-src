@@ -66,6 +66,10 @@
             <groupId>it.tidalwave.thesefoolishthings</groupId>
             <artifactId>it-tidalwave-messagebus</artifactId>
         </dependency>
+        <dependency>
+            <artifactId>it-tidalwave-util</artifactId>
+            <groupId>it.tidalwave.thesefoolishthings</groupId>
+        </dependency>
         
         <dependency>
             <groupId>org.netbeans.api</groupId>

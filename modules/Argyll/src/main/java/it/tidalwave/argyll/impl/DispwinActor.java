@@ -24,12 +24,16 @@ package it.tidalwave.argyll.impl;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
+import java.util.ArrayList;
+import java.util.List;
 import java.io.IOException;
+import it.tidalwave.util.spi.SimpleFinderSupport;
 import it.tidalwave.actor.annotation.Actor;
 import it.tidalwave.actor.annotation.ListensTo;
+import it.tidalwave.blueargyle.util.Executor; 
 import it.tidalwave.argyll.DisplayDiscoveryMessage;
 import it.tidalwave.argyll.DisplayDiscoveryQueryMessage;
-import it.tidalwave.blueargyle.util.Executor; 
+import it.tidalwave.argyll.Display;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
@@ -55,8 +59,22 @@ public class DispwinActor
       {
         log.trace("discoverDisplays({})", message);
 
-        final Executor executor = Executor.forExecutable("dispwin")
-                                          .withArgument("--");
-        DisplayDiscoveryMessage.with(executor.start().waitForCompletion().getStderr().filteredBy("^ *[1-9] = '([^,]*),.*$")).send();
+        final Executor executor = Executor.forExecutable("dispwin").withArgument("--");
+        final List<Display> displays = new ArrayList<Display>();
+        
+        for (final String displayName : executor.start().waitForCompletion().getStderr().filteredBy("^ *[1-9] = '([^,]*),.*$"))
+          {
+            displays.add(new Display(displayName)); 
+          }
+        
+        new DisplayDiscoveryMessage(new SimpleFinderSupport<Display>() 
+          {
+            @Override
+            protected List<? extends Display> computeNeededResults() 
+              {
+                return displays;
+              }  
+              
+          }).send();
       }
   }

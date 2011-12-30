@@ -22,33 +22,20 @@
  **********************************************************************************************************************/
 package it.tidalwave.argyll;
 
-import it.tidalwave.actor.MessageSupport;
-import it.tidalwave.actor.annotation.Message;
-import it.tidalwave.util.Finder;
 import javax.annotation.Nonnull;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+import it.tidalwave.role.spi.DefaultDisplayable;
+import it.tidalwave.netbeans.util.AsLookupSupport;
 
 /***********************************************************************************************************************
- * 
- * A message notifying the discovery of some displays.
- * 
- * @stereotype Message
  * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Message @RequiredArgsConstructor @ToString
-public class DisplayDiscoveryMessage extends MessageSupport
+public class Display extends AsLookupSupport
   {
-    @Getter
-    private final Finder<Display> finder;  
-   
-    @Nonnull
-    public Finder<Display> findDisplays()
+    public Display (final @Nonnull String displayName)
       {
-        return finder;  
-      }
+        super(new Object[] { new DefaultDisplayable(displayName) });  
+      }    
   }
