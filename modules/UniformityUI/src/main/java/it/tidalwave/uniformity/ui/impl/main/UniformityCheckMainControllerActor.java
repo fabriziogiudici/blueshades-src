@@ -101,8 +101,15 @@ public class UniformityCheckMainControllerActor
      * 
      *
      ******************************************************************************************************************/
+    @RequiredArgsConstructor
     abstract class MeasurementProcessor
       {
+        @Nonnull
+         final String upperFormat;
+        
+        @Nonnull
+         final String lowerFormat;
+        
         public void render (@Nonnull UniformityMeasurements measurements)
           {
             final int columns = measurements.getColumns();
@@ -123,8 +130,25 @@ public class UniformityCheckMainControllerActor
           }
         
         @Nonnull
-        protected abstract String formatMeasurement (@Nonnull UniformityMeasurement centerMeasurement,
-                                                     @Nonnull UniformityMeasurement measurement);
+        protected String formatMeasurement (final @Nonnull UniformityMeasurement centerMeasurement,
+                                            final @Nonnull UniformityMeasurement measurement)
+          {
+            final double centerValue = getValue(centerMeasurement);  
+            final double value = getValue(measurement);
+            final double delta = value - centerValue;
+
+            final StringBuilder buffer = new StringBuilder();
+            buffer.append(String.format(upperFormat, value));
+            
+            if (centerMeasurement != measurement)
+              {
+                buffer.append(String.format(lowerFormat, delta));
+              }
+            
+            return buffer.toString();
+          }
+        
+        protected abstract double getValue (@Nonnull UniformityMeasurement measurement);
       }
     
     /*******************************************************************************************************************
@@ -133,23 +157,15 @@ public class UniformityCheckMainControllerActor
      ******************************************************************************************************************/
     class TemperatureProcessor extends MeasurementProcessor
       {
-        @Override @Nonnull
-        protected String formatMeasurement (final @Nonnull UniformityMeasurement centerMeasurement,
-                                            final @Nonnull UniformityMeasurement measurement)
+        public TemperatureProcessor()
           {
-            final int centerValue = centerMeasurement.getTemperature().getT();  
-            final int value = measurement.getTemperature().getT();
-            final int delta = value - centerValue;
-            
-            final StringBuilder buffer = new StringBuilder();
-            buffer.append(String.format("%d K", value));
-            
-            if (centerMeasurement != measurement)
-              {
-                buffer.append(String.format("\n\u0394 = %+d K", delta));
-              }
-            
-            return buffer.toString();
+            super("%.0f K", "\n\u0394 = %+.0f K");  
+          }
+        
+        @Override
+        protected double getValue (final @Nonnull UniformityMeasurement measurement)
+          {
+            return measurement.getTemperature().getT();  
           }
       }
     
@@ -159,23 +175,15 @@ public class UniformityCheckMainControllerActor
      ******************************************************************************************************************/
     class LuminanceProcessor extends MeasurementProcessor
       {
-        @Override @Nonnull
-        protected String formatMeasurement (final @Nonnull UniformityMeasurement centerMeasurement,
-                                            final @Nonnull UniformityMeasurement measurement)
+        public LuminanceProcessor()
           {
-            final double centerValue = centerMeasurement.getLuminance();  
-            final double value = measurement.getLuminance();
-            final double delta = value - centerValue;
-
-            final StringBuilder buffer = new StringBuilder();
-            buffer.append(String.format("%.0f cd/m\u00b2", value));
-            
-            if (centerMeasurement != measurement)
-              {
-                buffer.append(String.format("\n\u0394 = %+.0f cd/m\u00b2", delta));
-              }
-            
-            return buffer.toString();
+            super("%.0f cd/m\u00b2", "\n\u0394 = %+.0f cd/m\u00b2");  
+          }
+        
+        @Override
+        protected double getValue (final @Nonnull UniformityMeasurement measurement)
+          {
+            return measurement.getLuminance();  
           }
       }
     
