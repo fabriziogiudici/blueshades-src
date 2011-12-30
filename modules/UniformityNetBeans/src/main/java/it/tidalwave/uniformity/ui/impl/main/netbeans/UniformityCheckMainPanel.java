@@ -23,11 +23,13 @@
 package it.tidalwave.uniformity.ui.impl.main.netbeans;
 
 import javax.annotation.Nonnull;
+import java.beans.PropertyVetoException;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import javax.swing.Action;
 import javax.swing.JPanel;
 import org.openide.nodes.Node;
+import org.openide.explorer.ExplorerManager;
 import org.openide.explorer.view.ListView;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.swing.ActionAdapter;
@@ -35,6 +37,7 @@ import it.tidalwave.swing.RadioButtonsSelector;
 import it.tidalwave.netbeans.SimpleExplorerPanel;
 import it.tidalwave.uniformity.ui.main.UniformityCheckMainPresentation;
 import it.tidalwave.blueargyle.util.MutableProperty;
+import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
  * 
@@ -44,6 +47,7 @@ import it.tidalwave.blueargyle.util.MutableProperty;
  * @version $Id$
  *
  **********************************************************************************************************************/
+@Slf4j
 public class UniformityCheckMainPanel extends JPanel implements UniformityCheckMainPresentation
   {
     public static final String PROP_SELECTED_MEASURE = "selectedMeasure";
@@ -107,6 +111,22 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
       {  
         assert EventQueue.isDispatchThread();
         epMeasurementsArchive.getExplorerManager().setRootContext((Node)presentationModel);
+      }
+    
+    @Override
+    public void selectFirstDisplay()  
+      {
+//        try 
+//          {
+            assert EventQueue.isDispatchThread();
+            final ExplorerManager explorerManager = epDisplays.getExplorerManager();
+            // FIXME: doesn't work
+//            explorerManager.setSelectedNodes(new Node[] { explorerManager.getRootContext().getChildren().getNodes()[0] });
+//          }
+//        catch (PropertyVetoException e)
+//          {
+//            log.error("", e);
+//          }
       }
     
     @Override

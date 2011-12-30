@@ -56,4 +56,6 @@ public interface UniformityCheckMainPresentation
     public void hideWaitingOnDisplayList();
 
     public void hideWaitingOnMeasurementsArchive();
+
+    public void selectFirstDisplay();
   }

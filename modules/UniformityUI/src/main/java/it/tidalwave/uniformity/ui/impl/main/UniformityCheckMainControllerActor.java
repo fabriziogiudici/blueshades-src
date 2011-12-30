@@ -254,6 +254,7 @@ public class UniformityCheckMainControllerActor
         log.info("onDiscoveredDisplays({})", message);
         displayDiscoveryRequestor.stop();
         populateDisplays(message.findDisplays());
+        presentation.selectFirstDisplay();
         presentation.hideWaitingOnDisplayList();
       }  
     
