@@ -36,7 +36,7 @@ import static it.tidalwave.uniformity.Position.*;
  *
  **********************************************************************************************************************/
 @RequiredArgsConstructor
-abstract class MeasurementRenderer
+abstract class PropertyRenderer
   {
     @Nonnull
     private final UniformityCheckMainPresentation presentation;

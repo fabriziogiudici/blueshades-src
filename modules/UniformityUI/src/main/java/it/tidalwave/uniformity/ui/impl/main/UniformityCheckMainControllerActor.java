@@ -77,21 +77,22 @@ import lombok.extern.slf4j.Slf4j;
 @Actor(threadSafe=false) @NotThreadSafe @Slf4j
 public class UniformityCheckMainControllerActor
   {
+    // FIXME: use @Inject
     private final UniformityCheckMainPresentationProvider presentationBuilder = Locator.find(UniformityCheckMainPresentationProvider.class);
     
     private UniformityCheckMainPresentation presentation;
 
-    private UniformityMeasurements measurements;
+    private UniformityMeasurements selectedMeasurements;
     
-    private final MutableProperty<Integer> selectedMeasurement = new MutableProperty<Integer>(0);
+    private final MutableProperty<Integer> selectedPropertyIndex = new MutableProperty<Integer>(0);
     
-    private final List<MeasurementRenderer> measurementRenderers = new ArrayList<MeasurementRenderer>();
+    private final List<PropertyRenderer> propertyRenderers = new ArrayList<PropertyRenderer>();
     
     /*******************************************************************************************************************
      * 
      *
      ******************************************************************************************************************/
-    static class TemperatureRenderer extends MeasurementRenderer
+    static class TemperatureRenderer extends PropertyRenderer
       {
         public TemperatureRenderer (final @Nonnull UniformityCheckMainPresentation presentation)
           {
@@ -109,7 +110,7 @@ public class UniformityCheckMainControllerActor
      * 
      *
      ******************************************************************************************************************/
-    static class LuminanceRenderer extends MeasurementRenderer
+    static class LuminanceRenderer extends PropertyRenderer
       {
         public LuminanceRenderer (final UniformityCheckMainPresentation presentation)
           {
@@ -127,7 +128,7 @@ public class UniformityCheckMainControllerActor
      * 
      *
      ******************************************************************************************************************/
-    private final PropertyChangeListener pcl = new PropertyChangeListener() 
+    private final PropertyChangeListener selectedPropertyTracker = new PropertyChangeListener() 
       {
         @Override
         public void propertyChange (final @Nonnull PropertyChangeEvent event) 
@@ -198,7 +199,7 @@ public class UniformityCheckMainControllerActor
      ******************************************************************************************************************/
     public UniformityCheckMainControllerActor()
       {
-        selectedMeasurement.addPropertyChangeListener(pcl);
+        selectedPropertyIndex.addPropertyChangeListener(selectedPropertyTracker);
       }
     
     /*******************************************************************************************************************
@@ -210,10 +211,10 @@ public class UniformityCheckMainControllerActor
       {
         log.info("initialize()");
         presentation = presentationBuilder.getPresentation();
-        measurementRenderers.clear();
-        measurementRenderers.add(new LuminanceRenderer(presentation));
-        measurementRenderers.add(new TemperatureRenderer(presentation));
-        presentation.bind(startAction, selectedMeasurement);
+        propertyRenderers.clear();
+        propertyRenderers.add(new LuminanceRenderer(presentation));
+        propertyRenderers.add(new TemperatureRenderer(presentation));
+        presentation.bind(startAction, selectedPropertyIndex);
         
         new UniformityArchiveQuery().sendLater(1, TimeUnit.SECONDS); // FIXME
       }
@@ -225,9 +226,9 @@ public class UniformityCheckMainControllerActor
     public void onNewMeasurements (final @ListensTo @Nonnull UniformityMeasurementMessage message)
       {
         log.info("onNewMeasurements({})", message);
-        measurements = null; // prevents a double refresh because of changing selectedMeasurement
-        selectedMeasurement.setValue(0);
-        measurements = message.getMeasurements();
+        selectedMeasurements = null; // prevents a double refresh because of changing selectedMeasurement
+        selectedPropertyIndex.setValue(0);
+        selectedMeasurements = message.getMeasurements();
         refreshPresentation();
         startAction.setEnabled(true);
       }  
@@ -239,7 +240,7 @@ public class UniformityCheckMainControllerActor
     public void onSelectedArchivedMeasurements (final @ListensTo @Nonnull UniformityMeasurementsSelectedMessage message)
       {
         log.info("onSelectedArchivedMeasurements({})", message);
-        measurements = message.getMeasurements();
+        selectedMeasurements = message.getMeasurements();
         refreshPresentation();
       }  
     
@@ -280,9 +281,9 @@ public class UniformityCheckMainControllerActor
      ******************************************************************************************************************/
     private void refreshPresentation()
       {
-        if (measurements != null)
+        if (selectedMeasurements != null)
           {
-            measurementRenderers.get(selectedMeasurement.getValue()).render(measurements);
+            propertyRenderers.get(selectedPropertyIndex.getValue()).render(selectedMeasurements);
           }
       }
   }
