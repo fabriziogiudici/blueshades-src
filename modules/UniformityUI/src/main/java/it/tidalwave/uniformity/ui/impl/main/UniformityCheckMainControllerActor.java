@@ -35,7 +35,6 @@ import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.openide.util.Lookup;
 import org.openide.util.lookup.Lookups;
@@ -102,7 +101,7 @@ public class UniformityCheckMainControllerActor
      *
      ******************************************************************************************************************/
     @RequiredArgsConstructor
-    abstract class MeasurementProcessor
+    abstract class MeasurementRenderer
       {
         @Nonnull
          final String upperFormat;
@@ -155,9 +154,9 @@ public class UniformityCheckMainControllerActor
      * 
      *
      ******************************************************************************************************************/
-    class TemperatureProcessor extends MeasurementProcessor
+    class TemperatureRenderer extends MeasurementRenderer
       {
-        public TemperatureProcessor()
+        public TemperatureRenderer()
           {
             super("%.0f K", "\n\u0394 = %+.0f K");  
           }
@@ -173,9 +172,9 @@ public class UniformityCheckMainControllerActor
      * 
      *
      ******************************************************************************************************************/
-    class LuminanceProcessor extends MeasurementProcessor
+    class LuminanceRenderer extends MeasurementRenderer
       {
-        public LuminanceProcessor()
+        public LuminanceRenderer()
           {
             super("%.0f cd/m\u00b2", "\n\u0394 = %+.0f cd/m\u00b2");  
           }
@@ -195,7 +194,7 @@ public class UniformityCheckMainControllerActor
     
     private final MutableProperty<Integer> selectedMeasurement = new MutableProperty<Integer>(0);
     
-    private final List<MeasurementProcessor> measurementProcessors = new ArrayList<MeasurementProcessor>();
+    private final List<MeasurementRenderer> measurementRenderers = new ArrayList<MeasurementRenderer>();
     
     /*******************************************************************************************************************
      * 
@@ -243,9 +242,9 @@ public class UniformityCheckMainControllerActor
     public void initialize()
       {
         log.info("initialize()");
-        measurementProcessors.clear();
-        measurementProcessors.add(new LuminanceProcessor());
-        measurementProcessors.add(new TemperatureProcessor());
+        measurementRenderers.clear();
+        measurementRenderers.add(new LuminanceRenderer());
+        measurementRenderers.add(new TemperatureRenderer());
         presentation = presentationBuilder.getPresentation();
         presentation.bind(startAction, selectedMeasurement);
         
@@ -312,7 +311,7 @@ public class UniformityCheckMainControllerActor
       {
         if (measurements != null)
           {
-            measurementProcessors.get(selectedMeasurement.getValue()).render(measurements);
+            measurementRenderers.get(selectedMeasurement.getValue()).render(measurements);
           }
       }
   }
