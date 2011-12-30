@@ -58,6 +58,7 @@ import it.tidalwave.uniformity.UniformityMeasurementMessage;
 import it.tidalwave.uniformity.UniformityMeasurements;
 import it.tidalwave.uniformity.archive.UniformityArchiveContentMessage;
 import it.tidalwave.uniformity.archive.UniformityArchiveQuery;
+import it.tidalwave.uniformity.archive.UniformityArchiveUpdatedMessage;
 import it.tidalwave.uniformity.ui.UniformityMeasurementsSelectedMessage;
 import it.tidalwave.uniformity.ui.main.UniformityCheckMainPresentation;
 import it.tidalwave.uniformity.ui.main.UniformityCheckMainPresentationProvider;
@@ -229,11 +230,11 @@ public class UniformityCheckMainControllerActor
      * 
      *
      ******************************************************************************************************************/
-//    public void populateMeasurementsArchive (final @ListensTo @Nonnull UniformityArchiveUpdatedMessage message)
-//      {
-//        log.info("populateMeasurementsArchive({})", message);
-//        populateMeasurementsArchive(message.findMeasurements());
-//      }  
+    public void onUpdatedArchivedMeasurements (final @ListensTo @Nonnull UniformityArchiveUpdatedMessage message)
+      {
+        log.info("onUpdatedArchivedMeasurements({})", message);
+        populateMeasurementsArchive(message.findMeasurements());
+      }  
     
     /*******************************************************************************************************************
      * 
