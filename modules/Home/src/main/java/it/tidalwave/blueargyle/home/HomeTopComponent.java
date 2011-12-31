@@ -25,8 +25,8 @@ package it.tidalwave.blueargyle.home;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
+import org.openide.util.NbBundle;
 import org.openide.windows.TopComponent;
-import org.openide.util.NbBundle.Messages;
 
 /***********************************************************************************************************************
  * 
@@ -44,19 +44,15 @@ import org.openide.util.NbBundle.Messages;
     @ActionReference(path = "Toolbars/Standard", position = 10)
   })
 @TopComponent.OpenActionRegistration(displayName = "#CTL_HomeAction", preferredID = "HomeTopComponent")
-@Messages(
-  {
-    "CTL_HomeAction=Home",
-    "CTL_HomeTopComponent=Home Window",
-    "HINT_HomeTopComponent=This is a Home window"
-  })
 public final class HomeTopComponent extends TopComponent 
   {
     public HomeTopComponent() 
       {
         initComponents();
-        setName(Bundle.CTL_HomeTopComponent());
-        setToolTipText(Bundle.HINT_HomeTopComponent());
+        setName(NbBundle.getMessage(HomeTopComponent.class, "CTL_HomeTopComponent"));
+        putClientProperty(PROP_DRAGGING_DISABLED, true);
+        putClientProperty(PROP_MAXIMIZATION_DISABLED, true);
+        putClientProperty(PROP_UNDOCKING_DISABLED, true);
       }
 
     /**
