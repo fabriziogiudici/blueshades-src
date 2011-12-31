@@ -23,6 +23,7 @@
 package it.tidalwave.uniformity.ui.impl.main;
 
 import javax.annotation.Nonnull;
+import java.util.Locale;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import it.tidalwave.role.Displayable;
@@ -38,7 +39,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 class DateTimeDisplayable implements Displayable
   {
-    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormat.shortDateTime();
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormat.shortDateTime().withLocale(Locale.ITALY);
 
     @Nonnull
     private final UniformityMeasurements measurements;
