@@ -146,7 +146,7 @@ public class UniformityCheckMeasurementControllerActor
      ******************************************************************************************************************/
     public void onArgyllFailure (final @ListensTo @Nonnull ArgyllFailureMessage message) 
       {
-        log.info("failure({})", message);
+        log.info("onArgyllFailure({})", message);
         new CancelMessage().send(); // FIXME: harsh, do a notification on the UI too
       }
         
