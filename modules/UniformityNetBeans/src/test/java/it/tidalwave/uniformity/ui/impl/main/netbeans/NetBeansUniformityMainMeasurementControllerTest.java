@@ -45,7 +45,8 @@ public class NetBeansUniformityMainMeasurementControllerTest
               {
                 final JFrame frame = new JFrame();
                 final UniformityCheckMainPanel presentation = new UniformityCheckMainPanel();
-                presentation.populateMeasurements(new String[][] {{"a","b","c"},{"a","b","c"},{"a","b","c"}});
+                final String[] row = {"2948\n7943", "6305\n395", "32\n3950"};
+                presentation.populateMeasurements(new String[][] { row, row, row });
                 frame.add(presentation);
                 frame.setSize(800, 600);
                 frame.setVisible(true);
