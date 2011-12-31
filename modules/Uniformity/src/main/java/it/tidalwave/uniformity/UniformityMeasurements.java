@@ -33,6 +33,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import org.joda.time.DateTime;
 import it.tidalwave.netbeans.util.AsLookupSupport;
+import it.tidalwave.argyll.Display;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
@@ -46,7 +47,7 @@ import lombok.Getter;
 public class UniformityMeasurements extends AsLookupSupport
   {
     @Nonnull @Getter
-    private final String displayName;
+    private final Display display;
             
     @Nonnull @Getter
     private final DateTime dateTime;
@@ -60,17 +61,17 @@ public class UniformityMeasurements extends AsLookupSupport
     @Nonnull
     private final SortedMap<Position, UniformityMeasurement> measurementMapByPosition;
     
-    public UniformityMeasurements (final @Nonnull String displayName,
+    public UniformityMeasurements (final @Nonnull Display display,
                                    final @Nonnull Map<Position, UniformityMeasurement> measurementMapByPosition)
       {
-        this(displayName, new DateTime(), measurementMapByPosition);
+        this(display, new DateTime(), measurementMapByPosition);
       }
     
-    public UniformityMeasurements (final @Nonnull String displayName,
+    public UniformityMeasurements (final @Nonnull Display display,
                                    final @Nonnull DateTime dateTime,
                                    final @Nonnull Map<Position, UniformityMeasurement> measurementMapByPosition)
       {
-        this.displayName = displayName;
+        this.display = display;
         this.dateTime = dateTime;
         this.measurementMapByPosition = new TreeMap<Position, UniformityMeasurement>(measurementMapByPosition);
         
@@ -98,7 +99,7 @@ public class UniformityMeasurements extends AsLookupSupport
         final StringWriter sw = new StringWriter();
         final PrintWriter pw = new PrintWriter(sw);
         
-        pw.printf("UniformityMeasurements('%s', %s\n", displayName, dateTime);
+        pw.printf("UniformityMeasurements('%s', %s\n", display.getDisplayName(), dateTime);
         
         for (final Entry<Position, UniformityMeasurement> e : measurementMapByPosition.entrySet())
           {

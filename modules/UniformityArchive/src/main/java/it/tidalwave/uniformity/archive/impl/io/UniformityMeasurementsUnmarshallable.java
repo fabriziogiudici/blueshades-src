@@ -22,6 +22,7 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.archive.impl.io;
 
+import it.tidalwave.argyll.Display;
 import javax.annotation.Nonnull;
 import java.util.Map;
 import java.util.Scanner;
@@ -101,7 +102,7 @@ public class UniformityMeasurementsUnmarshallable implements Unmarshallable
               }
           }
 
-        return new UniformityMeasurements(displayName, dateTime, map);
+        return new UniformityMeasurements(new Display(displayName, -1), dateTime, map);
       }   
     
     @Nonnull

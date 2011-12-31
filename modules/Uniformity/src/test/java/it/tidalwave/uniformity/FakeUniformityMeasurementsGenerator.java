@@ -11,6 +11,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import org.joda.time.DateTime;
 import it.tidalwave.colorimetry.ColorTemperature;
+import it.tidalwave.argyll.Display;
 import lombok.NoArgsConstructor;
 import static it.tidalwave.uniformity.Position.xy;
 import static it.tidalwave.colorimetry.ColorTemperature.kelvin;
@@ -38,7 +39,7 @@ public final class FakeUniformityMeasurementsGenerator
         m.put(xy(1, 2), new UniformityMeasurement(randomTemperature(r), randomLuminance(r)));
         m.put(xy(2, 2), new UniformityMeasurement(randomTemperature(r), randomLuminance(r)));
        
-        return new UniformityMeasurements(displayName, dateTime, m);
+        return new UniformityMeasurements(new Display(displayName, 0), dateTime, m);
       }  
     
     @Nonnull

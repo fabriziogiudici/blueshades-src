@@ -22,9 +22,9 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.ui.impl.measurement.netbeans;
 
+import javax.annotation.Nonnull;
 import java.awt.EventQueue;
 import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import javax.swing.JFrame;
 import it.tidalwave.uniformity.ui.measurement.UniformityCheckMeasurementPresentation;
 import lombok.Delegate;
@@ -39,7 +39,7 @@ public class NetBeansUniformityCheckMeasurementPresentation implements Uniformit
   {
     private static interface DelegateExclusions
       {
-        public void showUp();
+        public void showUp (GraphicsDevice graphicsDevice);
         public void dismiss();    
       }
     
@@ -65,12 +65,10 @@ public class NetBeansUniformityCheckMeasurementPresentation implements Uniformit
      *
      ******************************************************************************************************************/
     @Override
-    public void showUp()
+    public void showUp (final @Nonnull GraphicsDevice graphicsDevice)
       {
         assert EventQueue.isDispatchThread();
-        panel.showUp();
-        final GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        final GraphicsDevice graphicsDevice = graphicsEnvironment.getScreenDevices()[0];
+        panel.showUp(graphicsDevice);
         graphicsDevice.setFullScreenWindow(frame);
         frame.setVisible(true);
       }

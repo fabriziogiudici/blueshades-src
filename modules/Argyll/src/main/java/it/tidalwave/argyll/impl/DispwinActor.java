@@ -61,10 +61,12 @@ public class DispwinActor
 
         final Executor executor = Executor.forExecutable("dispwin").withArgument("--");
         final List<Display> displays = new ArrayList<Display>();
+        int screenDeviceIndex = 0;
         
         for (final String displayName : executor.start().waitForCompletion().getStderr().filteredBy("^ *[1-9] = '([^,]*),.*$"))
           {
-            displays.add(new Display(displayName)); 
+            // FIXME: is it safe to assume that Argyll enumerates displays in the same order of Java ScreenDevices?
+            displays.add(new Display(displayName, screenDeviceIndex++)); 
           }
         
         new DisplayDiscoveryMessage(new SimpleFinderSupport<Display>() 

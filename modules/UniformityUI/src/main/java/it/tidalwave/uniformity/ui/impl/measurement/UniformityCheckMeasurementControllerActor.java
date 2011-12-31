@@ -53,6 +53,7 @@ import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.concurrent.TimeUnit.*;
 import static it.tidalwave.actor.Collaboration.*;
+import it.tidalwave.argyll.Display;
 import static it.tidalwave.colorimetry.ColorPoint.ColorSpace.*;
 import static it.tidalwave.uniformity.Position.xy;
 
@@ -89,7 +90,7 @@ public class UniformityCheckMeasurementControllerActor
     
     private UniformityCheckMeasurementPresentation presentation;
 
-    private String displayName;
+    private Display display;
     
     private final List<Position> positionSequence = new ArrayList<Position>();
 
@@ -114,7 +115,7 @@ public class UniformityCheckMeasurementControllerActor
     public void start (final @ListensTo @Nonnull UniformityCheckRequest message)
       {
         log.info("start({})", message);
-        displayName = message.getDisplayName();
+        display = message.getDisplay();
         initializeMeasurement();
         prepareNextMeasurement(message.getCollaboration());  
       }
@@ -215,7 +216,7 @@ public class UniformityCheckMeasurementControllerActor
         presentation.setGridSize(COLUMNS, ROWS);
         continueAction.setEnabled(false);
         cancelAction.setEnabled(false);
-        presentation.showUp();
+        presentation.showUp(display.getGraphicsDevice());
         presentation.renderControlPanelAt(DEFAULT_CONTROL_PANEL_POSITION);
       }
     
@@ -231,7 +232,7 @@ public class UniformityCheckMeasurementControllerActor
         if (!positionIterator.hasNext())
           {
             presentation.dismiss();  
-            new UniformityMeasurementMessage(new UniformityMeasurements(displayName, measurementMapByPosition)).send();
+            new UniformityMeasurementMessage(new UniformityMeasurements(display, measurementMapByPosition)).send();
           }
         else
           {

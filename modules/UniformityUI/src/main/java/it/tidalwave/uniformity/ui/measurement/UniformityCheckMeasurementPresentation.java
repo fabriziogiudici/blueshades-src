@@ -26,6 +26,7 @@ import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import javax.swing.Action;
 import it.tidalwave.uniformity.Position;
+import java.awt.GraphicsDevice;
 
 /***********************************************************************************************************************
  *
@@ -56,7 +57,7 @@ public interface UniformityCheckMeasurementPresentation
      * Makes the UI visible.
      *
      ******************************************************************************************************************/
-    public void showUp();
+    public void showUp (@Nonnull GraphicsDevice graphicsDevice);
     
     /*******************************************************************************************************************
      *

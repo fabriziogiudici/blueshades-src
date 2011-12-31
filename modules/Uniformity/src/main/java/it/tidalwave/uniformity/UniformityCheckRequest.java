@@ -25,6 +25,7 @@ package it.tidalwave.uniformity;
 import javax.annotation.Nonnull;
 import it.tidalwave.actor.MessageSupport;
 import it.tidalwave.actor.annotation.Message;
+import it.tidalwave.argyll.Display;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
@@ -43,5 +44,5 @@ import lombok.ToString;
 public class UniformityCheckRequest extends MessageSupport
   {
     @Nonnull @Getter
-    private final String displayName;
+    private final Display display;
   }

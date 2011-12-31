@@ -22,39 +22,23 @@
  **********************************************************************************************************************/
 package it.tidalwave.argyll;
 
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import it.tidalwave.role.spi.DefaultDisplayable;
-import it.tidalwave.netbeans.util.AsLookupSupport;
+import it.tidalwave.actor.MessageSupport;
+import it.tidalwave.actor.annotation.Message;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 /***********************************************************************************************************************
+ * 
+ * @stereotype Message
  * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class Display extends AsLookupSupport
+@Message @RequiredArgsConstructor @ToString
+public class DisplaySelectionMessage extends MessageSupport
   {
-    @Nonnull @Getter
-    private final String displayName;
-    
-    @Nonnegative
-    private final int screenDeviceIndex;
-    
-    public Display (final @Nonnull String displayName, final @Nonnegative int screenDeviceIndex)
-      {
-        super(new Object[] { new DefaultDisplayable(displayName) });  
-        this.displayName = displayName;
-        this.screenDeviceIndex = screenDeviceIndex;
-      }    
-    
-    @Nonnull
-    public GraphicsDevice getGraphicsDevice()
-      {
-        final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        return ge.getScreenDevices()[screenDeviceIndex];
-      }
+    @Getter
+    private final Display selectedDisplay;  
   }

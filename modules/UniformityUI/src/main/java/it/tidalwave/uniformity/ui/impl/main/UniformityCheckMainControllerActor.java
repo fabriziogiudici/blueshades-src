@@ -32,8 +32,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -56,7 +54,7 @@ import it.tidalwave.blueargyle.util.MutableProperty;
 import it.tidalwave.argyll.DisplayDiscoveryMessage;
 import it.tidalwave.argyll.DisplayDiscoveryQueryMessage;
 import it.tidalwave.argyll.Display;
-import it.tidalwave.role.ui.PresentationModel;
+import it.tidalwave.argyll.DisplaySelectionMessage;
 import it.tidalwave.uniformity.UniformityCheckRequest;
 import it.tidalwave.uniformity.UniformityMeasurement;
 import it.tidalwave.uniformity.UniformityMeasurementMessage;
@@ -87,6 +85,10 @@ public class UniformityCheckMainControllerActor
     
     /** The presentation controlled by this class */
     private UniformityCheckMainPresentation presentation;
+    
+    /** The selected Display. */
+    @CheckForNull
+    private Display selectedDisplay;
 
     /** The measurements currently selected and rendered in details. */
     @CheckForNull
@@ -158,24 +160,6 @@ public class UniformityCheckMainControllerActor
 
     /*******************************************************************************************************************
      * 
-     * Injects some capabilities into the PresentationModel for measurements. 
-     *
-     ******************************************************************************************************************/
-    private final LookupFilter capabilityInjectorLookupFilter = new LookupFilter() 
-      {
-        @Override @Nonnull
-        public Lookup filter (final @Nonnull Lookup lookup)
-          {
-            final UniformityMeasurements measurements = lookup.lookup(UniformityMeasurements.class);        
-            return (measurements == null) ? lookup // e.g. the root node 
-                                          : new ProxyLookup(Lookups.fixed(new DateTimeDisplayable(measurements), 
-                                                                          new MeasurementsActionProvider(measurements)),
-                                                            lookup);
-          }
-      };
-    
-    /*******************************************************************************************************************
-     * 
      * Starts a new measurement sequence.
      *
      ******************************************************************************************************************/
@@ -184,11 +168,32 @@ public class UniformityCheckMainControllerActor
         @Override
         public void actionPerformed (final @Nonnull ActionEvent event) 
           {
-            // TODO: query Argyll for existing devices
-            final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            final GraphicsDevice[] screenDevices = ge.getScreenDevices();
             setEnabled(false);
-            new UniformityCheckRequest(screenDevices[0].getIDstring()).send();
+            new UniformityCheckRequest(selectedDisplay).send();
+          }
+      };
+    
+    /*******************************************************************************************************************
+     * 
+     * The ActionProvider for displays.
+     *
+     ******************************************************************************************************************/
+    @RequiredArgsConstructor
+    private static class DisplayActionProvider implements ActionProvider
+      {
+        @Nonnull
+        private final Display display;
+        
+        @Override @Nonnull
+        public Action getPreferredAction() 
+          {
+            return new ActionMessageAdapter("Select", new DisplaySelectionMessage(display));
+          }
+
+        @Override @Nonnull
+        public Collection<? extends Action> getActions() 
+          {
+            return Collections.<Action>emptyList();
           }
       };
     
@@ -213,6 +218,40 @@ public class UniformityCheckMainControllerActor
         public Collection<? extends Action> getActions() 
           {
             return Collections.<Action>emptyList();
+          }
+      };
+    
+    /*******************************************************************************************************************
+     * 
+     * Injects some capabilities into the PresentationModel for Displays. 
+     *
+     ******************************************************************************************************************/
+    private final LookupFilter displaysCapabilityInjectorLookupFilter = new LookupFilter() 
+      {
+        @Override @Nonnull
+        public Lookup filter (final @Nonnull Lookup lookup)
+          {
+            final Display display = lookup.lookup(Display.class);        
+            return (display == null) ? lookup // e.g. the root node 
+                                      : new ProxyLookup(Lookups.fixed(new DisplayActionProvider(display)), lookup);
+          }
+      };
+    
+    /*******************************************************************************************************************
+     * 
+     * Injects some capabilities into the PresentationModel for measurements. 
+     *
+     ******************************************************************************************************************/
+    private final LookupFilter measurementsCapabilityInjectorLookupFilter = new LookupFilter() 
+      {
+        @Override @Nonnull
+        public Lookup filter (final @Nonnull Lookup lookup)
+          {
+            final UniformityMeasurements measurements = lookup.lookup(UniformityMeasurements.class);        
+            return (measurements == null) ? lookup // e.g. the root node 
+                                          : new ProxyLookup(Lookups.fixed(new DateTimeDisplayable(measurements), 
+                                                                          new MeasurementsActionProvider(measurements)),
+                                                            lookup);
           }
       };
     
@@ -256,6 +295,16 @@ public class UniformityCheckMainControllerActor
         populateDisplays(message.findDisplays());
         presentation.selectFirstDisplay();
         presentation.hideWaitingOnDisplayList();
+      }  
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    public void onDisplaySelection (final @ListensTo @Nonnull DisplaySelectionMessage message)
+      {
+        log.info("onDisplaySelection({})", message);
+        selectedDisplay = message.getSelectedDisplay();
       }  
     
     /*******************************************************************************************************************
@@ -312,8 +361,8 @@ public class UniformityCheckMainControllerActor
      ******************************************************************************************************************/
     private void populateDisplays (final @Nonnull Finder<Display> finder)
       {
-        final PresentationModel presentationModel = new NodePresentationModel(new DefaultSimpleComposite<Display>(finder));
-        presentation.populateDisplays(presentationModel);
+        final Node presentationModel = new NodePresentationModel(new DefaultSimpleComposite<Display>(finder));
+        presentation.populateDisplays(new LookupFilterDecoratorNode(presentationModel, displaysCapabilityInjectorLookupFilter));
       }
     
     /*******************************************************************************************************************
@@ -323,7 +372,7 @@ public class UniformityCheckMainControllerActor
     private void populateMeasurementsArchive (final @Nonnull Finder<UniformityMeasurements> finder)
       {
         final Node presentationModel = new NodePresentationModel(new DefaultSimpleComposite<UniformityMeasurements>(finder));
-        presentation.populateMeasurementsArchive(new LookupFilterDecoratorNode(presentationModel, capabilityInjectorLookupFilter));
+        presentation.populateMeasurementsArchive(new LookupFilterDecoratorNode(presentationModel, measurementsCapabilityInjectorLookupFilter));
       }
     
     /*******************************************************************************************************************

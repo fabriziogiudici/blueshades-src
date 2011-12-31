@@ -33,7 +33,7 @@
         <netbeans.cluster>blueargyle</netbeans.cluster>
 
         <actors.version>1.0.2-SNAPSHOT</actors.version>
-        <openbluesky.version>0.14</openbluesky.version>
+        <openbluesky.version>0.15-SNAPSHOT</openbluesky.version>
         <thesefoolishthings.version>1.19</thesefoolishthings.version>
         <libraries.version>1.1.5</libraries.version>
         <netbeans.version>RELEASE70</netbeans.version>

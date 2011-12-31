@@ -56,7 +56,7 @@ public class UniformityMeasurementsMarshallable implements Marshallable
         final int rows = uniformityMeasurements.getRows();
         final int columns = uniformityMeasurements.getColumns();
         final DateTimeFormatter formatter = ISODateTimeFormat.dateTimeNoMillis();
-        pw.printf("%s ; D='%s'", formatter.print(uniformityMeasurements.getDateTime()), uniformityMeasurements.getDisplayName());
+        pw.printf("%s ; D='%s'", formatter.print(uniformityMeasurements.getDateTime()), uniformityMeasurements.getDisplay().getDisplayName());
 
         for (int row = 0; row < rows; row++)
           {

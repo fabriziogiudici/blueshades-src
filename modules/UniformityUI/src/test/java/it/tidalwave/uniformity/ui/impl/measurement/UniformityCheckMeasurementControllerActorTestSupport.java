@@ -28,11 +28,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.awt.GraphicsDevice;
 import java.awt.event.ActionEvent;
 import javax.swing.Action;
 import it.tidalwave.actor.Collaboration;
 import it.tidalwave.actor.spi.ActorActivator;
 import it.tidalwave.actor.spi.ActorGroupActivator;
+import it.tidalwave.argyll.Display;
 import it.tidalwave.argyll.MeasurementMessage;
 import it.tidalwave.argyll.MeasurementRequest;
 import it.tidalwave.argyll.impl.FakeSpotReadActor;
@@ -151,14 +153,14 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
     public void must_properly_drive_a_complete_3x3_sequence() 
       throws InterruptedException
       {
-        final Collaboration collaboration = new UniformityCheckRequest("display1").send();
+        final Collaboration collaboration = new UniformityCheckRequest(new Display("display1", 0)).send();
         collaboration.waitForCompletion();
         
         inOrder.verify(presentation).bind(any(Action.class), any(Action.class));
         inOrder.verify(presentation).setGridSize(eq(3), eq(3));
         inOrder.verify(action("Continue")).setEnabled(eq(false));
         inOrder.verify(action("Cancel")).setEnabled(eq(false));
-        inOrder.verify(presentation).showUp();
+        inOrder.verify(presentation).showUp(any(GraphicsDevice.class));
         inOrder.verify(presentation).renderControlPanelAt(                 eq(xy(0, 0)));
         
         inOrder.verify(presentation).renderSensorPlacementInvitationCellAt(eq(xy(1, 1)));
@@ -286,7 +288,7 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
         m.put(xy(0, 2), new UniformityMeasurement(kelvin(3813), 97));
         m.put(xy(1, 2), new UniformityMeasurement(kelvin(2879), 33));
         m.put(xy(2, 2), new UniformityMeasurement(kelvin(6071), 19));
-        final UniformityMeasurements measurements = new UniformityMeasurements("display1", m);
+        final UniformityMeasurements measurements = new UniformityMeasurements(new Display("display1", 0), m);
         messageVerifier.verify(UniformityMeasurementMessage.class).with("measurements", new Equals(measurements)); 
         
         messageVerifier.verifyCollaborationCompleted();

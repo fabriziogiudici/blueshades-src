@@ -29,6 +29,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Component;
 import java.awt.EventQueue;
+import java.awt.GraphicsDevice;
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -129,7 +130,7 @@ public class UniformityCheckMeasurementPresentationPanel extends JPanel implemen
      *
      ******************************************************************************************************************/
     @Override
-    public void showUp()
+    public void showUp (@Nonnull GraphicsDevice graphicsDevice)
       {
         assert EventQueue.isDispatchThread();
       }
