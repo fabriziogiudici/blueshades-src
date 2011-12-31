@@ -29,6 +29,7 @@ import java.awt.GraphicsEnvironment;
 import it.tidalwave.role.spi.DefaultDisplayable;
 import it.tidalwave.netbeans.util.AsLookupSupport;
 import lombok.Getter;
+import lombok.ToString;
 
 /***********************************************************************************************************************
  * 
@@ -36,6 +37,7 @@ import lombok.Getter;
  * @version $Id$
  *
  **********************************************************************************************************************/
+@ToString(callSuper=false)
 public class Display extends AsLookupSupport
   {
     @Nonnull @Getter
@@ -46,7 +48,7 @@ public class Display extends AsLookupSupport
     
     public Display (final @Nonnull String displayName, final @Nonnegative int screenDeviceIndex)
       {
-        super(new Object[] { new DefaultDisplayable(displayName) });  
+        super(new Object[] { new DefaultDisplayable(displayName, displayName) });  
         this.displayName = displayName;
         this.screenDeviceIndex = screenDeviceIndex;
       }    
