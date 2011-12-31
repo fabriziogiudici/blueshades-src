@@ -136,7 +136,7 @@ public class UniformityCheckMeasurementControllerActor
         presentation.renderMeasurementCellAt(currentPosition,
                                              String.format("Luminance: %d cd/m\u00b2", measurement.getLuminance()), 
                                              String.format("White point: %d K", measurement.getTemperature().getT()));
-        eventuallyMoveInControlPanel();
+        eventuallyMoveBackControlPanel();
         prepareNextMeasurement(message.getCollaboration());  
       }
         
@@ -255,7 +255,7 @@ public class UniformityCheckMeasurementControllerActor
      * If the ControlPanel was moved to the alternate position, restore it.
      *
      ******************************************************************************************************************/
-    private void eventuallyMoveInControlPanel()
+    private void eventuallyMoveBackControlPanel()
       {
         if (currentPosition.equals(DEFAULT_CONTROL_PANEL_POSITION))
           {
