@@ -45,19 +45,6 @@ public class RepeatingMessageSender
      * 
      *
      ******************************************************************************************************************/
-    private final TimerTask messageSender = new TimerTask()
-      {
-        @Override
-        public void run() 
-          {
-            message.send();
-          }              
-      };
-    
-    /*******************************************************************************************************************
-     * 
-     *
-     ******************************************************************************************************************/
     public synchronized void start (final @Nonnull MessageSupport message)
       {
         this.message = message;
@@ -65,7 +52,14 @@ public class RepeatingMessageSender
         if (timer == null)
           {
             timer = new Timer();
-            timer.scheduleAtFixedRate(messageSender, 0, 500);
+            timer.scheduleAtFixedRate(new TimerTask()
+              {
+                @Override
+                public void run() 
+                  {
+                    message.send();
+                  }              
+              }, 0, 500);
           }
       }
 
