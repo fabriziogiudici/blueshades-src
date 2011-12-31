@@ -71,7 +71,8 @@ public final class HomeTopComponent extends TopComponent
         jPanel1.setBackground(new java.awt.Color(80, 80, 80));
         jPanel1.setName(org.openide.util.NbBundle.getMessage(HomeTopComponent.class, "HomeTopComponent.jPanel1.name")); // NOI18N
 
-        jLabel1.setForeground(new java.awt.Color(210, 210, 210));
+        jLabel1.setFont(jLabel1.getFont().deriveFont(jLabel1.getFont().getSize()-1f));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(HomeTopComponent.class, "HomeTopComponent.jLabel1.text")); // NOI18N
         jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 8, 8, 8));
         jLabel1.setName(org.openide.util.NbBundle.getMessage(HomeTopComponent.class, "HomeTopComponent.jLabel1.name")); // NOI18N
