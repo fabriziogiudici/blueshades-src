@@ -23,14 +23,17 @@
 package it.tidalwave.uniformity.ui.impl.main.netbeans;
 
 import javax.annotation.Nonnull;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
-import javax.swing.ImageIcon;
+import java.awt.image.BufferedImage;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import it.tidalwave.swing.JPanelWithBackground;
+import org.jdesktop.swingx.JXPanel;
+import org.jdesktop.swingx.painter.ImagePainter;
 import it.tidalwave.swing.FixedAspectRatioLayout;
 import it.tidalwave.swing.ProportionalLayout;
 
@@ -44,24 +47,37 @@ import it.tidalwave.swing.ProportionalLayout;
  **********************************************************************************************************************/
 public class UniformityMeasurementsPanel extends JPanel
   {
-    private ImageIcon backgroundImage;
+    private final static String IMAGE_RESOURCE = "/it/tidalwave/uniformity/ui/impl/netbeans/2000px-Flat_monitor.svg.png";
+    
+    private final BufferedImage backgroundImage;
     
     private final GridLayout gridLayout = new GridLayout();
     
-    private final JPanelWithBackground displayPanel = new JPanelWithBackground(new ProportionalLayout(0.035, 0.034, 0.045, 0.30));
+    private final JXPanel displayPanel = new JXPanel(new ProportionalLayout(0.035, 0.035, 0.045, 0.30));
     
     private final JPanel innerPanel = new JPanel(gridLayout);
     
+    private final ImagePainter painter;
+    
     public UniformityMeasurementsPanel()
       {
-        assert EventQueue.isDispatchThread();
-        backgroundImage = new ImageIcon(getClass().getResource("/it/tidalwave/uniformity/ui/impl/netbeans/2000px-Flat_monitor.svg.png"));
-        displayPanel.setBackgroundImage(backgroundImage);
-        final double imageAspectRatio = (double)backgroundImage.getIconWidth() / backgroundImage.getIconHeight();
-        setLayout(new FixedAspectRatioLayout(imageAspectRatio));
-        add(displayPanel);
-        displayPanel.add(innerPanel);
-        setOpaque(false);
+        try 
+          {
+            assert EventQueue.isDispatchThread();
+            backgroundImage = ImageIO.read(getClass().getResource(IMAGE_RESOURCE));
+            painter = new ImagePainter(backgroundImage);
+            painter.setScaleToFit(true);
+            displayPanel.setBackgroundPainter(painter);
+            final double imageAspectRatio = (double)backgroundImage.getWidth() / backgroundImage.getHeight();
+            setLayout(new FixedAspectRatioLayout(imageAspectRatio));
+            add(displayPanel);
+            displayPanel.add(innerPanel);
+            setOpaque(false);
+          }
+        catch (IOException e)
+          {
+            throw new RuntimeException(e);
+          }
       }
         
     public void renderMeasurements (final @Nonnull String[][] measurements)
