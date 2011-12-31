@@ -69,7 +69,7 @@ import static it.tidalwave.uniformity.Position.xy;
 public class UniformityCheckMeasurementControllerActor
   {
     @Message(outOfBand=true) @ToString
-    private static class DoMeasurementMessage extends MessageSupport
+    private static class ConfirmMeasurementMessage extends MessageSupport
       {
       }
     
@@ -104,7 +104,7 @@ public class UniformityCheckMeasurementControllerActor
     
     private final SortedMap<Position, UniformityMeasurement> measurementMapByPosition = new TreeMap<Position, UniformityMeasurement>();
     
-    private final Action continueAction = new ActionMessageAdapter("Continue", new DoMeasurementMessage()); 
+    private final Action continueAction = new ActionMessageAdapter("Continue", new ConfirmMeasurementMessage()); 
     
     private final Action cancelAction = new ActionMessageAdapter("Cancel", new CancelMessage()); 
     
@@ -112,9 +112,9 @@ public class UniformityCheckMeasurementControllerActor
      * 
      *
      ******************************************************************************************************************/
-    public void start (final @ListensTo @Nonnull UniformityCheckRequest message)
+    public void onStart (final @ListensTo @Nonnull UniformityCheckRequest message)
       {
-        log.info("start({})", message);
+        log.info("onStart({})", message);
         display = message.getDisplay();
         initializeMeasurement();
         prepareNextMeasurement(message.getCollaboration());  
@@ -124,10 +124,10 @@ public class UniformityCheckMeasurementControllerActor
      * 
      *
      ******************************************************************************************************************/
-    public void processMeasure (final @ListensTo @Nonnull MeasurementMessage message) 
+    public void onNewMeasurement (final @ListensTo @Nonnull MeasurementMessage message) 
       throws NotFoundException
       {
-        log.info("processMeasure({})", message);
+        log.info("onNewMeasurement({})", message);
         presentation.hideMeasureInProgress();
         // FIXME: do the right math here
         final UniformityMeasurement measurement = new UniformityMeasurement(message.getCcTemperature().getMeasure(), 
@@ -144,7 +144,7 @@ public class UniformityCheckMeasurementControllerActor
      * 
      *
      ******************************************************************************************************************/
-    public void failure (final @ListensTo @Nonnull ArgyllFailureMessage message) 
+    public void onArgyllFailure (final @ListensTo @Nonnull ArgyllFailureMessage message) 
       {
         log.info("failure({})", message);
         new CancelMessage().send(); // FIXME: harsh, do a notification on the UI too
@@ -154,9 +154,9 @@ public class UniformityCheckMeasurementControllerActor
      * 
      *
      ******************************************************************************************************************/
-    private void doMeasurement (final @ListensTo @Nonnull DoMeasurementMessage message)
+    private void onConfirmMeasurement (final @ListensTo @Nonnull ConfirmMeasurementMessage message)
       {
-        log.info("doMeasurement()");
+        log.info("onConfirmMeasurement()");
         continueAction.setEnabled(false);
         cancelAction.setEnabled(false);
         collaborationPendingUserIntervention.resume(suspensionToken, new Runnable()
@@ -178,9 +178,9 @@ public class UniformityCheckMeasurementControllerActor
      * 
      *
      ******************************************************************************************************************/
-    private void cancel (final @ListensTo @Nonnull CancelMessage message)
+    private void onCancel (final @ListensTo @Nonnull CancelMessage message)
       {
-        log.info("cancel()");
+        log.info("onCancel()");
         cancelAction.setEnabled(false);
         
         if (suspensionToken != null)
