@@ -22,6 +22,7 @@
  **********************************************************************************************************************/
 package it.tidalwave.actor;
 
+import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import java.util.TimerTask;
 import java.util.Timer;
@@ -42,7 +43,8 @@ public class RepeatingMessageSender
     @Nonnull
     private final Class<? extends MessageSupport> messageClass;
     
-    private final Timer timer = new Timer();
+    @CheckForNull
+    private Timer timer;
     
     /*******************************************************************************************************************
      * 
@@ -94,6 +96,7 @@ public class RepeatingMessageSender
      ******************************************************************************************************************/
     public void start()
       {
+        timer = new Timer();
         timer.scheduleAtFixedRate(messageSender, 0, 500);
       }
 
@@ -101,9 +104,13 @@ public class RepeatingMessageSender
      * 
      *
      ******************************************************************************************************************/
-    public void stop() 
+    public synchronized void stop() 
       {
-        timer.cancel();
+        if (timer != null)
+          {
+            timer.cancel();
+            timer = null;
+          }
       }
 
     /*******************************************************************************************************************
