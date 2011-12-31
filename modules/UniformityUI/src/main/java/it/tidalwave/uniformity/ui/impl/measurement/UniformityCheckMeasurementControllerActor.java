@@ -185,16 +185,7 @@ public class UniformityCheckMeasurementControllerActor
         
         if (suspensionToken != null)
           {
-            collaborationPendingUserIntervention.resume(suspensionToken, new Runnable()
-              {
-                @Override
-                public void run() 
-                  {
-                    // do nothing, but it will make the Collaboration to complete
-                    // TODO: perhaps a specific method on Collaboration would make sense (such as collaborationPendingUserIntervention.terminate()).
-                  }
-              });
-
+            collaborationPendingUserIntervention.resumeAndDie(suspensionToken);
             suspensionToken = null;
             collaborationPendingUserIntervention = NULL_COLLABORATION;
           }
