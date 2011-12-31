@@ -38,9 +38,10 @@ import it.tidalwave.actor.annotation.Actor;
 import it.tidalwave.actor.annotation.ListensTo;
 import it.tidalwave.actor.annotation.Message;
 import it.tidalwave.swing.ActionMessageAdapter;
+import it.tidalwave.argyll.ArgyllFailureMessage;
+import it.tidalwave.argyll.Display;
 import it.tidalwave.argyll.MeasurementMessage;
 import it.tidalwave.argyll.MeasurementRequest;
-import it.tidalwave.argyll.ArgyllFailureMessage;
 import it.tidalwave.netbeans.util.Locator;
 import it.tidalwave.uniformity.Position;
 import it.tidalwave.uniformity.UniformityCheckRequest;
@@ -53,7 +54,6 @@ import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.concurrent.TimeUnit.*;
 import static it.tidalwave.actor.Collaboration.*;
-import it.tidalwave.argyll.Display;
 import static it.tidalwave.colorimetry.ColorPoint.ColorSpace.*;
 import static it.tidalwave.uniformity.Position.xy;
 
@@ -112,9 +112,9 @@ public class UniformityCheckMeasurementControllerActor
      * 
      *
      ******************************************************************************************************************/
-    public void onStart (final @ListensTo @Nonnull UniformityCheckRequest message)
+    public void onMeasurementsRequest (final @ListensTo @Nonnull UniformityCheckRequest message)
       {
-        log.info("onStart({})", message);
+        log.info("onMeasurementsRequest({})", message);
         display = message.getDisplay();
         initializeMeasurement();
         prepareNextMeasurement(message.getCollaboration());  
