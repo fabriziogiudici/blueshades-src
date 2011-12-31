@@ -23,7 +23,6 @@
 package it.tidalwave.uniformity.ui.impl.main.netbeans;
 
 import javax.annotation.Nonnull;
-import java.beans.PropertyVetoException;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import javax.swing.Action;
@@ -133,25 +132,28 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
     public void showWaitingOnDisplayList() 
       {
         assert EventQueue.isDispatchThread();
-        // FIXME: TODO
+        epDisplays.setBusy(true);
       }
 
     @Override
     public void showWaitingOnMeasurementsArchive() 
       {
-        // FIXME: TODO
+        assert EventQueue.isDispatchThread();
+        epMeasurementsArchive.setBusy(true);
       } 
 
     @Override
     public void hideWaitingOnDisplayList() 
       {
-        // FIXME: TODO
+        assert EventQueue.isDispatchThread();
+        epDisplays.setBusy(false);
       }
 
     @Override
     public void hideWaitingOnMeasurementsArchive() 
       {
-        // FIXME: TODO
+        assert EventQueue.isDispatchThread();
+        epMeasurementsArchive.setBusy(false);
       }
     
     @Override

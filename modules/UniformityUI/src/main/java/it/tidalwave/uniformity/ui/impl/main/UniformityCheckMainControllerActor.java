@@ -276,10 +276,8 @@ public class UniformityCheckMainControllerActor
         propertyRenderers.clear();
         propertyRenderers.add(new LuminanceRenderer(presentation));
         propertyRenderers.add(new TemperatureRenderer(presentation));
-        presentation.bind(startNewMeasurementAction, selectedPropertyRendereIndex);
-        
+        presentation.bind(startNewMeasurementAction, selectedPropertyRendereIndex);        
         presentation.showWaitingOnDisplayList();
-        presentation.showWaitingOnMeasurementsArchive();
         displayDiscoveryRequestor.start(new DisplayDiscoveryQueryMessage());
       }
     

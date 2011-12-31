@@ -23,13 +23,19 @@
 package it.tidalwave.netbeans;
 
 import javax.annotation.Nonnull;
-import java.awt.BorderLayout;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.EventQueue;
 import javax.swing.ActionMap;
 import javax.swing.JComponent;
-import javax.swing.JPanel;
+import javax.swing.OverlayLayout;
+import javax.swing.SwingConstants;
 import javax.swing.text.DefaultEditorKit;
+import org.jdesktop.swingx.JXBusyLabel;
+import org.jdesktop.swingx.JXPanel;
+import org.jdesktop.swingx.painter.MattePainter;
 import org.openide.nodes.Node;
 import org.openide.explorer.ExplorerManager;
 import org.openide.explorer.ExplorerUtils;
@@ -43,11 +49,18 @@ import lombok.Getter;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class SimpleExplorerPanel extends JPanel implements ExplorerManager.Provider 
+public class SimpleExplorerPanel extends JXPanel implements ExplorerManager.Provider 
   {
     @Getter
     private final ExplorerManager explorerManager = new ExplorerManager();
     
+    @Getter
+    private boolean busy;
+    
+    private final JXBusyLabel busyLabel = new JXBusyLabel();
+
+    private final JXPanel shadingPanel = new JXPanel(new BorderLayout());
+            
     private final PropertyChangeListener pcl = new PropertyChangeListener() 
       {
         @Override
@@ -80,25 +93,37 @@ public class SimpleExplorerPanel extends JPanel implements ExplorerManager.Provi
 
     public SimpleExplorerPanel() 
       {
+        assert EventQueue.isDispatchThread();
+        setLayout(new OverlayLayout(this));
+        busyLabel.setText("Loading...");
+        busyLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        final MattePainter painter = new MattePainter(new Color(255, 255, 255, 128));
+//        painter.setFilters(new GaussianBlurFilter(10));
+        shadingPanel.setVisible(false);
+        shadingPanel.setOpaque(false);
+        shadingPanel.setBackgroundPainter(painter);
+        shadingPanel.add(busyLabel, BorderLayout.CENTER);
+        add(shadingPanel);
+        
         final ActionMap actionMap = getActionMap();
         actionMap.put(DefaultEditorKit.copyAction, ExplorerUtils.actionCopy(explorerManager));
         actionMap.put(DefaultEditorKit.cutAction, ExplorerUtils.actionCut(explorerManager));
         actionMap.put(DefaultEditorKit.pasteAction, ExplorerUtils.actionPaste(explorerManager));
         actionMap.put("delete", ExplorerUtils.actionDelete(explorerManager, true));
-        
+
         explorerManager.addPropertyChangeListener(pcl);
       }
     
     public SimpleExplorerPanel (final @Nonnull JComponent component)
       {
         this();
-        setLayout(new BorderLayout());
-        add(component, BorderLayout.CENTER);
+        add(component);
       }  
 
     @Override
     public void addNotify() 
       {
+        assert EventQueue.isDispatchThread();
         super.addNotify();
         ExplorerUtils.activateActions(explorerManager, true);
       }
@@ -106,8 +131,18 @@ public class SimpleExplorerPanel extends JPanel implements ExplorerManager.Provi
     @Override
     public void removeNotify() 
       {
+        assert EventQueue.isDispatchThread();
         ExplorerUtils.activateActions(explorerManager, false);
         super.removeNotify();
+      }
+    
+    public void setBusy (final boolean busy)
+      {
+        assert EventQueue.isDispatchThread();
+          // FIXME: it doesn't block interactions
+        this.busy = busy;
+        busyLabel.setBusy(busy);
+        shadingPanel.setVisible(busy);
       }
   }
 
