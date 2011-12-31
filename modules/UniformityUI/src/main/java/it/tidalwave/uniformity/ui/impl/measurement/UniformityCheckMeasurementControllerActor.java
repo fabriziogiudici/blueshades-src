@@ -130,8 +130,8 @@ public class UniformityCheckMeasurementControllerActor
         log.info("onNewMeasurement({})", message);
         presentation.hideMeasureInProgress();
         // FIXME: do the right math here
-        final UniformityMeasurement measurement = new UniformityMeasurement(message.getCcTemperature().getMeasure(), 
-                                                                            (int)message.getColorPoints().find(Lab).getC1());
+        final UniformityMeasurement measurement = new UniformityMeasurement(message.getDaylightTemperature().getMeasure(), 
+                                                                            (int)message.getColorPoints().find(XYZ).getC2());
         measurementMapByPosition.put(currentPosition, measurement);
         presentation.renderMeasurementCellAt(currentPosition,
                                              String.format("Luminance: %d cd/m\u00b2", measurement.getLuminance()), 
