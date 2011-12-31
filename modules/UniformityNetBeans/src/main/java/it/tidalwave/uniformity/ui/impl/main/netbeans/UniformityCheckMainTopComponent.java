@@ -44,7 +44,7 @@ import static org.openide.windows.TopComponent.*;
  *
  **********************************************************************************************************************/
 @TopComponent.Description(preferredID = "UniformityCheckMainTopComponent", 
-                          iconBase="it/tidalwave/uniformity/ui/impl/main/netbeans/Uniformity-24.png",
+                          iconBase="it/tidalwave/uniformity/ui/impl/main/netbeans/Uniformity.png",
                           persistenceType = PERSISTENCE_NEVER)
 @TopComponent.Registration(mode = "editor", openAtStartup = false)
 @ActionID(category = "Tools", id = "it.tidalwave.uniformity.ui.impl.main.netbeans.UniformityCheckMainTopComponent")
