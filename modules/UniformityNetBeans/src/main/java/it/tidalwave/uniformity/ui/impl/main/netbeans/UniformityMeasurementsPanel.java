@@ -25,12 +25,9 @@ package it.tidalwave.uniformity.ui.impl.main.netbeans;
 import javax.annotation.Nonnull;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
-import javax.swing.SwingConstants;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.painter.ImagePainter;
@@ -93,11 +90,7 @@ public class UniformityMeasurementsPanel extends JPanel
           {
             for (int column = 0; column < gridLayout.getColumns(); column++)
               {
-                final JLabel label = new JLabel("<html>" + measurements[row][column].replaceAll("\n", "<br>") + "</html>");
-                label.setHorizontalAlignment(SwingConstants.CENTER);
-                label.setOpaque(true);
-                label.setBackground(Color.WHITE);
-                innerPanel.add(label);
+                innerPanel.add(new MeasurementPanel(measurements[row][column]));
               }
           }
         
