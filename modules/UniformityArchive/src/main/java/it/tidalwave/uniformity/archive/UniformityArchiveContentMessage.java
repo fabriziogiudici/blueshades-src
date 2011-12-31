@@ -40,6 +40,7 @@ import lombok.ToString;
 @Message @RequiredArgsConstructor @Immutable @ToString
 public class UniformityArchiveContentMessage extends MessageSupport
   {  
+    @Nonnull
     private final Finder<UniformityMeasurements> finder;
 
     @Nonnull
