@@ -174,7 +174,7 @@
         <Component class="javax.swing.JButton" name="btStart">
           <Properties>
             <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="startAction" type="code"/>
+              <Connection code="startNewMeasurementAction" type="code"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
               <ResourceString bundle="it/tidalwave/uniformity/ui/impl/main/netbeans/Bundle.properties" key="UniformityCheckMainPanel.btStart.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>

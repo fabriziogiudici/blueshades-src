@@ -56,7 +56,7 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
  
     private final RadioButtonsSelector radioButtonsSelector;
     
-    private final ActionAdapter startAction = new ActionAdapter();
+    private final ActionAdapter startNewMeasurementAction = new ActionAdapter();
     
     private final SimpleExplorerPanel epDisplays = new SimpleExplorerPanel(new ListView());
     
@@ -73,10 +73,10 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
       }
 
     @Override
-    public void bind (final @Nonnull Action startAction, final @Nonnull MutableProperty<Integer> selectedMeasurement)
+    public void bind (final @Nonnull Action startNewMeasurementAction, final @Nonnull MutableProperty<Integer> selectedMeasurement)
       {
         assert EventQueue.isDispatchThread();
-        this.startAction.bind(startAction);
+        this.startNewMeasurementAction.bind(startNewMeasurementAction);
         radioButtonsSelector.bind(selectedMeasurement);
       }
     
@@ -93,13 +93,6 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
       }
     
     @Override
-    public void renderMeasurements (final @Nonnull String[][] measurements)
-      {
-        assert EventQueue.isDispatchThread();
-        measurementsPanel.renderMeasurements(measurements);  
-      }
-    
-    @Override
     public void populateDisplays (final @Nonnull PresentationModel presentationModel)
       {
         assert EventQueue.isDispatchThread();
@@ -111,6 +104,13 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
       {  
         assert EventQueue.isDispatchThread();
         epMeasurementsArchive.getExplorerManager().setRootContext((Node)presentationModel);
+      }
+    
+    @Override
+    public void populateMeasurements (final @Nonnull String[][] measurements)
+      {
+        assert EventQueue.isDispatchThread();
+        measurementsPanel.renderMeasurements(measurements);  
       }
     
     @Override
@@ -158,7 +158,7 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
     public void removeNotify()
       {
         assert EventQueue.isDispatchThread();
-        startAction.unbind();
+        startNewMeasurementAction.unbind();
         radioButtonsSelector.unbind();
         super.removeNotify();
       } 
@@ -228,7 +228,7 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
 
         jPanel3.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.jPanel3.name")); // NOI18N
 
-        btStart.setAction(startAction);
+        btStart.setAction(startNewMeasurementAction);
         btStart.setText(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.btStart.text")); // NOI18N
         btStart.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.btStart.name")); // NOI18N
         jPanel3.add(btStart);

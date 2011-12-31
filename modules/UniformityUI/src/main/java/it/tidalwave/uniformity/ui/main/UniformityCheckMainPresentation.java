@@ -41,13 +41,13 @@ public interface UniformityCheckMainPresentation
     
     public void dismiss();
 
-    public void bind (@Nonnull Action startAction, @Nonnull MutableProperty<Integer> selectedMeasurement);
+    public void bind (@Nonnull Action startNewMeasurementAction, @Nonnull MutableProperty<Integer> selectedMeasurement);
     
-    public void renderMeasurements (@Nonnull String[][] measurements);
-
     public void populateDisplays (@Nonnull PresentationModel presentationModel);
 
     public void populateMeasurementsArchive (@Nonnull PresentationModel presentationModel);
+
+    public void populateMeasurements (@Nonnull String[][] measurements);
 
     public void showWaitingOnDisplayList();
 

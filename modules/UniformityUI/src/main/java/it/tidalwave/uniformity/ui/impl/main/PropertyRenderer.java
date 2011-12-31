@@ -67,7 +67,7 @@ abstract class PropertyRenderer
               }
           }
 
-        presentation.renderMeasurements(s);
+        presentation.populateMeasurements(s);
       }
 
     /*******************************************************************************************************************
