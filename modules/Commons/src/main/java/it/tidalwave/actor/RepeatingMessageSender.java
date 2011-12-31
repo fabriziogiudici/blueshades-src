@@ -26,7 +26,6 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import java.util.TimerTask;
 import java.util.Timer;
-import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
  * 
@@ -34,14 +33,10 @@ import lombok.extern.slf4j.Slf4j;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Slf4j
 public class RepeatingMessageSender
   {
-    @Nonnull
-    private final MessageSupport message;
-    
-    @Nonnull
-    private final Class<? extends MessageSupport> messageClass;
+    @CheckForNull
+    private MessageSupport message;
     
     @CheckForNull
     private Timer timer;
@@ -55,18 +50,7 @@ public class RepeatingMessageSender
         @Override
         public void run() 
           {
-            try 
-              {
-                getMessage().send();
-              }
-            catch (InstantiationException e) 
-              {
-                log.error("", e);
-              }
-            catch (IllegalAccessException e) 
-              {
-                log.error("", e);
-              }
+            message.send();
           }              
       };
     
@@ -74,30 +58,15 @@ public class RepeatingMessageSender
      * 
      *
      ******************************************************************************************************************/
-    public RepeatingMessageSender (final @Nonnull Class<? extends MessageSupport> messageClass) 
+    public synchronized void start (final @Nonnull MessageSupport message)
       {
-        this.messageClass = messageClass;
-        this.message = null;
-      }
-
-    /*******************************************************************************************************************
-     * 
-     *
-     ******************************************************************************************************************/
-    public RepeatingMessageSender (final @Nonnull MessageSupport message) 
-      {
-        this.messageClass = null;
         this.message = message;
-      }
-
-    /*******************************************************************************************************************
-     * 
-     *
-     ******************************************************************************************************************/
-    public void start()
-      {
-        timer = new Timer();
-        timer.scheduleAtFixedRate(messageSender, 0, 500);
+        
+        if (timer == null)
+          {
+            timer = new Timer();
+            timer.scheduleAtFixedRate(messageSender, 0, 500);
+          }
       }
 
     /*******************************************************************************************************************
@@ -110,17 +79,7 @@ public class RepeatingMessageSender
           {
             timer.cancel();
             timer = null;
+            message = null;
           }
-      }
-
-    /*******************************************************************************************************************
-     * 
-     *
-     ******************************************************************************************************************/
-    @Nonnull
-    private MessageSupport getMessage()
-      throws InstantiationException, IllegalAccessException
-      {
-        return (message != null) ? message : messageClass.newInstance();
       }
   }

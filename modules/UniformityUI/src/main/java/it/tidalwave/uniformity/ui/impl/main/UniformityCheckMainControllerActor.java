@@ -101,10 +101,10 @@ public class UniformityCheckMainControllerActor
     private final List<PropertyRenderer> propertyRenderers = new ArrayList<PropertyRenderer>();
     
     /** The requestor sending query messages to the archive at initialization. */
-    private final RepeatingMessageSender archivedMeasurementsRequestor = new RepeatingMessageSender(new UniformityArchiveQuery());
+    private final RepeatingMessageSender archivedMeasurementsRequestor = new RepeatingMessageSender();
  
     /** The requestor sending discovery messages for displays at initialization. */
-    private final RepeatingMessageSender displayDiscoveryRequestor = new RepeatingMessageSender(new DisplayDiscoveryQueryMessage());
+    private final RepeatingMessageSender displayDiscoveryRequestor = new RepeatingMessageSender();
     
     /*******************************************************************************************************************
      *
@@ -280,7 +280,7 @@ public class UniformityCheckMainControllerActor
         
         presentation.showWaitingOnDisplayList();
         presentation.showWaitingOnMeasurementsArchive();
-        displayDiscoveryRequestor.start();
+        displayDiscoveryRequestor.start(new DisplayDiscoveryQueryMessage());
       }
     
     /*******************************************************************************************************************
@@ -305,7 +305,7 @@ public class UniformityCheckMainControllerActor
         log.info("onDisplaySelection({})", message);
         selectedDisplay = message.getSelectedDisplay();
         presentation.showWaitingOnMeasurementsArchive();
-        archivedMeasurementsRequestor.start(); // FIXME: only for the selected display
+        archivedMeasurementsRequestor.start(new UniformityArchiveQuery()); // FIXME: only for the selected display
       }  
     
     /*******************************************************************************************************************
