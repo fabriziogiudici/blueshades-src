@@ -22,7 +22,7 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.archive.impl;
 
-import javax.annotation.Nonnegative;
+import it.tidalwave.argyll.Display;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -43,11 +43,11 @@ import lombok.ToString;
 @EqualsAndHashCode @ToString
 public class UniformityArchive 
   {
-    private final Set<UniformityMeasurements> archive = new HashSet<UniformityMeasurements>();
+    private final Set<UniformityMeasurements> contents = new HashSet<UniformityMeasurements>();
 
     public void add (final @Nonnull UniformityMeasurements measurements) 
       {
-        archive.add(measurements);
+        contents.add(measurements);
       }
 
     @Nonnull
@@ -58,13 +58,36 @@ public class UniformityArchive
             @Override @Nonnull
             protected List<? extends UniformityMeasurements> computeNeededResults()  
               {
-                return new ArrayList<UniformityMeasurements>(archive);
+                return new ArrayList<UniformityMeasurements>(contents);
+              }                      
+          };
+      }
+    
+    @Nonnull
+    public Finder<UniformityMeasurements> findMeasurementsByDisplay (final @Nonnull Display display) 
+      {
+        return new SimpleFinderSupport<UniformityMeasurements>("measurements") 
+          {
+            @Override @Nonnull
+            protected List<? extends UniformityMeasurements> computeNeededResults()  
+              {
+                final ArrayList<UniformityMeasurements> result = new ArrayList<UniformityMeasurements>();
+                
+                for (final UniformityMeasurements measurements : contents)
+                  { 
+                    if (measurements.getDisplay().getDisplayName().equals(display.getDisplayName()))
+                      {
+                        result.add(measurements);  
+                      }
+                  }
+                
+                return result;
               }                      
           };
       }
     
     public void clear() 
       {
-        archive.clear();
+        contents.clear();
       }
   }

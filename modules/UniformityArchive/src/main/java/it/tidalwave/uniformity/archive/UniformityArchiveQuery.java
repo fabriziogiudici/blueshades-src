@@ -22,8 +22,13 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.archive;
 
+import javax.annotation.concurrent.Immutable;
+import javax.annotation.Nonnull;
 import it.tidalwave.actor.MessageSupport;
 import it.tidalwave.actor.annotation.Message;
+import it.tidalwave.argyll.Display;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 /***********************************************************************************************************************
@@ -32,7 +37,9 @@ import lombok.ToString;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Message @ToString
+@Message @Immutable @RequiredArgsConstructor @ToString
 public class UniformityArchiveQuery extends MessageSupport
   {  
+    @Nonnull @Getter
+    private final Display display;
   }

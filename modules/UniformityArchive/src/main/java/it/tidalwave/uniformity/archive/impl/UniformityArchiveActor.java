@@ -47,24 +47,24 @@ import lombok.extern.slf4j.Slf4j;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Actor @NotThreadSafe @Slf4j
+@Actor(threadSafe=false) @NotThreadSafe @Slf4j
 public class UniformityArchiveActor
   {
     private UniformityArchive archive = new UniformityArchive();
     
-    public void storeUniformityMeasurement (final @ListensTo @Nonnull UniformityMeasurementMessage message)
+    public void onNewMeasurement (final @ListensTo @Nonnull UniformityMeasurementMessage message)
       throws IOException
       {
-        log.info("storeUniformityMeasurement({})", message);
+        log.info("onNewMeasurement({})", message);
         archive.add(message.getMeasurements());
         storeArchive();
-        new UniformityArchiveUpdatedMessage(archive.findMeasurements()).send();
+        new UniformityArchiveUpdatedMessage(archive.findMeasurementsByDisplay(message.getMeasurements().getDisplay())).send();
       }
     
-    public void query (final @ListensTo @Nonnull UniformityArchiveQuery message)
+    public void onQuery (final @ListensTo @Nonnull UniformityArchiveQuery message)
       {
-        log.info("query({})", message);
-        new UniformityArchiveContentMessage(archive.findMeasurements()).send();
+        log.info("onQuery({})", message);
+        new UniformityArchiveContentMessage(archive.findMeasurementsByDisplay(message.getDisplay())).send();
       }
     
     @PostConstruct
