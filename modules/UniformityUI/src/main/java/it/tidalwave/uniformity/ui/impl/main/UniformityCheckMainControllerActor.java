@@ -121,7 +121,7 @@ public class UniformityCheckMainControllerActor
         @Override
         protected double getValue (final @Nonnull UniformityMeasurement measurement)
           {
-            return measurement.getTemperature().getT();  
+            return measurement.getTemperature().getValue();  
           }
       }
     

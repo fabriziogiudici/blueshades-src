@@ -45,20 +45,20 @@ public class ColorTemperature
       } 
     
     @Nonnegative
-    private final int t;
+    private final int value;
     
     @Nonnull
     private final Scale scale;
     
     @Nonnull
-    public static ColorTemperature kelvin (final @Nonnegative int t)
+    public static ColorTemperature kelvin (final @Nonnegative int value)
       {
-        return new ColorTemperature(t, Scale.K);
+        return new ColorTemperature(value, Scale.K);
       }
     
     @Override @Nonnull
     public String toString()
       {
-        return String.format("%d %s", t, scale);  
+        return String.format("%d %s", value, scale);  
       }
   }

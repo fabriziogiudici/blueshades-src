@@ -135,7 +135,7 @@ public class UniformityCheckMeasurementControllerActor
         measurementMapByPosition.put(currentPosition, measurement);
         presentation.renderMeasurementCellAt(currentPosition,
                                              String.format("Luminance: %d cd/m\u00b2", measurement.getLuminance()), 
-                                             String.format("White point: %d K", measurement.getTemperature().getT()));
+                                             String.format("White point: %d K", measurement.getTemperature().getValue()));
         eventuallyMoveBackControlPanel();
         prepareNextMeasurement(message.getCollaboration());  
       }

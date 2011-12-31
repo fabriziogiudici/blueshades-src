@@ -64,7 +64,7 @@ public class UniformityMeasurementsMarshallable implements Marshallable
               {
                 final UniformityMeasurement measurement = uniformityMeasurements.getAt(Position.xy(column, row)); 
                 pw.printf(" ; L[%d,%d]=%3d", column, row, measurement.getLuminance());
-                pw.printf(" ; T[%d,%d]=%5d", column, row, measurement.getTemperature().getT());
+                pw.printf(" ; T[%d,%d]=%5d", column, row, measurement.getTemperature().getValue());
               }
           }
 
