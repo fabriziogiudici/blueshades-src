@@ -13,11 +13,8 @@
     <groupId>it.tidalwave.blueargyle</groupId>
     <artifactId>it-tidalwave-blueargyle-application-customization</artifactId>
     <packaging>nbm</packaging>
-    <version>1.0-ALPHA-3-SNAPSHOT</version>
+    <version>1.0.2-SNAPSHOT</version>
     <name>blueArgyle - Application Customization</name>
     <description>blueArgyle - Application Customization</description>
     
-    <dependencies>
-    </dependencies>
-
 </project>
