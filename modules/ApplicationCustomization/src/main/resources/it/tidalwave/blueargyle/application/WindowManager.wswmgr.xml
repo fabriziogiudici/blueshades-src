@@ -24,8 +24,8 @@
 <windowmanager version="2.1">
     <main-window>
         <joined-properties
-            width="800"
-            height="600"
+            width="1024"
+            height="768"
             centered-horizontally="true"
             centered-vertically="true"
             frame-state="0"
