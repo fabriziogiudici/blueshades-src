@@ -280,7 +280,6 @@ public class UniformityCheckMainControllerActor
         
         presentation.showWaitingOnDisplayList();
         presentation.showWaitingOnMeasurementsArchive();
-        archivedMeasurementsRequestor.start();
         displayDiscoveryRequestor.start();
       }
     
@@ -305,6 +304,8 @@ public class UniformityCheckMainControllerActor
       {
         log.info("onDisplaySelection({})", message);
         selectedDisplay = message.getSelectedDisplay();
+        presentation.showWaitingOnMeasurementsArchive();
+        archivedMeasurementsRequestor.start(); // FIXME: only for the selected display
       }  
     
     /*******************************************************************************************************************
