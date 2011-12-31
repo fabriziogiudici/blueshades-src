@@ -64,6 +64,7 @@ public class UniformityMeasurementsPanel extends JPanel
             backgroundImage = ImageIO.read(getClass().getResource(IMAGE_RESOURCE));
             painter = new ImagePainter(backgroundImage);
             painter.setScaleToFit(true);
+            displayPanel.setOpaque(false);
             displayPanel.setBackgroundPainter(painter);
             final double imageAspectRatio = (double)backgroundImage.getWidth() / backgroundImage.getHeight();
             setLayout(new FixedAspectRatioLayout(imageAspectRatio));

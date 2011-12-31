@@ -29,13 +29,14 @@ import javax.swing.Action;
 import javax.swing.JPanel;
 import org.openide.nodes.Node;
 import org.openide.explorer.ExplorerManager;
-import org.openide.explorer.view.ListView;
 import it.tidalwave.role.ui.PresentationModel;
 import it.tidalwave.swing.ActionAdapter;
 import it.tidalwave.swing.RadioButtonsSelector;
 import it.tidalwave.netbeans.SimpleExplorerPanel;
 import it.tidalwave.uniformity.ui.main.UniformityCheckMainPresentation;
 import it.tidalwave.blueargyle.util.MutableProperty;
+import it.tidalwave.netbeans.explorer.view.EnhancedListView;
+import java.awt.Color;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
@@ -57,9 +58,13 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
     
     private final ActionAdapter startNewMeasurementAction = new ActionAdapter();
     
-    private final SimpleExplorerPanel epDisplays = new SimpleExplorerPanel(new ListView());
+    private final EnhancedListView lvDisplays = new EnhancedListView();
     
-    private final SimpleExplorerPanel epMeasurementsArchive = new SimpleExplorerPanel(new ListView());
+    private final EnhancedListView lvMeasurementsArchive = new EnhancedListView();
+    
+    private final SimpleExplorerPanel epDisplays = new SimpleExplorerPanel(lvDisplays);
+    
+    private final SimpleExplorerPanel epMeasurementsArchive = new SimpleExplorerPanel(lvMeasurementsArchive);
     
     public UniformityCheckMainPanel() 
       {
@@ -69,6 +74,14 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
         pnInnerMeasurements.add(measurementsPanel, BorderLayout.CENTER);
         pnDisplays.add(epDisplays, BorderLayout.CENTER);
         pnArchive.add(epMeasurementsArchive, BorderLayout.CENTER);
+        
+        lvMeasurementsArchive.setOpaque(true);
+        lvMeasurementsArchive.setBackground(new Color(80, 80, 80));
+        lvMeasurementsArchive.setForeground(Color.white);
+        
+        lvDisplays.setOpaque(true);
+        lvDisplays.setBackground(new Color(80, 80, 80));
+        lvDisplays.setForeground(Color.white);
       }
 
     @Override
@@ -178,66 +191,92 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
         pnInnerMeasurements = new javax.swing.JPanel();
         rbLuminance = new javax.swing.JRadioButton();
         rbTemperature = new javax.swing.JRadioButton();
+        lbMeasurements = new javax.swing.JLabel();
         pnDisplays = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         btStart = new javax.swing.JButton();
         pnArchive = new javax.swing.JPanel();
+        lbArchive = new javax.swing.JLabel();
+        lbDisplaySelection = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(80, 80, 80));
         setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.name")); // NOI18N
 
-        pnMeasurements.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.pnMeasurements.border.outsideBorder.title")), javax.swing.BorderFactory.createEmptyBorder(8, 8, 8, 8))); // NOI18N
+        pnMeasurements.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 8, 8, 8));
         pnMeasurements.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.pnMeasurements.name")); // NOI18N
+        pnMeasurements.setOpaque(false);
 
         pnInnerMeasurements.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.pnInnerMeasurements.name")); // NOI18N
+        pnInnerMeasurements.setOpaque(false);
         pnInnerMeasurements.setLayout(new java.awt.BorderLayout());
 
         bgMeasurement.add(rbLuminance);
+        rbLuminance.setForeground(new java.awt.Color(255, 255, 255));
         rbLuminance.setText(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.rbLuminance.text")); // NOI18N
         rbLuminance.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.rbLuminance.name")); // NOI18N
 
         bgMeasurement.add(rbTemperature);
+        rbTemperature.setForeground(new java.awt.Color(255, 255, 255));
         rbTemperature.setText(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.rbTemperature.text")); // NOI18N
         rbTemperature.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.rbTemperature.name")); // NOI18N
+
+        lbMeasurements.setFont(lbMeasurements.getFont().deriveFont(lbMeasurements.getFont().getStyle() | java.awt.Font.BOLD, lbMeasurements.getFont().getSize()+1));
+        lbMeasurements.setForeground(new java.awt.Color(255, 255, 255));
+        lbMeasurements.setText(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.lbMeasurements.text")); // NOI18N
+        lbMeasurements.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.lbMeasurements.name")); // NOI18N
 
         javax.swing.GroupLayout pnMeasurementsLayout = new javax.swing.GroupLayout(pnMeasurements);
         pnMeasurements.setLayout(pnMeasurementsLayout);
         pnMeasurementsLayout.setHorizontalGroup(
             pnMeasurementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnMeasurementsLayout.createSequentialGroup()
-                .addGap(0, 282, Short.MAX_VALUE)
-                .addComponent(rbLuminance)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(rbTemperature))
             .addGroup(pnMeasurementsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnInnerMeasurements, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(pnMeasurementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnMeasurementsLayout.createSequentialGroup()
+                        .addComponent(lbMeasurements)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                        .addComponent(rbLuminance)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rbTemperature))
+                    .addGroup(pnMeasurementsLayout.createSequentialGroup()
+                        .addComponent(pnInnerMeasurements, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         pnMeasurementsLayout.setVerticalGroup(
             pnMeasurementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnMeasurementsLayout.createSequentialGroup()
                 .addGroup(pnMeasurementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbTemperature)
-                    .addComponent(rbLuminance))
+                    .addComponent(rbLuminance)
+                    .addComponent(lbMeasurements))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnInnerMeasurements, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        pnDisplays.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.pnDisplays.border.title"))); // NOI18N
         pnDisplays.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.pnDisplays.name")); // NOI18N
+        pnDisplays.setOpaque(false);
         pnDisplays.setLayout(new java.awt.BorderLayout());
 
         jPanel3.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.jPanel3.name")); // NOI18N
+        jPanel3.setOpaque(false);
 
         btStart.setAction(startNewMeasurementAction);
         btStart.setText(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.btStart.text")); // NOI18N
         btStart.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.btStart.name")); // NOI18N
         jPanel3.add(btStart);
 
-        pnArchive.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.pnArchive.border.title"))); // NOI18N
         pnArchive.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.pnArchive.name")); // NOI18N
+        pnArchive.setOpaque(false);
         pnArchive.setLayout(new java.awt.BorderLayout());
+
+        lbArchive.setForeground(new java.awt.Color(255, 255, 255));
+        lbArchive.setText(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.lbArchive.text")); // NOI18N
+        lbArchive.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.lbArchive.name")); // NOI18N
+
+        lbDisplaySelection.setForeground(new java.awt.Color(255, 255, 255));
+        lbDisplaySelection.setText(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.lbDisplaySelection.text")); // NOI18N
+        lbDisplaySelection.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.lbDisplaySelection.name")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -245,9 +284,12 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnArchive, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnDisplays, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(pnArchive, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnDisplays, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lbArchive)
+                    .addComponent(lbDisplaySelection))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnMeasurements, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -263,9 +305,14 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnMeasurements, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(pnDisplays, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(lbDisplaySelection)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnArchive, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)))
+                        .addComponent(pnDisplays, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbArchive)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pnArchive, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -275,6 +322,9 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
     private javax.swing.ButtonGroup bgMeasurement;
     private javax.swing.JButton btStart;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lbArchive;
+    private javax.swing.JLabel lbDisplaySelection;
+    private javax.swing.JLabel lbMeasurements;
     private javax.swing.JPanel pnArchive;
     private javax.swing.JPanel pnDisplays;
     private javax.swing.JPanel pnInnerMeasurements;
