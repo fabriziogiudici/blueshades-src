@@ -167,24 +167,26 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
         inOrder.verify(action("Continue")).setEnabled(eq(true));
         inOrder.verify(action("Cancel")).setEnabled(eq(true));
         inOrder.verify(action("Continue")).actionPerformed(any(ActionEvent.class));
+        inOrder.verify(presentation).hideInvitationToOperateOnTheSensor();
         inOrder.verify(action("Continue")).setEnabled(eq(false));
         inOrder.verify(action("Cancel")).setEnabled(eq(false));
         inOrder.verify(presentation).renderWhiteCellAt(                    eq(xy(1, 1)));
         inOrder.verify(presentation).showMeasureInProgress();
         inOrder.verify(presentation).hideMeasureInProgress();
-        inOrder.verify(presentation).renderMeasurementCellAt(              eq(xy(1, 1)), eq("Luminance: 63 cd/m\u00b2"), eq("White point: 5925 K"));
+        inOrder.verify(presentation).renderMeasurementCellAt(              eq(xy(1, 1)), eq("Luminance: 56 cd/m\u00b2"), eq("White point: 2111 K"));
 
         inOrder.verify(presentation).renderSensorPlacementInvitationCellAt(eq(xy(0, 0)));
         inOrder.verify(presentation).renderControlPanelAt(                 eq(xy(0, 1)));
         inOrder.verify(action("Continue")).setEnabled(eq(true));
         inOrder.verify(action("Cancel")).setEnabled(eq(true));
         inOrder.verify(action("Continue")).actionPerformed(any(ActionEvent.class));
+        inOrder.verify(presentation).hideInvitationToOperateOnTheSensor();
         inOrder.verify(action("Continue")).setEnabled(eq(false));
         inOrder.verify(action("Cancel")).setEnabled(eq(false));
         inOrder.verify(presentation).renderWhiteCellAt(                    eq(xy(0, 0)));
         inOrder.verify(presentation).showMeasureInProgress();
         inOrder.verify(presentation).hideMeasureInProgress();
-        inOrder.verify(presentation).renderMeasurementCellAt(              eq(xy(0, 0)), eq("Luminance: 67 cd/m\u00b2"), eq("White point: 2753 K"));
+        inOrder.verify(presentation).renderMeasurementCellAt(              eq(xy(0, 0)), eq("Luminance: 9 cd/m\u00b2"), eq("White point: 2568 K"));
         inOrder.verify(presentation).renderControlPanelAt(                 eq(xy(0, 0)));
         inOrder.verify(presentation).renderEmptyCellAt(                    eq(xy(0, 1)));
 
@@ -192,78 +194,85 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
         inOrder.verify(action("Continue")).setEnabled(eq(true));
         inOrder.verify(action("Cancel")).setEnabled(eq(true));
         inOrder.verify(action("Continue")).actionPerformed(any(ActionEvent.class));
+        inOrder.verify(presentation).hideInvitationToOperateOnTheSensor();
         inOrder.verify(action("Continue")).setEnabled(eq(false));
         inOrder.verify(action("Cancel")).setEnabled(eq(false));
         inOrder.verify(presentation).renderWhiteCellAt(                    eq(xy(1, 0)));
         inOrder.verify(presentation).showMeasureInProgress();
         inOrder.verify(presentation).hideMeasureInProgress();
-        inOrder.verify(presentation).renderMeasurementCellAt(              eq(xy(1, 0)), eq("Luminance: 6 cd/m\u00b2"), eq("White point: 6507 K"));
+        inOrder.verify(presentation).renderMeasurementCellAt(              eq(xy(1, 0)), eq("Luminance: 79 cd/m\u00b2"), eq("White point: 5436 K"));
 
         inOrder.verify(presentation).renderSensorPlacementInvitationCellAt(eq(xy(2, 0)));
         inOrder.verify(action("Continue")).setEnabled(eq(true));
         inOrder.verify(action("Cancel")).setEnabled(eq(true));
         inOrder.verify(action("Continue")).actionPerformed(any(ActionEvent.class));
+        inOrder.verify(presentation).hideInvitationToOperateOnTheSensor();
         inOrder.verify(action("Continue")).setEnabled(eq(false));
         inOrder.verify(action("Cancel")).setEnabled(eq(false));
         inOrder.verify(presentation).renderWhiteCellAt(                    eq(xy(2, 0)));
         inOrder.verify(presentation).showMeasureInProgress();
         inOrder.verify(presentation).hideMeasureInProgress();
-        inOrder.verify(presentation).renderMeasurementCellAt(              eq(xy(2, 0)), eq("Luminance: 31 cd/m\u00b2"), eq("White point: 7284 K"));
+        inOrder.verify(presentation).renderMeasurementCellAt(              eq(xy(2, 0)), eq("Luminance: 61 cd/m\u00b2"), eq("White point: 7916 K"));
 
         inOrder.verify(presentation).renderSensorPlacementInvitationCellAt(eq(xy(0, 1)));
         inOrder.verify(action("Continue")).setEnabled(eq(true));
         inOrder.verify(action("Cancel")).setEnabled(eq(true));
         inOrder.verify(action("Continue")).actionPerformed(any(ActionEvent.class));
+        inOrder.verify(presentation).hideInvitationToOperateOnTheSensor();
         inOrder.verify(action("Continue")).setEnabled(eq(false));
         inOrder.verify(action("Cancel")).setEnabled(eq(false));
         inOrder.verify(presentation).renderWhiteCellAt(                    eq(xy(0, 1)));
         inOrder.verify(presentation).showMeasureInProgress();
         inOrder.verify(presentation).hideMeasureInProgress();
-        inOrder.verify(presentation).renderMeasurementCellAt(              eq(xy(0, 1)), eq("Luminance: 37 cd/m\u00b2"), eq("White point: 4102 K"));
+        inOrder.verify(presentation).renderMeasurementCellAt(              eq(xy(0, 1)), eq("Luminance: 0 cd/m\u00b2"), eq("White point: 4329 K"));
 
         inOrder.verify(presentation).renderSensorPlacementInvitationCellAt(eq(xy(2, 1)));
         inOrder.verify(action("Continue")).setEnabled(eq(true));
         inOrder.verify(action("Cancel")).setEnabled(eq(true));
         inOrder.verify(action("Continue")).actionPerformed(any(ActionEvent.class));
+        inOrder.verify(presentation).hideInvitationToOperateOnTheSensor();
         inOrder.verify(action("Continue")).setEnabled(eq(false));
         inOrder.verify(action("Cancel")).setEnabled(eq(false));
         inOrder.verify(presentation).renderWhiteCellAt(                    eq(xy(2, 1)));
         inOrder.verify(presentation).showMeasureInProgress();
         inOrder.verify(presentation).hideMeasureInProgress();
-        inOrder.verify(presentation).renderMeasurementCellAt(              eq(xy(2, 1)), eq("Luminance: 81 cd/m\u00b2"), eq("White point: 6456 K"));
+        inOrder.verify(presentation).renderMeasurementCellAt(              eq(xy(2, 1)), eq("Luminance: 52 cd/m\u00b2"), eq("White point: 2641 K"));
 
         inOrder.verify(presentation).renderSensorPlacementInvitationCellAt(eq(xy(0, 2)));
         inOrder.verify(action("Continue")).setEnabled(eq(true));
         inOrder.verify(action("Cancel")).setEnabled(eq(true));
         inOrder.verify(action("Continue")).actionPerformed(any(ActionEvent.class));
+        inOrder.verify(presentation).hideInvitationToOperateOnTheSensor();
         inOrder.verify(action("Continue")).setEnabled(eq(false));
         inOrder.verify(action("Cancel")).setEnabled(eq(false));
         inOrder.verify(presentation).renderWhiteCellAt(                    eq(xy(0, 2)));
         inOrder.verify(presentation).showMeasureInProgress();
         inOrder.verify(presentation).hideMeasureInProgress();
-        inOrder.verify(presentation).renderMeasurementCellAt(              eq(xy(0, 2)), eq("Luminance: 97 cd/m\u00b2"), eq("White point: 3813 K"));
+        inOrder.verify(presentation).renderMeasurementCellAt(              eq(xy(0, 2)), eq("Luminance: 4 cd/m\u00b2"), eq("White point: 3015 K"));
         
         inOrder.verify(presentation).renderSensorPlacementInvitationCellAt(eq(xy(1, 2)));
         inOrder.verify(action("Continue")).setEnabled(eq(true));
         inOrder.verify(action("Cancel")).setEnabled(eq(true));
         inOrder.verify(action("Continue")).actionPerformed(any(ActionEvent.class));
+        inOrder.verify(presentation).hideInvitationToOperateOnTheSensor();
         inOrder.verify(action("Continue")).setEnabled(eq(false));
         inOrder.verify(action("Cancel")).setEnabled(eq(false));
         inOrder.verify(presentation).renderWhiteCellAt(                    eq(xy(1, 2)));
         inOrder.verify(presentation).showMeasureInProgress();
         inOrder.verify(presentation).hideMeasureInProgress();
-        inOrder.verify(presentation).renderMeasurementCellAt(              eq(xy(1, 2)), eq("Luminance: 33 cd/m\u00b2"), eq("White point: 2879 K"));
+        inOrder.verify(presentation).renderMeasurementCellAt(              eq(xy(1, 2)), eq("Luminance: 20 cd/m\u00b2"), eq("White point: 6864 K"));
 
         inOrder.verify(presentation).renderSensorPlacementInvitationCellAt(eq(xy(2, 2)));
         inOrder.verify(action("Continue")).setEnabled(eq(true));
         inOrder.verify(action("Cancel")).setEnabled(eq(true));
         inOrder.verify(action("Continue")).actionPerformed(any(ActionEvent.class));
+        inOrder.verify(presentation).hideInvitationToOperateOnTheSensor();
         inOrder.verify(action("Continue")).setEnabled(eq(false));
         inOrder.verify(action("Cancel")).setEnabled(eq(false));
         inOrder.verify(presentation).renderWhiteCellAt(                    eq(xy(2, 2)));
         inOrder.verify(presentation).showMeasureInProgress();
         inOrder.verify(presentation).hideMeasureInProgress();
-        inOrder.verify(presentation).renderMeasurementCellAt(              eq(xy(2, 2)), eq("Luminance: 19 cd/m\u00b2"), eq("White point: 6071 K"));
+        inOrder.verify(presentation).renderMeasurementCellAt(              eq(xy(2, 2)), eq("Luminance: 0 cd/m\u00b2"), eq("White point: 7209 K"));
         
         inOrder.verify(presentation).dismiss();
         
@@ -279,15 +288,15 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
           }
         
         final SortedMap<Position, UniformityMeasurement> m = new TreeMap<Position, UniformityMeasurement>();
-        m.put(xy(0, 0), new UniformityMeasurement(kelvin(2753), 67));
-        m.put(xy(1, 0), new UniformityMeasurement(kelvin(6507), 6));
-        m.put(xy(2, 0), new UniformityMeasurement(kelvin(7284), 31));
-        m.put(xy(0, 1), new UniformityMeasurement(kelvin(4102), 37));
-        m.put(xy(1, 1), new UniformityMeasurement(kelvin(5925), 63));
-        m.put(xy(2, 1), new UniformityMeasurement(kelvin(6456), 81));
-        m.put(xy(0, 2), new UniformityMeasurement(kelvin(3813), 97));
-        m.put(xy(1, 2), new UniformityMeasurement(kelvin(2879), 33));
-        m.put(xy(2, 2), new UniformityMeasurement(kelvin(6071), 19));
+        m.put(xy(0, 0), new UniformityMeasurement(kelvin(2568), 9));
+        m.put(xy(1, 0), new UniformityMeasurement(kelvin(5436), 79));
+        m.put(xy(2, 0), new UniformityMeasurement(kelvin(7916), 61));
+        m.put(xy(0, 1), new UniformityMeasurement(kelvin(4329), 0));
+        m.put(xy(1, 1), new UniformityMeasurement(kelvin(2111), 56));
+        m.put(xy(2, 1), new UniformityMeasurement(kelvin(2641), 52));
+        m.put(xy(0, 2), new UniformityMeasurement(kelvin(3015), 4));
+        m.put(xy(1, 2), new UniformityMeasurement(kelvin(6864), 20));
+        m.put(xy(2, 2), new UniformityMeasurement(kelvin(7209), 0));
         final UniformityMeasurements measurements = new UniformityMeasurements(new Display("display1", 0), m);
         messageVerifier.verify(UniformityMeasurementMessage.class).with("measurements", new Equals(measurements)); 
         
