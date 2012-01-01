@@ -23,14 +23,12 @@
 package it.tidalwave.uniformity.archive.impl.io;
 
 import javax.annotation.Nonnull;
-import java.io.IOException;
-import java.io.OutputStream;
-import it.tidalwave.role.Marshallable;
+import java.util.Arrays;
+import java.util.Collection;
+import org.openide.util.lookup.ServiceProvider;
+import it.tidalwave.netbeans.capabilitiesprovider.CapabilitiesProvider;
+import it.tidalwave.netbeans.capabilitiesprovider.CapabilitiesProviderSupport;
 import it.tidalwave.uniformity.UniformityMeasurements;
-import it.tidalwave.uniformity.archive.impl.UniformityArchive;
-import lombok.RequiredArgsConstructor;
-import static it.tidalwave.uniformity.archive.SortCriteria.*;
-import static it.tidalwave.role.Marshallable.Marshallable;
 
 /***********************************************************************************************************************
  * 
@@ -38,21 +36,12 @@ import static it.tidalwave.role.Marshallable.Marshallable;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@RequiredArgsConstructor
-public class UniformityArchiveMarshallable implements Marshallable
+@ServiceProvider(service=CapabilitiesProvider.class)
+public class UniformityMeasurementsCapabilityProvider extends CapabilitiesProviderSupport<UniformityMeasurements>
   {
-    @Nonnull
-    private final UniformityArchive archive;
-    
-    @Override
-    public void marshal (final @Nonnull OutputStream os)
-      throws IOException 
+    @Override @Nonnull
+    public Collection<? extends Object> createCapabilities (final @Nonnull UniformityMeasurements owner) 
       {
-        for (final UniformityMeasurements measurements : archive.findMeasurements().sort(BY_DATE_TIME).results())
-          {
-            measurements.as(Marshallable).marshal(os);
-          }
-        
-        os.close();
+        return Arrays.asList(new UniformityMeasurementsMarshallable(owner), new UniformityMeasurementsUnmarshallable());
       }
   }

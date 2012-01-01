@@ -36,10 +36,10 @@ import it.tidalwave.uniformity.UniformityMeasurementMessage;
 import it.tidalwave.uniformity.archive.UniformityArchiveContentMessage;
 import it.tidalwave.uniformity.archive.UniformityArchiveQuery;
 import it.tidalwave.uniformity.archive.UniformityArchiveUpdatedMessage;
-import it.tidalwave.uniformity.archive.impl.io.UniformityArchiveMarshallable;
-import it.tidalwave.uniformity.archive.impl.io.UniformityArchiveUnmarshallable;
 import lombok.Cleanup;
 import lombok.extern.slf4j.Slf4j;
+import static it.tidalwave.role.Marshallable.Marshallable;
+import static it.tidalwave.role.Unmarshallable.Unmarshallable;
 
 /***********************************************************************************************************************
  * 
@@ -82,8 +82,7 @@ public class UniformityArchiveActor
         archive.clear();
         
         final @Cleanup InputStream is = new FileInputStream("/tmp/UniformityMeasurements.txt");
-        // FIXME: uniformityArchive.as(Marshallable).unmarshal(is);
-        archive = new UniformityArchiveUnmarshallable().unmarshal(is);
+        archive = archive.as(Unmarshallable).unmarshal(is);
         is.close();
       }
     
@@ -93,8 +92,7 @@ public class UniformityArchiveActor
         log.info("storeArchive()"); 
         
         final @Cleanup OutputStream os = new FileOutputStream("/tmp/UniformityMeasurements.txt");
-        // FIXME: uniformityArchive.as(Marshallable).marshal(os);
-        new UniformityArchiveMarshallable(archive).marshal(os);
+        archive.as(Marshallable).marshal(os);
         os.close();
       }
   }

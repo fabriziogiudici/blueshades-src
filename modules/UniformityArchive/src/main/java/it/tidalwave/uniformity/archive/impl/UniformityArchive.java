@@ -30,9 +30,9 @@ import java.util.Set;
 import it.tidalwave.util.Finder;
 import it.tidalwave.util.spi.SimpleFinderSupport;
 import it.tidalwave.argyll.Display;
+import it.tidalwave.netbeans.util.AsLookupSupport;
 import it.tidalwave.uniformity.UniformityMeasurements;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 /***********************************************************************************************************************
  * 
@@ -40,8 +40,8 @@ import lombok.ToString;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@EqualsAndHashCode @ToString
-public class UniformityArchive 
+@EqualsAndHashCode(callSuper=false)
+public class UniformityArchive extends AsLookupSupport
   {
     private final Set<UniformityMeasurements> contents = new HashSet<UniformityMeasurements>();
 

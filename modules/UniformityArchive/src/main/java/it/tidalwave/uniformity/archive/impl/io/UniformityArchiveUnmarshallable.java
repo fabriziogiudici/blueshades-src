@@ -27,7 +27,9 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import it.tidalwave.role.Unmarshallable;
+import it.tidalwave.uniformity.UniformityMeasurements;
 import it.tidalwave.uniformity.archive.impl.UniformityArchive;
+import static it.tidalwave.role.Unmarshallable.Unmarshallable;
 
 /***********************************************************************************************************************
  * 
@@ -47,8 +49,8 @@ public class UniformityArchiveUnmarshallable implements Unmarshallable
           {
             try
               {
-//                archive.add(new UniformityMeasurements().as(Unmarshallable).unmarshal(is));
-                archive.add(new UniformityMeasurementsUnmarshallable().unmarshal(is));
+                final UniformityMeasurements measurements = new UniformityMeasurements().as(Unmarshallable).unmarshal(is);
+                archive.add(measurements);
               }
             catch (EOFException e)
               {
