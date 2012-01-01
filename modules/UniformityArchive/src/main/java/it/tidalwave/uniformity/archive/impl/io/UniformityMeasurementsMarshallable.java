@@ -27,13 +27,13 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import it.tidalwave.role.Marshallable;
-import it.tidalwave.uniformity.Position;
-import it.tidalwave.uniformity.UniformityMeasurement;
-import it.tidalwave.uniformity.UniformityMeasurements;
-import lombok.RequiredArgsConstructor;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
+import it.tidalwave.role.Marshallable;
+import it.tidalwave.uniformity.UniformityMeasurement;
+import it.tidalwave.uniformity.UniformityMeasurements;
+import static it.tidalwave.uniformity.Position.*;
+import lombok.RequiredArgsConstructor;
 
 /***********************************************************************************************************************
  * 
@@ -62,7 +62,7 @@ public class UniformityMeasurementsMarshallable implements Marshallable
           {
             for (int column = 0; column < columns; column++)
               {
-                final UniformityMeasurement measurement = uniformityMeasurements.getAt(Position.xy(column, row)); 
+                final UniformityMeasurement measurement = uniformityMeasurements.getAt(xy(column, row)); 
                 pw.printf(" ; L[%d,%d]=%3d", column, row, measurement.getLuminance());
                 pw.printf(" ; T[%d,%d]=%5d", column, row, measurement.getTemperature().getValue());
               }
