@@ -70,18 +70,23 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
       {
         assert EventQueue.isDispatchThread();
         initComponents();
+        setOpaque(true);
         radioButtonsSelector = new RadioButtonsSelector(rbLuminance, rbTemperature);
         pnInnerMeasurements.add(measurementsPanel, BorderLayout.CENTER);
         pnDisplays.add(epDisplays, BorderLayout.CENTER);
         pnArchive.add(epMeasurementsArchive, BorderLayout.CENTER);
         
         lvMeasurementsArchive.setOpaque(true);
+        lvMeasurementsArchive.putClientProperty("List.selectionBackground", new Color(60, 60, 60));
+        lvMeasurementsArchive.putClientProperty("List.selectionForeground", Color.WHITE);
         lvMeasurementsArchive.setBackground(new Color(80, 80, 80));
         lvMeasurementsArchive.setForeground(Color.white);
         
         lvDisplays.setOpaque(true);
+        lvDisplays.putClientProperty("List.selectionBackground", new Color(60, 60, 60));
+        lvDisplays.putClientProperty("List.selectionForeground", Color.WHITE);
         lvDisplays.setBackground(new Color(80, 80, 80));
-        lvDisplays.setForeground(Color.white);
+        lvDisplays.setForeground(Color.WHITE);
       }
 
     @Override
