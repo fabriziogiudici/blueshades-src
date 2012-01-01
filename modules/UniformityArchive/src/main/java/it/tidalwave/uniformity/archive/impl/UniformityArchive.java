@@ -56,7 +56,7 @@ public class UniformityArchive
         return new SimpleFinderSupport<UniformityMeasurements>("measurements") 
           {
             @Override @Nonnull
-            protected List<? extends UniformityMeasurements> computeNeededResults()  
+            protected List<? extends UniformityMeasurements> computeResults()  
               {
                 return new ArrayList<UniformityMeasurements>(contents);
               }                      
@@ -69,7 +69,7 @@ public class UniformityArchive
         return new SimpleFinderSupport<UniformityMeasurements>("measurements") 
           {
             @Override @Nonnull
-            protected List<? extends UniformityMeasurements> computeNeededResults()  
+            protected List<? extends UniformityMeasurements> computeResults()  
               {
                 final ArrayList<UniformityMeasurements> result = new ArrayList<UniformityMeasurements>();
                 

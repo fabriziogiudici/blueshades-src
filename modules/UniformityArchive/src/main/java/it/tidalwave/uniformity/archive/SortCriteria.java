@@ -20,16 +20,17 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.uniformity.archive.impl.io;
+package it.tidalwave.uniformity.archive;
 
 import javax.annotation.Nonnull;
-import java.io.IOException;
-import java.io.OutputStream;
-import it.tidalwave.role.Marshallable;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import it.tidalwave.util.Finder;
+import it.tidalwave.util.Finder.SortDirection;
 import it.tidalwave.uniformity.UniformityMeasurements;
-import it.tidalwave.uniformity.archive.impl.UniformityArchive;
-import lombok.RequiredArgsConstructor;
-import static it.tidalwave.uniformity.archive.SortCriteria.*;
+import lombok.NoArgsConstructor;
+import static lombok.AccessLevel.*;
 
 /***********************************************************************************************************************
  * 
@@ -37,22 +38,23 @@ import static it.tidalwave.uniformity.archive.SortCriteria.*;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@RequiredArgsConstructor
-public class UniformityArchiveMarshallable implements Marshallable
+@NoArgsConstructor(access=PRIVATE)
+public final class SortCriteria
   {
-    @Nonnull
-    private final UniformityArchive archive;
-    
-    @Override
-    public void marshal (final @Nonnull OutputStream os)
-      throws IOException 
+    public final static Finder.SortCriterion BY_DATE_TIME = new Finder.FilterSortCriterion<UniformityMeasurements>() 
       {
-        for (final UniformityMeasurements measurements : archive.findMeasurements().sort(BY_DATE_TIME).results())
+        @Override
+        public void sort (final @Nonnull List<? extends UniformityMeasurements> results, 
+                          final @Nonnull SortDirection sortDirection)
           {
-            // FIXME: uniformityMeasurements.as(Marshallable).marshal(os);
-            new UniformityMeasurementsMarshallable(measurements).marshal(os);
+            Collections.sort(results, new Comparator<UniformityMeasurements>()
+              {
+                @Override
+                public int compare (final @Nonnull UniformityMeasurements m1, final @Nonnull UniformityMeasurements m2) 
+                  {
+                    return m1.getDateTime().compareTo(m2.getDateTime()) * sortDirection.intValue();
+                  }
+              });
           }
-        
-        os.close();
-      }
+      };
   }
