@@ -38,11 +38,12 @@ import it.tidalwave.actor.annotation.Actor;
 import it.tidalwave.actor.annotation.ListensTo;
 import it.tidalwave.actor.annotation.Message;
 import it.tidalwave.swing.ActionMessageAdapter;
+import it.tidalwave.netbeans.util.Locator;
 import it.tidalwave.argyll.ArgyllFailureMessage;
 import it.tidalwave.argyll.Display;
 import it.tidalwave.argyll.MeasurementMessage;
 import it.tidalwave.argyll.MeasurementRequest;
-import it.tidalwave.netbeans.util.Locator;
+import it.tidalwave.argyll.SensorOperationInvitationMessage;
 import it.tidalwave.uniformity.Position;
 import it.tidalwave.uniformity.UniformityCheckRequest;
 import it.tidalwave.uniformity.UniformityMeasurement;
@@ -144,6 +145,20 @@ public class UniformityCheckMeasurementControllerActor
      * 
      *
      ******************************************************************************************************************/
+    public void onSensorOperationInvitation (final @ListensTo @Nonnull SensorOperationInvitationMessage message) 
+      {
+        log.info("onSensorOperationInvitation({})", message);
+        presentation.showInvitationToOperateOnTheSensor(message.getInvitation());
+        presentation.hideMeasureInProgress();
+        continueAction.setEnabled(true);
+        cancelAction.setEnabled(true);
+        stobe(message.getCollaboration());
+      }
+        
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
     public void onArgyllFailure (final @ListensTo @Nonnull ArgyllFailureMessage message) 
       {
         log.info("onArgyllFailure({})", message);
@@ -157,6 +172,7 @@ public class UniformityCheckMeasurementControllerActor
     private void onConfirmMeasurement (final @ListensTo @Nonnull ConfirmMeasurementMessage message)
       {
         log.info("onConfirmMeasurement()");
+        presentation.hideInvitationToOperateOnTheSensor();
         continueAction.setEnabled(false);
         cancelAction.setEnabled(false);
         collaborationPendingUserIntervention.resume(suspensionToken, new Runnable()
@@ -228,13 +244,18 @@ public class UniformityCheckMeasurementControllerActor
         else
           {
             currentPosition = positionIterator.next(); 
-            collaborationPendingUserIntervention = collaboration;
-            suspensionToken = collaborationPendingUserIntervention.suspend();
-            presentation.renderSensorPlacementInvitationCellAt(currentPosition);
-            eventuallyMoveOutControlPanel();
-            continueAction.setEnabled(true);
-            cancelAction.setEnabled(true);
+            stobe(collaboration);
           }
+      }
+    
+    private void stobe (final @Nonnull Collaboration collaboration)
+      {
+        collaborationPendingUserIntervention = collaboration;
+        suspensionToken = collaborationPendingUserIntervention.suspend();
+        presentation.renderSensorPlacementInvitationCellAt(currentPosition);
+        eventuallyMoveOutControlPanel();
+        continueAction.setEnabled(true);
+        cancelAction.setEnabled(true);
       }
  
     /*******************************************************************************************************************

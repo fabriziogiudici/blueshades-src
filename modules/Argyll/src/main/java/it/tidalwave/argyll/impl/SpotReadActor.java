@@ -35,6 +35,7 @@ import it.tidalwave.colorimetry.MeasureWithPrecision;
 import it.tidalwave.argyll.ArgyllFailureMessage;
 import it.tidalwave.argyll.MeasurementMessage;
 import it.tidalwave.argyll.MeasurementRequest;
+import it.tidalwave.argyll.SensorOperationInvitationMessage;
 import it.tidalwave.blueargyle.util.Executor;
 import it.tidalwave.blueargyle.util.Executor.ConsoleOutput;
 import lombok.extern.slf4j.Slf4j;
@@ -78,7 +79,14 @@ public class SpotReadActor
             executor.send(COMMAND_DO_MEASUREMENT).getStdout().waitFor("(^.*to do a calibration.*$)");
             executor.send(COMMAND_QUIT).waitForCompletion();
 
-            parseMessage(executor.getStdout()).send();
+            if (!executor.getStdout().filteredBy("(.*Ambient filter should be removed.*)").isEmpty())
+              {
+                new SensorOperationInvitationMessage("Please remove the ambient filter").send();
+              }
+            else
+              {
+                parseMessage(executor.getStdout()).send();
+              }  
           }
         catch (IOException e)
           {

@@ -54,6 +54,7 @@ public class ControlPanel extends JPanel
       {
         this();
         pbMeasurementInProgress.setVisible(false);
+        lbInvitation.setVisible(false);
         this.continueAction.bind(continueAction);
         this.cancelAction.bind(cancelAction);
       }
@@ -73,6 +74,18 @@ public class ControlPanel extends JPanel
         pbMeasurementInProgress.setVisible(visible);
       }
     
+    public void showInvitationToOperateOnTheSensor (final @Nonnull String invitation) 
+      {
+        assert EventQueue.isDispatchThread();
+        lbInvitation.setText(String.format("<html>%s</html>", invitation));
+        lbInvitation.setVisible(true);
+      }
+    
+    public void hideInvitationToOperateOnTheSensor()
+      {
+        lbInvitation.setVisible(false);
+      }
+    
     /*******************************************************************************************************************
      * 
      * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The
@@ -89,12 +102,14 @@ public class ControlPanel extends JPanel
         btCancel = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         pbMeasurementInProgress = new javax.swing.JProgressBar();
+        lbInvitation = new javax.swing.JLabel();
 
         setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.name")); // NOI18N
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.jLabel1.text")); // NOI18N
+        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(16, 16, 16, 16));
         jLabel1.setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.jLabel1.name")); // NOI18N
 
@@ -130,22 +145,34 @@ public class ControlPanel extends JPanel
         pbMeasurementInProgress.setPreferredSize(new java.awt.Dimension(200, 20));
         jPanel2.add(pbMeasurementInProgress);
 
+        lbInvitation.setForeground(new java.awt.Color(255, 51, 51));
+        lbInvitation.setText(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.lbInvitation.text")); // NOI18N
+        lbInvitation.setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.lbInvitation.name")); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
-                .addContainerGap())
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(lbInvitation, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbInvitation, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
@@ -159,6 +186,7 @@ public class ControlPanel extends JPanel
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lbInvitation;
     private javax.swing.JProgressBar pbMeasurementInProgress;
     // End of variables declaration//GEN-END:variables
   }

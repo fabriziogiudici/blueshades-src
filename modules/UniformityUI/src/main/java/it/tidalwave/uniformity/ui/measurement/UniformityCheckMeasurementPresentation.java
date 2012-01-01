@@ -24,9 +24,9 @@ package it.tidalwave.uniformity.ui.measurement;
 
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
+import java.awt.GraphicsDevice;
 import javax.swing.Action;
 import it.tidalwave.uniformity.Position;
-import java.awt.GraphicsDevice;
 
 /***********************************************************************************************************************
  *
@@ -109,6 +109,20 @@ public interface UniformityCheckMeasurementPresentation
      *
      ******************************************************************************************************************/
     public void hideMeasureInProgress();
+    
+    /*******************************************************************************************************************
+     *
+     * Shows an invitation to do something to the sensor.
+     *
+     ******************************************************************************************************************/
+    public void showInvitationToOperateOnTheSensor (@Nonnull String invitation);
+
+    /*******************************************************************************************************************
+     *
+     * Hides an invitation to do something to the sensor.
+     *
+     ******************************************************************************************************************/
+    public void hideInvitationToOperateOnTheSensor();
     
     /*******************************************************************************************************************
      *

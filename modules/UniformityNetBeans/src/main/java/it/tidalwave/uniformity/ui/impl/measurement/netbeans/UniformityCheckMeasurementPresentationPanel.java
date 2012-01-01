@@ -198,6 +198,34 @@ public class UniformityCheckMeasurementPresentationPanel extends JPanel implemen
      *
      ******************************************************************************************************************/
     @Override
+    public void showInvitationToOperateOnTheSensor (final @Nonnull String invitation) 
+      {
+        if (controlPanel != null)
+          {
+            controlPanel.showInvitationToOperateOnTheSensor(invitation);
+          }
+      }  
+
+    /*******************************************************************************************************************
+     * 
+     * 
+     *
+     ******************************************************************************************************************/
+    @Override
+    public void hideInvitationToOperateOnTheSensor() 
+      {
+        if (controlPanel != null)
+          {
+            controlPanel.hideInvitationToOperateOnTheSensor();
+          }
+      }  
+
+    /*******************************************************************************************************************
+     * 
+     * 
+     *
+     ******************************************************************************************************************/
+    @Override
     public void showMeasureInProgress()
       {
         assert EventQueue.isDispatchThread();
