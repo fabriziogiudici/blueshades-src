@@ -289,7 +289,7 @@ public class Executor
     public Executor send (final @Nonnull String string) 
       throws IOException
       {
-        log.info(">>>> sending {}...", string);
+        log.info(">>>> sending '{}'...", string);
         stdin.println(string);
         return this;
       }
