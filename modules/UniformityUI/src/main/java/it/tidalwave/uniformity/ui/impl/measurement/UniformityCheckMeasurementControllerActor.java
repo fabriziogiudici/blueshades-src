@@ -152,7 +152,7 @@ public class UniformityCheckMeasurementControllerActor
         presentation.hideMeasureInProgress();
         continueAction.setEnabled(true);
         cancelAction.setEnabled(true);
-        stobe(message.getCollaboration());
+        inviteToPositionTheSensor(message.getCollaboration());
       }
         
     /*******************************************************************************************************************
@@ -229,7 +229,7 @@ public class UniformityCheckMeasurementControllerActor
     
     /*******************************************************************************************************************
      * 
-     * Prepares the next measurement inviting the user to properly position the sensor.
+     * Prepares for the next measurement.
      *
      ******************************************************************************************************************/
     private void prepareNextMeasurement (final @Nonnull Collaboration collaboration)
@@ -244,12 +244,18 @@ public class UniformityCheckMeasurementControllerActor
         else
           {
             currentPosition = positionIterator.next(); 
-            stobe(collaboration);
+            inviteToPositionTheSensor(collaboration);
           }
       }
     
-    private void stobe (final @Nonnull Collaboration collaboration)
+    /*******************************************************************************************************************
+     * 
+     * Invites the user to properly position the sensor.
+     *
+     ******************************************************************************************************************/
+    private void inviteToPositionTheSensor (final @Nonnull Collaboration collaboration)
       {
+        log.info("inviteToPositionTheSensor()");
         collaborationPendingUserIntervention = collaboration;
         suspensionToken = collaborationPendingUserIntervention.suspend();
         presentation.renderSensorPlacementInvitationCellAt(currentPosition);
