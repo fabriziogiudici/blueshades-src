@@ -57,6 +57,10 @@
         </dependency> 
 
         <dependency>
+            <groupId>com.kenai.nbpwr</groupId>
+            <artifactId>ch-randelshofer-quaqua</artifactId>
+        </dependency>
+        <dependency>
             <groupId>it.tidalwave.netbeans</groupId>
             <artifactId>it-tidalwave-netbeans-lookandfeel</artifactId>
         </dependency>
