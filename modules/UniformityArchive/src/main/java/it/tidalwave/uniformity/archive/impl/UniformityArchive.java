@@ -22,7 +22,6 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.archive.impl;
 
-import it.tidalwave.argyll.Display;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -30,6 +29,7 @@ import java.util.List;
 import java.util.Set;
 import it.tidalwave.util.Finder;
 import it.tidalwave.util.spi.SimpleFinderSupport;
+import it.tidalwave.argyll.Display;
 import it.tidalwave.uniformity.UniformityMeasurements;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
