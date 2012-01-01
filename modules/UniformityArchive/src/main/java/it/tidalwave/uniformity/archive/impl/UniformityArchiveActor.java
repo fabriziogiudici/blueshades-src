@@ -52,6 +52,14 @@ public class UniformityArchiveActor
   {
     private UniformityArchive archive = new UniformityArchive();
     
+    @PostConstruct
+    public void initialize() // FIXME: private
+      throws IOException
+      {
+        log.info("initialize()");  
+        loadArchive();
+      }
+    
     public void onNewMeasurement (final @ListensTo @Nonnull UniformityMeasurementMessage message)
       throws IOException
       {
@@ -67,8 +75,7 @@ public class UniformityArchiveActor
         new UniformityArchiveContentMessage(archive.findMeasurementsByDisplay(message.getDisplay())).send();
       }
     
-    @PostConstruct
-    public void loadArchive() // FIXME: private
+    public void loadArchive()
       throws IOException
       {
         log.info("loadArchive()");  
