@@ -185,8 +185,8 @@ public class UniformityCheckMeasurementPresentationPanel extends JPanel implemen
      ******************************************************************************************************************/
     @Override
     public void renderMeasurementCellAt (final @Nonnull Position position, 
-                                   final @Nonnull String luminance, 
-                                   final @Nonnull String whitePoint) 
+                                         final @Nonnull String luminance, 
+                                         final @Nonnull String whitePoint) 
       {
         assert EventQueue.isDispatchThread();
         setCell(position, new MeasurementPanel(luminance, whitePoint));
