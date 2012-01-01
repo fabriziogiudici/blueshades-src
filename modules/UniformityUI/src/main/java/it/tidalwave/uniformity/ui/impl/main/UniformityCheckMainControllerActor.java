@@ -67,6 +67,8 @@ import it.tidalwave.uniformity.ui.main.UniformityCheckMainPresentation;
 import it.tidalwave.uniformity.ui.main.UniformityCheckMainPresentationProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import static it.tidalwave.util.Finder.SortDirection.*;
+import static it.tidalwave.uniformity.archive.SortCriteria.*;
 
 /***********************************************************************************************************************
  * 
@@ -370,8 +372,8 @@ public class UniformityCheckMainControllerActor
      ******************************************************************************************************************/
     private void populateMeasurementsArchive (final @Nonnull Finder<UniformityMeasurements> finder)
       {
-        final Node presentationModel = new NodePresentationModel(new DefaultSimpleComposite<UniformityMeasurements>(finder));
-        presentation.populateMeasurementsArchive(new LookupFilterDecoratorNode(presentationModel, measurementsCapabilityInjectorLookupFilter));
+        final Node pm = new NodePresentationModel(new DefaultSimpleComposite<UniformityMeasurements>(finder.sort(BY_DATE_TIME, DESCENDING)));
+        presentation.populateMeasurementsArchive(new LookupFilterDecoratorNode(pm, measurementsCapabilityInjectorLookupFilter));
       }
     
     /*******************************************************************************************************************
