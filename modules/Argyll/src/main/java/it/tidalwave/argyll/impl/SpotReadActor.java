@@ -58,6 +58,8 @@ public class SpotReadActor
   {
     private final static String COMMAND_DO_MEASUREMENT = "";
     private final static String COMMAND_QUIT = "QQ";
+
+    private final static String PROMPT = "(^.*to do a calibration.*$)";
     
     /*******************************************************************************************************************
      * 
@@ -75,13 +77,13 @@ public class SpotReadActor
             final Executor executor = Executor.forExecutable("spotread")
                                             .withArgument("-T");
 //                                            .withArgument("-yl");
-            executor.start().getStdout().waitFor("(^.*to do a calibration.*$)").clear();
-            executor.send(COMMAND_DO_MEASUREMENT).getStdout().waitFor("(^.*to do a calibration.*$)");
+            executor.start().getStdout().waitFor(PROMPT).clear();
+            executor.send(COMMAND_DO_MEASUREMENT).getStdout().waitFor(PROMPT);
             executor.send(COMMAND_QUIT).waitForCompletion();
 
             if (!executor.getStdout().filteredBy("(.*Ambient filter should be removed.*)").isEmpty())
               {
-                new SensorOperationInvitationMessage("Please remove the ambient filter").send();
+                new SensorOperationInvitationMessage("Please remove the ambient filter from the sensor.").send();
               }
             else
               {
