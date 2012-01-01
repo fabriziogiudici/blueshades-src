@@ -268,10 +268,12 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
         pnArchive.setOpaque(false);
         pnArchive.setLayout(new java.awt.BorderLayout());
 
+        lbArchive.setFont(lbArchive.getFont().deriveFont(lbArchive.getFont().getSize()+1f));
         lbArchive.setForeground(new java.awt.Color(255, 255, 255));
         lbArchive.setText(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.lbArchive.text")); // NOI18N
         lbArchive.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.lbArchive.name")); // NOI18N
 
+        lbDisplaySelection.setFont(lbDisplaySelection.getFont().deriveFont(lbDisplaySelection.getFont().getSize()+1f));
         lbDisplaySelection.setForeground(new java.awt.Color(255, 255, 255));
         lbDisplaySelection.setText(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.lbDisplaySelection.text")); // NOI18N
         lbDisplaySelection.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.lbDisplaySelection.name")); // NOI18N
