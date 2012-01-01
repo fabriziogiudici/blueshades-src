@@ -69,6 +69,11 @@
                 <artifactId>org-slf4j-jdk14</artifactId>
                 <version>1.6.1-201106101300</version>
             </dependency>
+            <dependency>
+                <groupId>com.kenai.nbpwr</groupId>
+                <artifactId>ch-randelshofer-quaqua</artifactId>
+                <version>8.0-201111011200</version>
+            </dependency>
             
             <dependency>
                 <groupId>com.google.code.findbugs</groupId>
