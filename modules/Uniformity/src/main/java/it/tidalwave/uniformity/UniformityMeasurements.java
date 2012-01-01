@@ -61,6 +61,15 @@ public class UniformityMeasurements extends AsLookupSupport
     @Nonnull
     private final SortedMap<Position, UniformityMeasurement> measurementMapByPosition;
     
+    public UniformityMeasurements() // for prototypes
+      {
+        display = new Display("", -1);
+        dateTime = new DateTime();
+        columns = 0;
+        rows = 0;
+        measurementMapByPosition = new TreeMap<Position, UniformityMeasurement>();
+      }
+    
     public UniformityMeasurements (final @Nonnull Display display,
                                    final @Nonnull Map<Position, UniformityMeasurement> measurementMapByPosition)
       {
