@@ -28,6 +28,7 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import it.tidalwave.role.spi.DefaultDisplayable;
 import it.tidalwave.netbeans.util.AsLookupSupport;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -37,14 +38,14 @@ import lombok.ToString;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@ToString(callSuper=false)
+@ToString(callSuper=false) @EqualsAndHashCode(callSuper=false, of="displayName")
 public class Display extends AsLookupSupport
   {
     @Nonnull @Getter
     private final String displayName;
     
     @Nonnegative
-    private final int screenDeviceIndex;
+    private final int screenDeviceIndex; // FIXME: try to get rid of this, since it should be computed on demand
     
     public Display (final @Nonnull String displayName, final @Nonnegative int screenDeviceIndex)
       {
