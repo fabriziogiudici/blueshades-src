@@ -72,7 +72,7 @@ public class UniformityArchiveMarshallableTest
         marshallable.marshal(os);
         os.close();
         
-        FileComparisonUtils.assertSameContents(actualFile, expectedFile);
+        FileComparisonUtils.assertSameContents(expectedFile, actualFile);
       }
     
     @DataProvider(name="testCaseProvider")
