@@ -22,7 +22,6 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.archive.impl.io;
 
-import it.tidalwave.argyll.Display;
 import javax.annotation.Nonnull;
 import java.util.Map;
 import java.util.Scanner;
@@ -36,9 +35,13 @@ import org.joda.time.DateTime;
 import org.joda.time.format.ISODateTimeFormat;
 import it.tidalwave.role.Unmarshallable;
 import it.tidalwave.colorimetry.ColorTemperature;
+import it.tidalwave.argyll.Display;
 import it.tidalwave.uniformity.Position;
 import it.tidalwave.uniformity.UniformityMeasurement;
 import it.tidalwave.uniformity.UniformityMeasurements;
+import static java.lang.Integer.parseInt;
+import static it.tidalwave.colorimetry.ColorTemperature.kelvin;
+import static it.tidalwave.uniformity.Position.xy;
 
 /***********************************************************************************************************************
  * 
@@ -86,7 +89,7 @@ public class UniformityMeasurementsUnmarshallable implements Unmarshallable
             
             if (luminanceMatcher.matches())
               {
-//                final Position pos = Position.pos(Integer.parseInt(m2.group(1)), Integer.parseInt(m2.group(2)));
+//                final Position xy = xy(parseInt(luminanceMatcher.group(1)), parseInt(luminanceMatcher.group(2)));
                 luminance = Integer.parseInt(luminanceMatcher.group(3));
                 continue;
               }
@@ -95,9 +98,9 @@ public class UniformityMeasurementsUnmarshallable implements Unmarshallable
             
             if (temperatureMatcher.matches())
               {
-                final Position pos = Position.xy(Integer.parseInt(temperatureMatcher.group(1)), Integer.parseInt(temperatureMatcher.group(2)));
-                final ColorTemperature temperature = ColorTemperature.kelvin(Integer.parseInt(temperatureMatcher.group(3)));
-                map.put(pos, new UniformityMeasurement(temperature, luminance));
+                final Position xy = xy(parseInt(temperatureMatcher.group(1)), parseInt(temperatureMatcher.group(2)));
+                final ColorTemperature temperature = kelvin(parseInt(temperatureMatcher.group(3)));
+                map.put(xy, new UniformityMeasurement(temperature, luminance));
                 continue;
               }
           }
