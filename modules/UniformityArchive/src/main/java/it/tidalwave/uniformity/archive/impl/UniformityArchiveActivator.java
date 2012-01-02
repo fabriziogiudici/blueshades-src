@@ -23,8 +23,8 @@
 package it.tidalwave.uniformity.archive.impl;
 
 import org.openide.util.lookup.ServiceProvider;
-import it.tidalwave.actor.spi.ActorActivator;
 import it.tidalwave.actor.spi.ActorGroupActivator;
+import static it.tidalwave.actor.spi.ActorActivator.*;
 
 /***********************************************************************************************************************
  *
@@ -37,6 +37,6 @@ public class UniformityArchiveActivator extends ActorGroupActivator
   {
     public UniformityArchiveActivator()
       {
-        add(new ActorActivator(UniformityArchiveActor.class, 1));
+        add(activatorFor(UniformityArchiveActor.class).withPoolSize(1));
       }
   }

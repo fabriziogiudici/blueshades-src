@@ -32,7 +32,6 @@ import java.awt.GraphicsDevice;
 import java.awt.event.ActionEvent;
 import javax.swing.Action;
 import it.tidalwave.actor.Collaboration;
-import it.tidalwave.actor.spi.ActorActivator;
 import it.tidalwave.actor.spi.ActorGroupActivator;
 import it.tidalwave.argyll.Display;
 import it.tidalwave.argyll.MeasurementMessage;
@@ -56,6 +55,7 @@ import it.tidalwave.netbeans.util.test.TestLoggerSetup;
 import it.tidalwave.util.test.swing.ActionsTestHelper;
 import it.tidalwave.util.test.swing.ActionTestHelper;
 import it.tidalwave.actor.test.MessageVerifier;
+import static it.tidalwave.actor.spi.ActorActivator.*;
 import static it.tidalwave.uniformity.Position.xy;
 import static it.tidalwave.colorimetry.ColorTemperature.kelvin;
 import static org.mockito.Mockito.*;
@@ -77,9 +77,9 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
       {
         public TestActivator() 
           {
-//            add(new ActorActivator(SpotReadActor.class, 1)); // to test the real thing
-            add(new ActorActivator(FakeSpotReadActor.class, 1));
-            add(new ActorActivator(UniformityCheckMeasurementControllerActor.class, 1));
+//            add(activatorFor(SpotReadActor.class).withPoolSize(1)); // to test the real thing
+            add(activatorFor(FakeSpotReadActor.class).withPoolSize(1));
+            add(activatorFor(UniformityCheckMeasurementControllerActor.class).withPoolSize(1));
           }
       }
     

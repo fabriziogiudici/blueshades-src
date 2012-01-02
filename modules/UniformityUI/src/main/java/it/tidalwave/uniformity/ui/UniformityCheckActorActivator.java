@@ -22,10 +22,10 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.ui;
 
-import it.tidalwave.actor.spi.ActorActivator;
 import it.tidalwave.actor.spi.ActorGroupActivator;
 import it.tidalwave.uniformity.ui.impl.main.UniformityCheckMainControllerActor;
 import it.tidalwave.uniformity.ui.impl.measurement.UniformityCheckMeasurementControllerActor;
+import static it.tidalwave.actor.spi.ActorActivator.*;
 
 /***********************************************************************************************************************
  *
@@ -37,7 +37,7 @@ public class UniformityCheckActorActivator extends ActorGroupActivator
   {
     public UniformityCheckActorActivator()
       {
-        add(new ActorActivator(UniformityCheckMainControllerActor.class, 1));
-        add(new ActorActivator(UniformityCheckMeasurementControllerActor.class, 1));
+        add(activatorFor(UniformityCheckMainControllerActor.class).withPoolSize(1));
+        add(activatorFor(UniformityCheckMeasurementControllerActor.class).withPoolSize(1));
       }
   }

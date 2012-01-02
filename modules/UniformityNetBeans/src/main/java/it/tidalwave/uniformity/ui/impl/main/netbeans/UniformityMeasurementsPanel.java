@@ -31,8 +31,8 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.painter.ImagePainter;
-import it.tidalwave.swing.FixedAspectRatioLayout;
-import it.tidalwave.swing.ProportionalLayout;
+import it.tidalwave.swing.layout.FixedAspectRatioLayout;
+import it.tidalwave.swing.layout.ProportionalLayout;
 
 /***********************************************************************************************************************
  * 

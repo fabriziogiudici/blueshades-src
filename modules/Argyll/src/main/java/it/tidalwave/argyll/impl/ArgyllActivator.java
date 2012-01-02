@@ -23,8 +23,8 @@
 package it.tidalwave.argyll.impl;
 
 import org.openide.util.lookup.ServiceProvider;
-import it.tidalwave.actor.spi.ActorActivator;
 import it.tidalwave.actor.spi.ActorGroupActivator;
+import static it.tidalwave.actor.spi.ActorActivator.*;
 
 /***********************************************************************************************************************
  * 
@@ -37,15 +37,15 @@ public class ArgyllActivator extends ActorGroupActivator
   {
     public ArgyllActivator() 
       {
-        add(new ActorActivator(DispwinActor.class, 1));
+        add(activatorFor(DispwinActor.class).withPoolSize(1));
         
         if (Boolean.getBoolean("it.tidalwave.blueargyle.mockArgyll"))
           {
-            add(new ActorActivator(FakeSpotReadActor.class, 1));
+            add(activatorFor(FakeSpotReadActor.class).withPoolSize(1));
           }
         else
           {
-            add(new ActorActivator(SpotReadActor.class, 1));
+            add(activatorFor(SpotReadActor.class).withPoolSize(1));
           }
       }
   }
