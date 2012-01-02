@@ -30,7 +30,7 @@ import javax.swing.JPanel;
 import org.openide.nodes.Node;
 import org.openide.explorer.ExplorerManager;
 import it.tidalwave.role.ui.PresentationModel;
-import it.tidalwave.swing.ActionAdapter;
+import it.tidalwave.swing.SafeActionAdapter;
 import it.tidalwave.swing.RadioButtonsSelector;
 import it.tidalwave.netbeans.SimpleExplorerPanel;
 import it.tidalwave.uniformity.ui.main.UniformityCheckMainPresentation;
@@ -56,7 +56,7 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
  
     private final RadioButtonsSelector radioButtonsSelector;
     
-    private final ActionAdapter startNewMeasurementAction = new ActionAdapter();
+    private final SafeActionAdapter startNewMeasurementAction = new SafeActionAdapter();
     
     private final EnhancedListView lvDisplays = new EnhancedListView();
     

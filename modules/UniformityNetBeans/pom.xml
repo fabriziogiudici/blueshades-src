@@ -71,6 +71,10 @@
         </dependency>
         <dependency>
             <groupId>it.tidalwave.netbeans</groupId>
+            <artifactId>it-tidalwave-netbeans-swing</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.netbeans</groupId>
             <artifactId>it-tidalwave-netbeans-util</artifactId>
         </dependency>
         <dependency>

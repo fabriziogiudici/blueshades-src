@@ -26,7 +26,7 @@ import javax.annotation.Nonnull;
 import java.awt.EventQueue;
 import javax.swing.Action;
 import javax.swing.JPanel;
-import it.tidalwave.swing.ActionAdapter;
+import it.tidalwave.swing.SafeActionAdapter;
 
 /***********************************************************************************************************************
  * 
@@ -38,9 +38,9 @@ import it.tidalwave.swing.ActionAdapter;
  **********************************************************************************************************************/
 public class ControlPanel extends JPanel 
   {
-    private final ActionAdapter continueAction = new ActionAdapter();
+    private final SafeActionAdapter continueAction = new SafeActionAdapter();
     
-    private final ActionAdapter cancelAction = new ActionAdapter();
+    private final SafeActionAdapter cancelAction = new SafeActionAdapter();
     
     public ControlPanel()
       {
