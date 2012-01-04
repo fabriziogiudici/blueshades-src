@@ -54,7 +54,7 @@ public class ColorPoint
             @Override @Nonnull 
             public String toString (final @Nonnull ColorPoint colorPoint)
               {
-                return String.format("(L=%f, a*=%f, b*=%f)", colorPoint.c1, colorPoint.c2, colorPoint.c3);  
+                return String.format("(L*=%f, a*=%f, b*=%f)", colorPoint.c1, colorPoint.c2, colorPoint.c3);  
               }
           };
         
