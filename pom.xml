@@ -6,7 +6,7 @@
     <parent>
         <groupId>it.tidalwave.superpom</groupId>
         <artifactId>superpom</artifactId>
-        <version>1.8</version>
+        <version>1.9</version>
     </parent>
 
     <groupId>it.tidalwave.blueargyle</groupId>
@@ -31,6 +31,8 @@
 
         <netbeans.brandingToken>blueargyle</netbeans.brandingToken>
         <netbeans.cluster>blueargyle</netbeans.cluster>
+        <tft.appbundle.name>blueArgyle</tft.appbundle.name>
+        <tft.appbundle.signature>TDLW</tft.appbundle.signature>
 
         <actors.version>1.0.2-SNAPSHOT</actors.version>
         <openbluesky.version>0.15</openbluesky.version>
