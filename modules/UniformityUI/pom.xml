@@ -28,14 +28,14 @@
     <parent>
         <groupId>it.tidalwave.blueargyle</groupId>
         <artifactId>it-tidalwave-blueargyle-modules</artifactId>
-        <version>1.0-ALPHA-3-SNAPSHOT</version>
+        <version>1.0-ALPHA-3</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>it.tidalwave.blueargyle</groupId>
     <artifactId>it-tidalwave-uniformity-ui</artifactId>
     <packaging>nbm</packaging>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.1</version>
     <name>blueArgyle - Uniformity UI</name>
     <description>blueArgyle - Uniformity UI</description>
 
