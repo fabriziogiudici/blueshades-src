@@ -39,6 +39,7 @@ import it.tidalwave.actor.annotation.ListensTo;
 import it.tidalwave.actor.annotation.Message;
 import it.tidalwave.swing.ActionMessageAdapter;
 import it.tidalwave.netbeans.util.Locator;
+import it.tidalwave.colorimetry.XYZColorPoint;
 import it.tidalwave.argyll.ArgyllFailureMessage;
 import it.tidalwave.argyll.Display;
 import it.tidalwave.argyll.MeasurementMessage;
@@ -55,7 +56,6 @@ import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.concurrent.TimeUnit.*;
 import static it.tidalwave.actor.Collaboration.*;
-import static it.tidalwave.colorimetry.ColorPoint.ColorSpace.*;
 import static it.tidalwave.uniformity.Position.xy;
 
 /***********************************************************************************************************************
@@ -130,9 +130,10 @@ public class UniformityCheckMeasurementControllerActor
       {
         log.info("onNewMeasurement({})", message);
         presentation.hideMeasureInProgress();
-        // FIXME: do the right math here
+        final XYZColorPoint xyzColor = message.getColorPoints().find(XYZColorPoint.class);
+        // http://www.freelists.org/post/argyllcms/Measuring-whitepoint-and-luminance-with-spotread,1
         final UniformityMeasurement measurement = new UniformityMeasurement(message.getDaylightTemperature().getMeasure(), 
-                                                                            (int)message.getColorPoints().find(XYZ).getC2());
+                                                                            (int)xyzColor.getY());
         measurementMapByPosition.put(currentPosition, measurement);
         presentation.renderMeasurementCellAt(currentPosition,
                                              String.format("Luminance: %d cd/m\u00b2", measurement.getLuminance()), 

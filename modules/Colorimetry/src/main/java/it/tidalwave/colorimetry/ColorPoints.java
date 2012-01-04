@@ -48,18 +48,18 @@ public class ColorPoints
       }
     
     @Nonnull
-    public ColorPoint find (final @Nonnull ColorPoint.ColorSpace colorSpace)
+    public <T extends ColorPoint> T find (final @Nonnull Class<T> clazz)
       throws NotFoundException
       {
         for (final ColorPoint colorPoint : colorPoints)
           {
-            if (colorPoint.getColorSpace() == colorSpace)
+            if (colorPoint.getClass().equals(clazz))
               {
-                return colorPoint;  
+                return clazz.cast(colorPoint);  
               }
           }
         
-        throw new NotFoundException("No Color with space: " + colorSpace);
+        throw new NotFoundException("No Color with space: " + clazz);
       }
     
     @Override @Nonnull

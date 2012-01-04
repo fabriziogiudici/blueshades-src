@@ -20,6 +20,11 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
+/***********************************************************************************************************************
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ **********************************************************************************************************************/
+
 package it.tidalwave.colorimetry;
 
 import javax.annotation.Nonnull;
@@ -27,34 +32,24 @@ import javax.annotation.concurrent.Immutable;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 import static lombok.AccessLevel.*;
 
 /***********************************************************************************************************************
- * 
- * @author  Fabrizio Giudici
+ *
+ * @author  fritz
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @RequiredArgsConstructor(access=PROTECTED) @Getter @EqualsAndHashCode
-public abstract class ColorPoint
+@Immutable @RequiredArgsConstructor(access=PROTECTED) @Getter @EqualsAndHashCode(callSuper=false) @ToString(callSuper=false)
+public class XYZColorPoint extends ColorPoint
   {
-    public static enum ColorSpace
-      {
-        XYZ, Lab
-      }
+    private final double x;
+    
+    private final double y;
+    
+    private final double z;
     
     @Nonnull
-    public static XYZColorPoint colorXYZ (final double x, final double y, final double z)
-      {
-        return new XYZColorPoint(x, y, z, ColorSpace.XYZ);
-      }
-    
-    @Nonnull
-    public static ColorPoint colorLab (final double l, final double a, final double b)
-      {
-        return new LabColorPoint(l, a, b, ColorSpace.Lab);
-      }
-    
-    @Nonnull
-    public abstract ColorSpace getColorSpace();
+    private final ColorSpace colorSpace;
   }
