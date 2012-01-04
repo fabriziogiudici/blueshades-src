@@ -28,14 +28,14 @@
     <parent>
         <groupId>it.tidalwave.blueargyle</groupId>
         <artifactId>it-tidalwave-blueargyle-modules</artifactId>
-        <version>1.0-ALPHA-3</version>
+        <version>1.0-ALPHA-4-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>it.tidalwave.blueargyle</groupId>
     <artifactId>it-tidalwave-colorimetry</artifactId>
     <packaging>nbm</packaging>
-    <version>1.0.1</version>
+    <version>1.0.2-SNAPSHOT</version>
     <name>blueArgyle - Colorimetry</name>
     <description>blueArgyle - Colorimetry</description>
     

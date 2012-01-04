@@ -28,14 +28,14 @@
     <parent>
         <groupId>it.tidalwave.blueargyle</groupId>
         <artifactId>it-tidalwave-blueargyle-modules</artifactId>
-        <version>1.0-ALPHA-3</version>
+        <version>1.0-ALPHA-4-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>it.tidalwave.blueargyle</groupId>
     <artifactId>it-tidalwave-blueargyle-test-commons</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <name>blueArgyle - Test Commons</name>
     <description>blueArgyle - Test Commons</description>
     
