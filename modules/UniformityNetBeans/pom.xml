@@ -67,6 +67,10 @@
         
         <dependency>
             <groupId>it.tidalwave.netbeans</groupId>
+            <artifactId>it-tidalwave-netbeans-explorer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.netbeans</groupId>
             <artifactId>it-tidalwave-netbeans-nodes</artifactId>
         </dependency>
         <dependency>
@@ -145,12 +149,6 @@
             <groupId>org.easytesting</groupId>
             <artifactId>fest-swing</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>it.tidalwave.netbeans</groupId>
-            <artifactId>it-tidalwave-netbeans-explorer</artifactId>
-            <version>1.0.60-SNAPSHOT</version>
-            <type>jar</type>
         </dependency>
     </dependencies>
 
