@@ -51,7 +51,7 @@ public class Position implements Comparable<Position>
     @Override @Nonnull
     public String toString()
       {
-        return String.format("(c:%d r:%d)", column, row);  
+        return String.format("(c:%d, r:%d)", column, row);  
       }
   }
 
