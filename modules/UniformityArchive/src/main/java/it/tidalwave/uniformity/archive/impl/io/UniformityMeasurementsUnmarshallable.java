@@ -55,6 +55,11 @@ public class UniformityMeasurementsUnmarshallable implements Unmarshallable
     private static final Pattern PATTERN_LUMINANCE = Pattern.compile("L\\[([0-9]*),([0-9]*)\\]= *([0-9]*)");
     private static final Pattern PATTERN_TEMPERATURE = Pattern.compile("T\\[([0-9]*),([0-9]*)\\]= *([0-9]*)");
     
+    /*******************************************************************************************************************
+     * 
+     *
+     * 
+     ******************************************************************************************************************/
     @Override
     public UniformityMeasurements unmarshal (final @Nonnull InputStream is) 
       throws IOException
@@ -108,6 +113,11 @@ public class UniformityMeasurementsUnmarshallable implements Unmarshallable
         return new UniformityMeasurements(new Display(displayName, -1), dateTime, map);
       }   
     
+    /*******************************************************************************************************************
+     * 
+     *
+     * 
+     ******************************************************************************************************************/
     @Nonnull
     private String readLine (final @Nonnull InputStream is) 
       throws IOException

@@ -45,11 +45,21 @@ public class UniformityArchive extends AsLookupSupport
   {
     private final Set<UniformityMeasurements> contents = new HashSet<UniformityMeasurements>();
 
+    /*******************************************************************************************************************
+     * 
+     *
+     * 
+     ******************************************************************************************************************/
     public void add (final @Nonnull UniformityMeasurements measurements) 
       {
         contents.add(measurements);
       }
 
+    /*******************************************************************************************************************
+     * 
+     *
+     * 
+     ******************************************************************************************************************/
     @Nonnull
     public Finder<UniformityMeasurements> findMeasurements() 
       {
@@ -63,6 +73,11 @@ public class UniformityArchive extends AsLookupSupport
           };
       }
     
+    /*******************************************************************************************************************
+     * 
+     *
+     * 
+     ******************************************************************************************************************/
     @Nonnull
     public Finder<UniformityMeasurements> findMeasurementsByDisplay (final @Nonnull Display display) 
       {
@@ -86,6 +101,11 @@ public class UniformityArchive extends AsLookupSupport
           };
       }
     
+    /*******************************************************************************************************************
+     * 
+     *
+     * 
+     ******************************************************************************************************************/
     public void clear() 
       {
         contents.clear();

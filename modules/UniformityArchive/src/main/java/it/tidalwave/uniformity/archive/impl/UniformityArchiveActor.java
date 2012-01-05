@@ -54,6 +54,11 @@ public class UniformityArchiveActor
     
     private UniformityArchive archive = new UniformityArchive();
     
+    /*******************************************************************************************************************
+     * 
+     *
+     * 
+     ******************************************************************************************************************/
     @PostConstruct
     public void initialize() // FIXME: private
       throws IOException
@@ -64,6 +69,11 @@ public class UniformityArchiveActor
         loadArchive();
       }
     
+    /*******************************************************************************************************************
+     * 
+     *
+     * 
+     ******************************************************************************************************************/
     public void onNewMeasurement (final @ListensTo @Nonnull UniformityMeasurementMessage message)
       throws IOException
       {
@@ -73,13 +83,23 @@ public class UniformityArchiveActor
         new UniformityArchiveUpdatedMessage(archive.findMeasurementsByDisplay(message.getMeasurements().getDisplay())).send();
       }
     
+    /*******************************************************************************************************************
+     * 
+     *
+     * 
+     ******************************************************************************************************************/
     public void onQuery (final @ListensTo @Nonnull UniformityArchiveQuery message)
       {
         log.info("onQuery({})", message);
         new UniformityArchiveContentMessage(archive.findMeasurementsByDisplay(message.getDisplay())).send();
       }
     
-    public void loadArchive()
+    /*******************************************************************************************************************
+     * 
+     *
+     * 
+     ******************************************************************************************************************/
+    private void loadArchive()
       throws IOException
       {
         log.info("loadArchive()");  
@@ -90,6 +110,11 @@ public class UniformityArchiveActor
         is.close();
       }
     
+    /*******************************************************************************************************************
+     * 
+     *
+     * 
+     ******************************************************************************************************************/
     private void storeArchive() 
       throws IOException
       {
