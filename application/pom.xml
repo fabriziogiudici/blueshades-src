@@ -110,6 +110,33 @@
                     <etcConfFile>config/blueargyle.conf</etcConfFile>
                 </configuration>
             </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>prepare-argyll-binaries</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>it.tidalwave.blueargyle</groupId>
+                                    <artifactId>argyll</artifactId>
+                                    <version>1.3.5.1</version>
+                                    <type>tgz</type>
+                                    <classifier>macosx-intel-32</classifier>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>${project.basedir}/target/appbundle/executables</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
     

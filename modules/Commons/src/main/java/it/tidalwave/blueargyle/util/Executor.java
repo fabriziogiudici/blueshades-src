@@ -220,38 +220,32 @@ public class Executor
     @Nonnull
     public static Executor forExecutable (final @Nonnull String executable)
       {
-        try 
-          {
-            final Executor executor = new Executor();
-            executor.arguments.add(findPath(executable));
-            return executor;
-          } 
-        catch (NotFoundException e)
-          {
-            throw new RuntimeException(e); // FIXME: keep a declared exception
-          }
+        final Executor executor = new Executor();
+        final String path = System.getProperty("netbeans.home") + "/../../../../MacOS/Argyll_V1.3.5/bin/";
+        executor.arguments.add(new File(path + executable).getAbsolutePath());
+        return executor;
       }
     
-    /*******************************************************************************************************************
-     * 
-     *
-     ******************************************************************************************************************/
-    @Nonnull
-    private static String findPath (final @Nonnull String executable)
-      throws NotFoundException
-      {
-        for (final String path : System.getenv("PATH").split(File.pathSeparator))            
-          {
-            final File file = new File(new File(path), executable);
-            
-            if (file.canExecute())
-              {
-                return file.getAbsolutePath(); 
-              }
-          }
-        
-        throw new NotFoundException("Can't find " + executable + " in PATH");
-      }
+//    /*******************************************************************************************************************
+//     * 
+//     *
+//     ******************************************************************************************************************/
+//    @Nonnull
+//    private static String findPath (final @Nonnull String executable)
+//      throws NotFoundException
+//      {
+//        for (final String path : System.getenv("PATH").split(File.pathSeparator))            
+//          {
+//            final File file = new File(new File(path), executable);
+//            
+//            if (file.canExecute())
+//              {
+//                return file.getAbsolutePath(); 
+//              }
+//          }
+//        
+//        throw new NotFoundException("Can't find " + executable + " in PATH");
+//      }
     
     /*******************************************************************************************************************
      * 
