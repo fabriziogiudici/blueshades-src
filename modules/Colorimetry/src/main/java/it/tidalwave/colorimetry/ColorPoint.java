@@ -24,10 +24,6 @@ package it.tidalwave.colorimetry;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import static lombok.AccessLevel.*;
 
 /***********************************************************************************************************************
  * 
@@ -35,7 +31,7 @@ import static lombok.AccessLevel.*;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @RequiredArgsConstructor(access=PROTECTED) @Getter @EqualsAndHashCode
+@Immutable
 public abstract class ColorPoint
   {
     public static enum ColorSpace
