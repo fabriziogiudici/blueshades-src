@@ -25,11 +25,11 @@ package it.tidalwave.uniformity.archive.impl;
 import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
 import javax.annotation.concurrent.NotThreadSafe;
-import java.io.FileOutputStream;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import org.openide.filesystems.FileObject;
+import org.openide.filesystems.FileUtil;
 import it.tidalwave.actor.annotation.Actor;
 import it.tidalwave.actor.annotation.ListensTo;
 import it.tidalwave.uniformity.UniformityMeasurementMessage;
@@ -50,6 +50,8 @@ import static it.tidalwave.role.Unmarshallable.Unmarshallable;
 @Actor(threadSafe=false) @NotThreadSafe @Slf4j
 public class UniformityArchiveActor
   {
+    private FileObject persistenceFile;
+    
     private UniformityArchive archive = new UniformityArchive();
     
     @PostConstruct
@@ -57,6 +59,8 @@ public class UniformityArchiveActor
       throws IOException
       {
         log.info("initialize()");  
+        persistenceFile = FileUtil.createData(FileUtil.getConfigRoot(), "Archive/UniformityMeasurements.txt");
+        log.info(">>>> persistenceFile: {}", persistenceFile.getPath());
         loadArchive();
       }
     
@@ -81,7 +85,7 @@ public class UniformityArchiveActor
         log.info("loadArchive()");  
         archive.clear();
         
-        final @Cleanup InputStream is = new FileInputStream("/tmp/UniformityMeasurements.txt");
+        final @Cleanup InputStream is = persistenceFile.getInputStream();
         archive = archive.as(Unmarshallable).unmarshal(is);
         is.close();
       }
@@ -91,7 +95,7 @@ public class UniformityArchiveActor
       {
         log.info("storeArchive()"); 
         
-        final @Cleanup OutputStream os = new FileOutputStream("/tmp/UniformityMeasurements.txt");
+        final @Cleanup OutputStream os = persistenceFile.getOutputStream();
         archive.as(Marshallable).marshal(os);
         os.close();
       }
