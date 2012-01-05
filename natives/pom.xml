@@ -1,0 +1,79 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>it.tidalwave.blueargyle</groupId>
+        <artifactId>it-tidalwave-blueargyle-modules</artifactId>
+        <version>1.0-ALPHA-4-SNAPSHOT</version>
+        <relativePath>../modules/pom.xml</relativePath>
+    </parent>
+
+    <groupId>it.tidalwave.blueargyle</groupId>
+    <artifactId>argyll</artifactId>
+    <version>1.3.5.1</version>
+    <packaging>pom</packaging>
+    <name>Argyll (Mac OS X)</name>
+    <description>Argyll (Mac OS X)</description>
+    <inceptionYear>2004</inceptionYear>
+    <url>http://argyllcms.com/</url>
+    
+    <organization>
+        <name>Graeme Gill</name>
+        <url>http://web.aanet.com.au/gwg/</url>
+    </organization>
+    <licenses>
+        <license>
+            <name>AGPL-v3</name>
+            <url>http://argyllcms.com/doc/License.txt</url>
+            <comments>GNU AFFERO GENERAL PUBLIC LICENSE Version 3</comments>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Graeme Gill</name>
+            <email>graeme@argyllcms.com</email>
+            <url>http://web.aanet.com.au/gwg/</url>
+            <roles>
+                <role>manager</role>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+    <mailingLists>
+        <mailingList>
+            <name>Mailing list</name>
+            <post>argyllcms@freelists.org</post>
+            <archive>http://www.freelists.org/archive/argyllcms/</archive>
+        </mailingList>
+    </mailingLists>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-artifacts</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>attach-artifact</goal>
+                        </goals>
+                        <configuration>
+                            <artifacts>
+                                <artifact>
+                                    <file>/Users/fritz/Downloads/Argyll_V1.3.5_osx10.4_i86_bin.tgz</file>
+                                    <type>tgz</type>
+                                    <classifier>macosx-intel-32</classifier>
+                                </artifact>
+                            </artifacts>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    
+ </project>
