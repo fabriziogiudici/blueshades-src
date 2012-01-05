@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import it.tidalwave.util.NotFoundException;
 import lombok.AccessLevel;
 import lombok.Cleanup;
 import lombok.Getter;
@@ -219,10 +220,37 @@ public class Executor
     @Nonnull
     public static Executor forExecutable (final @Nonnull String executable)
       {
-        final String path = System.getenv("ARGYLL_HOME");
-        final Executor executor = new Executor();
-        executor.arguments.add(path + File.separator + "bin" + File.separator + executable);
-        return executor;
+        try 
+          {
+            final Executor executor = new Executor();
+            executor.arguments.add(findPath(executable));
+            return executor;
+          } 
+        catch (NotFoundException e)
+          {
+            throw new RuntimeException(e); // FIXME: keep a declared exception
+          }
+      }
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    @Nonnull
+    private static String findPath (final @Nonnull String executable)
+      throws NotFoundException
+      {
+        for (final String path : System.getenv("PATH").split(File.pathSeparator))            
+          {
+            final File file = new File(new File(path), executable);
+            
+            if (file.canExecute())
+              {
+                return file.getAbsolutePath(); 
+              }
+          }
+        
+        throw new NotFoundException("Can't find " + executable + " in PATH");
       }
     
     /*******************************************************************************************************************
