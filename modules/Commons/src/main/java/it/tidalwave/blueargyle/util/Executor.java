@@ -221,7 +221,9 @@ public class Executor
     public static Executor forExecutable (final @Nonnull String executable)
       {
         final Executor executor = new Executor();
-        final String path = System.getProperty("netbeans.home") + "/../../../../MacOS/Argyll_V1.3.5/bin/";
+        final String argyllHome = System.getenv("ARGYLL_HOME"); // used during development
+        final String path = (argyllHome != null) ? argyllHome + "/bin/"
+                                                 : (System.getProperty("netbeans.home") + "/../../../../MacOS/Argyll_V1.3.5/bin/");
         executor.arguments.add(new File(path + executable).getAbsolutePath());
         return executor;
       }
