@@ -206,6 +206,7 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
 
         setBackground(new java.awt.Color(80, 80, 80));
         setBorder(javax.swing.BorderFactory.createEmptyBorder(16, 16, 8, 16));
+        setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.name")); // NOI18N
         java.awt.GridBagLayout layout = new java.awt.GridBagLayout();
         layout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0};
         layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
@@ -214,6 +215,7 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
         bgProperty.add(rbLuminance);
         rbLuminance.setForeground(new java.awt.Color(255, 255, 255));
         rbLuminance.setText(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.rbLuminance.text")); // NOI18N
+        rbLuminance.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.rbLuminance.name")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
@@ -223,6 +225,7 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
         bgProperty.add(rbWhitePoint);
         rbWhitePoint.setForeground(new java.awt.Color(255, 255, 255));
         rbWhitePoint.setText(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.rbWhitePoint.text")); // NOI18N
+        rbWhitePoint.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.rbWhitePoint.name")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 0;
@@ -232,6 +235,7 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
         lbUniformityMeasurements.setFont(lbUniformityMeasurements.getFont().deriveFont(lbUniformityMeasurements.getFont().getStyle() | java.awt.Font.BOLD, lbUniformityMeasurements.getFont().getSize()+3));
         lbUniformityMeasurements.setForeground(new java.awt.Color(255, 255, 255));
         lbUniformityMeasurements.setText(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.lbUniformityMeasurements.text")); // NOI18N
+        lbUniformityMeasurements.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.lbUniformityMeasurements.name")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -239,6 +243,7 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
         add(lbUniformityMeasurements, gridBagConstraints);
 
         pnMeasurements.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        pnMeasurements.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.pnMeasurements.name")); // NOI18N
         pnMeasurements.setOpaque(false);
         pnMeasurements.setLayout(new java.awt.BorderLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -251,6 +256,7 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
         add(pnMeasurements, gridBagConstraints);
 
         btStartMeasurements.setText(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.btStartMeasurements.text")); // NOI18N
+        btStartMeasurements.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.btStartMeasurements.name")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 12;
@@ -260,6 +266,7 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
         lbDisplaySelection.setFont(lbDisplaySelection.getFont().deriveFont(lbDisplaySelection.getFont().getSize()+1f));
         lbDisplaySelection.setForeground(new java.awt.Color(255, 255, 255));
         lbDisplaySelection.setText(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.lbDisplaySelection.text")); // NOI18N
+        lbDisplaySelection.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.lbDisplaySelection.name")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
@@ -270,6 +277,7 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
         lbArchive.setFont(lbArchive.getFont().deriveFont(lbArchive.getFont().getSize()+1f));
         lbArchive.setForeground(new java.awt.Color(255, 255, 255));
         lbArchive.setText(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.lbArchive.text")); // NOI18N
+        lbArchive.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.lbArchive.name")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 8;
@@ -277,6 +285,7 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
         gridBagConstraints.insets = new java.awt.Insets(50, 0, 0, 0);
         add(lbArchive, gridBagConstraints);
 
+        filler1.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.filler1.name")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 10;
@@ -287,6 +296,7 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
 
         pnDisplays.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(70, 70, 70), 1, true));
         pnDisplays.setMinimumSize(new java.awt.Dimension(100, 80));
+        pnDisplays.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.pnDisplays.name")); // NOI18N
         pnDisplays.setOpaque(false);
         pnDisplays.setPreferredSize(new java.awt.Dimension(214, 80));
         pnDisplays.setLayout(new java.awt.BorderLayout());
@@ -297,6 +307,7 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
         add(pnDisplays, gridBagConstraints);
 
         pnArchive.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(70, 70, 70), 1, true));
+        pnArchive.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.pnArchive.name")); // NOI18N
         pnArchive.setOpaque(false);
         pnArchive.setLayout(new java.awt.BorderLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
