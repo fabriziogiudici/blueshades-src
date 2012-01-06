@@ -54,10 +54,10 @@ public class DispwinActor
      * Answers to the query for the existing displays.
      * 
      ******************************************************************************************************************/
-    public void discoverDisplays (final @ListensTo @Nonnull DisplayDiscoveryQueryMessage message)
+    public void onDisplayDiscoveryQuery (final @ListensTo @Nonnull DisplayDiscoveryQueryMessage message)
       throws IOException, InterruptedException
       {
-        log.trace("discoverDisplays({})", message);
+        log.trace("onDisplayDiscoveryQuery({})", message);
 
         final Executor executor = Executor.forExecutable("dispwin").withArgument("--");
         final List<Display> displays = new ArrayList<Display>();

@@ -56,10 +56,10 @@ public class FakeSpotReadActor
      * Answers to the request for a measurement.
      * 
      ******************************************************************************************************************/
-    public void spotRead (final @ListensTo @Nonnull MeasurementRequest message)
+    public void onMeasurementRequest (final @ListensTo @Nonnull MeasurementRequest message)
       throws InterruptedException
       {
-        log.info("spotRead({})", message);
+        log.info("onMeasurementRequest({})", message);
 
         Thread.sleep(500);
         

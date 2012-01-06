@@ -66,12 +66,12 @@ public class SpotReadActor
      * Answers to the request for a measurement.
      * 
      ******************************************************************************************************************/
-    public void spotRead (final @ListensTo @Nonnull MeasurementRequest message)
+    public void onMeasurementRequest (final @ListensTo @Nonnull MeasurementRequest message)
       throws InterruptedException
       {
         try
           {
-            log.info("spotRead({})", message);
+            log.info("onMeasurementRequest({})", message);
 
             // FIXME: -yl is required e.g. by the old EyeOne, but not tolerated by the x-rite i1 Display
             final Executor executor = Executor.forExecutable("spotread")
