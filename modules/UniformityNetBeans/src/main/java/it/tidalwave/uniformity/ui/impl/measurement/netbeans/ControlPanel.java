@@ -42,9 +42,8 @@ public class ControlPanel extends JPanel
     
     private final SafeActionAdapter cancelAction = new SafeActionAdapter();
     
-    public ControlPanel()
+    public ControlPanel() 
       {
-        assert EventQueue.isDispatchThread();
         initComponents();
         setOpaque(true);
         setBackground(UniformityCheckMeasurementPresentationPanel.CONTROL_PANEL_BACKGROUND);
@@ -95,94 +94,108 @@ public class ControlPanel extends JPanel
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
         btContinue = new javax.swing.JButton();
         btCancel = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        pbMeasurementInProgress = new javax.swing.JProgressBar();
+        lbInstructions = new javax.swing.JLabel();
         lbInvitation = new javax.swing.JLabel();
+        pbMeasurementInProgress = new javax.swing.JProgressBar();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
 
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(16, 16, 16, 16));
         setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.name")); // NOI18N
-
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.jLabel1.text")); // NOI18N
-        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(16, 16, 16, 16));
-        jLabel1.setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.jLabel1.name")); // NOI18N
-
-        jPanel1.setMaximumSize(new java.awt.Dimension(32767, 48));
-        jPanel1.setMinimumSize(new java.awt.Dimension(0, 48));
-        jPanel1.setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.jPanel1.name")); // NOI18N
-        jPanel1.setOpaque(false);
-        jPanel1.setPreferredSize(new java.awt.Dimension(0, 48));
-        jPanel1.setSize(new java.awt.Dimension(0, 48));
+        java.awt.GridBagLayout layout = new java.awt.GridBagLayout();
+        layout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
+        layout.rowHeights = new int[] {0, 10, 0, 10, 0, 10, 0};
+        setLayout(layout);
 
         btContinue.setAction(continueAction);
         btContinue.setText(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.btContinue.text")); // NOI18N
+        btContinue.setMaximumSize(new java.awt.Dimension(110, 32));
+        btContinue.setMinimumSize(new java.awt.Dimension(110, 32));
         btContinue.setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.btContinue.name")); // NOI18N
-        btContinue.setPreferredSize(new java.awt.Dimension(102, 32));
-        btContinue.setSize(new java.awt.Dimension(102, 32));
-        jPanel1.add(btContinue);
+        btContinue.setPreferredSize(new java.awt.Dimension(110, 32));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_END;
+        add(btContinue, gridBagConstraints);
 
         btCancel.setAction(cancelAction);
         btCancel.setText(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.btCancel.text")); // NOI18N
+        btCancel.setMaximumSize(new java.awt.Dimension(110, 32));
+        btCancel.setMinimumSize(new java.awt.Dimension(110, 32));
         btCancel.setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.btCancel.name")); // NOI18N
-        btCancel.setPreferredSize(new java.awt.Dimension(102, 32));
-        btCancel.setSize(new java.awt.Dimension(102, 32));
-        jPanel1.add(btCancel);
+        btCancel.setPreferredSize(new java.awt.Dimension(110, 32));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_END;
+        add(btCancel, gridBagConstraints);
 
-        jPanel2.setMinimumSize(new java.awt.Dimension(20, 32));
-        jPanel2.setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.jPanel2.name")); // NOI18N
-        jPanel2.setOpaque(false);
-        jPanel2.setPreferredSize(new java.awt.Dimension(255, 32));
-        jPanel2.setSize(new java.awt.Dimension(100, 32));
+        lbInstructions.setForeground(new java.awt.Color(255, 255, 255));
+        lbInstructions.setText(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.lbInstructions.text")); // NOI18N
+        lbInstructions.setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.lbInstructions.name")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weighty = 1.0;
+        add(lbInstructions, gridBagConstraints);
 
-        pbMeasurementInProgress.setIndeterminate(true);
-        pbMeasurementInProgress.setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.pbMeasurementInProgress.name")); // NOI18N
-        pbMeasurementInProgress.setPreferredSize(new java.awt.Dimension(200, 20));
-        jPanel2.add(pbMeasurementInProgress);
-
-        lbInvitation.setForeground(new java.awt.Color(255, 51, 51));
+        lbInvitation.setForeground(new java.awt.Color(255, 0, 0));
         lbInvitation.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbInvitation.setText(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.lbInvitation.text")); // NOI18N
         lbInvitation.setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.lbInvitation.name")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 11;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        add(lbInvitation, gridBagConstraints);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
-                .addContainerGap())
-            .addComponent(lbInvitation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lbInvitation, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        pbMeasurementInProgress.setIndeterminate(true);
+        pbMeasurementInProgress.setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.pbMeasurementInProgress.name")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        add(pbMeasurementInProgress, gridBagConstraints);
+
+        filler1.setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.filler1.name")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.insets = new java.awt.Insets(57, 0, 0, 0);
+        add(filler1, gridBagConstraints);
+
+        filler2.setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.filler2.name")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.weightx = 0.5;
+        add(filler2, gridBagConstraints);
+
+        filler3.setName(org.openide.util.NbBundle.getMessage(ControlPanel.class, "ControlPanel.filler3.name")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 10;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.weightx = 0.5;
+        add(filler3, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCancel;
     private javax.swing.JButton btContinue;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler2;
+    private javax.swing.Box.Filler filler3;
+    private javax.swing.JLabel lbInstructions;
     private javax.swing.JLabel lbInvitation;
     private javax.swing.JProgressBar pbMeasurementInProgress;
     // End of variables declaration//GEN-END:variables
-  }
+}
