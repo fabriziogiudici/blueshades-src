@@ -87,7 +87,7 @@ abstract class PropertyRenderer
 
         if (centerMeasurement != measurement)
           {
-            buffer.append(String.format(lowerFormat, delta));
+            buffer.append(String.format(lowerFormat, delta, 100.0 * delta / centerValue));
           }
 
         return buffer.toString();

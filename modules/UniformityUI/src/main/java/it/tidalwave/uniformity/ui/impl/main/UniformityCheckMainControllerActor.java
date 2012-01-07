@@ -117,7 +117,7 @@ public class UniformityCheckMainControllerActor
       {
         public TemperatureRenderer (final @Nonnull UniformityCheckMainPresentation presentation)
           {
-            super(presentation, "%.0f K", "\n\u0394 = %+.0f K");  
+            super(presentation, "%.0f K", "\n\u0394 = %+.0f K (%+.0f %%)");  
           }
         
         @Override
@@ -136,7 +136,7 @@ public class UniformityCheckMainControllerActor
       {
         public LuminanceRenderer (final UniformityCheckMainPresentation presentation)
           {
-            super(presentation, "%.0f cd/m\u00b2", "\n\u0394 = %+.0f cd/m\u00b2");  
+            super(presentation, "%.0f cd/m\u00b2", "\n\u0394 = %+.0f cd/m\u00b2 (%+.0f %%)");  
           }
         
         @Override
