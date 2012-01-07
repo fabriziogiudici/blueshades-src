@@ -87,6 +87,9 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
         lvDisplays.putClientProperty("List.selectionForeground", Color.WHITE);
         lvDisplays.setBackground(new Color(80, 80, 80));
         lvDisplays.setForeground(Color.WHITE);
+        
+        lbSelectedDisplayName.setText("");
+        lbSelectedProfile.setText("");
       }
 
     @Override
@@ -128,6 +131,20 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
       {
         assert EventQueue.isDispatchThread();
         measurementsPanel.renderMeasurements(measurements);  
+      }
+
+    @Override
+    public void renderDisplayName (final @Nonnull String displayName) 
+      {
+        assert EventQueue.isDispatchThread();
+        lbSelectedDisplayName.setText(displayName);
+      }
+
+    @Override
+    public void renderProfileName (final @Nonnull String profileName)   
+      {
+        assert EventQueue.isDispatchThread();
+        lbSelectedProfile.setText(profileName);
       }
     
     @Override
@@ -203,13 +220,15 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         pnDisplays = new javax.swing.JPanel();
         pnArchive = new javax.swing.JPanel();
+        lbSelectedDisplayName = new javax.swing.JLabel();
+        lbSelectedProfile = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(80, 80, 80));
         setBorder(javax.swing.BorderFactory.createEmptyBorder(16, 16, 8, 16));
         setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.name")); // NOI18N
         java.awt.GridBagLayout layout = new java.awt.GridBagLayout();
         layout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0};
-        layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
+        layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
         setLayout(layout);
 
         bgProperty.add(rbLuminance);
@@ -255,11 +274,12 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
         gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
         add(pnMeasurements, gridBagConstraints);
 
+        btStartMeasurements.setAction(startNewMeasurementAction);
         btStartMeasurements.setText(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.btStartMeasurements.text")); // NOI18N
         btStartMeasurements.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.btStartMeasurements.name")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridy = 16;
         gridBagConstraints.gridwidth = 7;
         add(btStartMeasurements, gridBagConstraints);
 
@@ -315,6 +335,26 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
         gridBagConstraints.gridy = 10;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         add(pnArchive, gridBagConstraints);
+
+        lbSelectedDisplayName.setForeground(new java.awt.Color(255, 255, 255));
+        lbSelectedDisplayName.setText(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.lbSelectedDisplayName.text")); // NOI18N
+        lbSelectedDisplayName.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.lbSelectedDisplayName.name")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        add(lbSelectedDisplayName, gridBagConstraints);
+
+        lbSelectedProfile.setForeground(new java.awt.Color(255, 255, 255));
+        lbSelectedProfile.setText(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.lbSelectedProfile.text")); // NOI18N
+        lbSelectedProfile.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.lbSelectedProfile.name")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        add(lbSelectedProfile, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgProperty;
@@ -322,6 +362,8 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
     private javax.swing.Box.Filler filler1;
     private javax.swing.JLabel lbArchive;
     private javax.swing.JLabel lbDisplaySelection;
+    private javax.swing.JLabel lbSelectedDisplayName;
+    private javax.swing.JLabel lbSelectedProfile;
     private javax.swing.JLabel lbUniformityMeasurements;
     private javax.swing.JPanel pnArchive;
     private javax.swing.JPanel pnDisplays;

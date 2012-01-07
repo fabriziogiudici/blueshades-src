@@ -22,10 +22,10 @@
  **********************************************************************************************************************/
 package it.tidalwave.argyll;
 
+import javax.annotation.Nonnull;
+import it.tidalwave.util.Finder;
 import it.tidalwave.actor.MessageSupport;
 import it.tidalwave.actor.annotation.Message;
-import it.tidalwave.util.Finder;
-import javax.annotation.Nonnull;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
@@ -44,10 +44,10 @@ import lombok.ToString;
 public class DisplayDiscoveryMessage extends MessageSupport
   {
     @Getter
-    private final Finder<Display> finder;  
+    private final Finder<ProfiledDisplay> finder;  
    
     @Nonnull
-    public Finder<Display> findDisplays()
+    public Finder<ProfiledDisplay> findDisplays()
       {
         return finder;  
       }

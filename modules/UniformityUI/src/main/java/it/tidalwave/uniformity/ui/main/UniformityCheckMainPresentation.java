@@ -49,6 +49,10 @@ public interface UniformityCheckMainPresentation
 
     public void populateMeasurements (@Nonnull String[][] measurements);
 
+    public void renderDisplayName (@Nonnull String displayName);
+
+    public void renderProfileName (@Nonnull String profileName);
+
     public void showWaitingOnDisplayList();
 
     public void showWaitingOnMeasurementsArchive();

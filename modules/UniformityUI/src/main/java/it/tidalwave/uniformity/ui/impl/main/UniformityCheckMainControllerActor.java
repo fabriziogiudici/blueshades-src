@@ -53,8 +53,8 @@ import it.tidalwave.swing.ActionMessageAdapter;
 import it.tidalwave.blueargyle.util.MutableProperty;
 import it.tidalwave.argyll.DisplayDiscoveryMessage;
 import it.tidalwave.argyll.DisplayDiscoveryQueryMessage;
-import it.tidalwave.argyll.Display;
 import it.tidalwave.argyll.DisplaySelectionMessage;
+import it.tidalwave.argyll.ProfiledDisplay;
 import it.tidalwave.uniformity.UniformityCheckRequest;
 import it.tidalwave.uniformity.UniformityMeasurement;
 import it.tidalwave.uniformity.UniformityMeasurementMessage;
@@ -90,7 +90,7 @@ public class UniformityCheckMainControllerActor
     
     /** The selected Display. */
     @CheckForNull
-    private Display selectedDisplay;
+    private ProfiledDisplay selectedDisplay;
 
     /** The measurements currently selected and rendered in details. */
     @CheckForNull
@@ -184,7 +184,7 @@ public class UniformityCheckMainControllerActor
     private static class DisplayActionProvider implements ActionProvider
       {
         @Nonnull
-        private final Display display;
+        private final ProfiledDisplay display;
         
         @Override @Nonnull
         public Action getPreferredAction() 
@@ -233,7 +233,7 @@ public class UniformityCheckMainControllerActor
         @Override @Nonnull
         public Lookup filter (final @Nonnull Lookup lookup)
           {
-            final Display display = lookup.lookup(Display.class);        
+            final ProfiledDisplay display = lookup.lookup(ProfiledDisplay.class);        
             return (display == null) ? lookup // e.g. the root node 
                                       : new ProxyLookup(Lookups.fixed(new DisplayActionProvider(display)), lookup);
           }
@@ -305,7 +305,7 @@ public class UniformityCheckMainControllerActor
         log.info("onDisplaySelection({})", message);
         selectedDisplay = message.getSelectedDisplay();
         presentation.showWaitingOnMeasurementsArchive();
-        archivedMeasurementsRequestor.start(new UniformityArchiveQuery(selectedDisplay)); 
+        archivedMeasurementsRequestor.start(new UniformityArchiveQuery(selectedDisplay.getDisplay())); 
       }  
     
     /*******************************************************************************************************************
@@ -318,6 +318,8 @@ public class UniformityCheckMainControllerActor
         archivedMeasurementsRequestor.stop();
         populateMeasurementsArchive(message.findMeasurements());
         presentation.hideWaitingOnMeasurementsArchive();
+        presentation.renderDisplayName(selectedDisplay.getDisplay().getDisplayName());
+        presentation.renderProfileName(selectedDisplay.getProfileName());
       }  
     
     /*******************************************************************************************************************
@@ -360,9 +362,9 @@ public class UniformityCheckMainControllerActor
      * 
      *
      ******************************************************************************************************************/
-    private void populateDisplays (final @Nonnull Finder<Display> finder)
+    private void populateDisplays (final @Nonnull Finder<ProfiledDisplay> finder)
       {
-        final Node presentationModel = new NodePresentationModel(new DefaultSimpleComposite<Display>(finder));
+        final Node presentationModel = new NodePresentationModel(new DefaultSimpleComposite<ProfiledDisplay>(finder));
         presentation.populateDisplays(new LookupFilterDecoratorNode(presentationModel, displaysCapabilityInjectorLookupFilter));
       }
     
@@ -385,6 +387,8 @@ public class UniformityCheckMainControllerActor
         if (selectedMeasurements != null)
           {
             propertyRenderers.get(selectedPropertyRendereIndex.getValue()).render(selectedMeasurements);
+            presentation.renderDisplayName(selectedMeasurements.getDisplay().getDisplay().getDisplayName());
+            presentation.renderProfileName(selectedMeasurements.getDisplay().getProfileName());
           }
       }
   }

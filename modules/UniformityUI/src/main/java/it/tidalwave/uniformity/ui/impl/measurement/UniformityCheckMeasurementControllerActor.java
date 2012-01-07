@@ -41,7 +41,6 @@ import it.tidalwave.swing.ActionMessageAdapter;
 import it.tidalwave.netbeans.util.Locator;
 import it.tidalwave.colorimetry.XYZColorPoint;
 import it.tidalwave.argyll.ArgyllFailureMessage;
-import it.tidalwave.argyll.Display;
 import it.tidalwave.argyll.MeasurementMessage;
 import it.tidalwave.argyll.MeasurementRequest;
 import it.tidalwave.argyll.SensorOperationInvitationMessage;
@@ -56,6 +55,7 @@ import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.concurrent.TimeUnit.*;
 import static it.tidalwave.actor.Collaboration.*;
+import it.tidalwave.argyll.ProfiledDisplay;
 import static it.tidalwave.uniformity.Position.xy;
 
 /***********************************************************************************************************************
@@ -91,7 +91,7 @@ public class UniformityCheckMeasurementControllerActor
     
     private UniformityCheckMeasurementPresentation presentation;
 
-    private Display display;
+    private ProfiledDisplay display;
     
     private final List<Position> positionSequence = new ArrayList<Position>();
 
@@ -224,7 +224,7 @@ public class UniformityCheckMeasurementControllerActor
         presentation.setGridSize(COLUMNS, ROWS);
         continueAction.setEnabled(false);
         cancelAction.setEnabled(false);
-        presentation.showUp(display.getGraphicsDevice());
+        presentation.showUp(display.getDisplay().getGraphicsDevice());
         presentation.renderControlPanelAt(DEFAULT_CONTROL_PANEL_POSITION);
       }
     

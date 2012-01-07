@@ -95,6 +95,11 @@
             <artifactId>it-tidalwave-blueargyle-test-commons</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.netbeans.modules</groupId>
+            <artifactId>org-netbeans-modules-masterfs</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>

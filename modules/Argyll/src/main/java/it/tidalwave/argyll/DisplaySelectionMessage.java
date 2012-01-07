@@ -40,5 +40,5 @@ import lombok.ToString;
 public class DisplaySelectionMessage extends MessageSupport
   {
     @Getter
-    private final Display selectedDisplay;  
+    private final ProfiledDisplay selectedDisplay;  
   }

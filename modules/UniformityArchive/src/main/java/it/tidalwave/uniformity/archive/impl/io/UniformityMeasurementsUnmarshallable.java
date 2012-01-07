@@ -36,6 +36,7 @@ import org.joda.time.format.ISODateTimeFormat;
 import it.tidalwave.role.Unmarshallable;
 import it.tidalwave.colorimetry.ColorTemperature;
 import it.tidalwave.argyll.Display;
+import it.tidalwave.argyll.ProfiledDisplay;
 import it.tidalwave.uniformity.Position;
 import it.tidalwave.uniformity.UniformityMeasurement;
 import it.tidalwave.uniformity.UniformityMeasurements;
@@ -52,6 +53,7 @@ import static it.tidalwave.uniformity.Position.xy;
 public class UniformityMeasurementsUnmarshallable implements Unmarshallable
   {
     private static final Pattern PATTERN_DISPLAY_NAME = Pattern.compile("D='([^']*)'");
+    private static final Pattern PATTERN_PROFILE_NAME = Pattern.compile("P='([^']*)'");
     private static final Pattern PATTERN_LUMINANCE = Pattern.compile("L\\[([0-9]*),([0-9]*)\\]= *([0-9]*)");
     private static final Pattern PATTERN_TEMPERATURE = Pattern.compile("T\\[([0-9]*),([0-9]*)\\]= *([0-9]*)");
     
@@ -75,6 +77,7 @@ public class UniformityMeasurementsUnmarshallable implements Unmarshallable
         final DateTime dateTime = ISODateTimeFormat.dateTimeNoMillis().parseDateTime(scanner.next().trim());
         
         String displayName = "";
+        String profileName = "";
         int luminance = 0;
         final Map<Position, UniformityMeasurement> map = new TreeMap<Position, UniformityMeasurement>();
         
@@ -87,6 +90,14 @@ public class UniformityMeasurementsUnmarshallable implements Unmarshallable
             if (displayNameMatcher.matches())
               {
                 displayName = displayNameMatcher.group(1);
+                continue;
+              }
+            
+            final Matcher profileNameMatcher = PATTERN_PROFILE_NAME.matcher(t);
+            
+            if (profileNameMatcher.matches())
+              {
+                profileName = profileNameMatcher.group(1);
                 continue;
               }
             
@@ -110,7 +121,7 @@ public class UniformityMeasurementsUnmarshallable implements Unmarshallable
               }
           }
 
-        return new UniformityMeasurements(new Display(displayName, -1), dateTime, map);
+        return new UniformityMeasurements(new ProfiledDisplay(new Display(displayName, -1), profileName), dateTime, map);
       }   
     
     /*******************************************************************************************************************

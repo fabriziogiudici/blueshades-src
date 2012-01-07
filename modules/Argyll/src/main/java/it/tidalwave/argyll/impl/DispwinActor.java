@@ -24,9 +24,14 @@ package it.tidalwave.argyll.impl;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
+import javax.annotation.Nonnegative;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.io.File;
 import java.io.IOException;
+import org.openide.filesystems.FileObject;
+import org.openide.filesystems.FileUtil;
 import it.tidalwave.util.spi.SimpleFinderSupport;
 import it.tidalwave.actor.annotation.Actor;
 import it.tidalwave.actor.annotation.ListensTo;
@@ -34,6 +39,7 @@ import it.tidalwave.blueargyle.util.Executor;
 import it.tidalwave.argyll.DisplayDiscoveryMessage;
 import it.tidalwave.argyll.DisplayDiscoveryQueryMessage;
 import it.tidalwave.argyll.Display;
+import it.tidalwave.argyll.ProfiledDisplay;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
@@ -60,23 +66,66 @@ public class DispwinActor
         log.trace("onDisplayDiscoveryQuery({})", message);
 
         final Executor executor = Executor.forExecutable("dispwin").withArgument("--");
-        final List<Display> displays = new ArrayList<Display>();
+        final List<ProfiledDisplay> displays = new ArrayList<ProfiledDisplay>();
         int screenDeviceIndex = 0;
+        
+        final List<FileObject> profileFiles = getProfileFiles();
         
         for (final String displayName : executor.start().waitForCompletion().getStderr().filteredBy("^ *[1-9] = '([^,]*),.*$"))
           {
             // FIXME: is it safe to assume that Argyll enumerates displays in the same order of Java ScreenDevices?
-            displays.add(new Display(displayName, screenDeviceIndex++)); 
+            final int index = screenDeviceIndex++;
+            final String profileName = getInstalledProfile(profileFiles, index);
+            displays.add(new ProfiledDisplay(new Display(displayName, index), profileName)); 
           }
         
-        new DisplayDiscoveryMessage(new SimpleFinderSupport<Display>() 
+        log.info(">>>> {}", displays);
+        
+        new DisplayDiscoveryMessage(new SimpleFinderSupport<ProfiledDisplay>() 
           {
             @Override
-            protected List<? extends Display> computeNeededResults() 
+            protected List<? extends ProfiledDisplay> computeNeededResults() 
               {
                 return displays;
               }  
               
           }).send();
+      }
+    
+    @Nonnull
+    private String getInstalledProfile (final @Nonnull List<FileObject> profileFiles, final @Nonnegative int index) 
+      throws IOException, InterruptedException
+      {
+        for (final FileObject profileFile : profileFiles)
+          {
+            final Executor executor = Executor.forExecutable("dispwin")
+                                              .withArgument("-d")
+                                              .withArgument(Integer.toString(index + 1))
+                                              .withArgument("-V")
+                                              .withArgument(profileFile.getPath());
+            if (!executor.start().waitForCompletion().getStdout().filteredBy("(.* IS loaded .*)").isEmpty())
+              {
+                return profileFile.getName(); 
+              }
+          } 
+        
+        return "";
+      }
+    
+    @Nonnull
+    private List<FileObject> getProfileFiles()
+      {
+        final FileObject root = FileUtil.toFileObject(new File("/Users/fritz/Library/ColorSync/Profiles")); // FIXME
+        final List<FileObject> result = new ArrayList<FileObject>();
+        
+        for (final FileObject f : Collections.list(root.getChildren(true)))
+          {
+            if (f.hasExt("icc"))
+              {
+                result.add(f);  
+              }
+          }
+        
+        return result;
       }
   }

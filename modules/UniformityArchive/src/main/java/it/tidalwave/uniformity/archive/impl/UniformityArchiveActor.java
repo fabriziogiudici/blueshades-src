@@ -80,7 +80,7 @@ public class UniformityArchiveActor
         log.info("onNewMeasurement({})", message);
         archive.add(message.getMeasurements());
         storeArchive();
-        new UniformityArchiveUpdatedMessage(archive.findMeasurementsByDisplay(message.getMeasurements().getDisplay())).send();
+        new UniformityArchiveUpdatedMessage(archive.findMeasurementsByDisplay(message.getMeasurements().getDisplay().getDisplay())).send();
       }
     
     /*******************************************************************************************************************

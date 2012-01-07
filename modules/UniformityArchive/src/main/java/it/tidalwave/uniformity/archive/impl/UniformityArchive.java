@@ -90,7 +90,7 @@ public class UniformityArchive extends AsLookupSupport
                 
                 for (final UniformityMeasurements measurements : contents)
                   { 
-                    if (measurements.getDisplay().getDisplayName().equals(display.getDisplayName()))
+                    if (measurements.getDisplay().getDisplay().getDisplayName().equals(display.getDisplayName()))
                       {
                         result.add(measurements);  
                       }
