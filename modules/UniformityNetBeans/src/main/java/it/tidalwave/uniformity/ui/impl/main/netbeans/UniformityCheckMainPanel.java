@@ -88,8 +88,8 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
         lvDisplays.setBackground(new Color(80, 80, 80));
         lvDisplays.setForeground(Color.WHITE);
         
-        lbSelectedDisplayName.setText("");
-        lbSelectedProfile.setText("");
+        lbSelectedDisplayName.setText(" ");
+        lbSelectedProfile.setText(" ");
       }
 
     @Override
@@ -144,7 +144,7 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
     public void renderProfileName (final @Nonnull String profileName)   
       {
         assert EventQueue.isDispatchThread();
-        lbSelectedProfile.setText(profileName);
+        lbSelectedProfile.setText(profileName.equals("") ? " " : profileName);
       }
     
     @Override
@@ -254,7 +254,10 @@ public class UniformityCheckMainPanel extends JPanel implements UniformityCheckM
         lbUniformityMeasurements.setFont(lbUniformityMeasurements.getFont().deriveFont(lbUniformityMeasurements.getFont().getStyle() | java.awt.Font.BOLD, lbUniformityMeasurements.getFont().getSize()+3));
         lbUniformityMeasurements.setForeground(new java.awt.Color(255, 255, 255));
         lbUniformityMeasurements.setText(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.lbUniformityMeasurements.text")); // NOI18N
+        lbUniformityMeasurements.setMaximumSize(new java.awt.Dimension(250, 20));
+        lbUniformityMeasurements.setMinimumSize(new java.awt.Dimension(250, 20));
         lbUniformityMeasurements.setName(org.openide.util.NbBundle.getMessage(UniformityCheckMainPanel.class, "UniformityCheckMainPanel.lbUniformityMeasurements.name")); // NOI18N
+        lbUniformityMeasurements.setPreferredSize(new java.awt.Dimension(250, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
