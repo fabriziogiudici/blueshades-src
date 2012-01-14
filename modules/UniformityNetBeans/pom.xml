@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- *******************************************************************************************************************
+ *
+ * blueArgyle - a Java UI for Argyll
+ * Copyright (C) 2011-2011 by Tidalwave s.a.s. (http://www.tidalwave.it)
+ *
+ ***********************************************************************************************************************
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations under the License.
+ *
+ ***********************************************************************************************************************
+ *
+ * WWW: http://blueargyle.java.net
+ * SCM: https://bitbucket.org/tidalwave/blueargyle-src
+ *
+ ******************************************************************************************************************* -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>it.tidalwave.blueargyle</groupId>
+        <artifactId>it-tidalwave-blueargyle-modules</artifactId>
+        <version>1.0-ALPHA-5-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <groupId>it.tidalwave.blueargyle</groupId>
+    <artifactId>it-tidalwave-uniformity-ui-netbeans</artifactId>
+    <packaging>nbm</packaging>
+    <version>1.0.3-SNAPSHOT</version>
+    <name>blueArgyle - Uniformity UI (NetBeans)</name>
+    <description>blueArgyle - Uniformity UI (NetBeans)</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>it.tidalwave.blueargyle</groupId>
+            <artifactId>it-tidalwave-uniformity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.blueargyle</groupId>
+            <artifactId>it-tidalwave-uniformity-ui</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.blueargyle</groupId>
+            <artifactId>it-tidalwave-argyll</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.blueargyle</groupId>
+            <artifactId>it-tidalwave-colorimetry</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.blueargyle</groupId>
+            <artifactId>it-tidalwave-blueargyle-commons</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.solidblue</groupId>
+            <artifactId>it-tidalwave-actor</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>it.tidalwave.netbeans</groupId>
+            <artifactId>it-tidalwave-netbeans-explorer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.netbeans</groupId>
+            <artifactId>it-tidalwave-netbeans-nodes</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.netbeans</groupId>
+            <artifactId>it-tidalwave-netbeans-swing</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.netbeans</groupId>
+            <artifactId>it-tidalwave-netbeans-util</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.thesefoolishthings</groupId>
+            <artifactId>it-tidalwave-util</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-explorer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-nodes</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-modules</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-windows</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-util-lookup</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-modules-settings</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-awt</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-util</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.kenai.nbpwr</groupId>
+            <artifactId>org-jdesktop-swingx</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.kenai.nbpwr</groupId>
+            <artifactId>org-slf4j-jdk14</artifactId>
+        </dependency>
+        
+        <!-- TEST DEPENDENCIES -->
+        <dependency>
+            <groupId>it.tidalwave.blueargyle</groupId>
+            <artifactId>it-tidalwave-uniformity-ui</artifactId>
+            <classifier>tests</classifier>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.blueargyle</groupId>
+            <artifactId>it-tidalwave-blueargyle-test-commons</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.netbeans</groupId>
+            <artifactId>it-tidalwave-netbeans-util-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.easytesting</groupId>
+            <artifactId>fest-swing</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>

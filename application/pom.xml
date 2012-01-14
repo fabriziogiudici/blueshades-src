@@ -1,0 +1,153 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>it.tidalwave.blueargyle</groupId>
+        <artifactId>it-tidalwave-blueargyle-modules</artifactId>
+        <version>1.0-ALPHA-5-SNAPSHOT</version>
+        <relativePath>../modules/pom.xml</relativePath>
+    </parent>
+
+    <groupId>it.tidalwave.blueargyle</groupId>
+    <artifactId>it-tidalwave-blueargyle-application</artifactId>
+    <version>1.0-ALPHA-5-SNAPSHOT</version>
+    <packaging>nbm-application</packaging>
+    <name>blueArgyle (application)</name>
+    <description>blueArgyle (application)</description>
+    
+    <dependencies>
+        <dependency>
+            <groupId>it.tidalwave.blueargyle</groupId>
+            <artifactId>it-tidalwave-blueargyle-branding</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.blueargyle</groupId>
+            <artifactId>it-tidalwave-blueargyle-application-customization</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.blueargyle</groupId>
+            <artifactId>it-tidalwave-blueargyle-home</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.blueargyle</groupId>
+            <artifactId>it-tidalwave-argyll</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.blueargyle</groupId>
+            <artifactId>it-tidalwave-uniformity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.blueargyle</groupId>
+            <artifactId>it-tidalwave-uniformity-ui</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.blueargyle</groupId>
+            <artifactId>it-tidalwave-uniformity-ui-netbeans</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.blueargyle</groupId>
+            <artifactId>it-tidalwave-uniformity-archive</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>it.tidalwave.netbeans</groupId>
+            <artifactId>it-tidalwave-netbeans-licensepanel</artifactId>
+        </dependency> 
+
+        <dependency>
+            <groupId>com.kenai.nbpwr</groupId>
+            <artifactId>ch-randelshofer-quaqua</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.netbeans</groupId>
+            <artifactId>it-tidalwave-netbeans-lookandfeel</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.netbeans</groupId>
+            <artifactId>it-tidalwave-netbeans-util</artifactId>
+        </dependency>
+
+<!-- Uncomment if you want to expose AutoUpdate services
+
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-modules-autoupdate-services</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-modules-autoupdate-ui</artifactId> 
+            <version>${netbeans.version}</version> 
+        </dependency>
+-->
+
+        <dependency>
+            <groupId>org.netbeans.modules</groupId>
+            <artifactId>org-netbeans-core-ui</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.modules</groupId>
+            <artifactId>org-netbeans-modules-applemenu</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.modules</groupId>
+            <artifactId>org-netbeans-modules-masterfs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.modules</groupId>
+            <artifactId>org-netbeans-core-nativeaccess</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>nbm-maven-plugin</artifactId>
+                <configuration>
+                    <etcConfFile>config/blueargyle.conf</etcConfFile>
+                </configuration>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>prepare-argyll-binaries</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>it.tidalwave.blueargyle</groupId>
+                                    <artifactId>argyll</artifactId>
+                                    <version>1.3.5.1</version>
+                                    <type>tgz</type>
+                                    <classifier>macosx-intel-32</classifier>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>${project.basedir}/target/appbundle/executables</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>it.tidalwave.blueargyle</groupId>
+                                    <artifactId>it-tidalwave-openjdk7</artifactId>
+                                    <version>b222-20111220</version>
+                                    <type>tgz</type>
+                                    <classifier>macosx-intel</classifier>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>${project.basedir}/target/appbundle/executables/OpenJDK7-b222-20111220-1/jre</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    
+</project>
+

@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+AutoUpdate-Show-In-Client: true
+OpenIDE-Module-Localizing-Bundle: it/tidalwave/blueargyle/branding/Bundle.properties

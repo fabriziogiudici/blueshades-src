@@ -1,0 +1,239 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>it.tidalwave.superpom</groupId>
+        <artifactId>superpom</artifactId>
+        <version>1.11</version>
+    </parent>
+
+    <groupId>it.tidalwave.blueargyle</groupId>
+    <artifactId>it-tidalwave-blueargyle</artifactId>
+    <version>1.0-ALPHA-5-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>blueArgyle (master)</name>
+    <description>blueArgyle - a Java UI for Argyll</description>
+
+    <url>http://blueargyle.java.net</url>
+    <inceptionYear>2011</inceptionYear>
+
+    <properties>
+        <scm.repo.url>ssh://hg@bitbucket.org/tidalwave/blueargyle-src</scm.repo.url>
+        <scm.repo.readonly.url>https://bitbucket.org/tidalwave/blueargyle-src</scm.repo.readonly.url>
+        <scm.repo.browse.url>https://bitbucket.org/tidalwave/blueargyle-src/src</scm.repo.browse.url>
+        <tidalwave.ci.view>blueArgyle</tidalwave.ci.view>
+        <tidalwave.issues>BAY</tidalwave.issues>
+        
+        <tft.lombok.version>0.10.6</tft.lombok.version>
+        <tft.test.listeners>it.tidalwave.util.test.TestLogger</tft.test.listeners>
+
+        <netbeans.brandingToken>blueargyle</netbeans.brandingToken>
+        <netbeans.cluster>blueargyle</netbeans.cluster>
+        <tft.appbundle.name>blueArgyle</tft.appbundle.name>
+        <tft.appbundle.signature>TDLW</tft.appbundle.signature>
+
+        <actors.version>1.0.2</actors.version>
+        <openbluesky.version>0.15</openbluesky.version>
+        <thesefoolishthings.version>1.19</thesefoolishthings.version>
+        <libraries.version>1.1.5</libraries.version>
+        <netbeans.version>RELEASE70</netbeans.version>
+        <logback.version>0.9.30</logback.version>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>releases-oss.sonatype.org</id>
+            <name>Sonatype Releases Repository</name>
+            <url>http://oss.sonatype.org/content/repositories/releases/</url>
+        </repository>
+        <repository>
+            <id>snapshots-oss.sonatype.org</id>
+            <name>Sonatype Snapshots Repository</name>
+            <url>http://oss.sonatype.org/content/repositories/snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>it.tidalwave.blueargyle</groupId>
+                <artifactId>it-tidalwave-blueargyle-application</artifactId>
+                <version>1.0-ALPHA-5-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.blueargyle</groupId>
+                <artifactId>it-tidalwave-blueargyle-home</artifactId>
+                <version>1.0.2-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.blueargyle</groupId>
+                <artifactId>it-tidalwave-blueargyle-application-customization</artifactId>
+                <version>1.0.4-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.blueargyle</groupId>
+                <artifactId>it-tidalwave-blueargyle-branding</artifactId>
+                <version>1.0.4-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.blueargyle</groupId>
+                <artifactId>it-tidalwave-argyll</artifactId>
+                <version>1.0.3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.blueargyle</groupId>
+                <artifactId>it-tidalwave-argyll</artifactId>
+                <classifier>tests</classifier>
+                <version>1.0.3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.blueargyle</groupId>
+                <artifactId>it-tidalwave-colorimetry</artifactId>
+                <version>1.0.3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.blueargyle</groupId>
+                <artifactId>it-tidalwave-uniformity</artifactId>
+                <version>1.0.3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.blueargyle</groupId>
+                <artifactId>it-tidalwave-uniformity</artifactId>
+                <classifier>tests</classifier>
+                <version>1.0.3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.blueargyle</groupId>
+                <artifactId>it-tidalwave-uniformity-archive</artifactId>
+                <version>1.0.2-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.blueargyle</groupId>
+                <artifactId>it-tidalwave-uniformity-ui</artifactId>
+                <version>1.0.3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.blueargyle</groupId>
+                <artifactId>it-tidalwave-uniformity-ui</artifactId>
+                <classifier>tests</classifier>
+                <version>1.0.3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.blueargyle</groupId>
+                <artifactId>it-tidalwave-uniformity-ui-netbeans</artifactId>
+                <version>1.0.3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.blueargyle</groupId>
+                <artifactId>it-tidalwave-blueargyle-commons</artifactId>
+                <version>1.0.3-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.blueargyle</groupId>
+                <artifactId>it-tidalwave-blueargyle-test-commons</artifactId>
+                <version>1.0.2-SNAPSHOT</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    
+    <mailingLists>
+        <mailingList>
+            <name>Continuous Integration</name>
+            <post>ci@blueargyle.java.net</post>
+            <archive>http://java.net/projects/blueargyle/lists/ci/archive</archive>
+        </mailingList>
+        <mailingList>
+            <name>Developers</name>
+            <post>dev@blueargyle.java.net</post>
+            <archive>http://java.net/projects/blueargyle/lists/dev/archive</archive>
+        </mailingList>
+    </mailingLists>
+
+    <!-- Repeated because of http://jira.codehaus.org/browse/SCM-442 -->
+    <scm>
+        <connection>scm:hg:${scm.repo.readonly.url}</connection>
+        <developerConnection>scm:hg:${scm.repo.effective.url}</developerConnection>
+        <url>${scm.repo.browse.url}</url>
+    </scm>
+
+    <build>
+        <plugins>
+           <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <properties>
+                        <property>
+                            <name>listener</name>
+                            <value>${tft.test.listeners}</value>
+                        </property>
+                    </properties>
+                </configuration>
+            </plugin>
+            <!-- Needed for setting that inherited = false -->
+            <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <inherited>false</inherited>
+                <configuration>
+                    <excludes>
+                        <exclude>LICENSE.txt</exclude>
+                        <exclude>**/*.mf</exclude>
+                        <exclude>**/.revision</exclude>
+                        <exclude>.hgtags</exclude>
+                        <exclude>.hgignore</exclude>
+                    </excludes>
+                </configuration>                
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>deploy-extra-artifacts</id>
+            <build>
+                <plugins>
+                    <!-- Attaches the extra artifacts prepared during the release process by the assembly plugin -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <configuration>
+                            <artifacts>
+                                <artifact>
+                                    <file>${project.build.directory}/${project.build.finalName}-project.tar.gz</file>
+                                    <type>tar.gz</type>
+                                    <classifier>project</classifier>
+                                </artifact>
+                                <artifact>
+                                    <file>${project.build.directory}/${project.build.finalName}-bin.tar.gz</file>
+                                    <type>tar.gz</type>
+                                    <classifier>bin</classifier>
+                                </artifact>
+                                <artifact>
+                                    <file>application/target/it-tidalwave-blueargyle-application-${project.version}.zip</file>
+                                    <type>zip</type>
+                                    <classifier>executable</classifier>
+                                </artifact>
+                            </artifacts>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <modules>
+        <module>application</module>
+        <module>branding</module>
+        <module>modules</module>
+    </modules>
+</project>
+
