@@ -22,7 +22,12 @@
  **********************************************************************************************************************/
 package it.tidalwave.blueargyle.profileevaluation.ui.impl.main.netbeans;
 
+import javax.annotation.Nonnull;
+import javax.swing.Action;
 import javax.swing.JPanel;
+import java.awt.EventQueue;
+import it.tidalwave.swing.SafeActionAdapter;
+import it.tidalwave.blueargyle.profileevaluation.ui.main.ProfileEvaluationMainPresentation;
 
 /***********************************************************************************************************************
  *
@@ -30,14 +35,31 @@ import javax.swing.JPanel;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class ProfileEvaluationMainPanel extends JPanel 
+public class ProfileEvaluationMainPanel extends JPanel implements ProfileEvaluationMainPresentation
   {
+    private final SafeActionAdapter startAction = new SafeActionAdapter();
+    
     public ProfileEvaluationMainPanel() 
       {
+        assert EventQueue.isDispatchThread();
         initComponents();
         setOpaque(true);
       }
 
+    @Override
+    public void bind (final @Nonnull Action startAction) 
+      {
+        this.startAction.bind(startAction);
+      }
+    
+    @Override
+    public void removeNotify()
+      {
+        assert EventQueue.isDispatchThread();
+        startAction.unbind();
+        super.removeNotify();
+      } 
+    
     /*******************************************************************************************************************
      * 
      * This method is called from within the constructor to initialize the form.
@@ -64,6 +86,7 @@ public class ProfileEvaluationMainPanel extends JPanel
         layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0};
         setLayout(layout);
 
+        btStart.setAction(startAction);
         btStart.setText(org.openide.util.NbBundle.getMessage(ProfileEvaluationMainPanel.class, "ProfileEvaluationMainPanel.btStart.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 6;
@@ -97,15 +120,15 @@ public class ProfileEvaluationMainPanel extends JPanel
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(70, 70, 70), 1, true));
         jPanel1.setOpaque(false);
 
-        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 242, Short.MAX_VALUE)
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 174, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 131, Short.MAX_VALUE)
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 38, Short.MAX_VALUE)
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();

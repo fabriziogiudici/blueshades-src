@@ -20,6 +20,16 @@
             <groupId>it.tidalwave.solidblue</groupId>
             <artifactId>it-tidalwave-actor</artifactId>
         </dependency>
+        
+        <dependency>
+            <artifactId>it-tidalwave-netbeans-util</artifactId>
+            <groupId>it.tidalwave.netbeans</groupId>
+        </dependency>
+
+        <dependency>
+            <artifactId>org-slf4j-jdk14</artifactId>
+            <groupId>com.kenai.nbpwr</groupId>
+        </dependency>
     </dependencies>
     
     <build>
@@ -31,6 +41,8 @@
                 <configuration>
                     <publicPackages>
                         <publicPackage>it.tidalwave.blueargyle.profileevaluation.ui</publicPackage>
+                        <publicPackage>it.tidalwave.blueargyle.profileevaluation.ui.main</publicPackage>
+                        <publicPackage>it.tidalwave.blueargyle.profileevaluation.ui.sequence</publicPackage>
                     </publicPackages>
                 </configuration>
             </plugin>

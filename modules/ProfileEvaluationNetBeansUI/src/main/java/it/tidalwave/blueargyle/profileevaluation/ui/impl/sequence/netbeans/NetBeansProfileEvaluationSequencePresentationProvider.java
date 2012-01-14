@@ -20,26 +20,33 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.blueargyle.profileevaluation.ui;
+package it.tidalwave.blueargyle.profileevaluation.ui.impl.sequence.netbeans;
 
+import javax.annotation.Nonnull;
+import it.tidalwave.swing.SwingSafeComponentBuilder;
+import it.tidalwave.blueargyle.profileevaluation.ui.sequence.ProfileEvaluationSequencePresentation;
+import it.tidalwave.blueargyle.profileevaluation.ui.sequence.ProfileEvaluationSequencePresentationProvider;
 import org.openide.util.lookup.ServiceProvider;
-import it.tidalwave.actor.spi.ActorGroupActivator;
-import it.tidalwave.blueargyle.profileevaluation.ui.impl.main.ProfileEvaluationMainControllerActor;
-import it.tidalwave.blueargyle.profileevaluation.ui.impl.sequence.ProfileEvaluationSequenceControllerActor;
-import static it.tidalwave.actor.spi.ActorActivator.*;
+import lombok.extern.slf4j.Slf4j;
+import static it.tidalwave.swing.SwingSafeComponentBuilder.*;
 
 /***********************************************************************************************************************
- *
- * @author  fritz
+ * 
+ * @stereotype Factory
+ * 
+ * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-@ServiceProvider(service=ActorGroupActivator.class)
-public class ProfileEvaluationActorActivator extends ActorGroupActivator
+@ServiceProvider(service=ProfileEvaluationSequencePresentationProvider.class) @Slf4j
+public class NetBeansProfileEvaluationSequencePresentationProvider implements ProfileEvaluationSequencePresentationProvider
   {
-    public ProfileEvaluationActorActivator()
+    private final SwingSafeComponentBuilder<NetBeansProfileEvaluationSequencePresentation, ProfileEvaluationSequencePresentation> builder = 
+            builderFor(NetBeansProfileEvaluationSequencePresentation.class, ProfileEvaluationSequencePresentation.class);
+    
+    @Override @Nonnull
+    public ProfileEvaluationSequencePresentation getPresentation()
       {
-        add(activatorFor(ProfileEvaluationMainControllerActor.class).withPoolSize(1));
-        add(activatorFor(ProfileEvaluationSequenceControllerActor.class).withPoolSize(1));
+        return builder.getInstance();
       }
   }
