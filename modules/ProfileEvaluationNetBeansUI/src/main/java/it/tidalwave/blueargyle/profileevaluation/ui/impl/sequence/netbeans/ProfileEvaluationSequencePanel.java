@@ -34,6 +34,10 @@ import it.tidalwave.blueargyle.profileevaluation.ui.sequence.ProfileEvaluationSe
 import it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans.GrangerRainbowPanel;
 import it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans.HiKeyPanel;
 import it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans.LoKeyPanel;
+import it.tidalwave.blueargyle.profileevaluation.ui.sequence.GrangerRainbowDescriptor;
+import it.tidalwave.blueargyle.profileevaluation.ui.sequence.HiKeyDescriptor;
+import it.tidalwave.blueargyle.profileevaluation.ui.sequence.LoKeyDescriptor;
+import it.tidalwave.blueargyle.profileevaluation.ui.sequence.SequenceStepDescriptor;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
@@ -43,28 +47,8 @@ import lombok.extern.slf4j.Slf4j;
  *
  **********************************************************************************************************************/
 @Slf4j
-public class ProfileEvaluationSequencePanel extends JPanel implements ProfileEvaluationSequencePresentation/***********************************************************************************************************************
- *
- * blueArgyle - a Java UI for Argyll
- * Copyright (C) 2011-2012 by Tidalwave s.a.s. (http://www.tidalwave.it)
- *
- ***********************************************************************************************************************
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
- * the License. You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
- * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations under the License.
- *
- ***********************************************************************************************************************
- *
- * WWW: http://blueargyle.java.net
- * SCM: https://bitbucket.org/tidalwave/blueargyle-src
- *
- **********************************************************************************************************************/
+public class ProfileEvaluationSequencePanel extends JPanel implements ProfileEvaluationSequencePresentation
+  {
     private final SafeActionAdapter nextAction = new SafeActionAdapter();
     
     private final SafeActionAdapter previousAction = new SafeActionAdapter();
@@ -116,22 +100,23 @@ public class ProfileEvaluationSequencePanel extends JPanel implements ProfileEva
      *
      ******************************************************************************************************************/
     @Override
-    public void renderEvaluationStep (final @Nonnull String next) 
+    public void renderEvaluationStep (final @Nonnull SequenceStepDescriptor step) 
       {
         assert EventQueue.isDispatchThread();
-        log.info("renderEvaluationStep({})", next);
+        log.info("renderEvaluationStep({})", step);
        
         JComponent c = null;
         
-        if ("hi".equals(next))
+        // FIXME: use a Factory
+        if (HiKeyDescriptor.class.equals(step.getClass()))
           {
             c = new HiKeyPanel();
           }
-        else if ("lo".equals(next))
+        else if (LoKeyDescriptor.class.equals(step.getClass()))
           {
             c = new LoKeyPanel();
           }
-        else if ("granger".equals(next))
+        else if (GrangerRainbowDescriptor.class.equals(step.getClass()))
           {
             c = new GrangerRainbowPanel();
           }
@@ -142,6 +127,9 @@ public class ProfileEvaluationSequencePanel extends JPanel implements ProfileEva
           {
             pnContents.add(c, BorderLayout.CENTER);
           }
+        
+        lbTitle.setText(step.getTitle());
+        lbInstructions.setText("<html>" + step.getInstructions() + "</html>");
         
         revalidate();
       }

@@ -22,6 +22,10 @@
  **********************************************************************************************************************/
 package it.tidalwave.blueargyle.profileevaluation.ui.impl.sequence;
 
+import it.tidalwave.blueargyle.profileevaluation.ui.sequence.SequenceStepDescriptor;
+import it.tidalwave.blueargyle.profileevaluation.ui.sequence.HiKeyDescriptor;
+import it.tidalwave.blueargyle.profileevaluation.ui.sequence.LoKeyDescriptor;
+import it.tidalwave.blueargyle.profileevaluation.ui.sequence.GrangerRainbowDescriptor;
 import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
 import javax.annotation.concurrent.NotThreadSafe;
@@ -74,9 +78,14 @@ public class ProfileEvaluationSequenceControllerActor
     
     private final Action previousAction = new ActionMessageAdapter("Previous", new PreviousMessage()); 
     
-    private final List<String> theList = Collections.unmodifiableList(Arrays.asList("hi", "lo", "granger"));
+    private final List<? extends SequenceStepDescriptor> stepSequence = Collections.unmodifiableList(Arrays.asList
+      (
+        new HiKeyDescriptor(),
+        new LoKeyDescriptor(),
+        new GrangerRainbowDescriptor()
+      ));
     
-    private ListIterator<String> current;
+    private ListIterator<? extends SequenceStepDescriptor> currentStep;
     
     /*******************************************************************************************************************
      * 
@@ -98,8 +107,8 @@ public class ProfileEvaluationSequenceControllerActor
       {
         log.info("onProfileEvaluationRequest({})", message);
         presentation.showUp(message.getDisplay().getDisplay().getGraphicsDevice());
-        current = theList.listIterator();
-        presentation.renderEvaluationStep(current.next());
+        currentStep = stepSequence.listIterator();
+        presentation.renderEvaluationStep(currentStep.next());
       }
     
     /*******************************************************************************************************************
@@ -110,9 +119,9 @@ public class ProfileEvaluationSequenceControllerActor
       {
         log.info("onNextMessage({})", message);
         
-        if (current.hasNext())
+        if (currentStep.hasNext())
           {
-            presentation.renderEvaluationStep(current.next());  
+            presentation.renderEvaluationStep(currentStep.next());  
           }
         else
           {
@@ -128,9 +137,9 @@ public class ProfileEvaluationSequenceControllerActor
       {
         log.info("onPreviousMessage({})", message);
         
-        if (current.hasPrevious())
+        if (currentStep.hasPrevious())
           {
-            presentation.renderEvaluationStep(current.previous());  
+            presentation.renderEvaluationStep(currentStep.previous());  
           }
         else
           {
