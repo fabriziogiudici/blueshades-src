@@ -42,7 +42,7 @@ public class StripPanel extends JPanel
       {
         setOpaque(true);
         setBackground(background);
-        setLayout(new GridLayout(1, Math.abs(lastShade - firstShade + 1) * 2));
+        setLayout(new GridLayout(1, (Math.abs(lastShade - firstShade) + 1) * 2));
         setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
         
         final int direction = (int)Math.signum(lastShade - firstShade);
