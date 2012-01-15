@@ -43,8 +43,28 @@ import lombok.extern.slf4j.Slf4j;
  *
  **********************************************************************************************************************/
 @Slf4j
-public class ProfileEvaluationSequencePanel extends JPanel implements ProfileEvaluationSequencePresentation
-  {
+public class ProfileEvaluationSequencePanel extends JPanel implements ProfileEvaluationSequencePresentation/***********************************************************************************************************************
+ *
+ * blueArgyle - a Java UI for Argyll
+ * Copyright (C) 2011-2012 by Tidalwave s.a.s. (http://www.tidalwave.it)
+ *
+ ***********************************************************************************************************************
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations under the License.
+ *
+ ***********************************************************************************************************************
+ *
+ * WWW: http://blueargyle.java.net
+ * SCM: https://bitbucket.org/tidalwave/blueargyle-src
+ *
+ **********************************************************************************************************************/
     private final SafeActionAdapter nextAction = new SafeActionAdapter();
     
     private final SafeActionAdapter previousAction = new SafeActionAdapter();
@@ -57,6 +77,7 @@ public class ProfileEvaluationSequencePanel extends JPanel implements ProfileEva
       {
         assert EventQueue.isDispatchThread();
         initComponents();
+        setOpaque(true);
       }
 
     /*******************************************************************************************************************
@@ -152,28 +173,33 @@ public class ProfileEvaluationSequencePanel extends JPanel implements ProfileEva
         btNext = new javax.swing.JButton();
         btPrevious = new javax.swing.JButton();
         pnContents = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lbInstructions = new javax.swing.JLabel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        lbTitle = new javax.swing.JLabel();
+        lbProfileName = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(80, 80, 80));
         setBorder(javax.swing.BorderFactory.createEmptyBorder(16, 16, 16, 16));
         setBounds(new java.awt.Rectangle(16, 16, 16, 16));
         java.awt.GridBagLayout layout = new java.awt.GridBagLayout();
         layout.columnWidths = new int[] {0, 5, 0, 5, 0};
-        layout.rowHeights = new int[] {0, 5, 0, 5, 0};
+        layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0};
         setLayout(layout);
 
         btNext.setAction(nextAction);
         btNext.setText(org.openide.util.NbBundle.getMessage(ProfileEvaluationSequencePanel.class, "ProfileEvaluationSequencePanel.btNext.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.BASELINE;
         add(btNext, gridBagConstraints);
 
         btPrevious.setAction(previousAction);
         btPrevious.setText(org.openide.util.NbBundle.getMessage(ProfileEvaluationSequencePanel.class, "ProfileEvaluationSequencePanel.btPrevious.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.BASELINE;
         add(btPrevious, gridBagConstraints);
 
         pnContents.setLayout(new java.awt.BorderLayout());
@@ -184,26 +210,51 @@ public class ProfileEvaluationSequencePanel extends JPanel implements ProfileEva
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         add(pnContents, gridBagConstraints);
 
-        jLabel1.setText(org.openide.util.NbBundle.getMessage(ProfileEvaluationSequencePanel.class, "ProfileEvaluationSequencePanel.jLabel1.text")); // NOI18N
+        lbInstructions.setForeground(new java.awt.Color(236, 236, 236));
+        lbInstructions.setText(org.openide.util.NbBundle.getMessage(ProfileEvaluationSequencePanel.class, "ProfileEvaluationSequencePanel.lbInstructions.text")); // NOI18N
+        lbInstructions.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        add(jLabel1, gridBagConstraints);
+        gridBagConstraints.weighty = 0.15;
+        add(lbInstructions, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         add(filler1, gridBagConstraints);
+
+        lbTitle.setFont(lbTitle.getFont().deriveFont(lbTitle.getFont().getStyle() | java.awt.Font.BOLD, lbTitle.getFont().getSize()+3));
+        lbTitle.setForeground(new java.awt.Color(236, 236, 236));
+        lbTitle.setText(org.openide.util.NbBundle.getMessage(ProfileEvaluationSequencePanel.class, "ProfileEvaluationSequencePanel.lbTitle.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(8, 0, 0, 0);
+        add(lbTitle, gridBagConstraints);
+
+        lbProfileName.setForeground(new java.awt.Color(236, 236, 236));
+        lbProfileName.setText(org.openide.util.NbBundle.getMessage(ProfileEvaluationSequencePanel.class, "ProfileEvaluationSequencePanel.lbProfileName.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.BASELINE;
+        add(lbProfileName, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btNext;
     private javax.swing.JButton btPrevious;
     private javax.swing.Box.Filler filler1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lbInstructions;
+    private javax.swing.JLabel lbProfileName;
+    private javax.swing.JLabel lbTitle;
     private javax.swing.JPanel pnContents;
     // End of variables declaration//GEN-END:variables
   }
