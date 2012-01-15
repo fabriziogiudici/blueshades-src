@@ -28,6 +28,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.color.ICC_Profile;
@@ -59,24 +60,28 @@ public final class TestImageFactory
                                                       final @Nonnegative int height,
                                                       final @Nonnull String profileName)
       {
-        log.info("createGrangerRainbow({}, {})", width, height);
+        log.info("createGrangerRainbow({}, {}, {})", new Object[] { width, height, profileName });
         
         final ICC_Profile profile = loadProfile(profileName);
         
         final EditableImage image = EditableImage.create(new CreateOp(width, height, BYTE, Color.WHITE));
         final BufferedImage bImage = image.getInnerProperty(BufferedImage.class);
         final Graphics g = bImage.createGraphics();
+        final Font font = g.getFont().deriveFont(10.0f);
+        final Font largeFont = g.getFont().deriveFont(16.0f).deriveFont(Font.BOLD);
         g.setColor(Color.BLACK);
         final int margin = 64;
         final int trimmedWidth = width - margin * 2;
         final int trimmedHeight = height - margin * 2;
         g.drawRect(margin - 1, margin - 1, trimmedWidth + 1, trimmedHeight + 1);
         
+        g.setFont(largeFont);
         drawString(g, "H", margin + trimmedWidth / 2, margin - 20 - 20, 0, CENTER);
         drawString(g, "B", 4, margin + trimmedHeight / 2, 0, LEADING);
         drawString(g, "S", width - 4, margin + trimmedHeight / 2, 0, TRAILING);
         drawString(g, getICCProfileName(profile), margin + trimmedWidth / 2, margin + trimmedHeight + margin / 2, 0, CENTER);
-                
+        g.setFont(font);
+        
         float xLabelDelta = (1f / 6) * 0.9999f;
         float yLabelDelta = (1f / 8) * 0.9999f;
         float xLabelNext = 0;
@@ -84,7 +89,7 @@ public final class TestImageFactory
         
         for (int y = 0; y < trimmedHeight; y++)
           {
-            final float yf = (float)y / trimmedHeight;
+            final float yf = (float)y / (trimmedHeight - 1);
             final float saturation = Math.min(1f, 2f * yf);
             final float brightness = Math.min(1f, 2f * (1f - yf));
             
@@ -97,7 +102,7 @@ public final class TestImageFactory
             
             for (int x = 0; x < trimmedWidth; x++)
               {
-                final float xf = (float)x / trimmedWidth;
+                final float xf = (float)x / (trimmedWidth - 1);
                 final float hue = 1.0f - xf;
                 
                 if ((y == 0) && (xf >= xLabelNext))
@@ -112,7 +117,7 @@ public final class TestImageFactory
         
         // execute() in place doesn't work
         final EditableImage image2 = image.execute2(new AssignColorProfileOp(profile));
-        image2.execute(new WriteOp("JPG", "/tmp/grangersynth " + getICCProfileName(profile) + ".jpg"));
+//        image2.execute(new WriteOp("JPG", "/tmp/grangersynth " + getICCProfileName(profile) + ".jpg"));
         return image2;
       }
     
