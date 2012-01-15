@@ -49,6 +49,11 @@ public class ProfileEvaluationMainPanel extends JPanel implements ProfileEvaluat
     
     private final SafeActionAdapter startAction = new SafeActionAdapter();
     
+    /*******************************************************************************************************************
+     *
+     * 
+     *
+     ******************************************************************************************************************/
     public ProfileEvaluationMainPanel() 
       {
         assert EventQueue.isDispatchThread();
@@ -66,12 +71,22 @@ public class ProfileEvaluationMainPanel extends JPanel implements ProfileEvaluat
         lvDisplays.setForeground(Color.WHITE);
       }
 
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc}
+     *
+     ******************************************************************************************************************/
     @Override
     public void bind (final @Nonnull Action startAction) 
       {
         this.startAction.bind(startAction);
       }
     
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc}
+     *
+     ******************************************************************************************************************/
     @Override
     public void populateDisplays (final @Nonnull PresentationModel presentationModel)
       {
@@ -79,6 +94,11 @@ public class ProfileEvaluationMainPanel extends JPanel implements ProfileEvaluat
         epDisplays.getExplorerManager().setRootContext((Node)presentationModel);
       }
     
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc}
+     *
+     ******************************************************************************************************************/
     @Override
     public void showWaitingOnDisplayList() 
       {
@@ -86,6 +106,11 @@ public class ProfileEvaluationMainPanel extends JPanel implements ProfileEvaluat
         epDisplays.setBusy(true);
       }
 
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc}
+     *
+     ******************************************************************************************************************/
     @Override
     public void hideWaitingOnDisplayList() 
       {
@@ -93,6 +118,11 @@ public class ProfileEvaluationMainPanel extends JPanel implements ProfileEvaluat
         epDisplays.setBusy(false);
       }
 
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc}
+     *
+     ******************************************************************************************************************/
     @Override
     public void renderProfileName (final @Nonnull String profileName) 
       {
@@ -100,6 +130,11 @@ public class ProfileEvaluationMainPanel extends JPanel implements ProfileEvaluat
         lbProfileName.setText(profileName);
       }
     
+    /*******************************************************************************************************************
+     *
+     * {@inheritDoc}
+     *
+     ******************************************************************************************************************/
     @Override
     public void removeNotify()
       {

@@ -53,8 +53,11 @@ import static it.tidalwave.image.EditableImage.DataType.*;
 @NoArgsConstructor @Slf4j
 public final class TestImageFactory 
   {
-    // See http://www.openphotographyforums.com/forums/showthread.php?t=12336
-    
+    /*******************************************************************************************************************
+     *
+     * See http://www.openphotographyforums.com/forums/showthread.php?t=12336
+     *
+     ******************************************************************************************************************/
     @Nonnull
     public static EditableImage createGrangerRainbow (final @Nonnegative int width,
                                                       final @Nonnegative int height,
@@ -121,6 +124,11 @@ public final class TestImageFactory
         return image2;
       }
     
+    /*******************************************************************************************************************
+     *
+     * .
+     *
+     ******************************************************************************************************************/
     @Nonnull
     private static ICC_Profile loadProfile (final @Nonnull String profileName)
       {
@@ -142,6 +150,11 @@ public final class TestImageFactory
           }
       }
     
+    /*******************************************************************************************************************
+     *
+     * .
+     *
+     ******************************************************************************************************************/
     private static void drawString (final @Nonnull Graphics g, 
                                     final @Nonnull String string,
                                     final @Nonnull int x,
