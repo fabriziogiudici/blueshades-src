@@ -26,15 +26,16 @@ import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
 import javax.annotation.concurrent.NotThreadSafe;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 import javax.swing.Action;
-import it.tidalwave.swing.ActionMessageAdapter;
 import it.tidalwave.actor.MessageSupport;
 import it.tidalwave.actor.annotation.Actor;
 import it.tidalwave.actor.annotation.ListensTo;
 import it.tidalwave.actor.annotation.Message;
 import it.tidalwave.netbeans.util.Locator;
+import it.tidalwave.swing.ActionMessageAdapter;
 import it.tidalwave.blueargyle.profileevaluation.ProfileEvaluationRequest;
 import it.tidalwave.blueargyle.profileevaluation.ui.sequence.ProfileEvaluationSequencePresentation;
 import it.tidalwave.blueargyle.profileevaluation.ui.sequence.ProfileEvaluationSequencePresentationProvider;
@@ -73,7 +74,7 @@ public class ProfileEvaluationSequenceControllerActor
     
     private final Action previousAction = new ActionMessageAdapter("Previous", new PreviousMessage()); 
     
-    private final List<String> theList = Arrays.asList("hi", "lo", "granger");
+    private final List<String> theList = Collections.unmodifiableList(Arrays.asList("hi", "lo", "granger"));
     
     private ListIterator<String> current;
     

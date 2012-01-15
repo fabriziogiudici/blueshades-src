@@ -25,7 +25,10 @@ package it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /***********************************************************************************************************************
@@ -41,17 +44,49 @@ public class StripPanel extends JPanel
         setOpaque(true);
         setBackground(background);
         setLayout(new GridLayout(1, Math.abs(lastShade - firstShade + 1) * 2));
+        setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+        setMaximumSize(new Dimension(600, 200));
         
-        for (int shade = firstShade; shade != lastShade; shade += Math.signum(lastShade - firstShade))
+        final int direction = (int)Math.signum(lastShade - firstShade);
+        
+        for (int shade = firstShade; shade != lastShade + direction; shade += direction)
           {
-            final JPanel strip = new JPanel();
-            strip.setOpaque(true);
-            strip.setBackground(new Color(shade, shade, shade));
-            add(strip);
             final JPanel filler = new JPanel();
             filler.setOpaque(true);
             filler.setBackground(background);
             add(filler);
+            
+            final JPanel strip = new JPanel();
+            strip.setOpaque(true);
+            strip.setBackground(new Color(shade, shade, shade));
+            add(strip);
+            final JLabel label = new JLabel(toString(shade));
+            label.setForeground(inverse(background));
+            strip.add(label);
           }
+      }
+
+    @Nonnull
+    private static String toString (final int shade) 
+      {
+        final StringBuilder buffer = new StringBuilder();
+        buffer.append("<html>");
+        String separator = "";
+        
+        for (final char c : ("" + shade).toCharArray())
+          {
+            buffer.append(separator).append(c); 
+            separator ="<br>";
+          }
+        
+        buffer.append("</html>");
+        
+        return buffer.toString();
+      }
+    
+    @Nonnull
+    private static Color inverse (final @Nonnull Color c)
+      {
+        return new Color(255 - c.getRed(), 255 - c.getGreen(), 255 - c.getBlue());  
       }
   }
