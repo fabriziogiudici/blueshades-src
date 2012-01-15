@@ -22,18 +22,18 @@
  **********************************************************************************************************************/
 package it.tidalwave.blueargyle.profileevaluation.ui.impl.sequence.netbeans;
 
-import it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans.GrangerRainbowPanel;
-import it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans.HiKeyPanel;
-import it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans.LoKeyPanel;
 import javax.annotation.Nonnull;
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.GraphicsDevice;
 import javax.swing.Action;
-import javax.swing.JPanel;
-import it.tidalwave.blueargyle.profileevaluation.ui.sequence.ProfileEvaluationSequencePresentation;
-import it.tidalwave.swing.SafeActionAdapter;
-import java.awt.BorderLayout;
 import javax.swing.JComponent;
+import javax.swing.JPanel;
+import it.tidalwave.swing.SafeActionAdapter;
+import it.tidalwave.blueargyle.profileevaluation.ui.sequence.ProfileEvaluationSequencePresentation;
+import it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans.GrangerRainbowPanel;
+import it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans.HiKeyPanel;
+import it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans.LoKeyPanel;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
