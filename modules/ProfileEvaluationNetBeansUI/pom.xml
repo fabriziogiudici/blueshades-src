@@ -28,6 +28,10 @@
         
         <dependency>
             <groupId>it.tidalwave.blueargyle</groupId>
+            <artifactId>it-tidalwave-blueargly-profileevaluation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.blueargyle</groupId>
             <artifactId>it-tidalwave-blueargly-profileevaluation-ui</artifactId>
         </dependency>
         <dependency>

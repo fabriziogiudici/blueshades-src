@@ -31,7 +31,7 @@ import javax.swing.SwingWorker;
 import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.painter.ImagePainter;
 import it.tidalwave.image.EditableImage;
-import it.tidalwave.blueargyle.profileevaluation.ui.TestImageFactory;
+import it.tidalwave.blueargyle.profileevaluation.TestImageFactory;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
@@ -60,7 +60,8 @@ public class GrangerRainbowPanel extends JXPanel
                 @Override @Nonnull
                 protected EditableImage doInBackground() 
                   {
-                    return TestImageFactory.createGrangerRainbow(getWidth(), getHeight());
+//                    return TestImageFactory.createGrangerRainbow(getWidth(), getHeight(), "MelissaRGB");
+                    return TestImageFactory.createGrangerRainbow(getWidth(), getHeight(), "Adobe98");
                   }
 
                 @Override
@@ -83,7 +84,7 @@ public class GrangerRainbowPanel extends JXPanel
                         e.printStackTrace();
                       }
                   }
-            }.execute();
+              }.execute();
           }
         
         super.paint(g);

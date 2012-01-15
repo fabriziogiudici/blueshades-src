@@ -33,6 +33,16 @@
             <groupId>it.tidalwave.solidblue</groupId>
             <artifactId>it-tidalwave-actor</artifactId>
         </dependency>
+        
+        <dependency>
+            <groupId>org.imajine</groupId>
+            <artifactId>org-imajine-image-nbm</artifactId>
+        </dependency>
+        
+        <dependency>
+            <artifactId>org-slf4j-jdk14</artifactId>
+            <groupId>com.kenai.nbpwr</groupId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -44,6 +54,8 @@
                 <configuration>
                     <publicPackages>
                         <publicPackage>it.tidalwave.blueargyle.profileevaluation</publicPackage>
+                        <publicPackage>it.tidalwave.blueargyle.profileevaluation.profiles</publicPackage>
+                        <publicPackage>it.tidalwave.blueargyle.profileevaluation.profiles.alternate</publicPackage>
                     </publicPackages>
                 </configuration>
             </plugin>
