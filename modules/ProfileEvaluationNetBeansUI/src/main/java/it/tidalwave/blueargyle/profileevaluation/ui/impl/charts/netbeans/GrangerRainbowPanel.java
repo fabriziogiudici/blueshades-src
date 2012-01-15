@@ -25,6 +25,7 @@ package it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -45,10 +46,17 @@ public class GrangerRainbowPanel extends JXPanel
   {
     @CheckForNull
     private BufferedImage image;
+
+    public GrangerRainbowPanel()
+      {
+        assert EventQueue.isDispatchThread();
+      }
     
     @Override
     public void paint (final @Nonnull Graphics g) 
       {
+        assert EventQueue.isDispatchThread();
+        
         if (image == null)
           {
             new SwingWorker<Void, Void>() 
@@ -86,6 +94,7 @@ public class GrangerRainbowPanel extends JXPanel
     
     private void createBackgroundImage()
       {
+        assert !EventQueue.isDispatchThread();
         log.info("createBackgroundImage()");
         final int width = getWidth();
         final int height = getHeight();
