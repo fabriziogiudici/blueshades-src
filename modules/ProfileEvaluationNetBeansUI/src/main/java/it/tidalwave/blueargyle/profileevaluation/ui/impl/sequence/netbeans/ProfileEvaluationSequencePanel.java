@@ -22,6 +22,9 @@
  **********************************************************************************************************************/
 package it.tidalwave.blueargyle.profileevaluation.ui.impl.sequence.netbeans;
 
+import it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans.GrangerRainbowPanel;
+import it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans.HiKeyPanel;
+import it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans.LoKeyPanel;
 import javax.annotation.Nonnull;
 import java.awt.EventQueue;
 import java.awt.GraphicsDevice;
@@ -29,6 +32,9 @@ import javax.swing.Action;
 import javax.swing.JPanel;
 import it.tidalwave.blueargyle.profileevaluation.ui.sequence.ProfileEvaluationSequencePresentation;
 import it.tidalwave.swing.SafeActionAdapter;
+import java.awt.BorderLayout;
+import javax.swing.JComponent;
+import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
  *
@@ -36,18 +42,27 @@ import it.tidalwave.swing.SafeActionAdapter;
  * @version $Id$
  *
  **********************************************************************************************************************/
+@Slf4j
 public class ProfileEvaluationSequencePanel extends JPanel implements ProfileEvaluationSequencePresentation
   {
     private final SafeActionAdapter nextAction = new SafeActionAdapter();
     
     private final SafeActionAdapter previousAction = new SafeActionAdapter();
     
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
     public ProfileEvaluationSequencePanel() 
       {
         assert EventQueue.isDispatchThread();
         initComponents();
       }
 
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
     @Override
     public void bind (final @Nonnull Action nextAction, final @Nonnull Action previousAction) 
       {
@@ -80,6 +95,41 @@ public class ProfileEvaluationSequencePanel extends JPanel implements ProfileEva
      *
      ******************************************************************************************************************/
     @Override
+    public void renderEvaluationStep (final @Nonnull String next) 
+      {
+        assert EventQueue.isDispatchThread();
+        log.info("renderEvaluationStep({})", next);
+       
+        JComponent c = null;
+        
+        if ("hi".equals(next))
+          {
+            c = new HiKeyPanel();
+          }
+        else if ("lo".equals(next))
+          {
+            c = new LoKeyPanel();
+          }
+        else if ("granger".equals(next))
+          {
+            c = new GrangerRainbowPanel();
+          }
+        
+        pnContents.removeAll();
+        
+        if (c != null)
+          {
+            pnContents.add(c, BorderLayout.CENTER);
+          }
+        
+        revalidate();
+      }
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    @Override
     public void removeNotify()
       {
         assert EventQueue.isDispatchThread();
@@ -101,7 +151,7 @@ public class ProfileEvaluationSequencePanel extends JPanel implements ProfileEva
 
         btNext = new javax.swing.JButton();
         btPrevious = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        pnContents = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
 
@@ -126,23 +176,13 @@ public class ProfileEvaluationSequencePanel extends JPanel implements ProfileEva
         gridBagConstraints.gridy = 4;
         add(btPrevious, gridBagConstraints);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 368, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 213, Short.MAX_VALUE)
-        );
-
+        pnContents.setLayout(new java.awt.BorderLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        add(jPanel1, gridBagConstraints);
+        add(pnContents, gridBagConstraints);
 
         jLabel1.setText(org.openide.util.NbBundle.getMessage(ProfileEvaluationSequencePanel.class, "ProfileEvaluationSequencePanel.jLabel1.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -164,6 +204,6 @@ public class ProfileEvaluationSequencePanel extends JPanel implements ProfileEva
     private javax.swing.JButton btPrevious;
     private javax.swing.Box.Filler filler1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel pnContents;
     // End of variables declaration//GEN-END:variables
   }

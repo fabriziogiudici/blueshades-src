@@ -38,5 +38,7 @@ public interface ProfileEvaluationSequencePresentation
 
     public void showUp (@Nonnull GraphicsDevice graphicsDevice);
     
-    public void dismiss();    
+    public void dismiss();
+
+    public void renderEvaluationStep (@Nonnull String next);
   }

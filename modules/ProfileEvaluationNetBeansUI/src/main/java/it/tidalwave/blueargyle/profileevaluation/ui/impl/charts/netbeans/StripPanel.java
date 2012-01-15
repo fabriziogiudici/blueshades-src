@@ -48,6 +48,10 @@ public class StripPanel extends JPanel
             strip.setOpaque(true);
             strip.setBackground(new Color(shade, shade, shade));
             add(strip);
+            final JPanel filler = new JPanel();
+            filler.setOpaque(true);
+            filler.setBackground(background);
+            add(filler);
           }
       }
   }

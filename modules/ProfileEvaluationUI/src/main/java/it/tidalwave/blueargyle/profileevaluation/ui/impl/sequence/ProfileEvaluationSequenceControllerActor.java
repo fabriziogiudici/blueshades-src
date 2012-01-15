@@ -25,15 +25,20 @@ package it.tidalwave.blueargyle.profileevaluation.ui.impl.sequence;
 import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
 import javax.annotation.concurrent.NotThreadSafe;
-import java.awt.event.ActionEvent;
-import javax.swing.AbstractAction;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ListIterator;
 import javax.swing.Action;
+import it.tidalwave.swing.ActionMessageAdapter;
+import it.tidalwave.actor.MessageSupport;
 import it.tidalwave.actor.annotation.Actor;
 import it.tidalwave.actor.annotation.ListensTo;
-import it.tidalwave.blueargyle.profileevaluation.ProfileEvaluationRequest;
+import it.tidalwave.actor.annotation.Message;
 import it.tidalwave.netbeans.util.Locator;
+import it.tidalwave.blueargyle.profileevaluation.ProfileEvaluationRequest;
 import it.tidalwave.blueargyle.profileevaluation.ui.sequence.ProfileEvaluationSequencePresentation;
 import it.tidalwave.blueargyle.profileevaluation.ui.sequence.ProfileEvaluationSequencePresentationProvider;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
@@ -48,39 +53,29 @@ import lombok.extern.slf4j.Slf4j;
 @Actor(threadSafe=false) @NotThreadSafe @Slf4j
 public class ProfileEvaluationSequenceControllerActor
   {
+    @Message(outOfBand=true) @ToString
+    private static class NextMessage extends MessageSupport
+      {
+      }
+    
+    @Message(outOfBand=true) @ToString
+    private static class PreviousMessage extends MessageSupport
+      {
+      }
+    
     // FIXME: use @Inject
     private final ProfileEvaluationSequencePresentationProvider presentationProvider = Locator.find(ProfileEvaluationSequencePresentationProvider.class);
     
     /** The presentation controlled by this class */
     private ProfileEvaluationSequencePresentation presentation;
     
-    /*******************************************************************************************************************
-     * 
-     * 
-     *
-     ******************************************************************************************************************/
-    private final Action previousAction = new AbstractAction("Previous") 
-      {
-        @Override
-        public void actionPerformed (final @Nonnull ActionEvent event) 
-          {
-            log.info("PREVIOUS");
-          }
-      };
+    private final Action nextAction = new ActionMessageAdapter("Next", new NextMessage()); 
     
-    /*******************************************************************************************************************
-     * 
-     * 
-     *
-     ******************************************************************************************************************/
-    private final Action nextAction = new AbstractAction("Next") 
-      {
-        @Override
-        public void actionPerformed (final @Nonnull ActionEvent event) 
-          {
-            log.info("NEXT");
-          }
-      };
+    private final Action previousAction = new ActionMessageAdapter("Previous", new PreviousMessage()); 
+    
+    private final List<String> theList = Arrays.asList("hi", "lo", "granger");
+    
+    private ListIterator<String> current;
     
     /*******************************************************************************************************************
      * 
@@ -91,7 +86,7 @@ public class ProfileEvaluationSequenceControllerActor
       {
         log.info("initialize()");
         presentation = presentationProvider.getPresentation();
-        presentation.bind(nextAction, previousAction);        
+        presentation.bind(nextAction, previousAction);    
       }
     
     /*******************************************************************************************************************
@@ -102,5 +97,43 @@ public class ProfileEvaluationSequenceControllerActor
       {
         log.info("onProfileEvaluationRequest({})", message);
         presentation.showUp(message.getDisplay().getDisplay().getGraphicsDevice());
+        current = theList.listIterator();
+        presentation.renderEvaluationStep(current.next());
+      }
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    private void onNextMessage (final @Nonnull @ListensTo NextMessage message)
+      {
+        log.info("onNextMessage({})", message);
+        
+        if (current.hasNext())
+          {
+            presentation.renderEvaluationStep(current.next());  
+          }
+        else
+          {
+            presentation.dismiss();  
+          }
+      }
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    private void onPreviousMessage (final @Nonnull @ListensTo PreviousMessage message)
+      {
+        log.info("onPreviousMessage({})", message);
+        
+        if (current.hasPrevious())
+          {
+            presentation.renderEvaluationStep(current.previous());  
+          }
+        else
+          {
+            presentation.dismiss();  
+          }
       }
   }

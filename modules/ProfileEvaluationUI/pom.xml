@@ -22,6 +22,10 @@
         </dependency>
         <dependency>
             <groupId>it.tidalwave.blueargyle</groupId>
+            <artifactId>it-tidalwave-blueargyle-commons</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.blueargyle</groupId>
             <artifactId>it-tidalwave-argyll</artifactId>
         </dependency>
         

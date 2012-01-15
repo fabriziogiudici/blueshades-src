@@ -22,6 +22,7 @@
  **********************************************************************************************************************/
 package it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /***********************************************************************************************************************
@@ -34,5 +35,6 @@ public class GrangerRainbowPanel extends JPanel
   {
     public GrangerRainbowPanel() 
       {
+        add(new JLabel("Granger"));
       }
   }
