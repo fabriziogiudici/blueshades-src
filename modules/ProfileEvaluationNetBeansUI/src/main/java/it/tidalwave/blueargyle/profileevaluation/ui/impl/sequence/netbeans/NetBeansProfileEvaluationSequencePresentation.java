@@ -23,8 +23,12 @@
 package it.tidalwave.blueargyle.profileevaluation.ui.impl.sequence.netbeans;
 
 import javax.annotation.Nonnull;
-import javax.swing.Action;
+import java.awt.EventQueue;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import javax.swing.JFrame;
 import it.tidalwave.blueargyle.profileevaluation.ui.sequence.ProfileEvaluationSequencePresentation;
+import lombok.Delegate;
 
 /***********************************************************************************************************************
  *
@@ -34,8 +38,53 @@ import it.tidalwave.blueargyle.profileevaluation.ui.sequence.ProfileEvaluationSe
  **********************************************************************************************************************/
 public class NetBeansProfileEvaluationSequencePresentation implements ProfileEvaluationSequencePresentation
   {
-    @Override
-    public void bind(Action nextAction, Action previousAction)
+    private static interface DelegateExclusions
       {
+        public void showUp (GraphicsDevice graphicsDevice);
+        public void dismiss();    
+      }
+    
+    protected final JFrame frame = new JFrame();
+    
+    @Delegate(types=ProfileEvaluationSequencePresentation.class, excludes=DelegateExclusions.class)
+    protected final ProfileEvaluationSequencePanel panel = new ProfileEvaluationSequencePanel();
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    public NetBeansProfileEvaluationSequencePresentation()
+      {
+        assert EventQueue.isDispatchThread();
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setUndecorated(true); 
+        frame.add(panel);
+      }
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    @Override
+    public void showUp (final @Nonnull GraphicsDevice graphicsDevice)
+      {
+        assert EventQueue.isDispatchThread();
+        panel.showUp(graphicsDevice);
+//        graphicsDevice.setFullScreenWindow(frame);
+        GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(frame);
+        frame.setVisible(true);
+      }
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    @Override
+    public void dismiss()
+      {
+        assert EventQueue.isDispatchThread();
+        frame.setVisible(false);
+        frame.dispose();
+        panel.dismiss();
       }
   }

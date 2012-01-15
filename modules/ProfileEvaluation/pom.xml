@@ -3,44 +3,38 @@
     <modelVersion>4.0.0</modelVersion>
     
     <parent>
-        <groupId>it.tidalwave.blueargyle</groupId>
         <artifactId>it-tidalwave-blueargyle-modules</artifactId>
+        <groupId>it.tidalwave.blueargyle</groupId>
         <version>1.0-ALPHA-5-SNAPSHOT</version>
     </parent>
 
     <groupId>it.tidalwave.blueargyle</groupId>
-    <artifactId>it-tidalwave-blueargly-profileevaluation-ui</artifactId>
-    <packaging>nbm</packaging>
+    <artifactId>it-tidalwave-blueargly-profileevaluation</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <name>blueArgyle - Profile Evaluation UI</name>
-    <description>blueArgyle - Profile Evaluation UI</description>
+    <packaging>nbm</packaging>
+
+    <name>blueArgyle - Profile Evaluation</name>
+    <description>blueArgyle - Profile Evaluation</description>
 
     <dependencies>
         <dependency>
             <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-blueargly-profileevaluation</artifactId>
+            <artifactId>it-tidalwave-argyll</artifactId>
         </dependency>
         <dependency>
             <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-argyll</artifactId>
+            <artifactId>it-tidalwave-colorimetry</artifactId>
         </dependency>
-        
+        <dependency>
+            <groupId>it.tidalwave.blueargyle</groupId>
+            <artifactId>it-tidalwave-blueargyle-commons</artifactId>
+        </dependency>
         <dependency>
             <groupId>it.tidalwave.solidblue</groupId>
             <artifactId>it-tidalwave-actor</artifactId>
         </dependency>
-        
-        <dependency>
-            <groupId>it.tidalwave.netbeans</groupId>
-            <artifactId>it-tidalwave-netbeans-util</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.kenai.nbpwr</groupId>
-            <artifactId>org-slf4j-jdk14</artifactId>
-        </dependency>
     </dependencies>
-    
+
     <build>
         <plugins>
             <plugin>
@@ -49,9 +43,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <publicPackages>
-                        <publicPackage>it.tidalwave.blueargyle.profileevaluation.ui</publicPackage>
-                        <publicPackage>it.tidalwave.blueargyle.profileevaluation.ui.main</publicPackage>
-                        <publicPackage>it.tidalwave.blueargyle.profileevaluation.ui.sequence</publicPackage>
+                        <publicPackage>it.tidalwave.blueargyle.profileevaluation</publicPackage>
                     </publicPackages>
                 </configuration>
             </plugin>

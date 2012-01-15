@@ -20,23 +20,29 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.blueargyle.profileevaluation.ui.sequence;
+package it.tidalwave.blueargyle.profileevaluation;
 
 import javax.annotation.Nonnull;
-import javax.swing.Action;
-import java.awt.GraphicsDevice;
+import it.tidalwave.actor.MessageSupport;
+import it.tidalwave.actor.annotation.Message;
+import it.tidalwave.argyll.ProfiledDisplay;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 /***********************************************************************************************************************
- *
- * @author  fritz
+ * 
+ * A request for starting the Uniformity Check.
+ * 
+ * @stereotype Message
+ * 
+ * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public interface ProfileEvaluationSequencePresentation 
+@Message @RequiredArgsConstructor @ToString
+public class ProfileEvaluationRequest extends MessageSupport
   {
-    public void bind (@Nonnull Action nextAction, @Nonnull Action previousAction);
-
-    public void showUp (@Nonnull GraphicsDevice graphicsDevice);
-    
-    public void dismiss();    
+    @Nonnull @Getter    
+    private final ProfiledDisplay display;
   }

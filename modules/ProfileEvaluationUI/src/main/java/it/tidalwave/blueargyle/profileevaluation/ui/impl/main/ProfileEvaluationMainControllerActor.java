@@ -30,6 +30,9 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import it.tidalwave.netbeans.util.Locator;
 import it.tidalwave.actor.annotation.Actor;
+import it.tidalwave.argyll.Display;
+import it.tidalwave.argyll.ProfiledDisplay;
+import it.tidalwave.blueargyle.profileevaluation.ProfileEvaluationRequest;
 import it.tidalwave.blueargyle.profileevaluation.ui.main.ProfileEvaluationMainPresentation;
 import it.tidalwave.blueargyle.profileevaluation.ui.main.ProfileEvaluationMainPresentationProvider;
 import lombok.extern.slf4j.Slf4j;
@@ -62,7 +65,7 @@ public class ProfileEvaluationMainControllerActor
         @Override
         public void actionPerformed (final @Nonnull ActionEvent event) 
           {
-            log.info("START");
+            new ProfileEvaluationRequest(new ProfiledDisplay(new Display("dummy", 0), "dummy")).send(); // FIXME
           }
       };
     

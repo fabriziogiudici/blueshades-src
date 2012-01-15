@@ -24,6 +24,7 @@ package it.tidalwave.blueargyle.profileevaluation.ui.impl.sequence.netbeans;
 
 import javax.annotation.Nonnull;
 import java.awt.EventQueue;
+import java.awt.GraphicsDevice;
 import javax.swing.Action;
 import javax.swing.JPanel;
 import it.tidalwave.blueargyle.profileevaluation.ui.sequence.ProfileEvaluationSequencePresentation;
@@ -54,6 +55,30 @@ public class ProfileEvaluationSequencePanel extends JPanel implements ProfileEva
         this.previousAction.bind(previousAction);
       }
     
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    @Override
+    public void showUp (final @Nonnull GraphicsDevice graphicsDevice)
+      {
+        assert EventQueue.isDispatchThread();
+      }
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    @Override
+    public void dismiss()
+      {
+        assert EventQueue.isDispatchThread();
+      }
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
     @Override
     public void removeNotify()
       {

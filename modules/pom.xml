@@ -150,6 +150,7 @@
         <module>Colorimetry</module>
         <module>Commons</module>
         <module>Home</module>
+        <module>ProfileEvaluation</module>
         <module>ProfileEvaluationUI</module>
         <module>ProfileEvaluationNetBeansUI</module>
         <module>TestCommons</module>

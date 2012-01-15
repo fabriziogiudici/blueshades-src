@@ -29,6 +29,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import it.tidalwave.actor.annotation.Actor;
+import it.tidalwave.actor.annotation.ListensTo;
+import it.tidalwave.blueargyle.profileevaluation.ProfileEvaluationRequest;
 import it.tidalwave.netbeans.util.Locator;
 import it.tidalwave.blueargyle.profileevaluation.ui.sequence.ProfileEvaluationSequencePresentation;
 import it.tidalwave.blueargyle.profileevaluation.ui.sequence.ProfileEvaluationSequencePresentationProvider;
@@ -90,5 +92,15 @@ public class ProfileEvaluationSequenceControllerActor
         log.info("initialize()");
         presentation = presentationProvider.getPresentation();
         presentation.bind(nextAction, previousAction);        
+      }
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    public void onProfileEvaluationRequest (final @Nonnull @ListensTo ProfileEvaluationRequest message)
+      {
+        log.info("onProfileEvaluationRequest({})", message);
+        presentation.showUp(message.getDisplay().getDisplay().getGraphicsDevice());
       }
   }

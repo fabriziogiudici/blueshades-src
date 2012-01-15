@@ -1,4 +1,5 @@
-/***********************************************************************************************************************
+<?xml version="1.0" encoding="UTF-8"?>
+<!--********************************************************************************************************************
  *
  * blueArgyle - a Java UI for Argyll
  * Copyright (C) 2011-2012 by Tidalwave s.a.s. (http://www.tidalwave.it)
@@ -19,24 +20,14 @@
  * WWW: http://blueargyle.java.net
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
- **********************************************************************************************************************/
-package it.tidalwave.blueargyle.profileevaluation.ui.sequence;
-
-import javax.annotation.Nonnull;
-import javax.swing.Action;
-import java.awt.GraphicsDevice;
-
-/***********************************************************************************************************************
- *
- * @author  fritz
- * @version $Id$
- *
- **********************************************************************************************************************/
-public interface ProfileEvaluationSequencePresentation 
-  {
-    public void bind (@Nonnull Action nextAction, @Nonnull Action previousAction);
-
-    public void showUp (@Nonnull GraphicsDevice graphicsDevice);
-    
-    public void dismiss();    
-  }
+ ********************************************************************************************************************-->
+<nbm>
+    <moduleType>normal</moduleType>
+    <codeNameBase>it.tidalwave.blueargyle.profileevaluation/1</codeNameBase>
+    <cluster>blueargyle</cluster>
+    <manifest>src/main/nbm/manifest.mf</manifest>
+    <homepageUrl>http://blueargyle.java.net</homepageUrl>
+    <author>Fabrizio Giudici</author>
+    <licenseName>Apache License, Version 2.0</licenseName>
+    <licenseFile>../../LICENSE.txt</licenseFile>
+</nbm>
