@@ -33,6 +33,7 @@ public class HiKeyDescriptor extends SequenceSetDescriptorSupport
     public HiKeyDescriptor()
       {
         super("Highlights visual evaluation", 
-              "Write down which is the brightest column which can be distinguished from the white background.");
+              "Write down which is the brightest column which can be distinguished from the white background " +
+              "and verify that all the columns are rendered without any color cast.");
       }
   }

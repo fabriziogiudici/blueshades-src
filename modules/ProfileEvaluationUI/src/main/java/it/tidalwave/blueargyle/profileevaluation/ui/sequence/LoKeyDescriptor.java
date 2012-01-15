@@ -33,6 +33,7 @@ public class LoKeyDescriptor extends SequenceSetDescriptorSupport
     public LoKeyDescriptor()
       {
         super("Shadows visual evaluation", 
-              "Write down which is the darkest column which can be distinguished from the black background.");
+              "Write down which is the darkest column which can be distinguished from the black background " +
+              "and verify that all the columns are rendered without any color cast.");
       }
   }
