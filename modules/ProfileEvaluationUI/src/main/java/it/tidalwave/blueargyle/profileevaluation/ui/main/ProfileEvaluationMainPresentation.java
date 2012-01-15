@@ -24,6 +24,7 @@ package it.tidalwave.blueargyle.profileevaluation.ui.main;
 
 import javax.annotation.Nonnull;
 import javax.swing.Action;
+import it.tidalwave.role.ui.PresentationModel;
 
 /***********************************************************************************************************************
  *
@@ -34,4 +35,10 @@ import javax.swing.Action;
 public interface ProfileEvaluationMainPresentation 
   {
     public void bind (@Nonnull Action startAction);
+
+    public void showWaitingOnDisplayList();
+
+    public void hideWaitingOnDisplayList();
+
+    public void populateDisplays (@Nonnull PresentationModel presentationModel);
   }

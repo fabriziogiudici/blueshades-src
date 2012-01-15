@@ -36,7 +36,25 @@
         
         <dependency>
             <groupId>it.tidalwave.netbeans</groupId>
+            <artifactId>it-tidalwave-netbeans-nodes</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.netbeans</groupId>
             <artifactId>it-tidalwave-netbeans-util</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>it.tidalwave.thesefoolishthings</groupId>
+            <artifactId>it-tidalwave-util</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-util-lookup</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-nodes</artifactId>
         </dependency>
 
         <dependency>

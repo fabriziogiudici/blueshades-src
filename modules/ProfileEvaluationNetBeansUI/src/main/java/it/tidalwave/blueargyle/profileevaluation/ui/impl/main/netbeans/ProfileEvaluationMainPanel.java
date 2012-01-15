@@ -23,10 +23,16 @@
 package it.tidalwave.blueargyle.profileevaluation.ui.impl.main.netbeans;
 
 import javax.annotation.Nonnull;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import javax.swing.Action;
 import javax.swing.JPanel;
 import java.awt.EventQueue;
+import org.openide.nodes.Node;
 import it.tidalwave.swing.SafeActionAdapter;
+import it.tidalwave.role.ui.PresentationModel;
+import it.tidalwave.netbeans.SimpleExplorerPanel;
+import it.tidalwave.netbeans.explorer.view.EnhancedListView;
 import it.tidalwave.blueargyle.profileevaluation.ui.main.ProfileEvaluationMainPresentation;
 
 /***********************************************************************************************************************
@@ -37,6 +43,10 @@ import it.tidalwave.blueargyle.profileevaluation.ui.main.ProfileEvaluationMainPr
  **********************************************************************************************************************/
 public class ProfileEvaluationMainPanel extends JPanel implements ProfileEvaluationMainPresentation
   {
+    private final EnhancedListView lvDisplays = new EnhancedListView();
+    
+    private final SimpleExplorerPanel epDisplays = new SimpleExplorerPanel(lvDisplays);
+    
     private final SafeActionAdapter startAction = new SafeActionAdapter();
     
     public ProfileEvaluationMainPanel() 
@@ -44,6 +54,14 @@ public class ProfileEvaluationMainPanel extends JPanel implements ProfileEvaluat
         assert EventQueue.isDispatchThread();
         initComponents();
         setOpaque(true);
+        
+        pnDisplays.add(epDisplays, BorderLayout.CENTER);
+        
+        lvDisplays.setOpaque(true);
+        lvDisplays.putClientProperty("List.selectionBackground", new Color(60, 60, 60));
+        lvDisplays.putClientProperty("List.selectionForeground", Color.WHITE);
+        lvDisplays.setBackground(new Color(80, 80, 80));
+        lvDisplays.setForeground(Color.WHITE);
       }
 
     @Override
@@ -52,6 +70,27 @@ public class ProfileEvaluationMainPanel extends JPanel implements ProfileEvaluat
         this.startAction.bind(startAction);
       }
     
+    @Override
+    public void populateDisplays (final @Nonnull PresentationModel presentationModel)
+      {
+        assert EventQueue.isDispatchThread();
+        epDisplays.getExplorerManager().setRootContext((Node)presentationModel);
+      }
+    
+    @Override
+    public void showWaitingOnDisplayList() 
+      {
+        assert EventQueue.isDispatchThread();
+        epDisplays.setBusy(true);
+      }
+
+    @Override
+    public void hideWaitingOnDisplayList() 
+      {
+        assert EventQueue.isDispatchThread();
+        epDisplays.setBusy(false);
+      }
+
     @Override
     public void removeNotify()
       {
@@ -75,7 +114,7 @@ public class ProfileEvaluationMainPanel extends JPanel implements ProfileEvaluat
         lbTitle = new javax.swing.JLabel();
         lbDescription = new javax.swing.JLabel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
-        jPanel1 = new javax.swing.JPanel();
+        pnDisplays = new javax.swing.JPanel();
         lbDisplaySelection = new javax.swing.JLabel();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
 
@@ -117,27 +156,16 @@ public class ProfileEvaluationMainPanel extends JPanel implements ProfileEvaluat
         gridBagConstraints.weighty = 1.0;
         add(filler1, gridBagConstraints);
 
-        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(70, 70, 70), 1, true));
-        jPanel1.setOpaque(false);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 174, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 38, Short.MAX_VALUE)
-        );
-
+        pnDisplays.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(70, 70, 70), 1, true));
+        pnDisplays.setOpaque(false);
+        pnDisplays.setLayout(new java.awt.BorderLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weighty = 1.0;
-        add(jPanel1, gridBagConstraints);
+        add(pnDisplays, gridBagConstraints);
 
         lbDisplaySelection.setFont(lbDisplaySelection.getFont().deriveFont(lbDisplaySelection.getFont().getSize()+1f));
         lbDisplaySelection.setForeground(new java.awt.Color(255, 255, 255));
@@ -160,9 +188,9 @@ public class ProfileEvaluationMainPanel extends JPanel implements ProfileEvaluat
     private javax.swing.JButton btStart;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbDescription;
     private javax.swing.JLabel lbDisplaySelection;
     private javax.swing.JLabel lbTitle;
+    private javax.swing.JPanel pnDisplays;
     // End of variables declaration//GEN-END:variables
   }

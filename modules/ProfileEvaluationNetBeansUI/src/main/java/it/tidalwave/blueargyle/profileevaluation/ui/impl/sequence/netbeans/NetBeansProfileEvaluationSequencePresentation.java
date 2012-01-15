@@ -70,8 +70,7 @@ public class NetBeansProfileEvaluationSequencePresentation implements ProfileEva
       {
         assert EventQueue.isDispatchThread();
         panel.showUp(graphicsDevice);
-//        graphicsDevice.setFullScreenWindow(frame);
-        GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(frame);
+        graphicsDevice.setFullScreenWindow(frame);
         frame.setVisible(true);
       }
     
