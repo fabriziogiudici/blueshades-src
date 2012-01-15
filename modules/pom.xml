@@ -34,6 +34,11 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
+                <groupId>org.imajine</groupId>
+                <artifactId>org-imajine-image-nbm</artifactId>
+                <version>${mistral.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>it.tidalwave.thesefoolishthings</groupId>
                 <artifactId>thesefoolishthings</artifactId>
                 <version>${thesefoolishthings.version}</version>
@@ -158,6 +163,6 @@
         <module>UniformityUI</module>
         <module>UniformityNetBeans</module>
         <module>UniformityArchive</module>
-  </modules>
+    </modules>
 
 </project>

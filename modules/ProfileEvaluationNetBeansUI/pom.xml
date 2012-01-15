@@ -36,6 +36,11 @@
         </dependency>
         
         <dependency>
+            <groupId>org.imajine</groupId>
+            <artifactId>org-imajine-image-nbm</artifactId>
+        </dependency>
+       
+        <dependency>
             <groupId>it.tidalwave.netbeans</groupId>
             <artifactId>it-tidalwave-netbeans-explorer</artifactId>
         </dependency>
@@ -92,5 +97,4 @@
             <version>1.0.3</version>
         </dependency>
     </dependencies>
-    
 </project>
