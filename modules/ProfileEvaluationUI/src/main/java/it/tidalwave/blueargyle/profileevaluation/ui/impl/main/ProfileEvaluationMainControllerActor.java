@@ -55,6 +55,8 @@ public class ProfileEvaluationMainControllerActor
     /** The presentation controlled by this class */
     private ProfileEvaluationMainPresentation presentation;
     
+    private ProfiledDisplay selectedDisplay = new ProfiledDisplay(new Display("dummy", 0), "dummy"); // FIXME
+    
     /*******************************************************************************************************************
      * 
      * 
@@ -65,7 +67,7 @@ public class ProfileEvaluationMainControllerActor
         @Override
         public void actionPerformed (final @Nonnull ActionEvent event) 
           {
-            new ProfileEvaluationRequest(new ProfiledDisplay(new Display("dummy", 0), "dummy")).send(); // FIXME
+            new ProfileEvaluationRequest(selectedDisplay).send();
           }
       };
     
