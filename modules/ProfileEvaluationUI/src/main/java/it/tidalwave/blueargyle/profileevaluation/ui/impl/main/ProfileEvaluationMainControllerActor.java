@@ -163,8 +163,7 @@ public class ProfileEvaluationMainControllerActor
       {
         log.info("onDisplaySelection({})", message);
         selectedDisplay = message.getSelectedDisplay();
-//        presentation.showWaitingOnMeasurementsArchive();
-//        archivedMeasurementsRequestor.start(new UniformityArchiveQuery(selectedDisplay.getDisplay())); 
+        presentation.renderProfileName(selectedDisplay.getProfileName());
       }  
     
     /*******************************************************************************************************************

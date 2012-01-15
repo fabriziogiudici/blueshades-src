@@ -62,6 +62,7 @@ public class ProfileEvaluationSequencePanel extends JPanel implements ProfileEva
         assert EventQueue.isDispatchThread();
         initComponents();
         setOpaque(true);
+        lbProfileName.setText(" ");
       }
 
     /*******************************************************************************************************************
@@ -139,6 +140,17 @@ public class ProfileEvaluationSequencePanel extends JPanel implements ProfileEva
      *
      ******************************************************************************************************************/
     @Override
+    public void renderProfileName (final @Nonnull String profileName) 
+      {
+        assert EventQueue.isDispatchThread();
+        lbProfileName.setText(profileName);
+      }
+    
+    /*******************************************************************************************************************
+     * 
+     *
+     ******************************************************************************************************************/
+    @Override
     public void removeNotify()
       {
         assert EventQueue.isDispatchThread();
@@ -166,7 +178,7 @@ public class ProfileEvaluationSequencePanel extends JPanel implements ProfileEva
         lbTitle = new javax.swing.JLabel();
         lbProfileName = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(80, 80, 80));
+        setBackground(new java.awt.Color(30, 30, 30));
         setBorder(javax.swing.BorderFactory.createEmptyBorder(16, 16, 16, 16));
         setBounds(new java.awt.Rectangle(16, 16, 16, 16));
         java.awt.GridBagLayout layout = new java.awt.GridBagLayout();

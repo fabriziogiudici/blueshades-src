@@ -55,6 +55,8 @@ public class ProfileEvaluationMainPanel extends JPanel implements ProfileEvaluat
         initComponents();
         setOpaque(true);
         
+        lbProfileName.setText(" ");
+        
         pnDisplays.add(epDisplays, BorderLayout.CENTER);
         
         lvDisplays.setOpaque(true);
@@ -92,6 +94,13 @@ public class ProfileEvaluationMainPanel extends JPanel implements ProfileEvaluat
       }
 
     @Override
+    public void renderProfileName (final @Nonnull String profileName) 
+      {
+        assert EventQueue.isDispatchThread();
+        lbProfileName.setText(profileName);
+      }
+    
+    @Override
     public void removeNotify()
       {
         assert EventQueue.isDispatchThread();
@@ -117,19 +126,20 @@ public class ProfileEvaluationMainPanel extends JPanel implements ProfileEvaluat
         pnDisplays = new javax.swing.JPanel();
         lbDisplaySelection = new javax.swing.JLabel();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        lbProfileName = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(80, 80, 80));
         setBorder(javax.swing.BorderFactory.createEmptyBorder(16, 16, 8, 16));
         java.awt.GridBagLayout layout = new java.awt.GridBagLayout();
         layout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0};
-        layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0};
+        layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
         setLayout(layout);
 
         btStart.setAction(startAction);
         btStart.setText(org.openide.util.NbBundle.getMessage(ProfileEvaluationMainPanel.class, "ProfileEvaluationMainPanel.btStart.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 10;
         add(btStart, gridBagConstraints);
 
         lbTitle.setFont(lbTitle.getFont().deriveFont(lbTitle.getFont().getStyle() | java.awt.Font.BOLD, lbTitle.getFont().getSize()+3));
@@ -179,9 +189,19 @@ public class ProfileEvaluationMainPanel extends JPanel implements ProfileEvaluat
         add(lbDisplaySelection, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.weightx = 0.3;
         add(filler2, gridBagConstraints);
+
+        lbProfileName.setForeground(new java.awt.Color(255, 255, 255));
+        lbProfileName.setText(org.openide.util.NbBundle.getMessage(ProfileEvaluationMainPanel.class, "ProfileEvaluationMainPanel.lbProfileName.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(8, 0, 0, 0);
+        add(lbProfileName, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -190,6 +210,7 @@ public class ProfileEvaluationMainPanel extends JPanel implements ProfileEvaluat
     private javax.swing.Box.Filler filler2;
     private javax.swing.JLabel lbDescription;
     private javax.swing.JLabel lbDisplaySelection;
+    private javax.swing.JLabel lbProfileName;
     private javax.swing.JLabel lbTitle;
     private javax.swing.JPanel pnDisplays;
     // End of variables declaration//GEN-END:variables

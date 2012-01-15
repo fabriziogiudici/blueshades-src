@@ -22,10 +22,6 @@
  **********************************************************************************************************************/
 package it.tidalwave.blueargyle.profileevaluation.ui.impl.sequence;
 
-import it.tidalwave.blueargyle.profileevaluation.ui.sequence.SequenceStepDescriptor;
-import it.tidalwave.blueargyle.profileevaluation.ui.sequence.HiKeyDescriptor;
-import it.tidalwave.blueargyle.profileevaluation.ui.sequence.LoKeyDescriptor;
-import it.tidalwave.blueargyle.profileevaluation.ui.sequence.GrangerRainbowDescriptor;
 import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
 import javax.annotation.concurrent.NotThreadSafe;
@@ -41,6 +37,10 @@ import it.tidalwave.actor.annotation.Message;
 import it.tidalwave.netbeans.util.Locator;
 import it.tidalwave.swing.ActionMessageAdapter;
 import it.tidalwave.blueargyle.profileevaluation.ProfileEvaluationRequest;
+import it.tidalwave.blueargyle.profileevaluation.ui.sequence.SequenceStepDescriptor;
+import it.tidalwave.blueargyle.profileevaluation.ui.sequence.HiKeyDescriptor;
+import it.tidalwave.blueargyle.profileevaluation.ui.sequence.LoKeyDescriptor;
+import it.tidalwave.blueargyle.profileevaluation.ui.sequence.GrangerRainbowDescriptor;
 import it.tidalwave.blueargyle.profileevaluation.ui.sequence.ProfileEvaluationSequencePresentation;
 import it.tidalwave.blueargyle.profileevaluation.ui.sequence.ProfileEvaluationSequencePresentationProvider;
 import lombok.ToString;
@@ -109,6 +109,7 @@ public class ProfileEvaluationSequenceControllerActor
         presentation.showUp(message.getDisplay().getDisplay().getGraphicsDevice());
         currentStep = stepSequence.listIterator();
         presentation.renderEvaluationStep(currentStep.next());
+        presentation.renderProfileName(message.getDisplay().getProfileName());
       }
     
     /*******************************************************************************************************************

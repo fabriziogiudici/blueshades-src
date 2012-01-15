@@ -41,4 +41,6 @@ public interface ProfileEvaluationSequencePresentation
     public void dismiss();
 
     public void renderEvaluationStep (@Nonnull SequenceStepDescriptor step);
+
+    public void renderProfileName (@Nonnull String profileName);
   }

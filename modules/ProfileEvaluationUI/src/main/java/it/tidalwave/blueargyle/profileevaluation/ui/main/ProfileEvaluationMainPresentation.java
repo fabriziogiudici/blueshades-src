@@ -41,4 +41,6 @@ public interface ProfileEvaluationMainPresentation
     public void hideWaitingOnDisplayList();
 
     public void populateDisplays (@Nonnull PresentationModel presentationModel);
+
+    public void renderProfileName (@Nonnull String profileName);
   }
