@@ -48,7 +48,7 @@ public class GrangerRainbowPanel extends DeferredCreationPainterPanel
       {
         assert !EventQueue.isDispatchThread();
         final EditableImage image = TestImageFactory.createGrangerRainbow(getWidth(), getHeight(), profileName);
-        final ImagePainter painter = new ImagePainter(image.getInnerProperty(BufferedImage.class));
+        final ImagePainter painter = new ColorSpaceImagePainter(image.getInnerProperty(BufferedImage.class));
         painter.setScaleToFit(true);
         return painter;
       }
