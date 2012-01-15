@@ -25,7 +25,6 @@ package it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -45,7 +44,6 @@ public class StripPanel extends JPanel
         setBackground(background);
         setLayout(new GridLayout(1, Math.abs(lastShade - firstShade + 1) * 2));
         setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
-        setMaximumSize(new Dimension(600, 200));
         
         final int direction = (int)Math.signum(lastShade - firstShade);
         

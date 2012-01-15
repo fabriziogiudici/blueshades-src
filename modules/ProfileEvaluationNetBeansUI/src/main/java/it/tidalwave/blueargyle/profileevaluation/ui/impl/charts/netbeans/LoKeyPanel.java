@@ -30,10 +30,10 @@ import java.awt.Color;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class LoKeyPanel extends StripPanel 
+public class LoKeyPanel extends KeyPanel 
   {
     public LoKeyPanel() 
       {
-        super(Color.BLACK, 1, 15);
+        setContents(new StripPanel(Color.BLACK, 1, 15));
       }
   }

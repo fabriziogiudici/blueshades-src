@@ -30,10 +30,10 @@ import java.awt.Color;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class HiKeyPanel extends StripPanel 
+public class HiKeyPanel extends KeyPanel 
   {
     public HiKeyPanel() 
       {
-        super(Color.WHITE, 254, 240);
+        setContents(new StripPanel(Color.WHITE, 254, 240));
       }
   }
