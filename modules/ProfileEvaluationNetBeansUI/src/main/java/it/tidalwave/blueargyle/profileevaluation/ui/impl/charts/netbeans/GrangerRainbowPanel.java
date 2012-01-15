@@ -23,15 +23,13 @@
 package it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans;
 
 import javax.annotation.Nonnull;
-import java.util.concurrent.ExecutionException;
 import java.awt.EventQueue;
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import javax.swing.SwingWorker;
-import org.jdesktop.swingx.JXPanel;
+import org.jdesktop.swingx.painter.Painter;
 import org.jdesktop.swingx.painter.ImagePainter;
 import it.tidalwave.image.EditableImage;
 import it.tidalwave.blueargyle.profileevaluation.TestImageFactory;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
@@ -40,53 +38,18 @@ import lombok.extern.slf4j.Slf4j;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Slf4j
-public class GrangerRainbowPanel extends JXPanel
+@RequiredArgsConstructor @Slf4j
+public class GrangerRainbowPanel extends DeferredCreationPainterPanel
   {
-    public GrangerRainbowPanel()
-      {
-        assert EventQueue.isDispatchThread();
-      }
+    private final String profileName;
     
-    @Override
-    public void paint (final @Nonnull Graphics g) 
+    @Override @Nonnull
+    protected Painter createPainter()
       {
-        assert EventQueue.isDispatchThread();
-        
-        if (getBackgroundPainter() == null)
-          {
-            new SwingWorker<EditableImage, Void>() 
-              {
-                @Override @Nonnull
-                protected EditableImage doInBackground() 
-                  {
-//                    return TestImageFactory.createGrangerRainbow(getWidth(), getHeight(), "MelissaRGB");
-                    return TestImageFactory.createGrangerRainbow(getWidth(), getHeight(), "Adobe98");
-                  }
-
-                @Override
-                protected void done()   
-                  {
-                    try 
-                      {
-                        final ImagePainter painter = new ImagePainter(get().getInnerProperty(BufferedImage.class));
-                        painter.setScaleToFit(true);
-                        setOpaque(false);
-                        setBackgroundPainter(painter);
-                        repaint();
-                      }
-                    catch (InterruptedException e) 
-                      {
-                        e.printStackTrace();
-                      }
-                    catch (ExecutionException e)
-                      {
-                        e.printStackTrace();
-                      }
-                  }
-              }.execute();
-          }
-        
-        super.paint(g);
+        assert !EventQueue.isDispatchThread();
+        final EditableImage image = TestImageFactory.createGrangerRainbow(getWidth(), getHeight(), profileName);
+        final ImagePainter painter = new ImagePainter(image.getInnerProperty(BufferedImage.class));
+        painter.setScaleToFit(true);
+        return painter;
       }
   }

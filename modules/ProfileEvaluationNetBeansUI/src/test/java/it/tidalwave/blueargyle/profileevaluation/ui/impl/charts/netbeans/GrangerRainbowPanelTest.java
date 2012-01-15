@@ -36,6 +36,6 @@ public class GrangerRainbowPanelTest extends PanelTestSupport
     @Override @Nonnull
     protected Component createPresentation() 
       {
-        return new GrangerRainbowPanel();  
+        return new GrangerRainbowPanel("Adobe98");  // "MelissaRGB"
       }
   }

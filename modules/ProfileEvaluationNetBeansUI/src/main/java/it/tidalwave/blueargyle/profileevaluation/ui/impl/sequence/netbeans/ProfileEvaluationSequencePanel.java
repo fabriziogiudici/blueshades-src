@@ -119,7 +119,7 @@ public class ProfileEvaluationSequencePanel extends JPanel implements ProfileEva
           }
         else if (GrangerRainbowDescriptor.class.equals(step.getClass()))
           {
-            c = new GrangerRainbowPanel();
+            c = new GrangerRainbowPanel("Adobe98"); // "MelissaRGB"
           }
         
         pnContents.removeAll();
