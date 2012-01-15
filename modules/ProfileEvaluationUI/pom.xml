@@ -55,6 +55,7 @@
                     <publicPackages>
                         <publicPackage>it.tidalwave.blueargyle.profileevaluation.ui</publicPackage>
                         <publicPackage>it.tidalwave.blueargyle.profileevaluation.ui.main</publicPackage>
+                        <publicPackage>it.tidalwave.blueargyle.profileevaluation.ui.charts</publicPackage>
                         <publicPackage>it.tidalwave.blueargyle.profileevaluation.ui.sequence</publicPackage>
                     </publicPackages>
                 </configuration>
