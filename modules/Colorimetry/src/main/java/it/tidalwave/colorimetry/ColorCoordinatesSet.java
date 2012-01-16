@@ -20,36 +20,51 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-/***********************************************************************************************************************
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- **********************************************************************************************************************/
-
 package it.tidalwave.colorimetry;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import it.tidalwave.util.NotFoundException;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
-import static lombok.AccessLevel.*;
 
 /***********************************************************************************************************************
- *
- * @author  fritz
+ * 
+ * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @RequiredArgsConstructor(access=PROTECTED) @Getter @EqualsAndHashCode(callSuper=false) @ToString(callSuper=false)
-public class XYZColorPoint extends ColorPoint
+@Immutable @Getter @EqualsAndHashCode
+public class ColorCoordinatesSet
   {
-    private final double x;
+    private final List<ColorCoordinates> coordinatesSet = new ArrayList<ColorCoordinates>();
     
-    private final double y;
-    
-    private final double z;
+    public ColorCoordinatesSet (final @Nonnull ColorCoordinates ... coordinates)
+      {
+        this.coordinatesSet.addAll(Arrays.asList(coordinates));
+      }
     
     @Nonnull
-    private final ColorSpace colorSpace;
+    public <T extends ColorCoordinates> T find (final @Nonnull Class<T> clazz)
+      throws NotFoundException
+      {
+        for (final ColorCoordinates coordinates : coordinatesSet)
+          {
+            if (coordinates.getClass().equals(clazz))
+              {
+                return clazz.cast(coordinates);  
+              }
+          }
+        
+        throw new NotFoundException("No Color with space: " + clazz);
+      }
+    
+    @Override @Nonnull
+    public String toString()
+      {
+        return coordinatesSet.toString();  
+      }
   }

@@ -25,7 +25,7 @@ package it.tidalwave.argyll;
 import javax.annotation.Nonnull;
 import it.tidalwave.actor.MessageSupport;
 import it.tidalwave.actor.annotation.Message;
-import it.tidalwave.colorimetry.ColorPoints;
+import it.tidalwave.colorimetry.ColorCoordinatesSet;
 import it.tidalwave.colorimetry.ColorTemperature;
 import it.tidalwave.colorimetry.MeasureWithPrecision;
 import lombok.RequiredArgsConstructor;
@@ -47,7 +47,7 @@ import static lombok.AccessLevel.PUBLIC;
 public class MeasurementMessage extends MessageSupport
   {
     @Nonnull
-    private final ColorPoints colorPoints;
+    private final ColorCoordinatesSet colorCoordinatesSet;
     
     @Nonnull
     private final MeasureWithPrecision<ColorTemperature> ccTemperature;

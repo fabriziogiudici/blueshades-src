@@ -24,47 +24,27 @@ package it.tidalwave.colorimetry;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import it.tidalwave.util.NotFoundException;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
+import static lombok.AccessLevel.*;
 
 /***********************************************************************************************************************
- * 
- * @author  Fabrizio Giudici
+ *
+ * @author  fritz
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @Getter @EqualsAndHashCode
-public class ColorPoints
+@Immutable @RequiredArgsConstructor(access=PROTECTED) @Getter @EqualsAndHashCode(callSuper=false) @ToString(callSuper=false)
+public class LabColorCoordinates extends ColorCoordinates
   {
-    private final List<ColorPoint> colorPoints = new ArrayList<ColorPoint>();
+    private final double l;
     
-    public ColorPoints (final @Nonnull ColorPoint ... colorPoints)
-      {
-        this.colorPoints.addAll(Arrays.asList(colorPoints));
-      }
+    private final double a;
+    
+    private final double b;
     
     @Nonnull
-    public <T extends ColorPoint> T find (final @Nonnull Class<T> clazz)
-      throws NotFoundException
-      {
-        for (final ColorPoint colorPoint : colorPoints)
-          {
-            if (colorPoint.getClass().equals(clazz))
-              {
-                return clazz.cast(colorPoint);  
-              }
-          }
-        
-        throw new NotFoundException("No Color with space: " + clazz);
-      }
-    
-    @Override @Nonnull
-    public String toString()
-      {
-        return colorPoints.toString();  
-      }
+    private final ColorSpace colorSpace;
   }

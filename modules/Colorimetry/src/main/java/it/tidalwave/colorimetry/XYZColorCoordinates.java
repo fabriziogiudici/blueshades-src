@@ -20,11 +20,6 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-/***********************************************************************************************************************
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- **********************************************************************************************************************/
-
 package it.tidalwave.colorimetry;
 
 import javax.annotation.Nonnull;
@@ -42,13 +37,13 @@ import static lombok.AccessLevel.*;
  *
  **********************************************************************************************************************/
 @Immutable @RequiredArgsConstructor(access=PROTECTED) @Getter @EqualsAndHashCode(callSuper=false) @ToString(callSuper=false)
-public class LabColorPoint extends ColorPoint
+public class XYZColorCoordinates extends ColorCoordinates
   {
-    private final double l;
+    private final double x;
     
-    private final double a;
+    private final double y;
     
-    private final double b;
+    private final double z;
     
     @Nonnull
     private final ColorSpace colorSpace;

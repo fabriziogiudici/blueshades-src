@@ -28,8 +28,8 @@ import java.util.Scanner;
 import java.io.IOException;
 import it.tidalwave.actor.annotation.Actor;
 import it.tidalwave.actor.annotation.ListensTo;
-import it.tidalwave.colorimetry.ColorPoint;
-import it.tidalwave.colorimetry.ColorPoints;
+import it.tidalwave.colorimetry.ColorCoordinates;
+import it.tidalwave.colorimetry.ColorCoordinatesSet;
 import it.tidalwave.colorimetry.ColorTemperature;
 import it.tidalwave.colorimetry.MeasureWithPrecision;
 import it.tidalwave.argyll.ArgyllFailureMessage;
@@ -39,7 +39,7 @@ import it.tidalwave.argyll.SensorOperationInvitationMessage;
 import it.tidalwave.blueargyle.util.Executor;
 import it.tidalwave.blueargyle.util.Executor.ConsoleOutput;
 import lombok.extern.slf4j.Slf4j;
-import static it.tidalwave.colorimetry.ColorPoint.*;
+import static it.tidalwave.colorimetry.ColorCoordinates.*;
 import static it.tidalwave.colorimetry.ColorTemperature.*;
 import static it.tidalwave.colorimetry.MeasureWithPrecision.*;
 
@@ -108,13 +108,13 @@ public class SpotReadActor
         final Scanner measure = stdout.filteredAndSplitBy("^ *Result is (XYZ:.*$)", "[ ,]"); // FIXME: try ^[0123456789.]+
         
         measure.next(); // XYZ:
-        final ColorPoint xyz = colorXYZ(measure.nextDouble(), measure.nextDouble(), measure.nextDouble());
+        final ColorCoordinates xyz = colorXYZ(measure.nextDouble(), measure.nextDouble(), measure.nextDouble());
         measure.next(); // blank
         measure.next(); // D50
         measure.next(); // Lab:
-        final ColorPoint lab = colorLab(measure.nextDouble(), measure.nextDouble(), measure.nextDouble());
+        final ColorCoordinates lab = colorLab(measure.nextDouble(), measure.nextDouble(), measure.nextDouble());
         
-        final ColorPoints colorPoints = new ColorPoints(lab, xyz);
+        final ColorCoordinatesSet coordinatesSet = new ColorCoordinatesSet(lab, xyz);
         
         // CCT = 2390K (Delta E 0.202257)
         final MeasureWithPrecision<ColorTemperature> ccTemp = parseTemperature(stdout, "^ *CCT *= *(.*$)");
@@ -123,12 +123,12 @@ public class SpotReadActor
         // Closest Daylight temperature  = 2244K (Delta E 13.893159)
         final MeasureWithPrecision<ColorTemperature> daylightTemp = parseTemperature(stdout, "^ *Closest Daylight temperature *= *(.*$)");
         
-        log.info("Color:      {}", colorPoints);
+        log.info("Color:      {}", coordinatesSet);
         log.info("CCT:        {}", ccTemp);
         log.info("Planck T:   {}", planckianTemp);
         log.info("DayLight T: {}", daylightTemp);
 
-        return new MeasurementMessage(colorPoints, ccTemp, planckianTemp, daylightTemp);
+        return new MeasurementMessage(coordinatesSet, ccTemp, planckianTemp, daylightTemp);
       }
     
     /*******************************************************************************************************************
