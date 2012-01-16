@@ -34,6 +34,7 @@ import java.io.StringWriter;
 import org.joda.time.DateTime;
 import it.tidalwave.netbeans.util.AsLookupSupport;
 import it.tidalwave.argyll.Display;
+import it.tidalwave.argyll.Profile;
 import it.tidalwave.argyll.ProfiledDisplay;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -64,7 +65,7 @@ public class UniformityMeasurements extends AsLookupSupport
     
     public UniformityMeasurements() // for prototypes
       {
-        display = new ProfiledDisplay(new Display("", -1), "");
+        display = new ProfiledDisplay(new Display("", -1), new Profile("?"));
         dateTime = new DateTime();
         columns = 0;
         rows = 0;

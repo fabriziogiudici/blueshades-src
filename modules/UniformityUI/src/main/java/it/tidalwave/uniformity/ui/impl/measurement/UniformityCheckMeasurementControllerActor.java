@@ -39,7 +39,7 @@ import it.tidalwave.actor.annotation.ListensTo;
 import it.tidalwave.actor.annotation.Message;
 import it.tidalwave.swing.ActionMessageAdapter;
 import it.tidalwave.netbeans.util.Locator;
-import it.tidalwave.colorimetry.XYZColorPoint;
+import it.tidalwave.colorimetry.XYZColorCoordinates;
 import it.tidalwave.argyll.ArgyllFailureMessage;
 import it.tidalwave.argyll.MeasurementMessage;
 import it.tidalwave.argyll.MeasurementRequest;
@@ -130,7 +130,7 @@ public class UniformityCheckMeasurementControllerActor
       {
         log.info("onNewMeasurement({})", message);
         presentation.hideMeasureInProgress();
-        final XYZColorPoint xyzColor = message.getColorPoints().find(XYZColorPoint.class);
+        final XYZColorCoordinates xyzColor = message.getColorCoordinatesSet().find(XYZColorCoordinates.class);
         // http://www.freelists.org/post/argyllcms/Measuring-whitepoint-and-luminance-with-spotread,1
         final UniformityMeasurement measurement = new UniformityMeasurement(message.getDaylightTemperature().getMeasure(), 
                                                                             (int)xyzColor.getY());

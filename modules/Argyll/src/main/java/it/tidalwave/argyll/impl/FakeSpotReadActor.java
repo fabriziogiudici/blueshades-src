@@ -27,13 +27,13 @@ import javax.annotation.concurrent.NotThreadSafe;
 import java.util.Random;
 import it.tidalwave.actor.annotation.Actor;
 import it.tidalwave.actor.annotation.ListensTo;
-import it.tidalwave.colorimetry.ColorPoints;
+import it.tidalwave.colorimetry.ColorCoordinatesSet;
 import it.tidalwave.colorimetry.ColorTemperature;
 import it.tidalwave.colorimetry.MeasureWithPrecision;
 import it.tidalwave.argyll.MeasurementMessage;
 import it.tidalwave.argyll.MeasurementRequest;
 import lombok.extern.slf4j.Slf4j;
-import static it.tidalwave.colorimetry.ColorPoint.*;
+import static it.tidalwave.colorimetry.ColorCoordinates.*;
 import static it.tidalwave.colorimetry.ColorTemperature.*;
 import static it.tidalwave.colorimetry.MeasureWithPrecision.*;
 
@@ -63,13 +63,13 @@ public class FakeSpotReadActor
 
         Thread.sleep(500);
         
-        final ColorPoints colorPoints = new ColorPoints(colorLab(r.nextDouble() * 100, r.nextDouble() * 100, r.nextDouble() * 100), 
+        final ColorCoordinatesSet coordinatesSet = new ColorCoordinatesSet(colorLab(r.nextDouble() * 100, r.nextDouble() * 100, r.nextDouble() * 100), 
                                                         colorXYZ(r.nextDouble() * 100, r.nextDouble() * 100, r.nextDouble() * 100));
         
         final MeasureWithPrecision<ColorTemperature> ccTemp        = measureWithPrecision(kelvin(2000 + r.nextInt(6000)), r.nextDouble() * 10);
         final MeasureWithPrecision<ColorTemperature> planckianTemp = measureWithPrecision(kelvin(2000 + r.nextInt(6000)), r.nextDouble() * 10);
         final MeasureWithPrecision<ColorTemperature> daylightTemp  = measureWithPrecision(kelvin(2000 + r.nextInt(6000)), r.nextDouble() * 10);
         
-        new MeasurementMessage(colorPoints, ccTemp, planckianTemp, daylightTemp).send();
+        new MeasurementMessage(coordinatesSet, ccTemp, planckianTemp, daylightTemp).send();
       }
   }

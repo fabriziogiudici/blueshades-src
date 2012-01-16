@@ -20,51 +20,70 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-package it.tidalwave.colorimetry;
+package it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans;
 
 import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import it.tidalwave.util.NotFoundException;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import java.util.concurrent.ExecutionException;
+import java.awt.EventQueue;
+import java.awt.Graphics;
+import javax.swing.SwingWorker;
+import lombok.extern.slf4j.Slf4j;
+import org.jdesktop.swingx.JXPanel;
+import org.jdesktop.swingx.painter.Painter;
 
 /***********************************************************************************************************************
- * 
+ *
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @Getter @EqualsAndHashCode
-public class ColorPoints
+@Slf4j
+public abstract class DeferredCreationPainterPanel extends JXPanel
   {
-    private final List<ColorPoint> colorPoints = new ArrayList<ColorPoint>();
-    
-    public ColorPoints (final @Nonnull ColorPoint ... colorPoints)
+    public DeferredCreationPainterPanel()
       {
-        this.colorPoints.addAll(Arrays.asList(colorPoints));
+        assert EventQueue.isDispatchThread();
+      }
+    
+    @Override
+    public void paint (final @Nonnull Graphics g) 
+      {
+        assert EventQueue.isDispatchThread();
+        
+        if (getBackgroundPainter() == null)
+          {
+            new SwingWorker<Painter, Void>() 
+              {
+                @Override @Nonnull
+                protected Painter doInBackground() 
+                  {
+                    return createPainter();
+                  }
+
+                @Override
+                protected void done()   
+                  {
+                    try 
+                      {
+                        setOpaque(false);
+                        setBackgroundPainter(get());
+                        repaint();
+                      }
+                    catch (InterruptedException e) 
+                      {
+                        log.error("", e);
+                      }
+                    catch (ExecutionException e)
+                      {
+                        log.error("", e);
+                      }
+                  }
+              }.execute();
+          }
+        
+        super.paint(g);
       }
     
     @Nonnull
-    public <T extends ColorPoint> T find (final @Nonnull Class<T> clazz)
-      throws NotFoundException
-      {
-        for (final ColorPoint colorPoint : colorPoints)
-          {
-            if (colorPoint.getClass().equals(clazz))
-              {
-                return clazz.cast(colorPoint);  
-              }
-          }
-        
-        throw new NotFoundException("No Color with space: " + clazz);
-      }
-    
-    @Override @Nonnull
-    public String toString()
-      {
-        return colorPoints.toString();  
-      }
+    protected abstract Painter createPainter();
   }

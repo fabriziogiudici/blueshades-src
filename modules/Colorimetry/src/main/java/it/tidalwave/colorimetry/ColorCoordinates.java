@@ -32,7 +32,7 @@ import javax.annotation.concurrent.Immutable;
  *
  **********************************************************************************************************************/
 @Immutable
-public abstract class ColorPoint
+public abstract class ColorCoordinates
   {
     public static enum ColorSpace
       {
@@ -40,15 +40,15 @@ public abstract class ColorPoint
       }
     
     @Nonnull
-    public static XYZColorPoint colorXYZ (final double x, final double y, final double z)
+    public static XYZColorCoordinates colorXYZ (final double x, final double y, final double z)
       {
-        return new XYZColorPoint(x, y, z, ColorSpace.XYZ);
+        return new XYZColorCoordinates(x, y, z, ColorSpace.XYZ);
       }
     
     @Nonnull
-    public static ColorPoint colorLab (final double l, final double a, final double b)
+    public static ColorCoordinates colorLab (final double l, final double a, final double b)
       {
-        return new LabColorPoint(l, a, b, ColorSpace.Lab);
+        return new LabColorCoordinates(l, a, b, ColorSpace.Lab);
       }
     
     @Nonnull

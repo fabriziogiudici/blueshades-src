@@ -48,6 +48,14 @@
         </dependency>
         <dependency>
             <groupId>it.tidalwave.blueargyle</groupId>
+            <artifactId>it-tidalwave-blueargly-profileevaluation-ui</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.blueargyle</groupId>
+            <artifactId>it-tidalwave-blueargly-profileevaluation-ui-netbeans</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.blueargyle</groupId>
             <artifactId>it-tidalwave-uniformity-archive</artifactId>
         </dependency>
 
@@ -55,6 +63,11 @@
             <groupId>it.tidalwave.netbeans</groupId>
             <artifactId>it-tidalwave-netbeans-licensepanel</artifactId>
         </dependency> 
+
+        <dependency>
+            <groupId>org.imajine</groupId>
+            <artifactId>org-imajine-image-nbm</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.kenai.nbpwr</groupId>

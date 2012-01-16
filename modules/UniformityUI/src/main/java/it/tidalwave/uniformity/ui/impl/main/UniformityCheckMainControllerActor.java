@@ -319,7 +319,7 @@ public class UniformityCheckMainControllerActor
         populateMeasurementsArchive(message.findMeasurements());
         presentation.hideWaitingOnMeasurementsArchive();
         presentation.renderDisplayName(selectedDisplay.getDisplay().getDisplayName());
-        presentation.renderProfileName(selectedDisplay.getProfileName());
+        presentation.renderProfileName(selectedDisplay.getProfile().getName());
       }  
     
     /*******************************************************************************************************************
@@ -388,7 +388,7 @@ public class UniformityCheckMainControllerActor
           {
             propertyRenderers.get(selectedPropertyRendereIndex.getValue()).render(selectedMeasurements);
             presentation.renderDisplayName(selectedMeasurements.getDisplay().getDisplay().getDisplayName());
-            presentation.renderProfileName(selectedMeasurements.getDisplay().getProfileName());
+            presentation.renderProfileName(selectedMeasurements.getDisplay().getProfile().getName());
           }
       }
   }

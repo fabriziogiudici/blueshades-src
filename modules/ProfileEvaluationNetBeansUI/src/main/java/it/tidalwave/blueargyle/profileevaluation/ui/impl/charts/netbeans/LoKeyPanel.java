@@ -20,36 +20,20 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-/***********************************************************************************************************************
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- **********************************************************************************************************************/
+package it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans;
 
-package it.tidalwave.colorimetry;
-
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
-import static lombok.AccessLevel.*;
+import java.awt.Color;
 
 /***********************************************************************************************************************
  *
- * @author  fritz
+ * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @RequiredArgsConstructor(access=PROTECTED) @Getter @EqualsAndHashCode(callSuper=false) @ToString(callSuper=false)
-public class LabColorPoint extends ColorPoint
+public class LoKeyPanel extends KeyPanel 
   {
-    private final double l;
-    
-    private final double a;
-    
-    private final double b;
-    
-    @Nonnull
-    private final ColorSpace colorSpace;
+    public LoKeyPanel() 
+      {
+        setContents(new StripPanel(Color.BLACK, 1, 15));
+      }
   }

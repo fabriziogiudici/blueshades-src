@@ -20,20 +20,7 @@
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
-/***********************************************************************************************************************
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- **********************************************************************************************************************/
-
-package it.tidalwave.colorimetry;
-
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
-import static lombok.AccessLevel.*;
+package it.tidalwave.blueargyle.profileevaluation.ui.sequence;
 
 /***********************************************************************************************************************
  *
@@ -41,15 +28,13 @@ import static lombok.AccessLevel.*;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@Immutable @RequiredArgsConstructor(access=PROTECTED) @Getter @EqualsAndHashCode(callSuper=false) @ToString(callSuper=false)
-public class XYZColorPoint extends ColorPoint
+public class GrangerRainbowDescriptor extends SequenceSetDescriptorSupport
   {
-    private final double x;
-    
-    private final double y;
-    
-    private final double z;
-    
-    @Nonnull
-    private final ColorSpace colorSpace;
+    public GrangerRainbowDescriptor()
+      {
+        super("Granger rainbow", 
+              "Look at the chart and find out whether there are banding artifacts, strange color blotches or " +
+              "areas where transitions are not smooth. Note that this is a very demanding test and it's very unlikely " +
+              "that a perfect result is achieved.");
+      }
   }
