@@ -30,6 +30,7 @@ import java.util.TreeMap;
 import org.joda.time.DateTime;
 import it.tidalwave.colorimetry.ColorTemperature;
 import it.tidalwave.argyll.Display;
+import it.tidalwave.argyll.Profile;
 import it.tidalwave.argyll.ProfiledDisplay;
 import lombok.NoArgsConstructor;
 import static it.tidalwave.uniformity.Position.xy;
@@ -60,7 +61,7 @@ public final class FakeUniformityMeasurementsGenerator
         m.put(xy(1, 2), new UniformityMeasurement(randomTemperature(r), randomLuminance(r)));
         m.put(xy(2, 2), new UniformityMeasurement(randomTemperature(r), randomLuminance(r)));
        
-        return new UniformityMeasurements(new ProfiledDisplay(new Display(displayName, 0), "profile"), dateTime, m);
+        return new UniformityMeasurements(new ProfiledDisplay(new Display(displayName, 0), new Profile("profile")), dateTime, m);
       }  
     
     @Nonnull

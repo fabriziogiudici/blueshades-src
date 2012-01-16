@@ -56,7 +56,7 @@ import it.tidalwave.util.test.swing.ActionsTestHelper;
 import it.tidalwave.util.test.swing.ActionTestHelper;
 import it.tidalwave.actor.test.MessageVerifier;
 import static it.tidalwave.actor.spi.ActorActivator.*;
-import it.tidalwave.argyll.ProfiledDisplay;
+import it.tidalwave.argyll.*;
 import static it.tidalwave.uniformity.Position.xy;
 import static it.tidalwave.colorimetry.ColorTemperature.kelvin;
 import static org.mockito.Mockito.*;
@@ -154,7 +154,7 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
     public void must_properly_drive_a_complete_3x3_sequence() 
       throws InterruptedException
       {
-        final Collaboration collaboration = new UniformityCheckRequest(new ProfiledDisplay(new Display("display1", 0), "profile")).send();
+        final Collaboration collaboration = new UniformityCheckRequest(new ProfiledDisplay(new Display("display1", 0), new Profile("profile"))).send();
         collaboration.waitForCompletion();
         
         inOrder.verify(presentation).bind(any(Action.class), any(Action.class));
@@ -298,7 +298,7 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
         m.put(xy(0, 2), new UniformityMeasurement(kelvin(3015), 4));
         m.put(xy(1, 2), new UniformityMeasurement(kelvin(6864), 20));
         m.put(xy(2, 2), new UniformityMeasurement(kelvin(7209), 0));
-        final UniformityMeasurements measurements = new UniformityMeasurements(new ProfiledDisplay(new Display("display1", 0), "profile"), m);
+        final UniformityMeasurements measurements = new UniformityMeasurements(new ProfiledDisplay(new Display("display1", 0), new Profile("profile")), m);
         messageVerifier.verify(UniformityMeasurementMessage.class).with("measurements", new Equals(measurements)); 
         
         messageVerifier.verifyCollaborationCompleted();

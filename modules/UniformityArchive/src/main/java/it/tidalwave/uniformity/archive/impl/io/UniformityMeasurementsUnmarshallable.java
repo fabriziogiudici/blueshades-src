@@ -36,6 +36,7 @@ import org.joda.time.format.ISODateTimeFormat;
 import it.tidalwave.role.Unmarshallable;
 import it.tidalwave.colorimetry.ColorTemperature;
 import it.tidalwave.argyll.Display;
+import it.tidalwave.argyll.Profile;
 import it.tidalwave.argyll.ProfiledDisplay;
 import it.tidalwave.uniformity.Position;
 import it.tidalwave.uniformity.UniformityMeasurement;
@@ -121,7 +122,7 @@ public class UniformityMeasurementsUnmarshallable implements Unmarshallable
               }
           }
 
-        return new UniformityMeasurements(new ProfiledDisplay(new Display(displayName, -1), profileName), dateTime, map);
+        return new UniformityMeasurements(new ProfiledDisplay(new Display(displayName, -1), new Profile(profileName)), dateTime, map);
       }   
     
     /*******************************************************************************************************************

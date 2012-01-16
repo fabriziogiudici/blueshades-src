@@ -163,7 +163,7 @@ public class ProfileEvaluationMainControllerActor
       {
         log.info("onDisplaySelection({})", message);
         selectedDisplay = message.getSelectedDisplay();
-        presentation.renderProfileName(selectedDisplay.getProfileName());
+        presentation.renderProfileName(selectedDisplay.getProfile().getName());
       }  
     
     /*******************************************************************************************************************

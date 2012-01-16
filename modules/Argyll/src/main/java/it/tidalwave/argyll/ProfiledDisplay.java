@@ -43,12 +43,12 @@ public class ProfiledDisplay extends AsLookupSupport
     private final Display display;
     
     @Nonnull
-    private final String profileName;
+    private final Profile profile;
 
-    public ProfiledDisplay (final @Nonnull Display display, final @Nonnull String profileName) 
+    public ProfiledDisplay (final @Nonnull Display display, final @Nonnull Profile profile) 
       {
         super(new Object[] { new DefaultDisplayable(display.getDisplayName(), display.getDisplayName()) });  
         this.display = display;
-        this.profileName = profileName;
+        this.profile = profile;
       }
   }

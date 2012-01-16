@@ -109,7 +109,7 @@ public class ProfileEvaluationSequenceControllerActor
         presentation.showUp(message.getDisplay().getDisplay().getGraphicsDevice());
         currentStep = stepSequence.listIterator();
         presentation.renderEvaluationStep(currentStep.next());
-        presentation.renderProfileName(message.getDisplay().getProfileName());
+        presentation.renderProfileName(message.getDisplay().getProfile().getName());
       }
     
     /*******************************************************************************************************************

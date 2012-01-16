@@ -35,11 +35,8 @@ import org.openide.filesystems.FileUtil;
 import it.tidalwave.util.spi.SimpleFinderSupport;
 import it.tidalwave.actor.annotation.Actor;
 import it.tidalwave.actor.annotation.ListensTo;
+import it.tidalwave.argyll.*;
 import it.tidalwave.blueargyle.util.Executor; 
-import it.tidalwave.argyll.DisplayDiscoveryMessage;
-import it.tidalwave.argyll.DisplayDiscoveryQueryMessage;
-import it.tidalwave.argyll.Display;
-import it.tidalwave.argyll.ProfiledDisplay;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
@@ -75,8 +72,8 @@ public class DispwinActor
           {
             // FIXME: is it safe to assume that Argyll enumerates displays in the same order of Java ScreenDevices?
             final int index = screenDeviceIndex++;
-            final String profileName = getInstalledProfile(profileFiles, index);
-            displays.add(new ProfiledDisplay(new Display(displayName, index), profileName)); 
+            final Profile profile = getInstalledProfile(profileFiles, index);
+            displays.add(new ProfiledDisplay(new Display(displayName, index), profile)); 
           }
         
         log.info(">>>> {}", displays);
@@ -93,7 +90,7 @@ public class DispwinActor
       }
     
     @Nonnull
-    private String getInstalledProfile (final @Nonnull List<FileObject> profileFiles, final @Nonnegative int index) 
+    private Profile getInstalledProfile (final @Nonnull List<FileObject> profileFiles, final @Nonnegative int index) 
       throws IOException, InterruptedException
       {
         for (final FileObject profileFile : profileFiles)
@@ -105,11 +102,11 @@ public class DispwinActor
                                               .withArgument(profileFile.getPath());
             if (!executor.start().waitForCompletion().getStdout().filteredBy("(.* IS loaded .*)").isEmpty())
               {
-                return profileFile.getName(); 
+                return new Profile(profileFile.getName()); 
               }
           } 
         
-        return "";
+        return new Profile("?");
       }
     
     @Nonnull
