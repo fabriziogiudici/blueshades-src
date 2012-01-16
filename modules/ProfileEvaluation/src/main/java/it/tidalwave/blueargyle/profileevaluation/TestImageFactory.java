@@ -120,7 +120,7 @@ public final class TestImageFactory
         
         // execute() in place doesn't work
         final EditableImage image2 = image.execute2(new AssignColorProfileOp(profile));
-//        image2.execute(new WriteOp("JPG", "/tmp/grangersynth " + getICCProfileName(profile) + ".jpg"));
+///        image2.execute(new WriteOp("TIFF", "/tmp/grangersynth " + getICCProfileName(profile) + ".tif"));
         return image2;
       }
     
