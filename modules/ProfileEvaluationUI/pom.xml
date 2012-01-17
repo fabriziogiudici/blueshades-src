@@ -59,9 +59,13 @@
 
         <dependency>
             <groupId>org.imajine</groupId>
-            <artifactId>org-imajine-image-nbm</artifactId>
+            <artifactId>org-imajine-image-core</artifactId>
         </dependency>
-        
+        <dependency>
+            <groupId>org.imajine</groupId>
+            <artifactId>org-imajine-image-operations</artifactId>
+        </dependency>
+         
         <dependency>
             <groupId>com.kenai.nbpwr</groupId>
             <artifactId>org-slf4j-jdk14</artifactId>

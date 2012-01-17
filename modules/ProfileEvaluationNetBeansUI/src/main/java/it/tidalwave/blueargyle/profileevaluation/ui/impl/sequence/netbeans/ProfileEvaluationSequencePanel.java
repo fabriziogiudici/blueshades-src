@@ -31,7 +31,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import it.tidalwave.swing.SafeActionAdapter;
 import it.tidalwave.blueargyle.profileevaluation.ui.sequence.ProfileEvaluationSequencePresentation;
-import it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans.GrangerRainbowPanel;
+import it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans.GrangerRainbowRenderer;
 import it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans.HiKeyPanel;
 import it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans.LoKeyPanel;
 import it.tidalwave.blueargyle.profileevaluation.ui.sequence.GrangerRainbowDescriptor;
@@ -119,7 +119,7 @@ public class ProfileEvaluationSequencePanel extends JPanel implements ProfileEva
           }
         else if (GrangerRainbowDescriptor.class.equals(step.getClass()))
           {
-            c = new GrangerRainbowPanel("Adobe98"); // "MelissaRGB"
+            c = new GrangerRainbowRenderer("Adobe98"); // "MelissaRGB"
           }
         
         pnContents.removeAll();

@@ -24,9 +24,6 @@ package it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans;
 
 import javax.annotation.Nonnull;
 import java.awt.EventQueue;
-import java.awt.image.BufferedImage;
-import org.jdesktop.swingx.painter.Painter;
-import org.jdesktop.swingx.painter.ImagePainter;
 import it.tidalwave.image.EditableImage;
 import it.tidalwave.blueargyle.profileevaluation.TestImageFactory;
 import lombok.RequiredArgsConstructor;
@@ -39,17 +36,14 @@ import lombok.extern.slf4j.Slf4j;
  *
  **********************************************************************************************************************/
 @RequiredArgsConstructor @Slf4j
-public class GrangerRainbowPanel extends DeferredCreationPainterPanel
+public class GrangerRainbowRenderer extends DeferredCreationEditableImageRenderer
   {
     private final String profileName;
     
     @Override @Nonnull
-    protected Painter createPainter()
+    protected EditableImage createEditableImage()
       {
         assert !EventQueue.isDispatchThread();
-        final EditableImage image = TestImageFactory.createGrangerRainbow(getWidth(), getHeight(), profileName);
-        final ImagePainter painter = new ColorSpaceImagePainter(image.getInnerProperty(BufferedImage.class));
-        painter.setScaleToFit(true);
-        return painter;
+        return TestImageFactory.createGrangerRainbow(getWidth(), getHeight(), profileName);
       }
   }

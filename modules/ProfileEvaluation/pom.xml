@@ -35,10 +35,19 @@
         </dependency>
         
         <dependency>
-            <groupId>org.imajine</groupId>
-            <artifactId>org-imajine-image-nbm</artifactId>
+            <artifactId>it-tidalwave-netbeans-util</artifactId>
+            <groupId>it.tidalwave.netbeans</groupId>
         </dependency>
         
+        <dependency>
+            <groupId>org.imajine</groupId>
+            <artifactId>org-imajine-image-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.imajine</groupId>
+            <artifactId>org-imajine-image-operations</artifactId>
+        </dependency>
+         
         <dependency>
             <artifactId>org-slf4j-jdk14</artifactId>
             <groupId>com.kenai.nbpwr</groupId>

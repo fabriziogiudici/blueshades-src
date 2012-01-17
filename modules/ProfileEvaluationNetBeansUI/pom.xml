@@ -41,9 +41,17 @@
         
         <dependency>
             <groupId>org.imajine</groupId>
-            <artifactId>org-imajine-image-nbm</artifactId>
+            <artifactId>org-imajine-image-core</artifactId>
         </dependency>
-       
+        <dependency>
+            <groupId>org.imajine</groupId>
+            <artifactId>org-imajine-image-operations</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.imajine</groupId>
+            <artifactId>org-imajine-image-renderer</artifactId>
+        </dependency>
+        
         <dependency>
             <groupId>it.tidalwave.netbeans</groupId>
             <artifactId>it-tidalwave-netbeans-explorer</artifactId>

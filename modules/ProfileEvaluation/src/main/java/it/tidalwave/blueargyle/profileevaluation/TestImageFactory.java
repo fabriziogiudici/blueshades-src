@@ -43,6 +43,8 @@ import lombok.extern.slf4j.Slf4j;
 import static javax.swing.SwingConstants.*;
 import static it.tidalwave.image.ImageUtils.*;
 import static it.tidalwave.image.EditableImage.DataType.*;
+import it.tidalwave.image.java2d.ImplementationFactoryJ2D;
+import it.tidalwave.netbeans.util.Locator;
 
 /***********************************************************************************************************************
  *
@@ -65,6 +67,7 @@ public final class TestImageFactory
       {
         log.info("createGrangerRainbow({}, {}, {})", new Object[] { width, height, profileName });
         
+        Locator.find(ImplementationFactoryJ2D.class);
         final ICC_Profile profile = loadProfile(profileName);
         
         final EditableImage image = EditableImage.create(new CreateOp(width, height, BYTE, Color.WHITE));

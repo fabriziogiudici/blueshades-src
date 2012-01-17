@@ -35,8 +35,10 @@
             </dependency>
             <dependency>
                 <groupId>org.imajine</groupId>
-                <artifactId>org-imajine-image-nbm</artifactId>
+                <artifactId>org-imajine-image</artifactId>
                 <version>${mistral.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.thesefoolishthings</groupId>

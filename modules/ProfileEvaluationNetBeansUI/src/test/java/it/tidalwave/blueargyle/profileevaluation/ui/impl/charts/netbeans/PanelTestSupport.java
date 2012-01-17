@@ -48,11 +48,11 @@ public abstract class PanelTestSupport
                 final JFrame frame = new JFrame();
                 final Component presentation = createPresentation();
                 frame.add(presentation);
-                frame.setSize(800, 600);
+                frame.setSize(1024, 768);
                 frame.setVisible(true);
-             }
+              }
           });
-        Thread.sleep(10000);
+        Thread.sleep(30000);
       }
 
     @Nonnull

@@ -34,7 +34,7 @@
         <tft.appbundle.name>blueArgyle</tft.appbundle.name>
         <tft.appbundle.signature>TDLW</tft.appbundle.signature>
 
-        <mistral.version>0.9.12</mistral.version>
+        <mistral.version>0.10-SNAPSHOT</mistral.version>
         <actors.version>1.0.2</actors.version>
         <openbluesky.version>0.15</openbluesky.version>
         <thesefoolishthings.version>1.19</thesefoolishthings.version>
