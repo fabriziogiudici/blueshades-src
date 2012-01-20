@@ -39,7 +39,7 @@
         <openbluesky.version>0.15</openbluesky.version>
         <thesefoolishthings.version>1.19</thesefoolishthings.version>
         <libraries.version>1.1.5</libraries.version>
-        <netbeans.version>RELEASE70</netbeans.version>
+        <netbeans.version>RELEASE71</netbeans.version>
         <logback.version>0.9.30</logback.version>
     </properties>
 
