@@ -157,6 +157,7 @@ public final class TestImageFactory
                 final float hStep = (width - 2 * margin) / stripCount;
                 final int direction = (int)Math.signum(lastShade - firstShade);
 
+                g.setColor(Color.GRAY);
                 g.setFont(largeFont);
                 drawString(g, getICCProfileName(profile), width / 2, height - margin / 2, 0, CENTER);
                 
@@ -173,7 +174,7 @@ public final class TestImageFactory
                     g.fillRect(x1, y1, x2 - x1 + 1, y2 - y1 + 1);
                     
                     g.setColor(Color.GRAY);
-                    drawString(g, "" + shade, x1, y1 + 20, (x1 + x2) / 2, CENTER);
+                    drawString(g, "" + shade, (x1 + x2) / 2, y1 + 20, 0, CENTER);
                   }
               }
           }));
@@ -220,7 +221,7 @@ public final class TestImageFactory
                                     final @Nonnull int w,
                                     final @Nonnull int alignment)
       {
-        final FontMetrics fm = g.getFontMetrics();
+        final FontMetrics fm = g.getFontMetrics(g.getFont());
         final int yy = y + fm.getHeight() / 2;  
         final int ww = fm.stringWidth(string);
         int xx = x;
