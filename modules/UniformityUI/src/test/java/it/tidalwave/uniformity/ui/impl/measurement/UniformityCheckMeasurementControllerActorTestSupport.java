@@ -161,7 +161,7 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
         inOrder.verify(presentation).setGridSize(eq(3), eq(3));
         inOrder.verify(action("Continue")).setEnabled(eq(false));
         inOrder.verify(action("Cancel")).setEnabled(eq(false));
-        inOrder.verify(presentation).showUp(any(GraphicsDevice.class));
+        inOrder.verify(presentation).showUp(any(GraphicsDevice.class)); // TODO: verify the graphicdevice
         inOrder.verify(presentation).renderControlPanelAt(                 eq(xy(0, 0)));
         
         inOrder.verify(presentation).renderSensorPlacementInvitationCellAt(eq(xy(1, 1)));
