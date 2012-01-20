@@ -31,7 +31,7 @@ import java.awt.Component;
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class GrangerRainbowPanelTest extends PanelTestSupport
+public class GrangerRainbowRendererTest extends PanelTestSupport
   {
     @Override @Nonnull
     protected Component createPresentation() 
