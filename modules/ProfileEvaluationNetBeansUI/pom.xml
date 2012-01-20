@@ -56,6 +56,10 @@
             <groupId>it.tidalwave.netbeans</groupId>
             <artifactId>it-tidalwave-netbeans-explorer</artifactId>
         </dependency>
+        <dependency>
+            <groupId>it.tidalwave.netbeans</groupId>
+            <artifactId>it-tidalwave-netbeans-util</artifactId>
+        </dependency>
         
         <dependency>
             <groupId>it.tidalwave.thesefoolishthings</groupId>

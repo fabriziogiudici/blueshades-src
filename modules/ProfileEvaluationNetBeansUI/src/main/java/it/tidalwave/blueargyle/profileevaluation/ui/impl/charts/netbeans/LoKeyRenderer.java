@@ -25,6 +25,7 @@ package it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans;
 import javax.annotation.Nonnull;
 import java.awt.Color;
 import java.awt.EventQueue;
+import it.tidalwave.netbeans.util.Locator;
 import it.tidalwave.image.EditableImage;
 import it.tidalwave.blueargyle.profileevaluation.TestImageFactory;
 import lombok.RequiredArgsConstructor;
@@ -41,10 +42,12 @@ public class LoKeyRenderer extends DeferredCreationEditableImageRenderer
   {
     private final String profileName;
     
+    private final TestImageFactory testImageFactory = Locator.find(TestImageFactory.class);
+    
     @Override @Nonnull
     protected EditableImage createEditableImage()
       {
         assert !EventQueue.isDispatchThread();
-        return TestImageFactory.createBandChart(getWidth(), getHeight(), profileName, Color.BLACK, 1, 15);
+        return testImageFactory.createBandChart(getWidth(), getHeight(), profileName, Color.BLACK, 1, 15);
       }
   }

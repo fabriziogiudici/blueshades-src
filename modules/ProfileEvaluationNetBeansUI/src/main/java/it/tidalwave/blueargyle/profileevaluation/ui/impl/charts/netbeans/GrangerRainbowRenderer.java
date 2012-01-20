@@ -25,6 +25,7 @@ package it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans;
 import javax.annotation.Nonnull;
 import java.awt.EventQueue;
 import it.tidalwave.image.EditableImage;
+import it.tidalwave.netbeans.util.Locator;
 import it.tidalwave.blueargyle.profileevaluation.TestImageFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,10 +41,12 @@ public class GrangerRainbowRenderer extends DeferredCreationEditableImageRendere
   {
     private final String profileName;
     
+    private final TestImageFactory testImageFactory = Locator.find(TestImageFactory.class);
+    
     @Override @Nonnull
     protected EditableImage createEditableImage()
       {
         assert !EventQueue.isDispatchThread();
-        return TestImageFactory.createGrangerRainbow(getWidth(), getHeight(), profileName);
+        return testImageFactory.createGrangerRainbow(getWidth(), getHeight(), profileName);
       }
   }

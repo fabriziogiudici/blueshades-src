@@ -34,6 +34,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.color.ICC_Profile;
 import java.awt.image.BufferedImage;
+import org.openide.util.lookup.ServiceProvider;
 import it.tidalwave.image.EditableImage;
 import it.tidalwave.image.op.AssignColorProfileOp;
 import it.tidalwave.image.op.CreateOp;
@@ -41,7 +42,6 @@ import it.tidalwave.image.op.DrawOp;
 import it.tidalwave.image.java2d.ImplementationFactoryJ2D;
 import it.tidalwave.netbeans.util.Locator;
 import lombok.Cleanup;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static javax.swing.SwingConstants.*;
 import static it.tidalwave.image.ImageUtils.*;
@@ -53,18 +53,23 @@ import static it.tidalwave.image.EditableImage.DataType.*;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@NoArgsConstructor @Slf4j
+@ServiceProvider(service=TestImageFactory.class) @Slf4j
 public final class TestImageFactory 
   {
+    public TestImageFactory()
+      {
+        Locator.find(ImplementationFactoryJ2D.class); 
+      }
+    
     /*******************************************************************************************************************
      *
      * See http://www.openphotographyforums.com/forums/showthread.php?t=12336
      *
      ******************************************************************************************************************/
     @Nonnull
-    public static EditableImage createGrangerRainbow (final @Nonnegative int width,
-                                                      final @Nonnegative int height,
-                                                      final @Nonnull String profileName)
+    public EditableImage createGrangerRainbow (final @Nonnegative int width,
+                                               final @Nonnegative int height,
+                                               final @Nonnull String profileName)
       {
         log.info("createGrangerRainbow({}, {}, {})", new Object[] { width, height, profileName });
         
@@ -134,14 +139,13 @@ public final class TestImageFactory
      *
      ******************************************************************************************************************/
     @Nonnull
-    public static EditableImage createBandChart (final @Nonnegative int width,
-                                                 final @Nonnegative int height,
-                                                 final @Nonnull String profileName,
-                                                 final @Nonnull Color background,
-                                                 final @Nonnegative int firstShade, 
-                                                 final @Nonnegative int lastShade) 
+    public EditableImage createBandChart (final @Nonnegative int width,
+                                          final @Nonnegative int height,
+                                          final @Nonnull String profileName,
+                                          final @Nonnull Color background,
+                                          final @Nonnegative int firstShade, 
+                                          final @Nonnegative int lastShade) 
       {
-        Locator.find(ImplementationFactoryJ2D.class); // FIXME: why is it needed?
         final ICC_Profile profile = loadProfile(profileName);
         
         final EditableImage image = EditableImage.create(new CreateOp(width, height, BYTE, background));
