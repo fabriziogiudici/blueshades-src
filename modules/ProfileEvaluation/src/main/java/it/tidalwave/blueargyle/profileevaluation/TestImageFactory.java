@@ -37,15 +37,19 @@ import java.awt.image.BufferedImage;
 import org.openide.util.lookup.ServiceProvider;
 import it.tidalwave.image.EditableImage;
 import it.tidalwave.image.op.AssignColorProfileOp;
+import it.tidalwave.image.op.ConvertColorProfileOp;
 import it.tidalwave.image.op.CreateOp;
 import it.tidalwave.image.op.DrawOp;
 import it.tidalwave.image.java2d.ImplementationFactoryJ2D;
+import it.tidalwave.image.jai.ImplementationFactoryJAI;
 import it.tidalwave.netbeans.util.Locator;
 import lombok.Cleanup;
 import lombok.extern.slf4j.Slf4j;
 import static javax.swing.SwingConstants.*;
 import static it.tidalwave.image.ImageUtils.*;
 import static it.tidalwave.image.EditableImage.DataType.*;
+import it.tidalwave.image.op.*;
+import java.awt.image.SampleModel;
 
 /***********************************************************************************************************************
  *
@@ -58,7 +62,10 @@ public final class TestImageFactory
   {
     public TestImageFactory()
       {
-        Locator.find(ImplementationFactoryJ2D.class); 
+        Locator.find(ImplementationFactoryJ2D.class).unregisterImplementation(AssignColorProfileOp.class); 
+        Locator.find(ImplementationFactoryJ2D.class).unregisterImplementation(ConvertColorProfileOp.class); 
+        
+        Locator.find(ImplementationFactoryJAI.class);
       }
     
     /*******************************************************************************************************************
@@ -73,63 +80,70 @@ public final class TestImageFactory
       {
         log.info("createGrangerRainbow({}, {}, {})", new Object[] { width, height, profileName });
         
-        Locator.find(ImplementationFactoryJ2D.class);
         final ICC_Profile profile = loadProfile(profileName);
         
         final EditableImage image = EditableImage.create(new CreateOp(width, height, BYTE, Color.WHITE));
-        final BufferedImage bImage = image.getInnerProperty(BufferedImage.class);
-        final Graphics g = bImage.createGraphics();
-        final Font font = g.getFont().deriveFont(10.0f);
-        final Font largeFont = g.getFont().deriveFont(16.0f).deriveFont(Font.BOLD);
-        g.setColor(Color.BLACK);
-        final int margin = 64;
-        final int trimmedWidth = width - margin * 2;
-        final int trimmedHeight = height - margin * 2;
-        g.drawRect(margin - 1, margin - 1, trimmedWidth + 1, trimmedHeight + 1);
-        
-        g.setFont(largeFont);
-        drawString(g, "H", margin + trimmedWidth / 2, margin - 20 - 20, 0, CENTER);
-        drawString(g, "B", 4, margin + trimmedHeight / 2, 0, LEADING);
-        drawString(g, "S", width - 4, margin + trimmedHeight / 2, 0, TRAILING);
-        drawString(g, getICCProfileName(profile), margin + trimmedWidth / 2, margin + trimmedHeight + margin / 2, 0, CENTER);
-        g.setFont(font);
-        
-        float xLabelDelta = (1f / 6) * 0.9999f;
-        float yLabelDelta = (1f / 8) * 0.9999f;
-        float xLabelNext = 0;
-        float yLabelNext = 0;
-        
-        for (int y = 0; y < trimmedHeight; y++)
+        image.execute(new DrawOp(new DrawOp.Executor() 
           {
-            final float yf = (float)y / (trimmedHeight - 1);
-            final float saturation = Math.min(1f, 2f * yf);
-            final float brightness = Math.min(1f, 2f * (1f - yf));
-            
-            if (yf >= yLabelNext)
+            @Override
+            public void draw (final @Nonnull Graphics2D g, final @Nonnull EditableImage image) 
               {
-                drawString(g, String.format("%.0f %%", brightness * 100), 0,              y + margin, margin, TRAILING);  
-                drawString(g, String.format("%.0f %%", saturation * 100), width - margin, y + margin, margin, LEADING);  
-                yLabelNext += yLabelDelta;
-              }  
-            
-            for (int x = 0; x < trimmedWidth; x++)
-              {
-                final float xf = (float)x / (trimmedWidth - 1);
-                final float hue = 1.0f - xf;
-                
-                if ((y == 0) && (xf >= xLabelNext))
+                final Font font = g.getFont().deriveFont(10.0f);
+                final Font largeFont = g.getFont().deriveFont(16.0f).deriveFont(Font.BOLD);
+                g.setColor(Color.BLACK);
+                final int margin = 64;
+                final int trimmedWidth = width - margin * 2;
+                final int trimmedHeight = height - margin * 2;
+                g.drawRect(margin - 1, margin - 1, trimmedWidth + 1, trimmedHeight + 1);
+
+                g.setFont(largeFont);
+                drawString(g, "H", margin + trimmedWidth / 2, margin - 20 - 20, 0, CENTER);
+                drawString(g, "B", 4, margin + trimmedHeight / 2, 0, LEADING);
+                drawString(g, "S", width - 4, margin + trimmedHeight / 2, 0, TRAILING);
+                drawString(g, getICCProfileName(profile), margin + trimmedWidth / 2, margin + trimmedHeight + margin / 2, 0, CENTER);
+                g.setFont(font);
+
+                float xLabelDelta = (1f / 6) * 0.9999f;
+                float yLabelDelta = (1f / 8) * 0.9999f;
+                float xLabelNext = 0;
+                float yLabelNext = 0;
+
+                for (int y = 0; y < trimmedHeight; y++)
                   {
-                    drawString(g, String.format("%.0f °", (1f - hue) * 360), x + margin, margin - 20, 0, CENTER);  
-                    xLabelNext += xLabelDelta;
+                    final float yf = (float)y / (trimmedHeight - 1);
+                    final float saturation = Math.min(1f, 2f * yf);
+                    final float brightness = Math.min(1f, 2f * (1f - yf));
+
+                    if (yf >= yLabelNext)
+                      {
+                        g.setColor(Color.BLACK);
+                        drawString(g, String.format("%.0f %%", brightness * 100), 0,              y + margin, margin, TRAILING);  
+                        drawString(g, String.format("%.0f %%", saturation * 100), width - margin, y + margin, margin, LEADING);  
+                        yLabelNext += yLabelDelta;
+                      }  
+
+                    for (int x = 0; x < trimmedWidth; x++)
+                      {
+                        final float xf = (float)x / (trimmedWidth - 1);
+                        final float hue = 1.0f - xf;
+
+                        if ((y == 0) && (xf >= xLabelNext))
+                          {
+                            drawString(g, String.format("%.0f °", (1f - hue) * 360), x + margin, margin - 20, 0, CENTER);  
+                            xLabelNext += xLabelDelta;
+                          }
+
+//                        bImage.setRGB(x + margin, y + margin, Color.HSBtoRGB(hue, saturation, brightness));
+                        g.setColor(new Color(Color.HSBtoRGB(hue, saturation, brightness)));
+                        g.fillRect(x + margin, y + margin, 1, 1); // FIXME: better way to plot single pixel?
+                      }
                   }
-                
-                bImage.setRGB(x + margin, y + margin, Color.HSBtoRGB(hue, saturation, brightness));
               }
-          }
+          }));
         
         // execute() in place doesn't work
         final EditableImage image2 = image.execute2(new AssignColorProfileOp(profile));
-///        image2.execute(new WriteOp("TIFF", "/tmp/grangersynth " + getICCProfileName(profile) + ".tif"));
+//        image2.execute(new WriteOp("TIFF", "/tmp/grangersynth " + getICCProfileName(profile) + ".tif"));
         return image2;
       }
 
