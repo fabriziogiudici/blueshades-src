@@ -129,7 +129,7 @@ public final class TestImageFactory
 
                         if ((y == 0) && (xf >= xLabelNext))
                           {
-                            drawString(g, String.format("%.0f °", (1f - hue) * 360), x + margin, margin - 20, 0, CENTER);  
+                            drawString(g, String.format("%.0f°", (1f - hue) * 360), x + margin, margin - 20, 0, CENTER);  
                             xLabelNext += xLabelDelta;
                           }
 
