@@ -52,7 +52,7 @@ public abstract class PanelTestSupport
                 frame.setVisible(true);
               }
           });
-        Thread.sleep(30000);
+        Thread.sleep(10000);
       }
 
     @Nonnull

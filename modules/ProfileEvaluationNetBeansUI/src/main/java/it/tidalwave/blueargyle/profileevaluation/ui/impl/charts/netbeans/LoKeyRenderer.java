@@ -23,19 +23,28 @@
 package it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans;
 
 import javax.annotation.Nonnull;
-import java.awt.Component;
+import java.awt.Color;
+import java.awt.EventQueue;
+import it.tidalwave.image.EditableImage;
+import it.tidalwave.blueargyle.profileevaluation.TestImageFactory;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
- * 
+ *
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class HiKeyPanelTest extends PanelTestSupport
+@RequiredArgsConstructor @Slf4j
+public class LoKeyRenderer extends DeferredCreationEditableImageRenderer
   {
+    private final String profileName;
+    
     @Override @Nonnull
-    protected Component createPresentation() 
+    protected EditableImage createEditableImage()
       {
-        return new HiKeyPanel();  
+        assert !EventQueue.isDispatchThread();
+        return TestImageFactory.createBandChart(getWidth(), getHeight(), profileName, Color.BLACK, 1, 15);
       }
   }

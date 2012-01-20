@@ -31,20 +31,21 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.color.ICC_Profile;
 import java.awt.image.BufferedImage;
 import it.tidalwave.image.EditableImage;
 import it.tidalwave.image.op.AssignColorProfileOp;
 import it.tidalwave.image.op.CreateOp;
-import it.tidalwave.image.op.WriteOp;
+import it.tidalwave.image.op.DrawOp;
+import it.tidalwave.image.java2d.ImplementationFactoryJ2D;
+import it.tidalwave.netbeans.util.Locator;
 import lombok.Cleanup;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import static javax.swing.SwingConstants.*;
 import static it.tidalwave.image.ImageUtils.*;
 import static it.tidalwave.image.EditableImage.DataType.*;
-import it.tidalwave.image.java2d.ImplementationFactoryJ2D;
-import it.tidalwave.netbeans.util.Locator;
 
 /***********************************************************************************************************************
  *
@@ -126,7 +127,61 @@ public final class TestImageFactory
 ///        image2.execute(new WriteOp("TIFF", "/tmp/grangersynth " + getICCProfileName(profile) + ".tif"));
         return image2;
       }
-    
+
+    /*******************************************************************************************************************
+     *
+     * 
+     *
+     ******************************************************************************************************************/
+    @Nonnull
+    public static EditableImage createBandChart (final @Nonnegative int width,
+                                                 final @Nonnegative int height,
+                                                 final @Nonnull String profileName,
+                                                 final @Nonnull Color background,
+                                                 final @Nonnegative int firstShade, 
+                                                 final @Nonnegative int lastShade) 
+      {
+        Locator.find(ImplementationFactoryJ2D.class); // FIXME: why is it needed?
+        final ICC_Profile profile = loadProfile(profileName);
+        
+        final EditableImage image = EditableImage.create(new CreateOp(width, height, BYTE, background));
+        image.execute(new DrawOp(new DrawOp.Executor() 
+          {
+            @Override
+            public void draw (final @Nonnull Graphics2D g, final @Nonnull EditableImage image)
+              {
+                final Font font = g.getFont().deriveFont(10.0f);
+                final Font largeFont = g.getFont().deriveFont(16.0f).deriveFont(Font.BOLD);
+                final int stripCount = (Math.abs(lastShade - firstShade) + 1) * 2 - 1;
+                final int margin = 128;
+                final float hStep = (width - 2 * margin) / stripCount;
+                final int direction = (int)Math.signum(lastShade - firstShade);
+
+                g.setFont(largeFont);
+                drawString(g, getICCProfileName(profile), width / 2, height - margin / 2, 0, CENTER);
+                
+                g.setFont(font);
+
+                for (int shade = firstShade; shade != lastShade + direction; shade += direction)
+                  {
+                    final int x1 = margin + Math.round((shade - Math.min(firstShade, lastShade)) * hStep * 2);
+                    final int x2 = Math.round(x1 + hStep);
+                    final int y1 = margin;
+                    final int y2 = height - margin;
+                    
+                    g.setColor(new Color(shade, shade, shade));
+                    g.fillRect(x1, y1, x2 - x1 + 1, y2 - y1 + 1);
+                    
+                    g.setColor(Color.GRAY);
+                    drawString(g, "" + shade, x1, y1 + 20, (x1 + x2) / 2, CENTER);
+                  }
+              }
+          }));
+        
+        final EditableImage image2 = image.execute2(new AssignColorProfileOp(profile));
+        return image2;
+      }
+
     /*******************************************************************************************************************
      *
      * .

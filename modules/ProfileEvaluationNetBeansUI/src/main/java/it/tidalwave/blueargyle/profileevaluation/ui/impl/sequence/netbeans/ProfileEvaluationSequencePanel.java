@@ -32,8 +32,8 @@ import javax.swing.JPanel;
 import it.tidalwave.swing.SafeActionAdapter;
 import it.tidalwave.blueargyle.profileevaluation.ui.sequence.ProfileEvaluationSequencePresentation;
 import it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans.GrangerRainbowRenderer;
-import it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans.HiKeyPanel;
-import it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans.LoKeyPanel;
+import it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans.HiKeyRenderer;
+import it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans.LoKeyRenderer;
 import it.tidalwave.blueargyle.profileevaluation.ui.sequence.GrangerRainbowDescriptor;
 import it.tidalwave.blueargyle.profileevaluation.ui.sequence.HiKeyDescriptor;
 import it.tidalwave.blueargyle.profileevaluation.ui.sequence.LoKeyDescriptor;
@@ -111,11 +111,11 @@ public class ProfileEvaluationSequencePanel extends JPanel implements ProfileEva
         // FIXME: use a Factory
         if (HiKeyDescriptor.class.equals(step.getClass()))
           {
-            c = new HiKeyPanel();
+            c = new HiKeyRenderer("Adobe98");
           }
         else if (LoKeyDescriptor.class.equals(step.getClass()))
           {
-            c = new LoKeyPanel();
+            c = new LoKeyRenderer("Adobe98");
           }
         else if (GrangerRainbowDescriptor.class.equals(step.getClass()))
           {

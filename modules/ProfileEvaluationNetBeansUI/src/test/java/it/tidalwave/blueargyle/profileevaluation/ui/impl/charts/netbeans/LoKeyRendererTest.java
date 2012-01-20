@@ -22,18 +22,20 @@
  **********************************************************************************************************************/
 package it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans;
 
-import java.awt.Color;
+import javax.annotation.Nonnull;
+import java.awt.Component;
 
 /***********************************************************************************************************************
- *
+ * 
  * @author  Fabrizio Giudici
  * @version $Id$
  *
  **********************************************************************************************************************/
-public class LoKeyPanel extends KeyPanel 
+public class LoKeyRendererTest extends PanelTestSupport
   {
-    public LoKeyPanel() 
+    @Override @Nonnull
+    protected Component createPresentation() 
       {
-        setContents(new StripPanel(Color.BLACK, 1, 15));
+        return new LoKeyRenderer("Adobe98");  
       }
   }

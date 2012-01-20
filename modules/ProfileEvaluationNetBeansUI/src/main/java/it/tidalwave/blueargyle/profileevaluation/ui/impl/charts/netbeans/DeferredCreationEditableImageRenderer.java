@@ -24,18 +24,21 @@ package it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans;
 
 import javax.annotation.Nonnull;
 import java.util.concurrent.ExecutionException;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.awt.color.ICC_Profile;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import javax.swing.SwingWorker;
 import it.tidalwave.image.EditableImage;
+import it.tidalwave.image.ImageUtils;
+import it.tidalwave.image.op.AssignColorProfileOp;
 import it.tidalwave.image.op.ConvertColorProfileOp;
 import it.tidalwave.image.render.EditableImageRenderer;
-import lombok.Cleanup;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.color.ColorSpace;
+import java.awt.color.ICC_ColorSpace;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
@@ -115,21 +118,28 @@ public abstract class DeferredCreationEditableImageRenderer extends EditableImag
     
     /*******************************************************************************************************************
      *
-     * .
+     * FIXME: profile conversion should be moved to EditableImageRenderer, but the problem is how to get the screen
+     * profile.
      *
      ******************************************************************************************************************/
     @Nonnull
     private static EditableImage profileConverted (final @Nonnull EditableImage image)
       {
-//        final GraphicsEnvironment environment = GraphicsEnvironment.getLocalGraphicsEnvironment();
-//        final GraphicsDevice device = environment.getScreenDevices()[0];
-//        final GraphicsConfiguration configuration = device.getConfigurations()[0];
-//        final ColorSpace colorSpace = configuration.getColorModel().getColorSpace();
-//        
-//        final ColorConvertOp ccOp = new ColorConvertOp(colorSpace, null);
-//        return ccOp.filter(image, null);
+        final GraphicsEnvironment environment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        final GraphicsDevice device = environment.getScreenDevices()[0];
+        final GraphicsConfiguration configuration = device.getDefaultConfiguration();
+        final ICC_ColorSpace colorSpace = (ICC_ColorSpace)configuration.getColorModel().getColorSpace();
 
-        return image.execute2(new ConvertColorProfileOp(loadProfile()));
+        return image;
+////        final ColorConvertOp ccOp = new ColorConvertOp(colorSpace, null);
+////        return ccOp.filter(image, null);
+//
+////        return image.execute2(new ConvertColorProfileOp(loadProfile()));
+//          System.err.println("DEVICE PROFILE " + ImageUtils.getICCProfileName(colorSpace.getProfile()));
+//        return image.execute2(new ConvertColorProfileOp(loadProfile()));
+////        return image.execute2(new ConvertColorProfileOp(loadProfile())).execute2(new AssignColorProfileOp(ICC_Profile.getInstance(ColorSpace.CS_sRGB)));
+////        return image.execute2(new ConvertColorProfileOp(loadProfile())).execute2(new AssignColorProfileOp(colorSpace.getProfile()));
+////        return image.execute2(new ConvertColorProfileOp(colorSpace.getProfile()));
       }
 
     /*******************************************************************************************************************
@@ -145,15 +155,10 @@ public abstract class DeferredCreationEditableImageRenderer extends EditableImag
             final String resourceName = "/Users/fritz/Settings/Argyll/Changeset 94d4e5c5ec8e/"
                     + "MBP 10.7.2 ColorLCD D65 140cdm² b-3 DarkRoom 2012-01-14 11.20/"
                     + "MBP 10.7.2 ColorLCD D65 140cdm² b-3 DarkRoom 2012-01-14 11.20 gm.icc";
-            final @Cleanup
-            InputStream is = new FileInputStream(resourceName);
-
-            if (is == null) 
-              {
-                throw new FileNotFoundException(resourceName);
-              }
-
-            return ICC_Profile.getInstance(is);
+//            final String resourceName = "/Users/fritz/Settings/Argyll/"
+//                      + "MBP 10.7.2 PLB2403WS D65 140cdm² b82 c90 r95 g87 b93 DarkRoom 2012-01-07 13.18/"
+//                      + "MBP 10.7.2 PLB2403WS D65 140cdm² b82 c90 r95 g87 b93 DarkRoom 2012-01-07 13.18 cLUTxyz.icc";
+            return ICC_Profile.getInstance(resourceName);
           }
         catch (IOException e)
           {
