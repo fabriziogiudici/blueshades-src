@@ -33,7 +33,6 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.color.ICC_Profile;
-import java.awt.image.BufferedImage;
 import org.openide.util.lookup.ServiceProvider;
 import it.tidalwave.image.EditableImage;
 import it.tidalwave.image.op.AssignColorProfileOp;
@@ -45,11 +44,10 @@ import it.tidalwave.image.jai.ImplementationFactoryJAI;
 import it.tidalwave.netbeans.util.Locator;
 import lombok.Cleanup;
 import lombok.extern.slf4j.Slf4j;
+import static java.awt.RenderingHints.*;
 import static javax.swing.SwingConstants.*;
 import static it.tidalwave.image.ImageUtils.*;
 import static it.tidalwave.image.EditableImage.DataType.*;
-import it.tidalwave.image.op.*;
-import java.awt.image.SampleModel;
 
 /***********************************************************************************************************************
  *
@@ -88,6 +86,7 @@ public final class TestImageFactory
             @Override
             public void draw (final @Nonnull Graphics2D g, final @Nonnull EditableImage image) 
               {
+                g.setRenderingHint(KEY_TEXT_ANTIALIASING, VALUE_TEXT_ANTIALIAS_ON);
                 final Font font = g.getFont().deriveFont(10.0f);
                 final Font largeFont = g.getFont().deriveFont(16.0f).deriveFont(Font.BOLD);
                 g.setColor(Color.BLACK);
@@ -129,6 +128,7 @@ public final class TestImageFactory
 
                         if ((y == 0) && (xf >= xLabelNext))
                           {
+                            g.setColor(Color.BLACK);
                             drawString(g, String.format("%.0f°", (1f - hue) * 360), x + margin, margin - 20, 0, CENTER);  
                             xLabelNext += xLabelDelta;
                           }
@@ -142,9 +142,7 @@ public final class TestImageFactory
           }));
         
         // execute() in place doesn't work
-        final EditableImage image2 = image.execute2(new AssignColorProfileOp(profile));
-//        image2.execute(new WriteOp("TIFF", "/tmp/grangersynth " + getICCProfileName(profile) + ".tif"));
-        return image2;
+        return image.execute2(new AssignColorProfileOp(profile));
       }
 
     /*******************************************************************************************************************
