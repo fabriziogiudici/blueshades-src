@@ -80,7 +80,7 @@ public final class TestImageFactory
         
         final ICC_Profile profile = loadProfile(profileName);
         
-        final EditableImage image = EditableImage.create(new CreateOp(width, height, BYTE, Color.WHITE));
+        final EditableImage image = EditableImage.create(new CreateOp(width, height, BYTE, Color.WHITE)); // FIXME: should be 16 bits for ProPhoto and MelissaRGB
         image.execute(new DrawOp(new DrawOp.Executor() 
           {
             @Override
