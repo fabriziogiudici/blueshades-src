@@ -38,6 +38,10 @@
             <groupId>it.tidalwave.blueargyle</groupId>
             <artifactId>it-tidalwave-blueargyle-commons</artifactId>
         </dependency>
+        <dependency>
+            <artifactId>it-tidalwave-argyll</artifactId>
+            <groupId>it.tidalwave.blueargyle</groupId>
+        </dependency>
         
         <dependency>
             <groupId>org.imajine</groupId>

@@ -22,8 +22,8 @@
  **********************************************************************************************************************/
 package it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans;
 
+import java.awt.color.ICC_Profile;
 import javax.annotation.Nonnull;
-import java.awt.Component;
 
 /***********************************************************************************************************************
  * 
@@ -34,8 +34,8 @@ import java.awt.Component;
 public class LoKeyRendererTest extends PanelTestSupport
   {
     @Override @Nonnull
-    protected Component createPresentation() 
+    protected DeferredCreationEditableImageRenderer createPresentation (final @Nonnull ICC_Profile deviceProfile)
       {
-        return new LoKeyRenderer("Adobe98");  
+        return new LoKeyRenderer("Adobe98", deviceProfile);  
       }
   }

@@ -28,7 +28,7 @@ import java.awt.EventQueue;
 import it.tidalwave.netbeans.util.Locator;
 import it.tidalwave.image.EditableImage;
 import it.tidalwave.blueargyle.profileevaluation.TestImageFactory;
-import lombok.RequiredArgsConstructor;
+import java.awt.color.ICC_Profile;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
@@ -37,12 +37,18 @@ import lombok.extern.slf4j.Slf4j;
  * @version $Id$
  *
  **********************************************************************************************************************/
-@RequiredArgsConstructor @Slf4j
+@Slf4j
 public class HiKeyRenderer extends DeferredCreationEditableImageRenderer
   {
     private final String profileName;
     
     private final TestImageFactory testImageFactory = Locator.find(TestImageFactory.class);
+    
+    public HiKeyRenderer (final @Nonnull String profileName, final @Nonnull ICC_Profile deviceProfile)
+      {
+        super(deviceProfile);
+        this.profileName = profileName;  
+      }
     
     @Override @Nonnull
     protected EditableImage createEditableImage()

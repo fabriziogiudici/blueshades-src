@@ -25,19 +25,20 @@ package it.tidalwave.blueargyle.profileevaluation.ui.impl.sequence.netbeans;
 import javax.annotation.Nonnull;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.GraphicsDevice;
+import java.awt.color.ICC_Profile;
 import javax.swing.Action;
-import javax.swing.JComponent;
 import javax.swing.JPanel;
+import it.tidalwave.argyll.ProfiledDisplay;
 import it.tidalwave.swing.SafeActionAdapter;
 import it.tidalwave.blueargyle.profileevaluation.ui.sequence.ProfileEvaluationSequencePresentation;
-import it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans.GrangerRainbowRenderer;
-import it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans.HiKeyRenderer;
-import it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans.LoKeyRenderer;
 import it.tidalwave.blueargyle.profileevaluation.ui.sequence.GrangerRainbowDescriptor;
 import it.tidalwave.blueargyle.profileevaluation.ui.sequence.HiKeyDescriptor;
 import it.tidalwave.blueargyle.profileevaluation.ui.sequence.LoKeyDescriptor;
 import it.tidalwave.blueargyle.profileevaluation.ui.sequence.SequenceStepDescriptor;
+import it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans.DeferredCreationEditableImageRenderer;
+import it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans.GrangerRainbowRenderer;
+import it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans.HiKeyRenderer;
+import it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans.LoKeyRenderer;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************
@@ -52,6 +53,9 @@ public class ProfileEvaluationSequencePanel extends JPanel implements ProfileEva
     private final SafeActionAdapter nextAction = new SafeActionAdapter();
     
     private final SafeActionAdapter previousAction = new SafeActionAdapter();
+    
+    @Nonnull
+    private ProfiledDisplay profiledDisplay;
     
     /*******************************************************************************************************************
      * 
@@ -81,9 +85,10 @@ public class ProfileEvaluationSequencePanel extends JPanel implements ProfileEva
      *
      ******************************************************************************************************************/
     @Override
-    public void showUp (final @Nonnull GraphicsDevice graphicsDevice)
+    public void showUp (final @Nonnull ProfiledDisplay profiledDisplay)
       {
         assert EventQueue.isDispatchThread();
+        this.profiledDisplay = profiledDisplay;
       }
     
     /*******************************************************************************************************************
@@ -106,20 +111,21 @@ public class ProfileEvaluationSequencePanel extends JPanel implements ProfileEva
         assert EventQueue.isDispatchThread();
         log.info("renderEvaluationStep({})", step);
        
-        JComponent c = null;
+        final ICC_Profile iccProfile = profiledDisplay.getProfile().getIccProfile();
+        DeferredCreationEditableImageRenderer c = null;
         
         // FIXME: use a Factory
         if (HiKeyDescriptor.class.equals(step.getClass()))
           {
-            c = new HiKeyRenderer("Adobe98");
+            c = new HiKeyRenderer("Adobe98", iccProfile);
           }
         else if (LoKeyDescriptor.class.equals(step.getClass()))
           {
-            c = new LoKeyRenderer("Adobe98");
+            c = new LoKeyRenderer("Adobe98", iccProfile);
           }
         else if (GrangerRainbowDescriptor.class.equals(step.getClass()))
           {
-            c = new GrangerRainbowRenderer("Adobe98"); // "MelissaRGB"
+            c = new GrangerRainbowRenderer("Adobe98", iccProfile); // "MelissaRGB"
           }
         
         pnContents.removeAll();

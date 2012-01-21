@@ -24,9 +24,8 @@ package it.tidalwave.blueargyle.profileevaluation.ui.impl.sequence.netbeans;
 
 import javax.annotation.Nonnull;
 import java.awt.EventQueue;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import javax.swing.JFrame;
+import it.tidalwave.argyll.ProfiledDisplay;
 import it.tidalwave.blueargyle.profileevaluation.ui.sequence.ProfileEvaluationSequencePresentation;
 import lombok.Delegate;
 
@@ -40,7 +39,7 @@ public class NetBeansProfileEvaluationSequencePresentation implements ProfileEva
   {
     private static interface DelegateExclusions
       {
-        public void showUp (GraphicsDevice graphicsDevice);
+        public void showUp (ProfiledDisplay profiledDisplay);
         public void dismiss();    
       }
     
@@ -66,11 +65,11 @@ public class NetBeansProfileEvaluationSequencePresentation implements ProfileEva
      *
      ******************************************************************************************************************/
     @Override
-    public void showUp (final @Nonnull GraphicsDevice graphicsDevice)
+    public void showUp (final @Nonnull ProfiledDisplay profiledDisplay)
       {
         assert EventQueue.isDispatchThread();
-        panel.showUp(graphicsDevice);
-        graphicsDevice.setFullScreenWindow(frame);
+        panel.showUp(profiledDisplay);
+        profiledDisplay.getDisplay().getGraphicsDevice().setFullScreenWindow(frame);
         frame.setVisible(true);
       }
     

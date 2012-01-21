@@ -23,7 +23,8 @@
 package it.tidalwave.blueargyle.profileevaluation.ui.impl.charts.netbeans;
 
 import javax.annotation.Nonnull;
-import java.awt.Component;
+import java.awt.color.ColorSpace;
+import java.awt.color.ICC_Profile;
 import javax.swing.JFrame;
 import it.tidalwave.swing.SwingSafeRunner;
 import org.testng.annotations.Test;
@@ -46,7 +47,8 @@ public abstract class PanelTestSupport
             public void run() 
               {
                 final JFrame frame = new JFrame();
-                final Component presentation = createPresentation();
+                final DeferredCreationEditableImageRenderer presentation = createPresentation(ICC_Profile.getInstance(ColorSpace.CS_sRGB));
+//                presentation.setDeviceProfileName("MBP 10.7.2 ColorLCD D65 140cdm² b-3 DarkRoom 2012-01-14 11.20 gm.icc"); // FIXME
                 frame.add(presentation);
                 frame.setSize(1024, 768);
                 frame.setVisible(true);
@@ -56,5 +58,5 @@ public abstract class PanelTestSupport
       }
 
     @Nonnull
-    protected abstract Component createPresentation();
+    protected abstract DeferredCreationEditableImageRenderer createPresentation (@Nonnull ICC_Profile deviceProfile);
   }

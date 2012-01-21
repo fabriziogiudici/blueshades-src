@@ -106,7 +106,7 @@ public class ProfileEvaluationSequenceControllerActor
     public void onProfileEvaluationRequest (final @Nonnull @ListensTo ProfileEvaluationRequest message)
       {
         log.info("onProfileEvaluationRequest({})", message);
-        presentation.showUp(message.getDisplay().getDisplay().getGraphicsDevice());
+        presentation.showUp(message.getDisplay());
         currentStep = stepSequence.listIterator();
         presentation.renderEvaluationStep(currentStep.next());
         presentation.renderProfileName(message.getDisplay().getProfile().getName());

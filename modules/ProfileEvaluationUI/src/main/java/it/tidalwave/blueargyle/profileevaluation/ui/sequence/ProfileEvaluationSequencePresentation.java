@@ -24,7 +24,7 @@ package it.tidalwave.blueargyle.profileevaluation.ui.sequence;
 
 import javax.annotation.Nonnull;
 import javax.swing.Action;
-import java.awt.GraphicsDevice;
+import it.tidalwave.argyll.ProfiledDisplay;
 
 /***********************************************************************************************************************
  *
@@ -46,7 +46,7 @@ public interface ProfileEvaluationSequencePresentation
      * .
      *
      ******************************************************************************************************************/
-    public void showUp (@Nonnull GraphicsDevice graphicsDevice);
+    public void showUp (@Nonnull ProfiledDisplay profiledDisplay);
     
     /*******************************************************************************************************************
      *
