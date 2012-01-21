@@ -37,7 +37,7 @@
     </parent>
 
     <groupId>it.tidalwave.blueargyle</groupId>
-    <artifactId>it-tidalwave-uniformity-archive</artifactId>
+    <artifactId>it-tidalwave-blueargyle-uniformity-archive</artifactId>
     <version>1.0.2-SNAPSHOT</version>
     <packaging>nbm</packaging>
     <name>blueArgyle - Uniformity Archive</name>
@@ -46,7 +46,7 @@
     <dependencies>
         <dependency>
             <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-uniformity</artifactId>
+            <artifactId>it-tidalwave-blueargyle-uniformity</artifactId>
         </dependency>
         <dependency>
             <groupId>it.tidalwave.blueargyle</groupId>
@@ -109,7 +109,7 @@
         </dependency>
         <dependency>
             <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-uniformity</artifactId>
+            <artifactId>it-tidalwave-blueargyle-uniformity</artifactId>
             <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>

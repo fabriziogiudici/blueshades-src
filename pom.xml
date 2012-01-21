@@ -104,34 +104,34 @@
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueargyle</groupId>
-                <artifactId>it-tidalwave-uniformity</artifactId>
+                <artifactId>it-tidalwave-blueargyle-uniformity</artifactId>
                 <version>1.0.3-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueargyle</groupId>
-                <artifactId>it-tidalwave-uniformity</artifactId>
+                <artifactId>it-tidalwave-blueargyle-uniformity</artifactId>
                 <classifier>tests</classifier>
                 <version>1.0.3-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueargyle</groupId>
-                <artifactId>it-tidalwave-uniformity-archive</artifactId>
+                <artifactId>it-tidalwave-blueargyle-uniformity-archive</artifactId>
                 <version>1.0.2-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueargyle</groupId>
-                <artifactId>it-tidalwave-uniformity-ui</artifactId>
+                <artifactId>it-tidalwave-blueargyle-uniformity-ui</artifactId>
                 <version>1.0.3-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueargyle</groupId>
-                <artifactId>it-tidalwave-uniformity-ui</artifactId>
+                <artifactId>it-tidalwave-blueargyle-uniformity-ui</artifactId>
                 <classifier>tests</classifier>
                 <version>1.0.3-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueargyle</groupId>
-                <artifactId>it-tidalwave-uniformity-ui-netbeans</artifactId>
+                <artifactId>it-tidalwave-blueargyle-uniformity-ui-netbeans</artifactId>
                 <version>1.0.3-SNAPSHOT</version>
             </dependency>
             <dependency>

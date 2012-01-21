@@ -33,7 +33,7 @@
     </parent>
 
     <groupId>it.tidalwave.blueargyle</groupId>
-    <artifactId>it-tidalwave-uniformity-ui-netbeans</artifactId>
+    <artifactId>it-tidalwave-blueargyle-uniformity-ui-netbeans</artifactId>
     <packaging>nbm</packaging>
     <version>1.0.3-SNAPSHOT</version>
     <name>blueArgyle - Uniformity UI (NetBeans)</name>
@@ -42,11 +42,11 @@
     <dependencies>
         <dependency>
             <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-uniformity</artifactId>
+            <artifactId>it-tidalwave-blueargyle-uniformity</artifactId>
         </dependency>
         <dependency>
             <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-uniformity-ui</artifactId>
+            <artifactId>it-tidalwave-blueargyle-uniformity-ui</artifactId>
         </dependency>
         <dependency>
             <groupId>it.tidalwave.blueargyle</groupId>
@@ -131,7 +131,7 @@
         <!-- TEST DEPENDENCIES -->
         <dependency>
             <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-uniformity-ui</artifactId>
+            <artifactId>it-tidalwave-blueargyle-uniformity-ui</artifactId>
             <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>

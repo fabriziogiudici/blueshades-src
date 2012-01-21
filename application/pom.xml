@@ -36,15 +36,15 @@
         </dependency>
         <dependency>
             <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-uniformity</artifactId>
+            <artifactId>it-tidalwave-blueargyle-uniformity</artifactId>
         </dependency>
         <dependency>
             <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-uniformity-ui</artifactId>
+            <artifactId>it-tidalwave-blueargyle-uniformity-ui</artifactId>
         </dependency>
         <dependency>
             <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-uniformity-ui-netbeans</artifactId>
+            <artifactId>it-tidalwave-blueargyle-uniformity-ui-netbeans</artifactId>
         </dependency>
         <dependency>
             <groupId>it.tidalwave.blueargyle</groupId>
@@ -56,7 +56,7 @@
         </dependency>
         <dependency>
             <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-uniformity-archive</artifactId>
+            <artifactId>it-tidalwave-blueargyle-uniformity-archive</artifactId>
         </dependency>
 
         <dependency>
