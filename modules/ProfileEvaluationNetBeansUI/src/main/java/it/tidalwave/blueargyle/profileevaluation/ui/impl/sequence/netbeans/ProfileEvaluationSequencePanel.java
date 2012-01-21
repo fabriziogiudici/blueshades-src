@@ -117,15 +117,15 @@ public class ProfileEvaluationSequencePanel extends JPanel implements ProfileEva
         // FIXME: use a Factory
         if (HiKeyDescriptor.class.equals(step.getClass()))
           {
-            c = new HiKeyRenderer("Adobe98", iccProfile);
+            c = new HiKeyRenderer("MelissaRGB", iccProfile);
           }
         else if (LoKeyDescriptor.class.equals(step.getClass()))
           {
-            c = new LoKeyRenderer("Adobe98", iccProfile);
+            c = new LoKeyRenderer("MelissaRGB", iccProfile);
           }
         else if (GrangerRainbowDescriptor.class.equals(step.getClass()))
           {
-            c = new GrangerRainbowRenderer("Adobe98", iccProfile); // "MelissaRGB"
+            c = new GrangerRainbowRenderer("MelissaRGB", iccProfile); 
           }
         
         pnContents.removeAll();
