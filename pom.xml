@@ -210,10 +210,14 @@
                 <configuration>
                     <excludes>
                         <exclude>LICENSE.txt</exclude>
+                        <exclude>**/*.icc</exclude>
+                        <exclude>**/*.icns</exclude>
+                        <exclude>**/*.form</exclude>
                         <exclude>**/*.mf</exclude>
                         <exclude>**/.revision</exclude>
                         <exclude>.hgtags</exclude>
                         <exclude>.hgignore</exclude>
+                        <exclude>**/src/test/resources/expected-results/**</exclude>
                     </excludes>
                 </configuration>                
             </plugin>
