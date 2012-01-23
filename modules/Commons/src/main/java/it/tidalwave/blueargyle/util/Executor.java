@@ -16,7 +16,7 @@
  *
  ***********************************************************************************************************************
  *
- * WWW: http://blueargyle.java.net
+ * WWW: http://blueargyle.tidalwave.it
  * SCM: https://bitbucket.org/tidalwave/blueargyle-src
  *
  **********************************************************************************************************************/
@@ -224,6 +224,7 @@ public class Executor
         final String argyllHome = System.getenv("ARGYLL_HOME"); // used during development
         final String path = (argyllHome != null) ? argyllHome + "/bin/"
                                                  : (System.getProperty("netbeans.home") + "/../../../../MacOS/Argyll_V1.3.5/bin/");
+//        final String path = "/Users/fritz/Applications/Argyll_V1.3.5/bin/";
         executor.arguments.add(new File(path + executable).getAbsolutePath());
         return executor;
       }
