@@ -4,59 +4,59 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>it.tidalwave.blueargyle</groupId>
-        <artifactId>it-tidalwave-blueargyle-modules</artifactId>
+        <groupId>it.tidalwave.blueshades</groupId>
+        <artifactId>it-tidalwave-blueshades-modules</artifactId>
         <version>1.0-ALPHA-5-SNAPSHOT</version>
         <relativePath>../modules/pom.xml</relativePath>
     </parent>
 
-    <groupId>it.tidalwave.blueargyle</groupId>
-    <artifactId>it-tidalwave-blueargyle-application</artifactId>
+    <groupId>it.tidalwave.blueshades</groupId>
+    <artifactId>it-tidalwave-blueshades-application</artifactId>
     <version>1.0-ALPHA-5-SNAPSHOT</version>
     <packaging>nbm-application</packaging>
-    <name>blueArgyle (application)</name>
-    <description>blueArgyle (application)</description>
+    <name>blueShades (application)</name>
+    <description>blueShades (application)</description>
     
     <dependencies>
         <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-blueargyle-branding</artifactId>
+            <groupId>it.tidalwave.blueshades</groupId>
+            <artifactId>it-tidalwave-blueshades-branding</artifactId>
         </dependency>
         <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-blueargyle-application-customization</artifactId>
+            <groupId>it.tidalwave.blueshades</groupId>
+            <artifactId>it-tidalwave-blueshades-application-customization</artifactId>
         </dependency>
         <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-blueargyle-home</artifactId>
+            <groupId>it.tidalwave.blueshades</groupId>
+            <artifactId>it-tidalwave-blueshades-home</artifactId>
         </dependency>
         <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
+            <groupId>it.tidalwave.blueshades</groupId>
             <artifactId>it-tidalwave-argyll</artifactId>
         </dependency>
         <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-blueargyle-uniformity</artifactId>
+            <groupId>it.tidalwave.blueshades</groupId>
+            <artifactId>it-tidalwave-blueshades-uniformity</artifactId>
         </dependency>
         <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-blueargyle-uniformity-ui</artifactId>
+            <groupId>it.tidalwave.blueshades</groupId>
+            <artifactId>it-tidalwave-blueshades-uniformity-ui</artifactId>
         </dependency>
         <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-blueargyle-uniformity-ui-netbeans</artifactId>
+            <groupId>it.tidalwave.blueshades</groupId>
+            <artifactId>it-tidalwave-blueshades-uniformity-ui-netbeans</artifactId>
         </dependency>
         <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-blueargyle-profileevaluation-ui</artifactId>
+            <groupId>it.tidalwave.blueshades</groupId>
+            <artifactId>it-tidalwave-blueshades-profileevaluation-ui</artifactId>
         </dependency>
         <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-blueargyle-profileevaluation-ui-netbeans</artifactId>
+            <groupId>it.tidalwave.blueshades</groupId>
+            <artifactId>it-tidalwave-blueshades-profileevaluation-ui-netbeans</artifactId>
         </dependency>
         <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-blueargyle-uniformity-archive</artifactId>
+            <groupId>it.tidalwave.blueshades</groupId>
+            <artifactId>it-tidalwave-blueshades-uniformity-archive</artifactId>
         </dependency>
 
         <dependency>
@@ -124,7 +124,7 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>nbm-maven-plugin</artifactId>
                 <configuration>
-                    <etcConfFile>config/blueargyle.conf</etcConfFile>
+                    <etcConfFile>config/blueshades.conf</etcConfFile>
                 </configuration>
             </plugin>
             
@@ -141,7 +141,7 @@
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
-                                    <groupId>it.tidalwave.blueargyle</groupId>
+                                    <groupId>it.tidalwave.blueshades</groupId>
                                     <artifactId>argyll</artifactId>
                                     <version>1.3.5.1</version>
                                     <type>tgz</type>

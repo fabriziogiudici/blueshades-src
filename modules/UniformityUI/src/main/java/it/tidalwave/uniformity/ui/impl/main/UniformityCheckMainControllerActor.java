@@ -1,6 +1,6 @@
 /***********************************************************************************************************************
  *
- * blueArgyle - a Java UI for Argyll
+ * blueShades - a Java UI for Argyll
  * Copyright (C) 2011-2012 by Tidalwave s.a.s. (http://www.tidalwave.it)
  *
  ***********************************************************************************************************************
@@ -16,8 +16,8 @@
  *
  ***********************************************************************************************************************
  *
- * WWW: http://blueargyle.tidalwave.it
- * SCM: https://bitbucket.org/tidalwave/blueargyle-src
+ * WWW: http://blueshades.tidalwave.it
+ * SCM: https://bitbucket.org/tidalwave/blueshades-src
  *
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.ui.impl.main;
@@ -50,7 +50,7 @@ import it.tidalwave.netbeans.nodes.LookupFilterDecoratorNode;
 import it.tidalwave.netbeans.nodes.LookupFilterDecoratorNode.LookupFilter;
 import it.tidalwave.netbeans.nodes.role.ActionProvider;
 import it.tidalwave.swing.ActionMessageAdapter;
-import it.tidalwave.blueargyle.util.MutableProperty;
+import it.tidalwave.blueshades.util.MutableProperty;
 import it.tidalwave.argyll.DisplayDiscoveryMessage;
 import it.tidalwave.argyll.DisplayDiscoveryQueryMessage;
 import it.tidalwave.argyll.DisplaySelectionMessage;

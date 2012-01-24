@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--********************************************************************************************************************
  *
- * blueArgyle - a Java UI for Argyll
+ * blueShades - a Java UI for Argyll
  * Copyright (C) 2011-2012 by Tidalwave s.a.s. (http://www.tidalwave.it)
  *
  ***********************************************************************************************************************
@@ -17,16 +17,16 @@
  *
  ***********************************************************************************************************************
  *
- * WWW: http://blueargyle.tidalwave.it
- * SCM: https://bitbucket.org/tidalwave/blueargyle-src
+ * WWW: http://blueshades.tidalwave.it
+ * SCM: https://bitbucket.org/tidalwave/blueshades-src
  *
  ********************************************************************************************************************-->
 <nbm>
     <moduleType>normal</moduleType>
-    <codeNameBase>it.tidalwave.blueargyle.profileevaluation.ui/1</codeNameBase>
-    <cluster>blueargyle</cluster>
+    <codeNameBase>it.tidalwave.blueshades.profileevaluation.ui/1</codeNameBase>
+    <cluster>blueshades</cluster>
     <manifest>src/main/nbm/manifest.mf</manifest>
-    <homepageUrl>http://blueargyle.java.net</homepageUrl>
+    <homepageUrl>http://blueshades.java.net</homepageUrl>
     <author>Fabrizio Giudici</author>
     <licenseName>Apache License, Version 2.0</licenseName>
     <licenseFile>../../LICENSE.txt</licenseFile>

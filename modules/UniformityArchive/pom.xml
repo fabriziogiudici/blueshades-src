@@ -30,35 +30,35 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>it.tidalwave.blueargyle</groupId>
-        <artifactId>it-tidalwave-blueargyle-modules</artifactId>
+        <groupId>it.tidalwave.blueshades</groupId>
+        <artifactId>it-tidalwave-blueshades-modules</artifactId>
         <version>1.0-ALPHA-5-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>it.tidalwave.blueargyle</groupId>
-    <artifactId>it-tidalwave-blueargyle-uniformity-archive</artifactId>
+    <groupId>it.tidalwave.blueshades</groupId>
+    <artifactId>it-tidalwave-blueshades-uniformity-archive</artifactId>
     <version>1.0.2-SNAPSHOT</version>
     <packaging>nbm</packaging>
-    <name>blueArgyle - Uniformity Archive</name>
-    <description>blueArgyle - Uniformity Archive</description>
+    <name>blueShades - Uniformity Archive</name>
+    <description>blueShades - Uniformity Archive</description>
 
     <dependencies>
         <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-blueargyle-uniformity</artifactId>
+            <groupId>it.tidalwave.blueshades</groupId>
+            <artifactId>it-tidalwave-blueshades-uniformity</artifactId>
         </dependency>
         <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
+            <groupId>it.tidalwave.blueshades</groupId>
             <artifactId>it-tidalwave-argyll</artifactId>
         </dependency>
         <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
+            <groupId>it.tidalwave.blueshades</groupId>
             <artifactId>it-tidalwave-colorimetry</artifactId>
         </dependency>
         <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-blueargyle-commons</artifactId>
+            <groupId>it.tidalwave.blueshades</groupId>
+            <artifactId>it-tidalwave-blueshades-commons</artifactId>
         </dependency>
         <dependency>
             <groupId>it.tidalwave.solidblue</groupId>
@@ -102,14 +102,14 @@
 
         <!-- TEST DEPENDENCIES -->
         <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
+            <groupId>it.tidalwave.blueshades</groupId>
             <artifactId>it-tidalwave-argyll</artifactId>
             <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-blueargyle-uniformity</artifactId>
+            <groupId>it.tidalwave.blueshades</groupId>
+            <artifactId>it-tidalwave-blueshades-uniformity</artifactId>
             <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>

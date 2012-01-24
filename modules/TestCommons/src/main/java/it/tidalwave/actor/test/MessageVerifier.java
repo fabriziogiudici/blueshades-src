@@ -1,6 +1,6 @@
 /***********************************************************************************************************************
  *
- * blueArgyle - a Java UI for Argyll
+ * blueShades - a Java UI for Argyll
  * Copyright (C) 2011-2012 by Tidalwave s.a.s. (http://www.tidalwave.it)
  *
  ***********************************************************************************************************************
@@ -16,8 +16,8 @@
  *
  ***********************************************************************************************************************
  *
- * WWW: http://blueargyle.tidalwave.it
- * SCM: https://bitbucket.org/tidalwave/blueargyle-src
+ * WWW: http://blueshades.tidalwave.it
+ * SCM: https://bitbucket.org/tidalwave/blueshades-src
  *
  **********************************************************************************************************************/
 package it.tidalwave.actor.test;

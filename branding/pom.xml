@@ -4,18 +4,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>it.tidalwave.blueargyle</groupId>
-        <artifactId>it-tidalwave-blueargyle</artifactId>
+        <groupId>it.tidalwave.blueshades</groupId>
+        <artifactId>it-tidalwave-blueshades</artifactId>
         <version>1.0-ALPHA-5-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>it.tidalwave.blueargyle</groupId>
-    <artifactId>it-tidalwave-blueargyle-branding</artifactId>
+    <groupId>it.tidalwave.blueshades</groupId>
+    <artifactId>it-tidalwave-blueshades-branding</artifactId>
     <version>1.0.4-SNAPSHOT</version>
     <packaging>nbm</packaging>
-    <name>blueArgyle (branding)</name>
-    <description>blueArgyle (branding)</description>
+    <name>blueShades (branding)</name>
+    <description>blueShades (branding)</description>
 
     <build>
         <plugins>

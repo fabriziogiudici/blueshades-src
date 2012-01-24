@@ -1,6 +1,6 @@
 /***********************************************************************************************************************
  *
- * blueArgyle - a Java UI for Argyll
+ * blueShades - a Java UI for Argyll
  * Copyright (C) 2011-2012 by Tidalwave s.a.s. (http://www.tidalwave.it)
  *
  ***********************************************************************************************************************
@@ -16,8 +16,8 @@
  *
  ***********************************************************************************************************************
  *
- * WWW: http://blueargyle.tidalwave.it
- * SCM: https://bitbucket.org/tidalwave/blueargyle-src
+ * WWW: http://blueshades.tidalwave.it
+ * SCM: https://bitbucket.org/tidalwave/blueshades-src
  *
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.ui.impl.main.netbeans;
@@ -36,7 +36,7 @@ import it.tidalwave.swing.RadioButtonsSelector;
 import it.tidalwave.swing.SafeActionAdapter;
 import it.tidalwave.netbeans.SimpleExplorerPanel;
 import it.tidalwave.netbeans.explorer.view.EnhancedListView;
-import it.tidalwave.blueargyle.util.MutableProperty;
+import it.tidalwave.blueshades.util.MutableProperty;
 import it.tidalwave.uniformity.ui.main.UniformityCheckMainPresentation;
 
 /***********************************************************************************************************************

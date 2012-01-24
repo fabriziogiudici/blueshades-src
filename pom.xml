@@ -9,29 +9,29 @@
         <version>1.12</version>
     </parent>
 
-    <groupId>it.tidalwave.blueargyle</groupId>
-    <artifactId>it-tidalwave-blueargyle</artifactId>
+    <groupId>it.tidalwave.blueshades</groupId>
+    <artifactId>it-tidalwave-blueshades</artifactId>
     <version>1.0-ALPHA-5-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>blueArgyle (master)</name>
-    <description>blueArgyle - a Java UI for Argyll</description>
+    <name>blueShades (master)</name>
+    <description>blueShades - a Java UI for Argyll</description>
 
-    <url>http://blueargyle.tidalwave.it</url>
+    <url>http://blueshades.tidalwave.it</url>
     <inceptionYear>2011</inceptionYear>
 
     <properties>
-        <scm.repo.url>ssh://hg@bitbucket.org/tidalwave/blueargyle-src</scm.repo.url>
-        <scm.repo.readonly.url>https://bitbucket.org/tidalwave/blueargyle-src</scm.repo.readonly.url>
-        <scm.repo.browse.url>https://bitbucket.org/tidalwave/blueargyle-src/src</scm.repo.browse.url>
-        <tidalwave.ci.view>blueArgyle</tidalwave.ci.view>
-        <tidalwave.issues>BAY</tidalwave.issues>
+        <scm.repo.url>ssh://hg@bitbucket.org/tidalwave/blueshades-src</scm.repo.url>
+        <scm.repo.readonly.url>https://bitbucket.org/tidalwave/blueshades-src</scm.repo.readonly.url>
+        <scm.repo.browse.url>https://bitbucket.org/tidalwave/blueshades-src/src</scm.repo.browse.url>
+        <tidalwave.ci.view>blueShades</tidalwave.ci.view>
+        <tidalwave.issues>BSH</tidalwave.issues>
         
         <tft.lombok.version>0.10.6</tft.lombok.version>
         <tft.test.listeners>it.tidalwave.util.test.TestLogger</tft.test.listeners>
 
-        <netbeans.brandingToken>blueargyle</netbeans.brandingToken>
-        <netbeans.cluster>blueargyle</netbeans.cluster>
-        <tft.appbundle.name>blueArgyle</tft.appbundle.name>
+        <netbeans.brandingToken>blueshades</netbeans.brandingToken>
+        <netbeans.cluster>blueshades</netbeans.cluster>
+        <tft.appbundle.name>blueShades</tft.appbundle.name>
         <tft.appbundle.signature>TDLW</tft.appbundle.signature>
 
         <mistral.version>0.10-SNAPSHOT</mistral.version>
@@ -67,102 +67,102 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>it.tidalwave.blueargyle</groupId>
-                <artifactId>it-tidalwave-blueargyle-application</artifactId>
+                <groupId>it.tidalwave.blueshades</groupId>
+                <artifactId>it-tidalwave-blueshades-application</artifactId>
                 <version>1.0-ALPHA-5-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>it.tidalwave.blueargyle</groupId>
-                <artifactId>it-tidalwave-blueargyle-home</artifactId>
+                <groupId>it.tidalwave.blueshades</groupId>
+                <artifactId>it-tidalwave-blueshades-home</artifactId>
                 <version>1.0.2-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>it.tidalwave.blueargyle</groupId>
-                <artifactId>it-tidalwave-blueargyle-application-customization</artifactId>
+                <groupId>it.tidalwave.blueshades</groupId>
+                <artifactId>it-tidalwave-blueshades-application-customization</artifactId>
                 <version>1.0.4-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>it.tidalwave.blueargyle</groupId>
-                <artifactId>it-tidalwave-blueargyle-branding</artifactId>
+                <groupId>it.tidalwave.blueshades</groupId>
+                <artifactId>it-tidalwave-blueshades-branding</artifactId>
                 <version>1.0.4-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>it.tidalwave.blueargyle</groupId>
+                <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-argyll</artifactId>
                 <version>1.0.3-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>it.tidalwave.blueargyle</groupId>
+                <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-argyll</artifactId>
                 <classifier>tests</classifier>
                 <version>1.0.3-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>it.tidalwave.blueargyle</groupId>
+                <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-colorimetry</artifactId>
                 <version>1.0.3-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>it.tidalwave.blueargyle</groupId>
-                <artifactId>it-tidalwave-blueargyle-uniformity</artifactId>
+                <groupId>it.tidalwave.blueshades</groupId>
+                <artifactId>it-tidalwave-blueshades-uniformity</artifactId>
                 <version>1.0.3-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>it.tidalwave.blueargyle</groupId>
-                <artifactId>it-tidalwave-blueargyle-uniformity</artifactId>
+                <groupId>it.tidalwave.blueshades</groupId>
+                <artifactId>it-tidalwave-blueshades-uniformity</artifactId>
                 <classifier>tests</classifier>
                 <version>1.0.3-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>it.tidalwave.blueargyle</groupId>
-                <artifactId>it-tidalwave-blueargyle-uniformity-archive</artifactId>
+                <groupId>it.tidalwave.blueshades</groupId>
+                <artifactId>it-tidalwave-blueshades-uniformity-archive</artifactId>
                 <version>1.0.2-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>it.tidalwave.blueargyle</groupId>
-                <artifactId>it-tidalwave-blueargyle-uniformity-ui</artifactId>
+                <groupId>it.tidalwave.blueshades</groupId>
+                <artifactId>it-tidalwave-blueshades-uniformity-ui</artifactId>
                 <version>1.0.3-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>it.tidalwave.blueargyle</groupId>
-                <artifactId>it-tidalwave-blueargyle-uniformity-ui</artifactId>
+                <groupId>it.tidalwave.blueshades</groupId>
+                <artifactId>it-tidalwave-blueshades-uniformity-ui</artifactId>
                 <classifier>tests</classifier>
                 <version>1.0.3-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>it.tidalwave.blueargyle</groupId>
-                <artifactId>it-tidalwave-blueargyle-uniformity-ui-netbeans</artifactId>
+                <groupId>it.tidalwave.blueshades</groupId>
+                <artifactId>it-tidalwave-blueshades-uniformity-ui-netbeans</artifactId>
                 <version>1.0.3-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>it.tidalwave.blueargyle</groupId>
-                <artifactId>it-tidalwave-blueargyle-profileevaluation</artifactId>
+                <groupId>it.tidalwave.blueshades</groupId>
+                <artifactId>it-tidalwave-blueshades-profileevaluation</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>it.tidalwave.blueargyle</groupId>
-                <artifactId>it-tidalwave-blueargyle-profileevaluation-ui</artifactId>
+                <groupId>it.tidalwave.blueshades</groupId>
+                <artifactId>it-tidalwave-blueshades-profileevaluation-ui</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>it.tidalwave.blueargyle</groupId>
-                <artifactId>it-tidalwave-blueargyle-profileevaluation-ui</artifactId>
+                <groupId>it.tidalwave.blueshades</groupId>
+                <artifactId>it-tidalwave-blueshades-profileevaluation-ui</artifactId>
                 <classifier>tests</classifier>
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>it.tidalwave.blueargyle</groupId>
-                <artifactId>it-tidalwave-blueargyle-profileevaluation-ui-netbeans</artifactId>
+                <groupId>it.tidalwave.blueshades</groupId>
+                <artifactId>it-tidalwave-blueshades-profileevaluation-ui-netbeans</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>it.tidalwave.blueargyle</groupId>
-                <artifactId>it-tidalwave-blueargyle-commons</artifactId>
+                <groupId>it.tidalwave.blueshades</groupId>
+                <artifactId>it-tidalwave-blueshades-commons</artifactId>
                 <version>1.0.3-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>it.tidalwave.blueargyle</groupId>
-                <artifactId>it-tidalwave-blueargyle-test-commons</artifactId>
+                <groupId>it.tidalwave.blueshades</groupId>
+                <artifactId>it-tidalwave-blueshades-test-commons</artifactId>
                 <version>1.0.2-SNAPSHOT</version>
             </dependency>
         </dependencies>
@@ -171,13 +171,13 @@
     <mailingLists>
         <mailingList>
             <name>Continuous Integration</name>
-            <post>ci@blueargyle.java.net</post>
-            <archive>http://java.net/projects/blueargyle/lists/ci/archive</archive>
+            <post>ci@blueshades.java.net</post>
+            <archive>http://java.net/projects/blueshades/lists/ci/archive</archive>
         </mailingList>
         <mailingList>
             <name>Developers</name>
-            <post>dev@blueargyle.java.net</post>
-            <archive>http://java.net/projects/blueargyle/lists/dev/archive</archive>
+            <post>dev@blueshades.java.net</post>
+            <archive>http://java.net/projects/blueshades/lists/dev/archive</archive>
         </mailingList>
     </mailingLists>
 
@@ -246,7 +246,7 @@
                                     <classifier>bin</classifier>
                                 </artifact>
                                 <artifact>
-                                    <file>application/target/it-tidalwave-blueargyle-application-${project.version}.zip</file>
+                                    <file>application/target/it-tidalwave-blueshades-application-${project.version}.zip</file>
                                     <type>zip</type>
                                     <classifier>executable</classifier>
                                 </artifact>

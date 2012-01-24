@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- *******************************************************************************************************************
  *
- * blueArgyle - a Java UI for Argyll
+ * blueShades - a Java UI for Argyll
  * Copyright (C) 2011-2011 by Tidalwave s.a.s. (http://www.tidalwave.it)
  *
  ***********************************************************************************************************************
@@ -17,8 +17,8 @@
  *
  ***********************************************************************************************************************
  *
- * WWW: http://blueargyle.java.net
- * SCM: https://bitbucket.org/tidalwave/blueargyle-src
+ * WWW: http://blueshades.java.net
+ * SCM: https://bitbucket.org/tidalwave/blueshades-src
  *
  ******************************************************************************************************************* -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -26,39 +26,39 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>it.tidalwave.blueargyle</groupId>
-        <artifactId>it-tidalwave-blueargyle-modules</artifactId>
+        <groupId>it.tidalwave.blueshades</groupId>
+        <artifactId>it-tidalwave-blueshades-modules</artifactId>
         <version>1.0-ALPHA-5-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>it.tidalwave.blueargyle</groupId>
-    <artifactId>it-tidalwave-blueargyle-uniformity-ui</artifactId>
+    <groupId>it.tidalwave.blueshades</groupId>
+    <artifactId>it-tidalwave-blueshades-uniformity-ui</artifactId>
     <packaging>nbm</packaging>
     <version>1.0.3-SNAPSHOT</version>
-    <name>blueArgyle - Uniformity UI</name>
-    <description>blueArgyle - Uniformity UI</description>
+    <name>blueShades - Uniformity UI</name>
+    <description>blueShades - Uniformity UI</description>
 
     <dependencies>
         <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-blueargyle-uniformity</artifactId>
+            <groupId>it.tidalwave.blueshades</groupId>
+            <artifactId>it-tidalwave-blueshades-uniformity</artifactId>
         </dependency>
         <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-blueargyle-uniformity-archive</artifactId>
+            <groupId>it.tidalwave.blueshades</groupId>
+            <artifactId>it-tidalwave-blueshades-uniformity-archive</artifactId>
         </dependency>
         <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
+            <groupId>it.tidalwave.blueshades</groupId>
             <artifactId>it-tidalwave-argyll</artifactId>
         </dependency>
         <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
+            <groupId>it.tidalwave.blueshades</groupId>
             <artifactId>it-tidalwave-colorimetry</artifactId>
         </dependency>
         <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-blueargyle-commons</artifactId>
+            <groupId>it.tidalwave.blueshades</groupId>
+            <artifactId>it-tidalwave-blueshades-commons</artifactId>
         </dependency>
         <dependency>
             <groupId>it.tidalwave.solidblue</groupId>
@@ -109,8 +109,8 @@
 
         <!-- TEST DEPENDENCIES -->
         <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-blueargyle-test-commons</artifactId>
+            <groupId>it.tidalwave.blueshades</groupId>
+            <artifactId>it-tidalwave-blueshades-test-commons</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

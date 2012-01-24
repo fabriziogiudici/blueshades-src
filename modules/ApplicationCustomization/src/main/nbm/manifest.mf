@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-OpenIDE-Module-Layer: it/tidalwave/blueargyle/application/layer.xml
-OpenIDE-Module-Localizing-Bundle: it/tidalwave/blueargyle/application/Bundle.properties
+OpenIDE-Module-Layer: it/tidalwave/blueshades/application/layer.xml
+OpenIDE-Module-Localizing-Bundle: it/tidalwave/blueshades/application/Bundle.properties

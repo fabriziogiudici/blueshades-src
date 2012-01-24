@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- *******************************************************************************************************************
  *
- * blueArgyle - a Java UI for Argyll
+ * blueShades - a Java UI for Argyll
  * Copyright (C) 2011-2011 by Tidalwave s.a.s. (http://www.tidalwave.it)
  *
  ***********************************************************************************************************************
@@ -17,8 +17,8 @@
  *
  ***********************************************************************************************************************
  *
- * WWW: http://blueargyle.java.net
- * SCM: https://bitbucket.org/tidalwave/blueargyle-src
+ * WWW: http://blueshades.java.net
+ * SCM: https://bitbucket.org/tidalwave/blueshades-src
  *
  ******************************************************************************************************************* -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -26,18 +26,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>it.tidalwave.blueargyle</groupId>
-        <artifactId>it-tidalwave-blueargyle-modules</artifactId>
+        <groupId>it.tidalwave.blueshades</groupId>
+        <artifactId>it-tidalwave-blueshades-modules</artifactId>
         <version>1.0-ALPHA-5-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>it.tidalwave.blueargyle</groupId>
-    <artifactId>it-tidalwave-blueargyle-home</artifactId>
+    <groupId>it.tidalwave.blueshades</groupId>
+    <artifactId>it-tidalwave-blueshades-home</artifactId>
     <version>1.0.2-SNAPSHOT</version>
     <packaging>nbm</packaging>
-    <name>blueArgyle - Home</name>
-    <description>blueArgyle - Home</description>
+    <name>blueShades - Home</name>
+    <description>blueShades - Home</description>
     
     <dependencies>
         <dependency>

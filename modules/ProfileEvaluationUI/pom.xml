@@ -3,29 +3,29 @@
     <modelVersion>4.0.0</modelVersion>
     
     <parent>
-        <groupId>it.tidalwave.blueargyle</groupId>
-        <artifactId>it-tidalwave-blueargyle-modules</artifactId>
+        <groupId>it.tidalwave.blueshades</groupId>
+        <artifactId>it-tidalwave-blueshades-modules</artifactId>
         <version>1.0-ALPHA-5-SNAPSHOT</version>
     </parent>
 
-    <groupId>it.tidalwave.blueargyle</groupId>
-    <artifactId>it-tidalwave-blueargyle-profileevaluation-ui</artifactId>
+    <groupId>it.tidalwave.blueshades</groupId>
+    <artifactId>it-tidalwave-blueshades-profileevaluation-ui</artifactId>
     <packaging>nbm</packaging>
     <version>1.0.0-SNAPSHOT</version>
-    <name>blueArgyle - Profile Evaluation UI</name>
-    <description>blueArgyle - Profile Evaluation UI</description>
+    <name>blueShades - Profile Evaluation UI</name>
+    <description>blueShades - Profile Evaluation UI</description>
 
     <dependencies>
         <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-blueargyle-profileevaluation</artifactId>
+            <groupId>it.tidalwave.blueshades</groupId>
+            <artifactId>it-tidalwave-blueshades-profileevaluation</artifactId>
         </dependency>
         <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-blueargyle-commons</artifactId>
+            <groupId>it.tidalwave.blueshades</groupId>
+            <artifactId>it-tidalwave-blueshades-commons</artifactId>
         </dependency>
         <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
+            <groupId>it.tidalwave.blueshades</groupId>
             <artifactId>it-tidalwave-argyll</artifactId>
         </dependency>
         
@@ -80,10 +80,10 @@
                 <extensions>true</extensions>
                 <configuration>
                     <publicPackages>
-                        <publicPackage>it.tidalwave.blueargyle.profileevaluation.ui</publicPackage>
-                        <publicPackage>it.tidalwave.blueargyle.profileevaluation.ui.main</publicPackage>
-                        <publicPackage>it.tidalwave.blueargyle.profileevaluation.ui.charts</publicPackage>
-                        <publicPackage>it.tidalwave.blueargyle.profileevaluation.ui.sequence</publicPackage>
+                        <publicPackage>it.tidalwave.blueshades.profileevaluation.ui</publicPackage>
+                        <publicPackage>it.tidalwave.blueshades.profileevaluation.ui.main</publicPackage>
+                        <publicPackage>it.tidalwave.blueshades.profileevaluation.ui.charts</publicPackage>
+                        <publicPackage>it.tidalwave.blueshades.profileevaluation.ui.sequence</publicPackage>
                     </publicPackages>
                 </configuration>
             </plugin>

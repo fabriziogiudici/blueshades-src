@@ -1,6 +1,6 @@
 /***********************************************************************************************************************
  *
- * blueArgyle - a Java UI for Argyll
+ * blueShades - a Java UI for Argyll
  * Copyright (C) 2011-2012 by Tidalwave s.a.s. (http://www.tidalwave.it)
  *
  ***********************************************************************************************************************
@@ -16,8 +16,8 @@
  *
  ***********************************************************************************************************************
  *
- * WWW: http://blueargyle.tidalwave.it
- * SCM: https://bitbucket.org/tidalwave/blueargyle-src
+ * WWW: http://blueshades.tidalwave.it
+ * SCM: https://bitbucket.org/tidalwave/blueshades-src
  *
  **********************************************************************************************************************/
 package it.tidalwave.argyll.impl;
@@ -39,7 +39,7 @@ public class ArgyllActivator extends ActorGroupActivator
       {
         add(activatorFor(DispwinActor.class).withPoolSize(1));
         
-        if (Boolean.getBoolean("it.tidalwave.blueargyle.mockArgyll"))
+        if (Boolean.getBoolean("it.tidalwave.blueshades.mockArgyll"))
           {
             add(activatorFor(FakeSpotReadActor.class).withPoolSize(1));
           }

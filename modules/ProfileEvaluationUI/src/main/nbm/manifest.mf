@@ -1,2 +1,2 @@
 Manifest-Version: 1.0
-OpenIDE-Module-Localizing-Bundle: it/tidalwave/blueargyle/profileevaluation/ui/Bundle.properties
+OpenIDE-Module-Localizing-Bundle: it/tidalwave/blueshades/profileevaluation/ui/Bundle.properties

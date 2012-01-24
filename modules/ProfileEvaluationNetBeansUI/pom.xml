@@ -3,17 +3,17 @@
     <modelVersion>4.0.0</modelVersion>
     
     <parent>
-        <groupId>it.tidalwave.blueargyle</groupId>
-        <artifactId>it-tidalwave-blueargyle-modules</artifactId>
+        <groupId>it.tidalwave.blueshades</groupId>
+        <artifactId>it-tidalwave-blueshades-modules</artifactId>
         <version>1.0-ALPHA-5-SNAPSHOT</version>
     </parent>
 
-    <groupId>it.tidalwave.blueargyle</groupId>
-    <artifactId>it-tidalwave-blueargyle-profileevaluation-ui-netbeans</artifactId>
+    <groupId>it.tidalwave.blueshades</groupId>
+    <artifactId>it-tidalwave-blueshades-profileevaluation-ui-netbeans</artifactId>
     <packaging>nbm</packaging>
     <version>1.0.0-SNAPSHOT</version>
-    <name>blueArgyle - Profile Evaluation UI (NetBeans)</name>
-    <description>blueArgyle - Profile Evaluation UI (NetBeans)</description>
+    <name>blueShades - Profile Evaluation UI (NetBeans)</name>
+    <description>blueShades - Profile Evaluation UI (NetBeans)</description>
 
     <dependencies>
         <dependency>
@@ -27,20 +27,20 @@
         </dependency>
         
         <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-blueargyle-profileevaluation</artifactId>
+            <groupId>it.tidalwave.blueshades</groupId>
+            <artifactId>it-tidalwave-blueshades-profileevaluation</artifactId>
         </dependency>
         <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-blueargyle-profileevaluation-ui</artifactId>
+            <groupId>it.tidalwave.blueshades</groupId>
+            <artifactId>it-tidalwave-blueshades-profileevaluation-ui</artifactId>
         </dependency>
         <dependency>
-            <groupId>it.tidalwave.blueargyle</groupId>
-            <artifactId>it-tidalwave-blueargyle-commons</artifactId>
+            <groupId>it.tidalwave.blueshades</groupId>
+            <artifactId>it-tidalwave-blueshades-commons</artifactId>
         </dependency>
         <dependency>
             <artifactId>it-tidalwave-argyll</artifactId>
-            <groupId>it.tidalwave.blueargyle</groupId>
+            <groupId>it.tidalwave.blueshades</groupId>
         </dependency>
         
         <dependency>
