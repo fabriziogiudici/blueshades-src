@@ -25,7 +25,7 @@
     <codeNameBase>it.tidalwave.blueshades.commons/1</codeNameBase>
     <cluster>blueshades</cluster>
     <manifest>src/main/nbm/manifest.mf</manifest>
-    <homepageUrl>http://blueshades.java.net</homepageUrl>
+    <homepageUrl>http://blueshades.tidalwave.it</homepageUrl>
     <author>Fabrizio Giudici</author>
     <licenseName>Apache License, Version 2.0</licenseName>
     <licenseFile>../../LICENSE.txt</licenseFile>
