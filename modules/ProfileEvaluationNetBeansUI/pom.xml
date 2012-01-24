@@ -39,8 +39,8 @@
             <artifactId>it-tidalwave-blueshades-commons</artifactId>
         </dependency>
         <dependency>
-            <artifactId>it-tidalwave-argyll</artifactId>
             <groupId>it.tidalwave.blueshades</groupId>
+            <artifactId>it-tidalwave-colorimetry</artifactId>
         </dependency>
         
         <dependency>

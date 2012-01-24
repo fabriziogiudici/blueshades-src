@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Set;
 import it.tidalwave.util.Finder;
 import it.tidalwave.util.spi.SimpleFinderSupport;
-import it.tidalwave.argyll.Display;
+import it.tidalwave.colorimetry.Display;
 import it.tidalwave.netbeans.util.AsLookupSupport;
 import it.tidalwave.uniformity.UniformityMeasurements;
 import lombok.EqualsAndHashCode;

@@ -24,7 +24,7 @@ package it.tidalwave.blueshades.profileevaluation.ui.sequence;
 
 import javax.annotation.Nonnull;
 import javax.swing.Action;
-import it.tidalwave.argyll.ProfiledDisplay;
+import it.tidalwave.colorimetry.ProfiledDisplay;
 
 /***********************************************************************************************************************
  *

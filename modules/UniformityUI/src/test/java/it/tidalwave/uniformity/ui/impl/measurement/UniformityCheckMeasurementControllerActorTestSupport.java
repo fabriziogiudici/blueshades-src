@@ -22,6 +22,8 @@
  **********************************************************************************************************************/
 package it.tidalwave.uniformity.ui.impl.measurement;
 
+import it.tidalwave.colorimetry.Profile;
+import it.tidalwave.colorimetry.ProfiledDisplay;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,11 +35,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.Action;
 import it.tidalwave.actor.Collaboration;
 import it.tidalwave.actor.spi.ActorGroupActivator;
-import it.tidalwave.argyll.Display;
-import it.tidalwave.argyll.MeasurementMessage;
-import it.tidalwave.argyll.MeasurementRequest;
-import it.tidalwave.argyll.impl.FakeSpotReadActor;
-import it.tidalwave.netbeans.util.test.MockLookup;
+import it.tidalwave.colorimetry.Display;
+import it.tidalwave.colorimetry.message.MeasurementMessage;
+import it.tidalwave.colorimetry.message.MeasurementRequest;
 import it.tidalwave.uniformity.Position;
 import it.tidalwave.uniformity.UniformityCheckRequest;
 import it.tidalwave.uniformity.UniformityMeasurement;
@@ -51,14 +51,15 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.mockito.InOrder;
 import org.mockito.internal.matchers.Equals;
+import it.tidalwave.netbeans.util.test.MockLookup;
 import it.tidalwave.netbeans.util.test.TestLoggerSetup;
 import it.tidalwave.util.test.swing.ActionsTestHelper;
 import it.tidalwave.util.test.swing.ActionTestHelper;
 import it.tidalwave.actor.test.MessageVerifier;
 import static it.tidalwave.actor.spi.ActorActivator.*;
-import it.tidalwave.argyll.*;
 import static it.tidalwave.uniformity.Position.xy;
 import static it.tidalwave.colorimetry.ColorTemperature.kelvin;
+import it.tidalwave.colorimetry.adapter.fake.impl.FakeMeasurementActor;
 import static org.mockito.Mockito.*;
 
 /***********************************************************************************************************************
@@ -79,7 +80,7 @@ public abstract class UniformityCheckMeasurementControllerActorTestSupport
         public TestActivator() 
           {
 //            add(activatorFor(SpotReadActor.class).withPoolSize(1)); // to test the real thing
-            add(activatorFor(FakeSpotReadActor.class).withPoolSize(1));
+            add(activatorFor(FakeMeasurementActor.class).withPoolSize(1));
             add(activatorFor(UniformityCheckMeasurementControllerActor.class).withPoolSize(1));
           }
       }

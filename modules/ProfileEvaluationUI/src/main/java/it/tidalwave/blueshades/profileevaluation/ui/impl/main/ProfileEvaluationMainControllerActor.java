@@ -22,6 +22,10 @@
  **********************************************************************************************************************/
 package it.tidalwave.blueshades.profileevaluation.ui.impl.main;
 
+import it.tidalwave.colorimetry.message.DisplayDiscoveryQueryMessage;
+import it.tidalwave.colorimetry.message.DisplayDiscoveryMessage;
+import it.tidalwave.colorimetry.message.DisplaySelectionMessage;
+import it.tidalwave.colorimetry.ProfiledDisplay;
 import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
 import javax.annotation.concurrent.NotThreadSafe;
@@ -41,7 +45,6 @@ import it.tidalwave.swing.ActionMessageAdapter;
 import it.tidalwave.actor.annotation.Actor;
 import it.tidalwave.actor.annotation.ListensTo;
 import it.tidalwave.actor.RepeatingMessageSender;
-import it.tidalwave.argyll.*;
 import it.tidalwave.blueshades.profileevaluation.ProfileEvaluationRequest;
 import it.tidalwave.blueshades.profileevaluation.ui.main.ProfileEvaluationMainPresentation;
 import it.tidalwave.blueshades.profileevaluation.ui.main.ProfileEvaluationMainPresentationProvider;

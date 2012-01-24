@@ -32,6 +32,10 @@
         </dependency>
         <dependency>
             <groupId>it.tidalwave.blueshades</groupId>
+            <artifactId>it-tidalwave-colorimetry-fake</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.blueshades</groupId>
             <artifactId>it-tidalwave-argyll</artifactId>
         </dependency>
         <dependency>

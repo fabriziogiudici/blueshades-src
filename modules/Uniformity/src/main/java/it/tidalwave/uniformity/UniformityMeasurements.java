@@ -33,9 +33,9 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import org.joda.time.DateTime;
 import it.tidalwave.netbeans.util.AsLookupSupport;
-import it.tidalwave.argyll.Display;
-import it.tidalwave.argyll.Profile;
-import it.tidalwave.argyll.ProfiledDisplay;
+import it.tidalwave.colorimetry.Display;
+import it.tidalwave.colorimetry.Profile;
+import it.tidalwave.colorimetry.ProfiledDisplay;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 

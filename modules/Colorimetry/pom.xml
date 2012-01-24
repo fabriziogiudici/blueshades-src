@@ -41,6 +41,14 @@
     
     <dependencies>
         <dependency>
+            <groupId>it.tidalwave.solidblue</groupId>
+            <artifactId>it-tidalwave-actor</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.netbeans</groupId>
+            <artifactId>it-tidalwave-netbeans-util</artifactId>
+        </dependency>
+        <dependency>
             <groupId>it.tidalwave.thesefoolishthings</groupId>
             <artifactId>it-tidalwave-util</artifactId>
         </dependency>
@@ -48,6 +56,10 @@
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-util</artifactId>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <artifactId>org-slf4j-jdk14</artifactId>
+            <groupId>com.kenai.nbpwr</groupId>
         </dependency>
     </dependencies>
 
@@ -59,6 +71,7 @@
                 <configuration>
                     <publicPackages>
                         <publicPackage>it.tidalwave.colorimetry</publicPackage>
+                        <publicPackage>it.tidalwave.colorimetry.message</publicPackage>
                     </publicPackages>
                 </configuration>
             </plugin>

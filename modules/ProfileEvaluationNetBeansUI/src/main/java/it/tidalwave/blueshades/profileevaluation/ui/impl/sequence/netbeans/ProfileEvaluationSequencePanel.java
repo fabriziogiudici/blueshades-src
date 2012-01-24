@@ -28,7 +28,7 @@ import java.awt.EventQueue;
 import java.awt.color.ICC_Profile;
 import javax.swing.Action;
 import javax.swing.JPanel;
-import it.tidalwave.argyll.ProfiledDisplay;
+import it.tidalwave.colorimetry.ProfiledDisplay;
 import it.tidalwave.swing.SafeActionAdapter;
 import it.tidalwave.blueshades.profileevaluation.ui.sequence.ProfileEvaluationSequencePresentation;
 import it.tidalwave.blueshades.profileevaluation.ui.sequence.GrangerRainbowDescriptor;

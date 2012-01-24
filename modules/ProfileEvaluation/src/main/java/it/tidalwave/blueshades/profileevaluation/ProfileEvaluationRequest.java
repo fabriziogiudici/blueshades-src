@@ -25,7 +25,7 @@ package it.tidalwave.blueshades.profileevaluation;
 import javax.annotation.Nonnull;
 import it.tidalwave.actor.MessageSupport;
 import it.tidalwave.actor.annotation.Message;
-import it.tidalwave.argyll.ProfiledDisplay;
+import it.tidalwave.colorimetry.ProfiledDisplay;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;

@@ -25,7 +25,7 @@ package it.tidalwave.blueshades.profileevaluation.ui.impl.sequence.netbeans;
 import javax.annotation.Nonnull;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
-import it.tidalwave.argyll.ProfiledDisplay;
+import it.tidalwave.colorimetry.ProfiledDisplay;
 import it.tidalwave.blueshades.profileevaluation.ui.sequence.ProfileEvaluationSequencePresentation;
 import lombok.Delegate;
 

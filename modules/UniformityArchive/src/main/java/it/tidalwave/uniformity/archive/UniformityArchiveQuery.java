@@ -26,7 +26,7 @@ import javax.annotation.concurrent.Immutable;
 import javax.annotation.Nonnull;
 import it.tidalwave.actor.MessageSupport;
 import it.tidalwave.actor.annotation.Message;
-import it.tidalwave.argyll.Display;
+import it.tidalwave.colorimetry.Display;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;

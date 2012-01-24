@@ -40,10 +40,10 @@ import it.tidalwave.actor.annotation.Message;
 import it.tidalwave.swing.ActionMessageAdapter;
 import it.tidalwave.netbeans.util.Locator;
 import it.tidalwave.colorimetry.XYZColorCoordinates;
-import it.tidalwave.argyll.ArgyllFailureMessage;
-import it.tidalwave.argyll.MeasurementMessage;
-import it.tidalwave.argyll.MeasurementRequest;
-import it.tidalwave.argyll.SensorOperationInvitationMessage;
+import it.tidalwave.colorimetry.ColorimeterFailureMessage;
+import it.tidalwave.colorimetry.message.MeasurementMessage;
+import it.tidalwave.colorimetry.message.MeasurementRequest;
+import it.tidalwave.colorimetry.message.SensorOperationInvitationMessage;
 import it.tidalwave.uniformity.Position;
 import it.tidalwave.uniformity.UniformityCheckRequest;
 import it.tidalwave.uniformity.UniformityMeasurement;
@@ -55,7 +55,7 @@ import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import static java.util.concurrent.TimeUnit.*;
 import static it.tidalwave.actor.Collaboration.*;
-import it.tidalwave.argyll.ProfiledDisplay;
+import it.tidalwave.colorimetry.ProfiledDisplay;
 import static it.tidalwave.uniformity.Position.xy;
 
 /***********************************************************************************************************************
@@ -160,7 +160,7 @@ public class UniformityCheckMeasurementControllerActor
      * 
      *
      ******************************************************************************************************************/
-    public void onArgyllFailure (final @ListensTo @Nonnull ArgyllFailureMessage message) 
+    public void onArgyllFailure (final @ListensTo @Nonnull ColorimeterFailureMessage message) 
       {
         log.info("onArgyllFailure({})", message);
         new CancelMessage().send(); // FIXME: harsh, do a notification on the UI too

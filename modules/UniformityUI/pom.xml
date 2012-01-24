@@ -110,6 +110,11 @@
         <!-- TEST DEPENDENCIES -->
         <dependency>
             <groupId>it.tidalwave.blueshades</groupId>
+            <artifactId>it-tidalwave-colorimetry-fake</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>it.tidalwave.blueshades</groupId>
             <artifactId>it-tidalwave-blueshades-test-commons</artifactId>
             <scope>test</scope>
         </dependency>
