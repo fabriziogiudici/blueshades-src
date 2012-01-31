@@ -63,10 +63,10 @@
             <artifactId>it-tidalwave-blueshades-uniformity-archive</artifactId>
         </dependency>
 
-        <dependency>
+<!--        <dependency> Disabled until we replace AFS 2.0 with AGPL v3
             <groupId>it.tidalwave.netbeans</groupId>
             <artifactId>it-tidalwave-netbeans-licensepanel</artifactId>
-        </dependency> 
+        </dependency> -->
 
         <dependency>
             <groupId>org.imajine</groupId>
