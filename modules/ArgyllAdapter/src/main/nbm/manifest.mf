@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+OpenIDE-Module-Install: it/tidalwave/argyll/impl/Installer.class
+OpenIDE-Module-Localizing-Bundle: it/tidalwave/argyll/Bundle.properties
