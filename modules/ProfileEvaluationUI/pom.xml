@@ -5,13 +5,13 @@
     <parent>
         <groupId>it.tidalwave.blueshades</groupId>
         <artifactId>it-tidalwave-blueshades-modules</artifactId>
-        <version>1.0-ALPHA-5</version>
+        <version>1.0-ALPHA-6-SNAPSHOT</version>
     </parent>
 
     <groupId>it.tidalwave.blueshades</groupId>
     <artifactId>it-tidalwave-blueshades-profileevaluation-ui</artifactId>
     <packaging>nbm</packaging>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <name>blueShades - Profile Evaluation UI</name>
     <description>blueShades - Profile Evaluation UI</description>
 
