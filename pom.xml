@@ -11,7 +11,7 @@
 
     <groupId>it.tidalwave.blueshades</groupId>
     <artifactId>it-tidalwave-blueshades</artifactId>
-    <version>1.0-ALPHA-5-SNAPSHOT</version>
+    <version>1.0-ALPHA-5</version>
     <packaging>pom</packaging>
     <name>blueShades (master)</name>
     <description>blueShades - a Java UI for Argyll</description>
@@ -69,106 +69,106 @@
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-application</artifactId>
-                <version>1.0-ALPHA-5-SNAPSHOT</version>
+                <version>1.0-ALPHA-5</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-home</artifactId>
-                <version>1.0.2-SNAPSHOT</version>
+                <version>1.0.2</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-application-customization</artifactId>
-                <version>1.0.4-SNAPSHOT</version>
+                <version>1.0.4</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-branding</artifactId>
-                <version>1.0.4-SNAPSHOT</version>
+                <version>1.0.4</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-colorimetry-fake</artifactId>
-                <version>1.0.3-SNAPSHOT</version>
+                <version>1.0.3</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-argyll</artifactId>
-                <version>1.0.3-SNAPSHOT</version>
+                <version>1.0.3</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-argyll</artifactId>
                 <classifier>tests</classifier>
-                <version>1.0.3-SNAPSHOT</version>
+                <version>1.0.3</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-colorimetry</artifactId>
-                <version>1.0.3-SNAPSHOT</version>
+                <version>1.0.3</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-uniformity</artifactId>
-                <version>1.0.3-SNAPSHOT</version>
+                <version>1.0.3</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-uniformity</artifactId>
                 <classifier>tests</classifier>
-                <version>1.0.3-SNAPSHOT</version>
+                <version>1.0.3</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-uniformity-archive</artifactId>
-                <version>1.0.2-SNAPSHOT</version>
+                <version>1.0.2</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-uniformity-ui</artifactId>
-                <version>1.0.3-SNAPSHOT</version>
+                <version>1.0.3</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-uniformity-ui</artifactId>
                 <classifier>tests</classifier>
-                <version>1.0.3-SNAPSHOT</version>
+                <version>1.0.3</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-uniformity-ui-netbeans</artifactId>
-                <version>1.0.3-SNAPSHOT</version>
+                <version>1.0.3</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-profileevaluation</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>1.0.0</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-profileevaluation-ui</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>1.0.0</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-profileevaluation-ui</artifactId>
                 <classifier>tests</classifier>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>1.0.0</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-profileevaluation-ui-netbeans</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>1.0.0</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-commons</artifactId>
-                <version>1.0.3-SNAPSHOT</version>
+                <version>1.0.3</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-test-commons</artifactId>
-                <version>1.0.2-SNAPSHOT</version>
+                <version>1.0.2</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
