@@ -6,13 +6,13 @@
     <parent>
         <groupId>it.tidalwave.blueshades</groupId>
         <artifactId>it-tidalwave-blueshades</artifactId>
-        <version>1.0-ALPHA-5-SNAPSHOT</version>
+        <version>1.0-ALPHA-6-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>it.tidalwave.blueshades</groupId>
     <artifactId>it-tidalwave-blueshades-branding</artifactId>
-    <version>1.0.4-SNAPSHOT</version>
+    <version>1.0.5-SNAPSHOT</version>
     <packaging>nbm</packaging>
     <name>blueShades (branding)</name>
     <description>blueShades (branding)</description>

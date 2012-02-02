@@ -5,12 +5,12 @@
     <parent>
         <artifactId>it-tidalwave-blueshades-modules</artifactId>
         <groupId>it.tidalwave.blueshades</groupId>
-        <version>1.0-ALPHA-5-SNAPSHOT</version>
+        <version>1.0-ALPHA-6-SNAPSHOT</version>
     </parent>
 
     <groupId>it.tidalwave.blueshades</groupId>
     <artifactId>it-tidalwave-blueshades-profileevaluation</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>nbm</packaging>
 
     <name>blueShades - Profile Evaluation</name>
@@ -74,5 +74,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
