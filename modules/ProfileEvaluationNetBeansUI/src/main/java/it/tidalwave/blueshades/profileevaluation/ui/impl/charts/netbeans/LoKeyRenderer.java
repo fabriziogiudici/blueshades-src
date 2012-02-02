@@ -27,7 +27,7 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.color.ICC_Profile;
 import it.tidalwave.netbeans.util.Locator;
-import it.tidalwave.image.EditableImage;
+import org.imajine.image.EditableImage;
 import it.tidalwave.blueshades.profileevaluation.TestImageFactory;
 import lombok.extern.slf4j.Slf4j;
 

@@ -28,9 +28,9 @@ import java.awt.color.ICC_Profile;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import javax.swing.SwingWorker;
-import it.tidalwave.image.EditableImage;
-import it.tidalwave.image.op.ConvertColorProfileOp;
-import it.tidalwave.image.render.EditableImageRenderer;
+import org.imajine.image.EditableImage;
+import org.imajine.image.op.ConvertColorProfileOp;
+import org.imajine.image.render.EditableImageRenderer;
 import lombok.extern.slf4j.Slf4j;
 
 /***********************************************************************************************************************

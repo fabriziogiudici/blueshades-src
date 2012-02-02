@@ -34,7 +34,7 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>org.imajine</groupId>
+                <groupId>org.imajine.image</groupId>
                 <artifactId>org-imajine-image</artifactId>
                 <version>${mistral.version}</version>
                 <type>pom</type>

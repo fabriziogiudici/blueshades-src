@@ -69,11 +69,11 @@
         </dependency> -->
 
         <dependency>
-            <groupId>org.imajine</groupId>
+            <groupId>org.imajine.image</groupId>
             <artifactId>org-imajine-image-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.imajine</groupId>
+            <groupId>org.imajine.image</groupId>
             <artifactId>org-imajine-image-operations</artifactId>
         </dependency>
  

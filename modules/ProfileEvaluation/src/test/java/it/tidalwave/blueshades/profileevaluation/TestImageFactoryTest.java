@@ -23,9 +23,9 @@
 package it.tidalwave.blueshades.profileevaluation;
 
 import javax.annotation.Nonnull;
-import it.tidalwave.image.EditableImage;
-import it.tidalwave.image.op.ConvertToBufferedImageOp;
-import it.tidalwave.image.op.WriteOp;
+import org.imajine.image.EditableImage;
+import org.imajine.image.op.ConvertToBufferedImageOp;
+import org.imajine.image.op.WriteOp;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

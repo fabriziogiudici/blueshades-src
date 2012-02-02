@@ -34,20 +34,20 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.color.ICC_Profile;
 import org.openide.util.lookup.ServiceProvider;
-import it.tidalwave.image.EditableImage;
-import it.tidalwave.image.op.AssignColorProfileOp;
-import it.tidalwave.image.op.ConvertColorProfileOp;
-import it.tidalwave.image.op.CreateOp;
-import it.tidalwave.image.op.DrawOp;
-import it.tidalwave.image.java2d.ImplementationFactoryJ2D;
-import it.tidalwave.image.jai.ImplementationFactoryJAI;
+import org.imajine.image.EditableImage;
+import org.imajine.image.op.AssignColorProfileOp;
+import org.imajine.image.op.ConvertColorProfileOp;
+import org.imajine.image.op.CreateOp;
+import org.imajine.image.op.DrawOp;
+import org.imajine.image.java2d.ImplementationFactoryJ2D;
+import org.imajine.image.jai.ImplementationFactoryJAI;
 import it.tidalwave.netbeans.util.Locator;
 import lombok.Cleanup;
 import lombok.extern.slf4j.Slf4j;
 import static java.awt.RenderingHints.*;
 import static javax.swing.SwingConstants.*;
-import static it.tidalwave.image.ImageUtils.*;
-import static it.tidalwave.image.EditableImage.DataType.*;
+import static org.imajine.image.ImageUtils.*;
+import static org.imajine.image.EditableImage.DataType.*;
 
 /***********************************************************************************************************************
  *

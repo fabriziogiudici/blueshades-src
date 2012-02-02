@@ -34,7 +34,7 @@
         <tft.appbundle.name>blueShades</tft.appbundle.name>
         <tft.appbundle.signature>TDLW</tft.appbundle.signature>
 
-        <mistral.version>0.11-ALPHA-1</mistral.version>
+        <mistral.version>1.0-ALPHA-1-SNAPSHOT</mistral.version>
         <actors.version>1.0.2</actors.version>
         <openbluesky.version>0.15</openbluesky.version>
         <thesefoolishthings.version>1.19</thesefoolishthings.version>
