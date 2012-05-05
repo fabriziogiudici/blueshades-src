@@ -152,7 +152,9 @@
     </dependencies>
 
     <modules>
+        <module>Application</module>
         <module>ApplicationCustomization</module>
+        <module>Branding</module>
         <module>ArgyllAdapter</module>
         <module>Colorimetry</module>
         <module>Commons</module>

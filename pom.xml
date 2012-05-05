@@ -264,8 +264,6 @@
     </profiles>
 
     <modules>
-        <module>application</module>
-        <module>branding</module>
         <module>modules</module>
     </modules>
 </project>

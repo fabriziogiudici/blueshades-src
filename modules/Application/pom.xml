@@ -7,7 +7,7 @@
         <groupId>it.tidalwave.blueshades</groupId>
         <artifactId>it-tidalwave-blueshades-modules</artifactId>
         <version>1.0-ALPHA-6-SNAPSHOT</version>
-        <relativePath>../modules/pom.xml</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>it.tidalwave.blueshades</groupId>
