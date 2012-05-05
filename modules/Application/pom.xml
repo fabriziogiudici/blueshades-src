@@ -14,8 +14,7 @@
     <artifactId>it-tidalwave-blueshades-application</artifactId>
     <version>1.0-ALPHA-6-SNAPSHOT</version>
     <packaging>nbm-application</packaging>
-    <name>blueShades (application)</name>
-    <description>blueShades (application)</description>
+    <name>blueShades - Application</name>
     
     <dependencies>
         <dependency>
