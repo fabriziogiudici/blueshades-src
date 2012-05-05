@@ -160,6 +160,7 @@
         <module>Commons</module>
         <module>FakeAdapter</module>
         <module>Home</module>
+        <module>Installers/MacOSX</module>
         <module>ProfileEvaluation</module>
         <module>ProfileEvaluationUI</module>
         <module>ProfileEvaluationNetBeansUI</module>

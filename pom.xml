@@ -70,6 +70,7 @@
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-application</artifactId>
                 <version>1.0-ALPHA-6-SNAPSHOT</version>
+                <type>zip</type>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
