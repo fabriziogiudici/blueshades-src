@@ -20,6 +20,11 @@
     <inceptionYear>2011</inceptionYear>
 
     <properties>
+        <tft.maven.requiredVersion>3.0.4</tft.maven.requiredVersion>
+        <tft.maven.requiredJdk>[1.7.0,)</tft.maven.requiredJdk>
+        <tft.javac.source>1.7</tft.javac.source>
+        <tft.javac.target>1.7</tft.javac.target>
+
         <scm.repo.url>ssh://hg@bitbucket.org/tidalwave/blueshades-src</scm.repo.url>
         <scm.repo.readonly.url>https://bitbucket.org/tidalwave/blueshades-src</scm.repo.readonly.url>
         <scm.repo.browse.url>https://bitbucket.org/tidalwave/blueshades-src/src</scm.repo.browse.url>
@@ -33,6 +38,8 @@
         <netbeans.cluster>blueshades</netbeans.cluster>
         <tft.appbundle.name>blueShades</tft.appbundle.name>
         <tft.appbundle.signature>TDLW</tft.appbundle.signature>
+        <tft.embedded-jre-version>1.7.0_04-1</tft.embedded-jre-version>
+        <tft.embedded-jre-directory>jre-1.7.0_04</tft.embedded-jre-directory>
 
         <mistral.version>1.0-ALPHA-1-SNAPSHOT</mistral.version>
         <actors.version>1.0.2</actors.version>
