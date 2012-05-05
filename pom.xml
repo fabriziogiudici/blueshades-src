@@ -25,15 +25,6 @@
         <tft.javac.source>1.7</tft.javac.source>
         <tft.javac.target>1.7</tft.javac.target>
 
-        <scm.repo.url>ssh://hg@bitbucket.org/tidalwave/blueshades-src</scm.repo.url>
-        <scm.repo.readonly.url>https://bitbucket.org/tidalwave/blueshades-src</scm.repo.readonly.url>
-        <scm.repo.browse.url>https://bitbucket.org/tidalwave/blueshades-src/src</scm.repo.browse.url>
-        <tidalwave.ci.view>blueShades</tidalwave.ci.view>
-        <tidalwave.issues>BSH</tidalwave.issues>
-        
-        <tft.lombok.version>0.10.6</tft.lombok.version>
-        <tft.test.listeners>it.tidalwave.util.test.TestLogger</tft.test.listeners>
-
         <netbeans.brandingToken>blueshades</netbeans.brandingToken>
         <netbeans.cluster>blueshades</netbeans.cluster>
         <tft.appbundle.name>blueShades</tft.appbundle.name>
@@ -41,15 +32,24 @@
         <tft.embedded-jre-version>1.7.0_04-1</tft.embedded-jre-version>
         <tft.embedded-jre-directory>jre-1.7.0_04</tft.embedded-jre-directory>
 
-        <mistral.version>1.0-ALPHA-1-SNAPSHOT</mistral.version>
-        <actors.version>1.0.2</actors.version>
         <openbluesky.version>0.16</openbluesky.version>
         <thesefoolishthings.version>1.19</thesefoolishthings.version>
-        <libraries.version>1.1.5</libraries.version>
         <netbeans.version>RELEASE712</netbeans.version>
+        <mistral.version>1.0-ALPHA-1-SNAPSHOT</mistral.version>
+        <actors.version>1.0.2</actors.version>
+        <libraries.version>1.1.5</libraries.version>
         <logback.version>0.9.30</logback.version>
+        <tft.lombok.version>0.10.6</tft.lombok.version>
 
         <netbeans.hint.license>Tidalwave-ASF</netbeans.hint.license>
+        
+        <scm.repo.url>ssh://hg@bitbucket.org/tidalwave/blueshades-src</scm.repo.url>
+        <scm.repo.readonly.url>https://bitbucket.org/tidalwave/blueshades-src</scm.repo.readonly.url>
+        <scm.repo.browse.url>https://bitbucket.org/tidalwave/blueshades-src/src</scm.repo.browse.url>
+        <tidalwave.ci.view>blueShades</tidalwave.ci.view>
+        <tidalwave.issues>BSH</tidalwave.issues>
+        
+        <tft.test.listeners>it.tidalwave.util.test.TestLogger</tft.test.listeners>
     </properties>
 
     <repositories>
