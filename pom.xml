@@ -33,7 +33,7 @@
         <tft.embedded-jre-directory>jre-1.7.0_04</tft.embedded-jre-directory>
 
         <openbluesky.version>0.16</openbluesky.version>
-        <thesefoolishthings.version>1.19</thesefoolishthings.version>
+        <thesefoolishthings.version>1.23</thesefoolishthings.version>
         <netbeans.version>RELEASE712</netbeans.version>
         <swingx.version>1.6-201002261215</swingx.version>
         <quaqua.version>8.0-201205051300</quaqua.version>
