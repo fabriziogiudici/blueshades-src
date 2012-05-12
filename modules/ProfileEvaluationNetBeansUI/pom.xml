@@ -5,13 +5,13 @@
     <parent>
         <groupId>it.tidalwave.blueshades</groupId>
         <artifactId>it-tidalwave-blueshades-modules</artifactId>
-        <version>1.0-ALPHA-6</version>
+        <version>1.0-ALPHA-7-SNAPSHOT</version>
     </parent>
 
     <groupId>it.tidalwave.blueshades</groupId>
     <artifactId>it-tidalwave-blueshades-profileevaluation-ui-netbeans</artifactId>
     <packaging>nbm</packaging>
-    <version>1.0.1</version>
+    <version>1.0.2-SNAPSHOT</version>
     <name>blueShades - Profile Evaluation UI (NetBeans)</name>
     <description>blueShades - Profile Evaluation UI (NetBeans)</description>
 
