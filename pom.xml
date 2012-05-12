@@ -245,35 +245,6 @@
         </plugins>
     </build>
 
-    <profiles>
-        <profile>
-            <id>deploy-extra-artifacts</id>
-            <build>
-                <plugins>
-                    <!-- Attaches the extra artifacts prepared during the release process by the assembly plugin -->
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>build-helper-maven-plugin</artifactId>
-                        <configuration>
-                            <artifacts>
-                                <artifact>
-                                    <file>${project.build.directory}/${project.build.finalName}-project.tar.gz</file>
-                                    <type>tar.gz</type>
-                                    <classifier>project</classifier>
-                                </artifact>
-                                <artifact>
-                                    <file>${project.build.directory}/${project.build.finalName}-bin.tar.gz</file>
-                                    <type>tar.gz</type>
-                                    <classifier>bin</classifier>
-                                </artifact>
-                            </artifacts>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
     <modules>
         <module>modules</module>
     </modules>
