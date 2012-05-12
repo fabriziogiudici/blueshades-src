@@ -30,7 +30,8 @@
         <tft.appbundle.name>blueShades</tft.appbundle.name>
         <tft.appbundle.signature>TDLW</tft.appbundle.signature>
         <tft.embedded-jre-version>1.7.0_04-1</tft.embedded-jre-version>
-        <tft.embedded-jre-directory>jre-1.7.0_04</tft.embedded-jre-directory>
+        <tft.embedded-jre-artifactId>it-tidalwave-openjre7</tft.embedded-jre-artifactId>
+        <tft.embedded-jre-directory>openjre-1.7.0_04</tft.embedded-jre-directory>
 
         <openbluesky.version>0.16</openbluesky.version>
         <thesefoolishthings.version>1.23</thesefoolishthings.version>
