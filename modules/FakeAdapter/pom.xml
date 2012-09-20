@@ -28,14 +28,14 @@
     <parent>
         <groupId>it.tidalwave.blueshades</groupId>
         <artifactId>it-tidalwave-blueshades-modules</artifactId>
-        <version>1.0-ALPHA-7-SNAPSHOT</version>
+        <version>1.0-ALPHA-7</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>it.tidalwave.blueshades</groupId>
     <artifactId>it-tidalwave-colorimetry-fake</artifactId>
     <packaging>nbm</packaging>
-    <version>1.0.5-SNAPSHOT</version>
+    <version>1.0.5</version>
     <name>blueShades - Fake Adapter</name>
     <description>blueShades - Fake Adapter</description>
     
