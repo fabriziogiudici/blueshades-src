@@ -6,7 +6,7 @@
     <parent>
         <groupId>it.tidalwave.superpom</groupId>
         <artifactId>superpom</artifactId>
-        <version>1.15</version>
+        <version>2.0</version>
     </parent>
 
     <groupId>it.tidalwave.blueshades</groupId>
@@ -15,7 +15,6 @@
     <packaging>pom</packaging>
     <name>blueShades (master)</name>
     <description>blueShades - a Java UI for Argyll</description>
-
     <url>http://blueshades.tidalwave.it</url>
     <inceptionYear>2011</inceptionYear>
 
@@ -24,14 +23,14 @@
         <tft.maven.requiredJdk>[1.7.0,)</tft.maven.requiredJdk>
         <tft.javac.source>1.7</tft.javac.source>
         <tft.javac.target>1.7</tft.javac.target>
+        <netbeans.hint.jdkPlatform>OpenJDK_1.7</netbeans.hint.jdkPlatform>
+        <netbeans.compile.on.save>none</netbeans.compile.on.save>
 
         <netbeans.brandingToken>blueshades</netbeans.brandingToken>
         <netbeans.cluster>blueshades</netbeans.cluster>
         <tft.appbundle.name>blueShades</tft.appbundle.name>
         <tft.appbundle.signature>TDLW</tft.appbundle.signature>
-        <tft.embedded-jre-version>1.7.0_04-1</tft.embedded-jre-version>
-        <tft.embedded-jre-artifactId>it-tidalwave-openjre7</tft.embedded-jre-artifactId>
-        <tft.embedded-jre-directory>openjre-1.7.0_04</tft.embedded-jre-directory>
+        <tft.netbeans.vmargs>-Xms25m -Xmx128m -Dit.tidalwave.netbeans.disableTabs=true -Dit.tidalwave.netbeans.disableQuaua=false -Dit.tidalwave.netbeans.quaqua.disableSheet=true</tft.netbeans.vmargs>
 
         <openbluesky.version>0.16</openbluesky.version>
         <thesefoolishthings.version>1.23</thesefoolishthings.version>
@@ -186,6 +185,22 @@
                 <artifactId>it-tidalwave-blueshades-test-commons</artifactId>
                 <version>1.0.4-SNAPSHOT</version>
             </dependency>
+            <dependency>
+                <groupId>it.tidalwave.blueshades</groupId>
+                <artifactId>it-tidalwave-blueshades-boot</artifactId>
+                <version>1.0-ALPHA-7-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.blueshades</groupId>
+                <artifactId>blueshades-macosx</artifactId>
+                <version>1.0-ALPHA-7-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>it.tidalwave.blueshades</groupId>
+                <artifactId>blueshades-macosx-embedded-jre</artifactId>
+                <version>1.0-ALPHA-7-SNAPSHOT</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
     

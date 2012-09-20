@@ -12,11 +12,11 @@
     </parent>
 
     <groupId>it.tidalwave.blueshades</groupId>
-    <artifactId>blueshades-macosx</artifactId>
+    <artifactId>blueshades-macosx-embedded-jre</artifactId>
     <packaging>jar</packaging>
     <version>1.0-ALPHA-7-SNAPSHOT</version>
-    <name>blueShades - Installers, Mac OS X</name>
-    <description>This module creates a Mac OS X application bundle.</description>
+    <name>blueShades - Installers, Mac OS X with embedded JRE</name>
+    <description>This module creates a Mac OS X application bundle with an embedded JRE.</description>
     
     <dependencies>
         <dependency>
@@ -25,7 +25,7 @@
             <type>zip</type>
         </dependency>
     </dependencies>
-            
+
     <build>
         <plugins>
             <plugin>
@@ -53,9 +53,9 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>            
+            </plugin> 
         </plugins>
     </build>
-
+            
 </project>
 
