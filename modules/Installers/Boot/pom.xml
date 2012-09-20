@@ -4,13 +4,13 @@
     <parent>
         <groupId>it.tidalwave.blueshades</groupId>
         <artifactId>it-tidalwave-blueshades-modules</artifactId>
-        <version>1.0-ALPHA-7</version>
+        <version>1.0-ALPHA-8-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
     <groupId>it.tidalwave.blueshades</groupId>
     <artifactId>it-tidalwave-blueshades-boot</artifactId>
-    <version>1.0-ALPHA-7</version>
+    <version>1.0-ALPHA-8-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>blueShades - Boot</name>
     <description>This module contains the customization for the application launcher.</description>
