@@ -26,7 +26,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 import java.util.Random;
 import it.tidalwave.actor.annotation.Actor;
-import it.tidalwave.actor.annotation.ListensTo;
+import it.tidalwave.messagebus.annotation.ListensTo;
 import it.tidalwave.colorimetry.ColorCoordinatesSet;
 import it.tidalwave.colorimetry.ColorTemperature;
 import it.tidalwave.colorimetry.MeasureWithPrecision;

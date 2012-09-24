@@ -53,7 +53,7 @@
             <artifactId>it-tidalwave-blueshades-commons</artifactId>
         </dependency>
         <dependency>
-            <groupId>it.tidalwave.solidblue</groupId>
+            <groupId>it.tidalwave.thesefoolishthings</groupId>
             <artifactId>it-tidalwave-actor</artifactId>
         </dependency>
         <dependency>

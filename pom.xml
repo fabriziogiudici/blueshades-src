@@ -32,7 +32,6 @@
         <tft.appbundle.signature>TDLW</tft.appbundle.signature>
         <tft.netbeans.vmargs>-Xms25m -Xmx128m -Dit.tidalwave.netbeans.disableTabs=true -Dit.tidalwave.netbeans.disableQuaua=false -Dit.tidalwave.netbeans.quaqua.disableSheet=true</tft.netbeans.vmargs>
 
-        <actors.version>1.0.2</actors.version>
         <fest-swing.version>1.2.1</fest-swing.version>
         <javax-annotation.version>1.3.7-201002241900</javax-annotation.version>
         <javax-inject.version>1.0-201002241208</javax-inject.version>
@@ -44,7 +43,7 @@
         <quaqua.version>8.0-201205051300</quaqua.version>
         <slf4j.version>1.6.1-201106101300</slf4j.version>
         <swingx.version>1.6-201002261215</swingx.version>
-        <thesefoolishthings.version>1.23</thesefoolishthings.version>
+        <thesefoolishthings.version>1.26-SNAPSHOT</thesefoolishthings.version>
         <uuid.version>2.1.5-201007271250</uuid.version>
         
         <tft.lombok.version>0.10.6</tft.lombok.version>
@@ -200,7 +199,6 @@
                 <artifactId>blueshades-macosx-embedded-jre</artifactId>
                 <version>1.0-ALPHA-8-SNAPSHOT</version>
             </dependency>
-
         </dependencies>
     </dependencyManagement>
     
