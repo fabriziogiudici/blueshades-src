@@ -32,22 +32,22 @@
         <tft.appbundle.signature>TDLW</tft.appbundle.signature>
         <tft.netbeans.vmargs>-Xms25m -Xmx128m -Dit.tidalwave.netbeans.disableTabs=true -Dit.tidalwave.netbeans.disableQuaua=false -Dit.tidalwave.netbeans.quaqua.disableSheet=true</tft.netbeans.vmargs>
 
-        <openbluesky.version>0.16</openbluesky.version>
-        <thesefoolishthings.version>1.23</thesefoolishthings.version>
-        <netbeans.version>RELEASE712</netbeans.version>
-        <swingx.version>1.6-201002261215</swingx.version>
-        <quaqua.version>8.0-201205051300</quaqua.version>
-        <mistral.version>1.0-ALPHA-2</mistral.version>
         <actors.version>1.0.2</actors.version>
-        <uuid.version>2.1.5-201007271250</uuid.version>
         <fest-swing.version>1.2.1</fest-swing.version>
-        <joda-time.version>1.6.2-201110292322</joda-time.version>
-        <slf4j.version>1.6.1-201106101300</slf4j.version>
-        <logback.version>0.9.30</logback.version>
-        <javax-inject.version>1.0-201002241208</javax-inject.version>
         <javax-annotation.version>1.3.7-201002241900</javax-annotation.version>
+        <javax-inject.version>1.0-201002241208</javax-inject.version>
+        <joda-time.version>1.6.2-201110292322</joda-time.version>
+        <logback.version>0.9.30</logback.version>
+        <mistral.version>1.0-ALPHA-2</mistral.version>
+        <netbeans.version>RELEASE712</netbeans.version>
+        <openbluesky.version>0.16</openbluesky.version>
+        <quaqua.version>8.0-201205051300</quaqua.version>
+        <slf4j.version>1.6.1-201106101300</slf4j.version>
+        <swingx.version>1.6-201002261215</swingx.version>
+        <thesefoolishthings.version>1.23</thesefoolishthings.version>
+        <uuid.version>2.1.5-201007271250</uuid.version>
+        
         <tft.lombok.version>0.10.6</tft.lombok.version>
-
         <netbeans.hint.license>Tidalwave-ASF</netbeans.hint.license>
         
         <scm.repo.url>ssh://hg@bitbucket.org/tidalwave/blueshades-src</scm.repo.url>
