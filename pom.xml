@@ -43,7 +43,7 @@
         <quaqua.version>8.0-201205051300</quaqua.version>
         <slf4j.version>1.6.1-201106101300</slf4j.version>
         <swingx.version>1.6-201002261215</swingx.version>
-        <thesefoolishthings.version>1.26-SNAPSHOT</thesefoolishthings.version>
+        <thesefoolishthings.version>1.27</thesefoolishthings.version>
         <uuid.version>2.1.5-201007271250</uuid.version>
         
         <tft.lombok.version>0.10.6</tft.lombok.version>
