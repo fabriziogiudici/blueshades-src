@@ -24,6 +24,11 @@
         <tft.javac.source>1.7</tft.javac.source>
         <tft.javac.target>1.7</tft.javac.target>
 
+        <tft.embedded-jdk-artifactId>it-tidalwave-oraclejdk7</tft.embedded-jdk-artifactId>
+        <tft.embedded-jdk-classifier>macosx-intel</tft.embedded-jdk-classifier>
+        <tft.embedded-jdk-name>jdk1.7.0u17</tft.embedded-jdk-name>
+        <tft.embedded-jdk-version>1.7.0_17-1</tft.embedded-jdk-version>
+
         <netbeans.hint.jdkPlatform>JDK_1.7.0_17</netbeans.hint.jdkPlatform>
         <netbeans.hint.license>Tidalwave-ASF</netbeans.hint.license>
         <netbeans.compile.on.save>none</netbeans.compile.on.save>
@@ -239,6 +244,7 @@
                 </configuration>
             </plugin>
             <!-- Needed for setting that inherited = false -->
+            <!-- FIXME: upgrade to new license plugin -->
             <plugin>
                 <groupId>com.mycila.maven-license-plugin</groupId>
                 <artifactId>maven-license-plugin</artifactId>
