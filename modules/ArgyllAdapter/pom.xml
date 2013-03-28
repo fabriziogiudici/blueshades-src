@@ -28,14 +28,14 @@
     <parent>
         <groupId>it.tidalwave.blueshades</groupId>
         <artifactId>it-tidalwave-blueshades-modules</artifactId>
-        <version>1.0-ALPHA-8-SNAPSHOT</version>
+        <version>1.0-ALPHA-8</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>it.tidalwave.blueshades</groupId>
     <artifactId>it-tidalwave-argyll</artifactId>
     <packaging>nbm</packaging>
-    <version>1.0.6-SNAPSHOT</version>
+    <version>1.0.6</version>
     <name>blueShades - Argyll Adapter</name>
     <description>blueShades - Argyll Adapter</description>
     
