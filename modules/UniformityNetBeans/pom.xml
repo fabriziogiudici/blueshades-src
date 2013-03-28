@@ -28,14 +28,14 @@
     <parent>
         <groupId>it.tidalwave.blueshades</groupId>
         <artifactId>it-tidalwave-blueshades-modules</artifactId>
-        <version>1.0-ALPHA-8</version>
+        <version>1.0-ALPHA-9-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>it.tidalwave.blueshades</groupId>
     <artifactId>it-tidalwave-blueshades-uniformity-ui-netbeans</artifactId>
     <packaging>nbm</packaging>
-    <version>1.0.6</version>
+    <version>1.0.7-SNAPSHOT</version>
     <name>blueShades - Uniformity UI (NetBeans)</name>
     <description>blueShades - Uniformity UI (NetBeans)</description>
 
