@@ -38,7 +38,7 @@
         <joda-time.version>1.6.2-201110292322</joda-time.version>
         <logback.version>0.9.30</logback.version>
         <mistral.version>1.0-ALPHA-2</mistral.version>
-        <netbeans.version>RELEASE712</netbeans.version>
+        <netbeans.version>RELEASE72</netbeans.version>
         <openbluesky.version>0.16</openbluesky.version>
         <quaqua.version>8.0-201205051300</quaqua.version>
         <slf4j.version>1.6.1-201106101300</slf4j.version>
