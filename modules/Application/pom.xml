@@ -124,17 +124,20 @@
     <build>
         <plugins>
             <!-- The default configuration would create jar and test-jar, with the jar contents overriding
-                the war contents when initializing -->
+            the war contents when initializing -->
             <plugin>
-               <groupId>org.apache.maven.plugins</groupId>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <executions>
                     <execution>
+                        <id>package-jar</id>
                         <phase>none</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
-            
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>nbm-maven-plugin</artifactId>
