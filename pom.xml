@@ -61,16 +61,9 @@
         <scm.repo.browse.url>https://bitbucket.org/tidalwave/blueshades-src/src</scm.repo.browse.url>
         <tidalwave.ci.view>blueShades</tidalwave.ci.view>
         <tidalwave.issues>BSH</tidalwave.issues>
-        
-        <tft.test.listeners>it.tidalwave.util.test.TestLogger</tft.test.listeners>
     </properties>
 
     <repositories>
-        <repository>
-            <id>releases-oss.sonatype.org</id>
-            <name>Sonatype Releases Repository</name>
-            <url>http://oss.sonatype.org/content/repositories/releases/</url>
-        </repository>
         <repository>
             <id>snapshots-oss.sonatype.org</id>
             <name>Sonatype Snapshots Repository</name>
@@ -231,18 +224,6 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <properties>
-                        <property>
-                            <name>listener</name>
-                            <value>${tft.test.listeners}</value>
-                        </property>
-                    </properties>
-                </configuration>
-            </plugin>
             <!-- Needed for setting that inherited = false -->
             <!-- FIXME: upgrade to new license plugin -->
             <plugin>
