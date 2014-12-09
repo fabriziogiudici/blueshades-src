@@ -32,7 +32,7 @@ import javax.swing.Action;
 import it.tidalwave.util.test.swing.ActionTestHelper.Verifier;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.mockito.internal.invocation.Invocation;
+import org.mockito.invocation.Invocation;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import static org.mockito.Mockito.*;
