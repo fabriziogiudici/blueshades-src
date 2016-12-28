@@ -35,7 +35,7 @@
     <groupId>it.tidalwave.blueshades</groupId>
     <artifactId>it-tidalwave-blueshades-test-commons</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.6-SNAPSHOT</version>
+    <version>1.0-ALPHA-9-SNAPSHOT</version>
     <name>blueShades - Test Commons</name>
     <description>blueShades - Test Commons</description>
     

@@ -10,7 +10,7 @@
 
     <groupId>it.tidalwave.blueshades</groupId>
     <artifactId>it-tidalwave-blueshades-profileevaluation</artifactId>
-    <version>1.0.4-SNAPSHOT</version>
+    <version>1.0-ALPHA-9-SNAPSHOT</version>
     <packaging>nbm</packaging>
 
     <name>blueShades - Profile Evaluation</name>

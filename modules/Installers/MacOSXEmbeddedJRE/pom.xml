@@ -6,7 +6,7 @@
     <!-- Don't use the modules pom or it will unpack also common dependencies -->
     <parent>
         <groupId>it.tidalwave.blueshades</groupId>
-        <artifactId>it-tidalwave-blueshades</artifactId>
+        <artifactId>blueshades</artifactId>
         <version>1.0-ALPHA-9-SNAPSHOT</version>
         <relativePath>../../../pom.xml</relativePath>
     </parent>
@@ -17,7 +17,7 @@
     <version>1.0-ALPHA-9-SNAPSHOT</version>
     <name>blueShades - Installers, Mac OS X with embedded JRE</name>
     <description>This module creates a Mac OS X application bundle with an embedded JRE.</description>
-    
+
     <dependencies>
         <dependency>
             <groupId>it.tidalwave.blueshades</groupId>
@@ -53,9 +53,9 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin> 
+            </plugin>
         </plugins>
     </build>
-            
+
 </project>
 
