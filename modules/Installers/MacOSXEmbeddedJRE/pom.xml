@@ -7,14 +7,14 @@
     <parent>
         <groupId>it.tidalwave.blueshades</groupId>
         <artifactId>blueshades</artifactId>
-        <version>1.0-ALPHA-9-SNAPSHOT</version>
+        <version>1.0-ALPHA-10-SNAPSHOT</version>
         <relativePath>../../../pom.xml</relativePath>
     </parent>
 
     <groupId>it.tidalwave.blueshades</groupId>
     <artifactId>blueshades-macosx-embedded-jre</artifactId>
     <packaging>jar</packaging>
-    <version>1.0-ALPHA-9-SNAPSHOT</version>
+    <version>1.0-ALPHA-10-SNAPSHOT</version>
     <name>blueShades - Installers, Mac OS X with embedded JRE</name>
     <description>This module creates a Mac OS X application bundle with an embedded JRE.</description>
 
