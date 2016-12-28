@@ -12,7 +12,7 @@
 
     <groupId>it.tidalwave.blueshades</groupId>
     <artifactId>blueshades</artifactId>
-    <version>1.0-ALPHA-9</version>
+    <version>1.0-ALPHA-10-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>blueShades</name>
     <url>http://blueshades.tidalwave.it</url>
@@ -69,122 +69,122 @@
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-application</artifactId>
-                <version>1.0-ALPHA-9</version>
+                <version>1.0-ALPHA-10-SNAPSHOT</version>
                 <type>zip</type>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-home</artifactId>
-                <version>1.0-ALPHA-9</version>
+                <version>1.0-ALPHA-10-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-application-customization</artifactId>
-                <version>1.0-ALPHA-9</version>
+                <version>1.0-ALPHA-10-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-branding</artifactId>
-                <version>1.0-ALPHA-9</version>
+                <version>1.0-ALPHA-10-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-colorimetry-fake</artifactId>
-                <version>1.0-ALPHA-9</version>
+                <version>1.0-ALPHA-10-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-argyll</artifactId>
-                <version>1.0-ALPHA-9</version>
+                <version>1.0-ALPHA-10-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-argyll</artifactId>
                 <classifier>tests</classifier>
-                <version>1.0-ALPHA-9</version>
+                <version>1.0-ALPHA-10-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-colorimetry</artifactId>
-                <version>1.0-ALPHA-9</version>
+                <version>1.0-ALPHA-10-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-uniformity</artifactId>
-                <version>1.0-ALPHA-9</version>
+                <version>1.0-ALPHA-10-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-uniformity</artifactId>
                 <classifier>tests</classifier>
-                <version>1.0-ALPHA-9</version>
+                <version>1.0-ALPHA-10-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-uniformity-archive</artifactId>
-                <version>1.0-ALPHA-9</version>
+                <version>1.0-ALPHA-10-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-uniformity-ui</artifactId>
-                <version>1.0-ALPHA-9</version>
+                <version>1.0-ALPHA-10-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-uniformity-ui</artifactId>
                 <classifier>tests</classifier>
-                <version>1.0-ALPHA-9</version>
+                <version>1.0-ALPHA-10-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-uniformity-ui-netbeans</artifactId>
-                <version>1.0-ALPHA-9</version>
+                <version>1.0-ALPHA-10-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-profileevaluation</artifactId>
-                <version>1.0-ALPHA-9</version>
+                <version>1.0-ALPHA-10-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-profileevaluation-ui</artifactId>
-                <version>1.0-ALPHA-9</version>
+                <version>1.0-ALPHA-10-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-profileevaluation-ui</artifactId>
                 <classifier>tests</classifier>
-                <version>1.0-ALPHA-9</version>
+                <version>1.0-ALPHA-10-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-profileevaluation-ui-netbeans</artifactId>
-                <version>1.0-ALPHA-9</version>
+                <version>1.0-ALPHA-10-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-commons</artifactId>
-                <version>1.0-ALPHA-9</version>
+                <version>1.0-ALPHA-10-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-test-commons</artifactId>
-                <version>1.0-ALPHA-9</version>
+                <version>1.0-ALPHA-10-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>it-tidalwave-blueshades-boot</artifactId>
-                <version>1.0-ALPHA-9</version>
+                <version>1.0-ALPHA-10-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>blueshades-macosx</artifactId>
-                <version>1.0-ALPHA-9</version>
+                <version>1.0-ALPHA-10-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>it.tidalwave.blueshades</groupId>
                 <artifactId>blueshades-macosx-embedded-jre</artifactId>
-                <version>1.0-ALPHA-9</version>
+                <version>1.0-ALPHA-10-SNAPSHOT</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -194,7 +194,7 @@
         <connection>scm:git:${scm.repo.readonly.url}</connection>
         <developerConnection>scm:git:${scm.repo.effective.url}</developerConnection>
         <url>${scm.repo.browse.url}</url>
-        <tag>1.0-ALPHA-9</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <build>
