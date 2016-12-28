@@ -1,9 +1,9 @@
 ![Maven Central](https://img.shields.io/maven-central/v/it.tidalwave.blueshades/blueshades.svg)
-[![Build Status](https://img.shields.io/jenkins/s/http/services.tidalwave.it/ci/blueShades (master)_Build_from_Scratch.svg)](http://services.tidalwave.it/ci/view/blueShades)
-[![Test Status](https://img.shields.io/jenkins/t/http/services.tidalwave.it/ci/blueShades (master).svg)](http://services.tidalwave.it/ci/view/blueShades)
-[![Coverage](https://img.shields.io/jenkins/c/http/services.tidalwave.it/ci/blueShades (master).svg)](http://services.tidalwave.it/ci/view/blueShades)
+[![Build Status](https://img.shields.io/jenkins/s/http/services.tidalwave.it/ci/blueShades_Build_from_Scratch.svg)](http://services.tidalwave.it/ci/view/blueShades)
+[![Test Status](https://img.shields.io/jenkins/t/http/services.tidalwave.it/ci/blueShades.svg)](http://services.tidalwave.it/ci/view/blueShades)
+[![Coverage](https://img.shields.io/jenkins/c/http/services.tidalwave.it/ci/blueShades.svg)](http://services.tidalwave.it/ci/view/blueShades)
 
-blueShades (master)
+blueShades
 ================================
 
 blueShades - a Java UI for Argyll

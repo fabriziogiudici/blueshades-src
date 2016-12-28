@@ -14,7 +14,7 @@
     <artifactId>blueshades</artifactId>
     <version>1.0-ALPHA-9-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>blueShades (master)</name>
+    <name>blueShades</name>
     <url>http://blueshades.tidalwave.it</url>
     <inceptionYear>2011</inceptionYear>
     <description>blueShades - a Java UI for Argyll</description>
