@@ -15,7 +15,7 @@
     <version>1.0-ALPHA-9-SNAPSHOT</version>
     <packaging>nbm-application</packaging>
     <name>blueShades - Application</name>
-    
+
     <dependencies>
         <dependency>
             <groupId>it.tidalwave.blueshades</groupId>
@@ -75,7 +75,7 @@
             <groupId>org.imajine.image</groupId>
             <artifactId>org-imajine-image-operations</artifactId>
         </dependency>
- 
+
         <dependency>
             <groupId>com.kenai.nbpwr</groupId>
             <artifactId>ch-randelshofer-quaqua</artifactId>
@@ -91,16 +91,16 @@
 
 <!-- Uncomment if you want to expose AutoUpdate services
 
-        <dependency>
-            <groupId>org.netbeans.api</groupId>
-            <artifactId>org-netbeans-modules-autoupdate-services</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.netbeans.api</groupId>
-            <artifactId>org-netbeans-modules-autoupdate-ui</artifactId> 
-            <version>${netbeans.version}</version> 
-        </dependency>
--->
+                <dependency>
+                    <groupId>org.netbeans.api</groupId>
+                    <artifactId>org-netbeans-modules-autoupdate-services</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>org.netbeans.api</groupId>
+                    <artifactId>org-netbeans-modules-autoupdate-ui</artifactId>
+                    <version>${netbeans.version}</version>
+                </dependency>
+        -->
 
         <dependency>
             <groupId>org.netbeans.modules</groupId>
@@ -143,10 +143,11 @@
                 <artifactId>nbm-maven-plugin</artifactId>
                 <configuration>
                     <etcConfFile>config/blueshades.conf</etcConfFile>
+                    <verifyIntegrity>false</verifyIntegrity>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-    
+
 </project>
 

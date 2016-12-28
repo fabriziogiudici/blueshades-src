@@ -11,7 +11,7 @@
     <groupId>it.tidalwave.blueshades</groupId>
     <artifactId>it-tidalwave-blueshades-profileevaluation-ui</artifactId>
     <packaging>nbm</packaging>
-    <version>1.0.4-SNAPSHOT</version>
+    <version>1.0-ALPHA-9-SNAPSHOT</version>
     <name>blueShades - Profile Evaluation UI</name>
     <description>blueShades - Profile Evaluation UI</description>
 

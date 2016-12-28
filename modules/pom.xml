@@ -5,7 +5,7 @@
 
     <parent>
         <groupId>it.tidalwave.blueshades</groupId>
-        <artifactId>it-tidalwave-blueshades</artifactId>
+        <artifactId>blueshades</artifactId>
         <version>1.0-ALPHA-9-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
@@ -63,7 +63,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-          
+
             <dependency>
                 <groupId>org.easytesting</groupId>
                 <artifactId>fest-swing</artifactId>
@@ -73,7 +73,7 @@
                 <groupId>com.kenai.nbpwr</groupId>
                 <artifactId>joda-time</artifactId>
                 <version>${joda-time.version}</version>
-            </dependency> 
+            </dependency>
             <dependency>
                 <groupId>com.kenai.nbpwr</groupId>
                 <artifactId>org-slf4j-jdk14</artifactId>
@@ -83,7 +83,7 @@
                 <groupId>com.kenai.nbpwr</groupId>
                 <artifactId>ch-randelshofer-quaqua</artifactId>
                 <version>${quaqua.version}</version>
-            </dependency>            
+            </dependency>
             <dependency>
                 <groupId>com.kenai.nbpwr</groupId>
                 <artifactId>org-jdesktop-swingx</artifactId>
@@ -133,13 +133,13 @@
             <groupId>com.kenai.nbpwr</groupId>
             <artifactId>javax-inject</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
-        
+
         <!-- TEST DEPENDENCIES -->
         <dependency>
             <groupId>it.tidalwave.thesefoolishthings</groupId>

@@ -12,7 +12,7 @@
 
     <groupId>it.tidalwave.blueshades</groupId>
     <artifactId>it-tidalwave-blueshades-branding</artifactId>
-    <version>1.0.8-SNAPSHOT</version>
+    <version>1.0-ALPHA-9-SNAPSHOT</version>
     <packaging>nbm</packaging>
     <name>blueShades - Branding</name>
 
