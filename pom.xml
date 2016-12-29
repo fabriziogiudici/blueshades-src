@@ -48,6 +48,8 @@
 
         <tidalwave.ci.view>blueShades</tidalwave.ci.view>
         <tidalwave.issues>BSH</tidalwave.issues>
+
+        <tft.clirr.skip>true</tft.clirr.skip> <!-- Clirr is not compatible with JDK 8 -->
     </properties>
 
     <repositories>
